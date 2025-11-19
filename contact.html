@@ -14,7 +14,7 @@
   h1{font-size:46px;color:#ffb400;text-align:center;margin:40px 0 10px;font-weight:800}
   .tagline{font-size:19px;text-align:center;color:#ccc;line-height:1.8;margin:20px 0 40px}
 
-  /* সোশ্যাল আইকন – নরমাল সাইজ, প্রফেশনাল লুক */
+  /* সোশ্যাল আইকন – নরমাল সাইজ */
   .social-links{
     display:flex;justify-content:center;gap:30px;margin:50px 0;flex-wrap:wrap;
   }
@@ -31,15 +31,9 @@
   .tg{background:#0088cc}
 
   .service-section{margin:40px 0}
-  .service-section h3{
-    font-size:24px;color:#ffb400;margin:25px 0 15px;text-align:center
-  }
-  .service-box{
-    background:#111;border:1px solid #333;border-radius:18px;padding:22px;margin:20px 0;
-  }
-  .service-box li{
-    font-size:18px;margin:16px 0;color:#ddd;padding-left:5px;
-  }
+  .service-section h3{font-size:24px;color:#ffb400;margin:25px 0 15px;text-align:center}
+  .service-box{background:#111;border:1px solid #333;border-radius:18px;padding:22px;margin:20px 0}
+  .service-box li{font-size:18px;margin:16px 0;color:#ddd;padding-left:5px}
   .service-box li::before{content:"✅ ";margin-right:8px}
 
   .whatsapp-btn{
@@ -48,14 +42,14 @@
     box-shadow:0 10px 30px rgba(255,180,0,0.4);
   }
 
-  /* নিচের নেভিগেশন */
+  /* নিচের নেভিগেশন বার – আগের মতোই ইমোজি + ঠিকঠাক */
   .nav{
     position:fixed;bottom:0;left:0;width:100%;background:#111;
-    border-top:2px solid #333;padding:14px 0;
-    display:flex;justify-content:space-around;z-index:999
+    border-top:2px solid #333;padding:15px 0;
+    display:flex;justify-content:space-around;z-index:999;
   }
-  .nav a{color:#777;font-size:30px}
-  .nav a.active,.nav a:hover{color:#ffb400}
+  .nav a{color:#777;font-size:32px;transition:0.3s}
+  .nav a.active,.nav a:hover{color:#ffb400;transform:scale(1.2)}
 </style>
 </head>
 <body>
@@ -68,7 +62,6 @@
     আপনার ফোনকে নতুনের মতো করে তুলুন!
   </p>
 
-  <!-- সোশ্যাল আইকন (নরমাল সাইজ) -->
   <div class="social-links">
     <a href="https://facebook.com" class="fb" title="Facebook"><i class="fab fa-facebook-f"></i></a>
     <a href="https://instagram.com/md__habibur_rahman" class="ig" title="Instagram"><i class="fab fa-instagram"></i></a>
@@ -81,15 +74,15 @@
   <div class="service-section">
     <h3>আমাদের অনলাইন সার্ভিসসমূহ</h3>
     <div class="service-box">
-      <h3 style="text-align:center;color:#ffb400;margin-bottom:20px">✅ All Service ON -</h3>
-      <ul>
+      <h3 style="text-align:center;color:#ffb400;margin-bottom:20px">All Service ON -</h3>
+      <ul style="list-style:none">
         <li>🪪 Nid Pdf</li>
-        <li>Sign Copy</li>
-        <li>Biometric Info</li>
-        <li>IMEI Info Check</li>
-        <li>NID to All Number</li>
-        <li>All Number Location</li>
-        <li>3/6 Month (Call Details)</li>
+        <li>🔰 Sign Copy</li>
+        <li>🧬 Biometric Info</li>
+        <li>📱 IMEI Info Check</li>
+        <li>🔗 NID to All Number</li>
+        <li>📍 All Number Location</li>
+        <li>📞 3/6 Month (Call Details)</li>
       </ul>
     </div>
   </div>
@@ -99,7 +92,7 @@
   </a>
 </div>
 
-<!-- নিচের নেভিগেশন বার -->
+<!-- নিচের নেভিগেশন বার – ঠিক আগের মতোই -->
 <div class="nav">
   <a href="index.html">Home</a>
   <a href="about.html">Person</a>
