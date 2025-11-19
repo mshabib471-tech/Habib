@@ -8,37 +8,52 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
-  body{background:#000;color:#fff;font-family:'Poppins',sans-serif;overflow:hidden}
-  .container{max-width:480px;margin:0 auto;padding:30px 20px 120px;text-align:center}
-  h1{font-size:48px;color:#ffb400;margin:40px 0 20px;font-weight:800;letter-spacing:2px}
-  .bengali{font-size:22px;color:#ccc;line-height:1.8;margin:20px 0}
-  
-  /* সোশ্যাল আইকন – বড়, কালারফুল, অফিসিয়াল */
+  body{background:#000;color:#fff;font-family:'Poppins',sans-serif;min-height:100vh}
+  .container{max-width:480px;margin:0 auto;padding:20px 20px 140px}
+
+  h1{font-size:46px;color:#ffb400;text-align:center;margin:40px 0 10px;font-weight:800}
+  .tagline{font-size:19px;text-align:center;color:#ccc;line-height:1.8;margin:20px 0 40px}
+
+  /* সোশ্যাল আইকন – নরমাল সাইজ, প্রফেশনাল লুক */
   .social-links{
-    display:flex;flex-wrap:wrap;justify-content:center;gap:30px;margin:60px 0;
+    display:flex;justify-content:center;gap:30px;margin:50px 0;flex-wrap:wrap;
   }
   .social-links a{
-    width:90px;height:90px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-    font-size:42px;color:#fff;transition:0.4s;transform:translateY(0);box-shadow:0 10px 30px rgba(0,0,0,0.6);
+    width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-size:26px;color:#fff;transition:0.3s;box-shadow:0 8px 20px rgba(0,0,0,0.5);
   }
-  .social-links a:hover{transform:translateY(-15px) scale(1.15);box-shadow:0 20px 40px rgba(0,0,0,0.8)}
-  
+  .social-links a:hover{transform:translateY(-8px)}
   .fb{background:#1877f2}
-  .ig{background:radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%)}
-  .tt{background:#000;color:#fff;border:3px solid #ff0050}
+  .ig{background:radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%)}
+  .tt{background:#000;border:3px solid #ff0050}
   .yt{background:#ff0000}
   .wa{background:#25d366}
   .tg{background:#0088cc}
 
-  .whatsapp-btn{
-    display:inline-block;margin:50px auto;padding:22px 50px;background:#ffb400;color:#000;
-    font-size:26px;font-weight:800;border-radius:60px;text-decoration:none;box-shadow:0 15px 40px rgba(255,180,0,0.5);
-    animation:pulse 2s infinite;
+  .service-section{margin:40px 0}
+  .service-section h3{
+    font-size:24px;color:#ffb400;margin:25px 0 15px;text-align:center
   }
-  @keyframes pulse{0%{box-shadow:0 15px 40px rgba(255,180,0,0.5)}50%{box-shadow:0 20px 60px rgba(255,180,0,0.8)}100%{box-shadow:0 15px 40px rgba(255,180,0,0.5)}}
+  .service-box{
+    background:#111;border:1px solid #333;border-radius:18px;padding:22px;margin:20px 0;
+  }
+  .service-box li{
+    font-size:18px;margin:16px 0;color:#ddd;padding-left:5px;
+  }
+  .service-box li::before{content:"✅ ";margin-right:8px}
 
-  .nav{bottom:0;position:fixed;width:100%;background:#111;border-top:2px solid #333;padding:15px 0;
-       display:flex;justify-content:space-around;z-index:99}
+  .whatsapp-btn{
+    display:block;margin:60px auto 20px;padding:20px 50px;background:#ffb400;color:#000;
+    font-size:24px;font-weight:800;border-radius:60px;text-decoration:none;text-align:center;
+    box-shadow:0 10px 30px rgba(255,180,0,0.4);
+  }
+
+  /* নিচের নেভিগেশন */
+  .nav{
+    position:fixed;bottom:0;left:0;width:100%;background:#111;
+    border-top:2px solid #333;padding:14px 0;
+    display:flex;justify-content:space-around;z-index:999
+  }
   .nav a{color:#777;font-size:30px}
   .nav a.active,.nav a:hover{color:#ffb400}
 </style>
@@ -47,10 +62,13 @@
 
 <div class="container">
   <h1>CONTACT</h1>
-  <p class="bengali">
-    প্রজেক্ট নিয়ে কথা বলতে চাইলে<br>যেকোনো সময় মেসেজ করো
+  <p class="tagline">
+    মোবাইল সার্ভিসিং এর জন্য আমাদের সাথে যোগাযোগ করুন!<br>
+    আমরা দ্রুত ও নির্ভরযোগ্য সার্ভিস প্রদান করি — স্ক্রিন মেরামত, ব্যাটারি পরিবর্তন, সফটওয়্যার সমস্যা সমাধান ও আরও অনেক কিছু।<br>
+    আপনার ফোনকে নতুনের মতো করে তুলুন!
   </p>
 
+  <!-- সোশ্যাল আইকন (নরমাল সাইজ) -->
   <div class="social-links">
     <a href="https://facebook.com" class="fb" title="Facebook"><i class="fab fa-facebook-f"></i></a>
     <a href="https://instagram.com/md__habibur_rahman" class="ig" title="Instagram"><i class="fab fa-instagram"></i></a>
@@ -60,20 +78,36 @@
     <a href="https://t.me/H_A_B_I_B_Top_1" class="tg" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
   </div>
 
+  <div class="service-section">
+    <h3>আমাদের অনলাইন সার্ভিসসমূহ</h3>
+    <div class="service-box">
+      <h3 style="text-align:center;color:#ffb400;margin-bottom:20px">✅ All Service ON -</h3>
+      <ul>
+        <li>🪪 Nid Pdf</li>
+        <li>Sign Copy</li>
+        <li>Biometric Info</li>
+        <li>IMEI Info Check</li>
+        <li>NID to All Number</li>
+        <li>All Number Location</li>
+        <li>3/6 Month (Call Details)</li>
+      </ul>
+    </div>
+  </div>
+
   <a href="https://wa.me/8801868461577" class="whatsapp-btn">
     Message on WhatsApp →
   </a>
 </div>
 
-<!-- Fixed Bottom Navigation -->
+<!-- নিচের নেভিগেশন বার -->
 <div class="nav">
-  <a href="index.html">🏠</a>
-  <a href="about.html">👤</a>
-  <a href="services.html">💼</a>
-  <a href="portfolio.html">🖼️</a>
-  <a href="resume.html">📄</a>
-  <a href="blog.html">✍️</a>
-  <a href="contact.html" class="active">💬</a>
+  <a href="index.html">Home</a>
+  <a href="about.html">Person</a>
+  <a href="services.html">Briefcase</a>
+  <a href="portfolio.html">Image</a>
+  <a href="resume.html">Document</a>
+  <a href="blog.html">Pen</a>
+  <a href="contact.html" class="active">Chat</a>
 </div>
 
 </body>
