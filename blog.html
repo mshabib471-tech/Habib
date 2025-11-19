@@ -1,61 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog | Habibur Rahman</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <style>
-    body {font-family:'Inter',sans-serif;background:#0a0a0a;color:#fff;margin:0;}
-    nav {position:fixed;top:0;width:100%;z-index:99;backdrop-filter:blur(12px);background:#000000dd;padding:20px 5%;display:flex;justify-content:space-between;align-items:center;}
-    .container {max-width:1100px;margin:auto;padding:120px 20px 80px;}
-    .grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:30px;}
-    .post {background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:20px;overflow:hidden;transition:.4s;}
-    .post:hover {transform:translateY(-12px);box-shadow:0 25px 50px rgba(139,92,246,0.25);}
-    .post img {width:100%;height:200px;object-fit:cover;}
-    .content {padding:25px;}
-    .date {color:#8b5cf6;font-size:14px;margin-bottom:10px;}
-    h1 {text-align:center;font-size:50px;margin-bottom:60px;background:linear-gradient(90deg,#8b5cf6,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog | Habibur Rahman</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#000;color:#fff;font-family:'Poppins',sans-serif}
+  .container{max-width:480px;margin:0 auto;padding:20px 20px 100px}
+  h1{font-size:40px;color:#ffb400;margin:40px 0;text-align:center;font-weight:800}
+  .post{margin:30px 0;background:#111;padding:25px;border-radius:20px}
+  .post h3{font-size:22px;color:#ffb400;margin-bottom:10px}
+  .post p{color:#aaa}
+  .nav{bottom:0;position:fixed;width:100%;background:#111;border-top:1px solid #333;padding:15px 0;display:flex;justify-content:space-around;z-index:99}
+  .nav a{color:#777;font-size:28px}
+  .nav a.active,.nav a:hover{color:#ffb400}
+</style>
 </head>
 <body>
-  <nav>
-    <h1 class="text-2xl font-bold text-purple-400">Habibur.</h1>
-    <ul class="flex space-x-8">
-      <li><a href="index.html" class="hover:text-purple-400">Home</a></li>
-      <li><a href="blog.html" class="text-purple-400">Blog</a></li>
-    </ul>
-  </nav>
+<div class="container">
+  <h1>BLOG</h1>
+  <div class="post"><h3>Next.js 15 Bangla Tutorial 2025</h3><p>App Router, Server Actions, AI Integration…</p></div>
+  <div class="post"><h3>TikTok Viral Secret 2025</h3><p>যেভাবে ৭ দিনে ১ মিলিয়ন ভিউ পাই</p></div>
+  <div class="post"><h3>Grok + Cursor দিয়ে Full App</h3><p>কোড না লিখে প্রজেক্ট ডেলিভারি</p></div>
+</div>
 
-  <div class="container">
-    <h1>Latest Blog Posts</h1>
-    <div class="grid">
-      <div class="post">
-        <img src="https://via.placeholder.com/600x400/1a0033/8b5cf6?text=Next.js+15" alt="">
-        <div class="content">
-          <div class="date">November 18, 2025</div>
-          <h3>How to Master Next.js 15 in 2025</h3>
-          <p>New features, App Router tips & tricks...</p>
-        </div>
-      </div>
-      <div class="post">
-        <img src="https://via.placeholder.com/600x400/002b36/06b6d4?text=TikTok+Hacks" alt="">
-        <div class="content">
-          <div class="date">November 10, 2025</div>
-          <h3>Secret TikTok Algorithm Hacks 2025</h3>
-          <p>How I got 1M+ views in a week...</p>
-        </div>
-      </div>
-      <div class="post">
-        <img src="https://via.placeholder.com/600x400/33001a/ec4899?text=AI+Coding" alt="">
-        <div class="content">
-          <div class="date">November 5, 2025</div>
-          <h3>Build Full Apps with Grok & Cursor</h3>
-          <p>Zero to production in hours...</p>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="nav">
+  <a href="index.html">🏠</a>
+  <a href="about.html">👤</a>
+  <a href="services.html">💼</a>
+  <a href="portfolio.html">🖼️</a>
+  <a href="resume.html">📄</a>
+  <a href="blog.html" class="active">✍️</a>
+  <a href="contact.html">💬</a>
+</div>
 </body>
 </html>
