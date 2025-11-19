@@ -4,80 +4,65 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About | Habibur Rahman</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;900&display=swap" rel="stylesheet">
 <style>
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{background:#000;color:#fff;font-family:'Poppins',sans-serif}
-  .container{max-width:480px;margin:0 auto;padding:20px 20px 120px}
-  .profile-img{
-    width:180px;height:180px;border-radius:50%;border:8px solid #1a1a1a;
-    margin:40px auto 20px;display:block;object-fit:cover;
-    box-shadow:0 0 30px rgba(255,180,0,0.3);
-  }
-  h1{font-size:42px;color:#ffb400;text-align:center;margin:20px 0 40px;font-weight:800}
-  .section{margin:40px 0}
-  .section h2{
-    font-size:26px;color:#ffb400;margin-bottom:20px;border-bottom:2px solid #333;padding-bottom:8px;
-  }
-  .section p{
-    font-size:17px;line-height:1.9;color:#ddd;text-align:justify;padding:0 10px;
-  }
-  .highlight{color:#ffb400;font-weight:600}
-  
-  .nav{
-    bottom:0;position:fixed;width:100%;background:#111;border-top:2px solid #333;
-    padding:15px 0;display:flex;justify-content:space-around;z-index:99
-  }
-  .nav a{color:#777;font-size:30px}
-  .nav a.active,.nav a:hover{color:#ffb400}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(135deg,#000 0%,#1a1a2e 100%);color:#fff;font-family:'Poppins',sans-serif;min-height:100vh}
+.container{max-width:480px;margin:0 auto;padding:20px 20px 160px}
+.profile-img{width:200px;height:200px;border-radius:50%;object-fit:cover;margin:40px auto 20px;display:block;border:6px solid #ffb400;
+box-shadow:0 0 50px rgba(255,180,0,0.5);animation:float 6s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+h1{font-size:46px;color:#ffb400;text-align:center;margin:20px 0 40px;font-weight:900;text-shadow:0 0 20px #ffb400}
+.section{margin:35px 0;background:rgba(255,255,255,0.05);padding:28px;border-radius:22px;border:1px solid #333}
+.section h2{font-size:26px;color:#ffb400;margin-bottom:18px;border-bottom:2px solid #444;padding-bottom:8px}
+.section p{font-size:17px;line-height:2;color:#ddd;text-align:justify;margin-bottom:15px}
+.highlight{color:#ffb400;font-weight:700}
+.footer{text-align:center;padding:30px 0;color:#666;font-size:15px;border-top:1px solid #333;margin-top:50px}
+.nav{position:fixed;bottom:0;left:0;width:100%;background:rgba(17,17,17,0.95);backdrop-filter:blur(10px);border-top:2px solid #ffb400;
+padding:16px 0;display:flex;justify-content:space-around;z-index:999}
+.nav a{color:#888;font-size:32px;transition:0.3s}
+.nav a.active,.nav a:hover{color:#ffb400;transform:scale(1.25)}
 </style>
 </head>
 <body>
 
 <div class="container">
-  <img src="https://i.ibb.co.com/HLrr8Pnm/Picsart-25-11-19-21-55-28-130.jpg" alt="Habibur Rahman" class="profile-img">
-  
+  <img src="https://i.ibb.co.com/HLrr8Pnm/Picsart-25-11-19-21-55-28-130.jpg" alt="Habibur" class="profile-img">
   <h1>ABOUT ME</h1>
 
   <div class="section">
-    <p>
-      হাবিবুর রহমান একজন <span class="highlight">বাংলাদেশী উদ্যোক্তা, মোবাইল সার্ভিসিং বিশেষজ্ঞ, গ্রাফিক ডিজাইনার এবং সোশ্যাল মিডিয়া মার্কেটিং পেশাদার</span>। তিনি অনলাইন মার্কেটপ্লেসে প্রিমিয়াম ডিজিটাল সেবা প্রদানের জন্য পরিচিত।
-    </p>
+    <p>হাবিবুর রহমান একজন বাংলাদেশী উদ্যোক্তা, মোবাইল সার্ভিসিং বিশেষজ্ঞ, গ্রাফিক ডিজাইনার এবং সোশাল মিডিয়া মার্কেটিং পেশাদার। তিনি অনলাইন মার্কেটপ্লেসে প্রিমিয়াম ডিজিটাল সেবা প্রদানের জন্য পরিচিত।</p>
   </div>
 
   <div class="section">
     <h2>জন্ম ও শিক্ষা</h2>
-    <p>
-      হাবিবুর রহমান ২০০৫ সালের ২৩ ফেব্রুয়ারি বাংলাদেশের চট্টগ্রাম জেলার চন্দনাইশ উপজেলার গাছবাড়িয়া এলাকায় জন্মগ্রহণ করেন। তিনি <span class="highlight">গাছবাড়িয়া নিত্যানন্দ গৌরচন্দ্র সরকারি মডেল উচ্চ বিদ্যালয়</span> থেকে এসএসসি পাস করেন এবং পরবর্তীতে টেকনিক্যাল ও ডিজিটাল স্কিলের উপর বিভিন্ন প্রশিক্ষণ গ্রহণ করেন। তরুণ বয়স থেকেই তিনি প্রযুক্তি এবং ডিজিটাল মাধ্যমের প্রতি গভীর আগ্রহী ছিলেন।
-    </p>
+    <p>তিনি বাংলাদেশের চট্টগ্রাম চন্দনাইশের গাছবাড়িয়া এলাকায় ২০০৫ সালে ফেব্রুয়ারীর ২৩ তারিখ জন্মগ্রহণ করেন। তিনি গাছবাড়িয়া নিত্যানন্দ গৌরচন্দ্র সরকারি মডেল উচ্চ বিদ্যালয় থেকে এসএসসি সম্পন্ন করেন এবং পরে টেকনিক্যাল প্রশিক্ষণ নেন। তরুণ বয়স থেকেই তিনি প্রযুক্তি এবং ডিজিটাল মাধ্যমের প্রতি আগ্রহী ছিলেন।</p>
   </div>
 
   <div class="section">
     <h2>কর্মজীবন</h2>
-    <p>
-      হাবিব তার কর্মজীবন শুরু করেন <span class="highlight">মোবাইল সার্ভিসিং</span> ক্ষেত্রে। এখানে তিনি সকল ব্র্যান্ডের মোবাইল ডিভাইসের হার্ডওয়্যার ও সফটওয়্যার সমস্যার সমাধানে দক্ষতা অর্জন করেন। পরবর্তীতে তিনি <span class="highlight">গ্রাফিক ডিজাইন</span> এবং <span class="highlight">ডিজিটাল মার্কেটিং</span>-এ প্রবেশ করেন।
-    </p>
-    <p>
-      বর্তমানে তিনি Fiverr, Upwork ও অন্যান্য ফ্রিল্যান্স প্ল্যাটফর্মে প্রিমিয়াম সার্ভিস প্রদান করেন। তার সার্ভিসের মধ্যে রয়েছে – লোগো ডিজাইন, ব্র্যান্ডিং, সোশ্যাল মিডিয়া কন্টেন্ট ক্রিয়েশন, ভাইরাল মার্কেটিং স্ট্র্যাটেজি, থাম্বনেইল ডিজাইন ইত্যাদি।
-    </p>
-    <p>
-      ২০২৩ সালে তিনি ফ্রিল্যান্সিং প্ল্যাটফর্মে <span class="highlight">টপ-রেটেড সেলার</span> হিসেবে স্বীকৃতি লাভ করেন। তার মার্কেটিং কৌশল বাংলাদেশের অনেক ক্ষুদ্র ও মাঝারি ব্যবসার জন্য গেম-চেঞ্জার হিসেবে কাজ করেছে।
-    </p>
+    <p>হাবিব মোবাইল সার্ভিসিংয়ের ক্ষেত্রে তার কর্মজীবন শুরু করেন, যেখানে তিনি বিভিন্ন ধরনের মোবাইল ডিভাইসের মেরামত ও রক্ষণাবেক্ষণে দক্ষতা অর্জন করেন। পরবর্তীতে তিনি গ্রাফিক ডিজাইন এবং ডিজিটাল মার্কেটিংয়ে প্রবেশ করেন।</p>
+    <p>তিনি Fiverr, Upwork সহ অন্যান্য ফ্রিল্যান্স প্ল্যাটফর্মের মাধ্যমে প্রিমিয়াম সেবা প্রদান শুরু করেন, যার মধ্যে লোগো ডিজাইন, সোশাল মিডিয়া কন্টেন্ট তৈরি, এবং অনলাইন মার্কেটিং কৌশল উন্নয়ন অন্তর্ভুক্ত। তার সোশাল মিডিয়া মার্কেটিং কৌশলগুলো বিভিন্ন ক্ষুদ্র ও মাঝারি ব্যবসায়ের জন্য ফলপ্রসূ প্রমাণিত হয়েছে।</p>
+    <p>তিনি <span class="highlight">২০২৩ সালে ফ্রিল্যান্সার প্ল্যাটফর্মে শীর্ষ-রেটেড সেলার</span> হিসেবে স্বীকৃতি পান।</p>
   </div>
 
   <div class="section">
     <h2>ব্যক্তিগত জীবন</h2>
-    <p>
-      হাবিব বর্তমানে চট্টগ্রামের গাছবাড়িয়ায় তার পরিবারের সাথে বসবাস করেন। তিনি প্রযুক্তি, উদ্যোক্তা মানসিকতা, গ্রাফিক ডিজাইন এবং সৃজনশীল কাজের প্রতি অত্যন্ত উৎসাহী। ফ্রি সময়ে তিনি নতুন টুল শিখেন, কন্টেন্ট বানান এবং তরুণদের মেন্টর করেন।
-    </p>
+    <p>হাবিব বাংলাদেশের চট্টগ্রাম জেলার চন্দনাইশ এর গাছবাড়িয়া এলাকায় বসবাস করেন এবং তার পরিবারের সাথে সময় কাটাতে পছন্দ করেন। তিনি প্রযুক্তি, উদ্যোক্তা মানসিকতা এবং সৃজনশীল কাজের প্রতি উৎসাহী।</p>
   </div>
 
-  <div style="text-align:center;margin:50px 0">
-    <a href="contact.html" style="display:inline-block;padding:20px 60px;background:#ffb400;color:#000;font-size:22px;font-weight:800;border-radius:60px;text-decoration:none">
-      Hire Me Now →
-    </a>
-  </div>
+  <div class="footer">© 2025 Habibur Rahman. All Rights Reserved.</div>
+</div>
+
+<!-- Bottom Navigation -->
+<div class="nav">
+  <a href="index.html">Home</a>
+  <a href="about.html" style="color:#ffb400">Person</a>
+  <a href="services.html">Briefcase</a>
+  <a href="portfolio.html">Image</a>
+  <a href="resume.html">Document</a>
+  <a href="blog.html">Pen</a>
+  <a href="contact.html">Chat</a>
 </div>
 
 <!-- Bottom Navigation -->
@@ -90,6 +75,7 @@
   <a href="blog.html">✍️</a>
   <a href="contact.html">💬</a>
 </div>
+
 
 </body>
 </html>
