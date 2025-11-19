@@ -3,53 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Habibur Rahman</title>
+<title>About | Habibur Rahman</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:linear-gradient(135deg,#000 0%,#1a1a2e 100%);color:#fff;font-family:'Poppins',sans-serif;min-height:100vh}
-.container{max-width:480px;margin:0 auto;padding:20px 20px 160px;text-align:center;position:relative}
-
-.profile-img{
-  width:240px;height:240px;border-radius:50%;object-fit:cover;margin:50px auto 20px;display:block;
-  border:6px solid #ffb400;box-shadow:0 0 50px rgba(255,180,0,0.6);animation:float 6s ease-in-out infinite
-}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
-
-.name{font-size:46px;font-weight:900;color:#ffb400;text-shadow:0 0 20px #ffb400;letter-spacing:2px}
-.title{font-size:34px;font-weight:700;background:linear-gradient(90deg,#ffb400,#ff6b6b);
--webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:10px 0 30px}
-.desc{font-size:18px;line-height:1.8;color:#ccc;padding:0 15px;margin-bottom:40px}
-
-/* About Me বক্স */
-.about-box{
-  background:linear-gradient(145deg,#1e3c72,#2a5298);margin:40px auto;padding:30px;border-radius:30px;width:92%;
-  border:3px solid #ffb400;box-shadow:0 20px 50px rgba(30,60,114,0.6);animation:glow-blue 2s infinite alternate
-}
-@keyframes glow-blue{from{box-shadow:0 20px 50px rgba(30,60,114,0.6)}to{box-shadow:0 30px 80px rgba(30,60,114,0.9)}}
-.about-box h3{font-size:32px;font-weight:900;color:#ffb400;margin-bottom:12px}
-.about-box p{font-size:19px;color:#ddd;margin-bottom:20px}
-.about-btn{display:inline-block;padding:18px 50px;background:#ffb400;color:#000;font-size:22px;font-weight:900;
-border-radius:50px;text-decoration:none;border:4px solid #000;transition:0.4s}
-.about-btn:hover{background:#000;color:#ffb400;transform:scale(1.08);box-shadow:0 0 30px #ffb400}
-
-/* Gaming Top-Up বক্স */
-.gaming-box{
-  background:linear-gradient(145deg,#ff8c00,#ff2e63);margin:40px auto;padding:30px;border-radius:30px;width:92%;
-  border:3px solid #ffb400;box-shadow:0 20px 50px rgba(255,46,99,0.5);animation:glow-red 2s infinite alternate
-}
-@keyframes glow-red{from{box-shadow:0 20px 50px rgba(255,46,99,0.5)}to{box-shadow:0 30px 80px rgba(255,46,99,0.8)}}
-.gaming-box h3{font-size:32px;font-weight:900;color:#000;margin-bottom:12px}
-.gaming-box p{font-size:19px;color:#000;font-weight:600;margin-bottom:20px}
-.gaming-btn{display:inline-block;padding:18px 50px;background:#000;color:#ffb400;font-size:22px;font-weight:900;
-border-radius:50px;text-decoration:none;border:4px solid #ffb400;transition:0.4s}
-.gaming-btn:hover{background:#ffb400;color:#000;transform:scale(1.08);box-shadow:0 0 30px #ffb400}
-
-.footer{text-align:center;padding:30px 0;color:#666;font-size:15px;border-top:1px solid #333;margin-top:40px}
-
-.nav{position:fixed;bottom:0;left:0;width:100%;background:rgba(17,17,17,0.95);backdrop-filter:blur(10px);
-border-top:2px solid #ffb400;padding:16px 0;display:flex;justify-content:space-around;z-index:999}
+.container{max-width:480px;margin:0 auto;padding:20px 20px 160px}
+.profile-img{width:200px;height:200px;border-radius:50%;object-fit:cover;margin:40px auto 20px;display:block;border:6px solid #ffb400;
+box-shadow:0 0 50px rgba(255,180,0,0.5);animation:float 6s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+h1{font-size:46px;color:#ffb400;text-align:center;margin:20px 0 40px;font-weight:900;text-shadow:0 0 20px #ffb400}
+.section{margin:35px 0;background:rgba(255,255,255,0.05);padding:28px;border-radius:22px;border:1px solid #333}
+.section h2{font-size:26px;color:#ffb400;margin-bottom:18px;border-bottom:2px solid #444;padding-bottom:8px}
+.section p{font-size:17px;line-height:2;color:#ddd;text-align:justify;margin-bottom:15px}
+.highlight{color:#ffb400;font-weight:700}
+.footer{text-align:center;padding:30px 0;color:#666;font-size:15px;border-top:1px solid #333;margin-top:50px}
+.nav{position:fixed;bottom:0;left:0;width:100%;background:rgba(17,17,17,0.95);backdrop-filter:blur(10px);border-top:2px solid #ffb400;
+padding:16px 0;display:flex;justify-content:space-around;z-index:999}
 .nav a{color:#888;font-size:32px;transition:0.3s}
 .nav a.active,.nav a:hover{color:#ffb400;transform:scale(1.25)}
 </style>
@@ -58,27 +28,27 @@ border-top:2px solid #ffb400;padding:16px 0;display:flex;justify-content:space-a
 
 <div class="container">
   <img src="https://i.ibb.co.com/HLrr8Pnm/Picsart-25-11-19-21-55-28-130.jpg" alt="Habibur" class="profile-img">
-  
-  <div class="name">HABIBUR RAHMAN</div>
-  <div class="title">Mobile Expert & Digital Creator</div>
-  
-  <p class="desc">
-    মোবাইল সার্ভিসিং, গেমিং টপ-আপ, NID সার্ভিস, গ্রাফিক ডিজাইন — সব এক জায়গায়।<br>
-    দ্রুত, নির্ভরযোগ্য ও সাশ্রয়ী সার্ভিস।
-  </p>
+  <h1>ABOUT ME</h1>
 
-  <!-- About Me বক্স -->
-  <div class="about-box">
-    <h3>ABOUT ME</h3>
-    <p>আমার জীবন, শিক্ষা, কাজের অভিজ্ঞতা ও যাত্রা জানুন</p>
-    <a href="about.html" class="about-btn">SEE MORE →</a>
+  <div class="section">
+    <p>হাবিবুর রহমান একজন বাংলাদেশী উদ্যোক্তা, মোবাইল সার্ভিসিং বিশেষজ্ঞ, গ্রাফিক ডিজাইনার এবং সোশাল মিডিয়া মার্কেটিং পেশাদার। তিনি অনলাইন মার্কেটপ্লেসে প্রিমিয়াম ডিজিটাল সেবা প্রদানের জন্য পরিচিত।</p>
   </div>
 
-  <!-- Gaming Top-Up বক্স -->
-  <div class="gaming-box">
-    <h3>GAMING TOP-UP</h3>
-    <p>Free Fire • PUBG • MLBB • CODM</p>
-    <a href="https://habib-yt.vercel.app" target="_blank" class="gaming-btn">TOP-UP NOW</a>
+  <div class="section">
+    <h2>জন্ম ও শিক্ষা</h2>
+    <p>তিনি বাংলাদেশের চট্টগ্রাম চন্দনাইশের গাছবাড়িয়া এলাকায় ২০০৫ সালে ফেব্রুয়ারীর ২৩ তারিখ জন্মগ্রহণ করেন। তিনি গাছবাড়িয়া নিত্যানন্দ গৌরচন্দ্র সরকারি মডেল উচ্চ বিদ্যালয় থেকে এসএসসি সম্পন্ন করেন এবং পরে টেকনিক্যাল প্রশিক্ষণ নেন। তরুণ বয়স থেকেই তিনি প্রযুক্তি এবং ডিজিটাল মাধ্যমের প্রতি আগ্রহী ছিলেন।</p>
+  </div>
+
+  <div class="section">
+    <h2>কর্মজীবন</h2>
+    <p>হাবিব মোবাইল সার্ভিসিংয়ের ক্ষেত্রে তার কর্মজীবন শুরু করেন, যেখানে তিনি বিভিন্ন ধরনের মোবাইল ডিভাইসের মেরামত ও রক্ষণাবেক্ষণে দক্ষতা অর্জন করেন। পরবর্তীতে তিনি গ্রাফিক ডিজাইন এবং ডিজিটাল মার্কেটিংয়ে প্রবেশ করেন।</p>
+    <p>তিনি Fiverr, Upwork সহ অন্যান্য ফ্রিল্যান্স প্ল্যাটফর্মের মাধ্যমে প্রিমিয়াম সেবা প্রদান শুরু করেন, যার মধ্যে লোগো ডিজাইন, সোশাল মিডিয়া কন্টেন্ট তৈরি, এবং অনলাইন মার্কেটিং কৌশল উন্নয়ন অন্তর্ভুক্ত। তার সোশাল মিডিয়া মার্কেটিং কৌশলগুলো বিভিন্ন ক্ষুদ্র ও মাঝারি ব্যবসায়ের জন্য ফলপ্রসূ প্রমাণিত হয়েছে।</p>
+    <p>তিনি <span class="highlight">২০২৩ সালে ফ্রিল্যান্সার প্ল্যাটফর্মে শীর্ষ-রেটেড সেলার</span> হিসেবে স্বীকৃতি পান।</p>
+  </div>
+
+  <div class="section">
+    <h2>ব্যক্তিগত জীবন</h2>
+    <p>হাবিব বাংলাদেশের চট্টগ্রাম জেলার চন্দনাইশ এর গাছবাড়িয়া এলাকায় বসবাস করেন এবং তার পরিবারের সাথে সময় কাটাতে পছন্দ করেন। তিনি প্রযুক্তি, উদ্যোক্তা মানসিকতা এবং সৃজনশীল কাজের প্রতি উৎসাহী।</p>
   </div>
 
   <div class="footer">© 2025 Habibur Rahman. All Rights Reserved.</div>
@@ -86,15 +56,14 @@ border-top:2px solid #ffb400;padding:16px 0;display:flex;justify-content:space-a
 
 <!-- Bottom Navigation -->
 <div class="nav">
-  <a href="index.html" class="active">Home</a>
-  <a href="about.html">Person</a>
+  <a href="index.html">Home</a>
+  <a href="about.html" style="color:#ffb400">Person</a>
   <a href="services.html">Briefcase</a>
   <a href="portfolio.html">Image</a>
   <a href="resume.html">Document</a>
   <a href="blog.html">Pen</a>
   <a href="contact.html">Chat</a>
 </div>
-
 
 <!-- Bottom Navigation -->
 <div class="nav">
