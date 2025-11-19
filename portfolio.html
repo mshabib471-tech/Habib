@@ -1,52 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portfolio | Habibur Rahman</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;900&display=swap" rel="stylesheet">
 <style>
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{background:#000;color:#fff;font-family:'Poppins',sans-serif}
-  .container{max-width:480px;margin:0 auto;padding:20px 20px 100px;text-align:center}
-  h1{font-size:40px;color:#ffb400;margin:40px 0 40px;font-weight:800}
-  .project{margin:30px 0;background:#111;border-radius:20px;overflow:hidden}
-  .project img{width:100%;height:200px;object-fit:cover}
-  .project h3{font-size:22px;color:#ffb400;padding:15px 10px 5px}
-  .project p{color:#aaa;padding:0 15px 20px}
-  .nav{bottom:0;position:fixed;width:100%;background:#111;border-top:1px solid #333;padding:15px 0;display:flex;justify-content:space-around;z-index:99}
-  .nav a{color:#777;font-size:28px}
-  .nav a.active,.nav a:hover{color:#ffb400}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(135deg,#000 0%,#1a1a2e 100%);color:#fff;font-family:'Poppins',sans-serif;min-height:100vh}
+.container{max-width:480px;margin:0 auto;padding:20px 20px 160px;text-align:center}
+h1{font-size:46px;color:#ffb400;margin:40px 0;font-weight:900;text-shadow:0 0 20px #ffb400}
+.grid{display:grid;gap:25px;margin-top:20px}
+.item{background:#111;border-radius:20px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.6)}
+.item img{width:100%;height:220px;object-fit:cover}
+.item h3{font-size:22px;color:#ffb400;padding:15px 10px 5px}
+.item p{color:#aaa;padding:0 15px 20px}
+.footer{text-align:center;padding:30px 0;color:#666;font-size:15px;border-top:1px solid #333;margin-top:50px}
+.nav{position:fixed;bottom:0;left:0;width:100%;background:rgba(17,17,17,0.95);backdrop-filter:blur(10px);border-top:2px solid #ffb400;
+padding:16px 0;display:flex;justify-content:space-around;z-index:999}
+.nav a{color:#888;font-size:32px;transition:0.3s}
+.nav a.active,.nav a:hover{color:#ffb400;transform:scale(1.25)}
 </style>
 </head>
 <body>
 <div class="container">
   <h1>PORTFOLIO</h1>
-  <div class="project">
-    <img src="https://via.placeholder.com/500x300/333/ffb400?text=E-Commerce+Pro" alt="">
-    <h3>Premium E-Commerce</h3>
-    <p>Next.js + Stripe + Dashboard</p>
+  <div class="grid">
+    <div class="item"><img src="https://via.placeholder.com/500x300/333/ffb400?text=Mobile+Repair+Shop" alt=""><h3>Mobile Repair Projects</h3><p>1000+ ফোন রিপেয়ার</p></div>
+    <div class="item"><img src="https://via.placeholder.com/500x300/333/ffb400?text=Gaming+TopUp+Site" alt=""><h3>Gaming Top-Up Site</h3><p>habib-yt.vercel.app</p></div>
+    <div class="item"><img src="https://via.placeholder.com/500x300/333/ffb400?text=Logo+%26+Thumbnail" alt=""><h3>Graphic Works</h3><p>500+ ক্লায়েন্ট</p></div>
   </div>
-  <div class="project">
-    <img src="https://via.placeholder.com/500x300/333/ffb400?text=3D+Portfolio" alt="">
-    <h3>3D Interactive Site</h3>
-    <p>Three.js + GSAP Animation</p>
-  </div>
-  <div class="project">
-    <img src="https://via.placeholder.com/500x300/333/ffb400?text=Viral+App" alt="">
-    <h3>Viral TikTok Style App</h3>
-    <p>React Native + Firebase</p>
-  </div>
+  <div class="footer">© 2025 Habibur Rahman. All Rights Reserved.</div>
+</div>
+<!-- Bottom Navigation -->
+<div class="nav">
+  <a href="index.html">Home</a>
+  <a href="about.html">Person</a>
+  <a href="services.html">Briefcase</a>
+  <a href="portfolio.html" style="color:#ffb400">Image</a>
+  <a href="resume.html">Document</a>
+  <a href="blog.html">Pen</a>
+  <a href="contact.html">Chat</a>
 </div>
 
+
+
+<!-- Bottom Navigation -->
 <div class="nav">
   <a href="index.html">🏠</a>
-  <a href="about.html">👤</a>
+  <a href="about.html" style="color:#ffb400">👤</a>
   <a href="services.html">💼</a>
-  <a href="portfolio.html" class="active">🖼️</a>
+  <a href="portfolio.html">🖼️</a>
   <a href="resume.html">📄</a>
   <a href="blog.html">✍️</a>
   <a href="contact.html">💬</a>
 </div>
+
 </body>
 </html>
