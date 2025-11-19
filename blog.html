@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog | Habibur Rahman</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    body {font-family:'Inter',sans-serif;background:#0a0a0a;color:#fff;margin:0;}
+    nav {position:fixed;top:0;width:100%;z-index:99;backdrop-filter:blur(12px);background:#000000dd;padding:20px 5%;display:flex;justify-content:space-between;align-items:center;}
+    .container {max-width:1100px;margin:auto;padding:120px 20px 80px;}
+    .grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:30px;}
+    .post {background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:20px;overflow:hidden;transition:.4s;}
+    .post:hover {transform:translateY(-12px);box-shadow:0 25px 50px rgba(139,92,246,0.25);}
+    .post img {width:100%;height:200px;object-fit:cover;}
+    .content {padding:25px;}
+    .date {color:#8b5cf6;font-size:14px;margin-bottom:10px;}
+    h1 {text-align:center;font-size:50px;margin-bottom:60px;background:linear-gradient(90deg,#8b5cf6,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+  </style>
+</head>
+<body>
+  <nav>
+    <h1 class="text-2xl font-bold text-purple-400">Habibur.</h1>
+    <ul class="flex space-x-8">
+      <li><a href="index.html" class="hover:text-purple-400">Home</a></li>
+      <li><a href="blog.html" class="text-purple-400">Blog</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h1>Latest Blog Posts</h1>
+    <div class="grid">
+      <div class="post">
+        <img src="https://via.placeholder.com/600x400/1a0033/8b5cf6?text=Next.js+15" alt="">
+        <div class="content">
+          <div class="date">November 18, 2025</div>
+          <h3>How to Master Next.js 15 in 2025</h3>
+          <p>New features, App Router tips & tricks...</p>
+        </div>
+      </div>
+      <div class="post">
+        <img src="https://via.placeholder.com/600x400/002b36/06b6d4?text=TikTok+Hacks" alt="">
+        <div class="content">
+          <div class="date">November 10, 2025</div>
+          <h3>Secret TikTok Algorithm Hacks 2025</h3>
+          <p>How I got 1M+ views in a week...</p>
+        </div>
+      </div>
+      <div class="post">
+        <img src="https://via.placeholder.com/600x400/33001a/ec4899?text=AI+Coding" alt="">
+        <div class="content">
+          <div class="date">November 5, 2025</div>
+          <h3>Build Full Apps with Grok & Cursor</h3>
+          <p>Zero to production in hours...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
