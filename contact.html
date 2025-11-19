@@ -1,53 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact | Habibur Rahman</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <style>
-    body {font-family:'Inter',sans-serif;background:#0a0a0a;color:#fff;margin:0;}
-    nav {position:fixed;top:0;width:100%;z-index:99;backdrop-filter:blur(12px);background:#000000dd;padding:20px 5%;display:flex;justify-content:space-between;align-items:center;}
-    .container {max-width:800px;margin:auto;padding:120px 20px;text-align:center;}
-    input,textarea {width:100%;padding:16px;margin:10px 0;border-radius:12px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:#fff;font-size:16px;}
-    button {background:linear-gradient(90deg,#8b5cf6,#ec4899);padding:16px 50px;border:none;border-radius:50px;font-size:18px;font-weight:bold;cursor:pointer;margin-top:20px;}
-    .social {font-size:40px;margin:40px 0;}
-    .social a {margin:0 15px;color:#fff;font-size:30px;transition:.3s;}
-    .social a:hover {color:#8b5cf6;transform:translateY(-8px);}
-    h1 {font-size:50px;margin-bottom:30px;background:linear-gradient(90deg,#8b5cf6,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | Habibur Rahman</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#000;color:#fff;font-family:'Poppins',sans-serif}
+  .container{max-width:480px;margin:0 auto;padding:20px;text-align:center}
+  h1{font-size:40px;color:#ffb400;margin:40px 0;font-weight:800}
+  .social a{color:#ffb400;font-size:40px;margin:0 20px}
+  .social a:hover{transform:scale(1.3)}
+  .nav{bottom:0;position:fixed;width:100%;background:#111;border-top:1px solid #333;padding:15px 0;display:flex;justify-content:space-around;z-index:99}
+  .nav a{color:#777;font-size:28px}
+  .nav a.active,.nav a:hover{color:#ffb400}
+</style>
 </head>
 <body>
-  <nav>
-    <h1 class="text-2xl font-bold text-purple-400">Habibur.</h1>
-    <ul class="flex space-x-8">
-      <li><a href="index.html" class="hover:text-purple-400">Home</a></li>
-      <li><a href="contact.html" class="text-purple-400">Contact</a></li>
-    </ul>
-  </nav>
-
-  <div class="container">
-    <h1>Get In Touch</h1>
-    <p class="text-xl mb-10 text-gray-400">প্রজেক্ট নিয়ে কথা বলতে চাইলে যেকোনো সময় মেসেজ করো</p>
-
-    <form>
-      <input type="text" placeholder="Your Name" required>
-      <input type="email" placeholder="Your Email" required>
-      <textarea rows="6" placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-
-    <div class="social">
-      <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
-      <a href="https://instagram.com/md__habibur_rahman" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="https://tiktok.com/@habibur_._rahman" target="_blank"><i class="fab fa-tiktok"></i></a>
-      <a href="https://youtube.com/@h_a_b_i_b-yt" target="_blank"><i class="fab fa-youtube"></i></a>
-      <a href="https://wa.me/8801868461577" target="_blank"><i class="fab fa-whatsapp"></i></a>
-      <a href="https://t.me/H_A_B_I_B_Top_1" target="_blank"><i class="fab fa-telegram"></i></a>
-    </div>
-
-    <p class="mt-10 text-gray-500">© 2025 Habibur Rahman. All rights reserved.</p>
+<div class="container">
+  <h1>CONTACT</h1>
+  <p style="font-size:20px;margin:40px 0;color:#ccc">প্রজেক্ট নিয়ে কথা বলতে চাইলে যেকোনো সময় মেসেজ করো</p>
+  
+  <div class="social" style="margin:50px 0">
+    <a href="https://facebook.com">FB</a>
+    <a href="https://instagram.com/md__habibur_rahman">IG</a>
+    <a href="https://tiktok.com/@habibur_._rahman">TT</a>
+    <a href="https://youtube.com/@h_a_b_i_b-yt">YT</a>
+    <a href="https://wa.me/8801868461577">WA</a>
+    <a href="https://t.me/H_A_B_I_B_Top_1">TG</a>
   </div>
+
+  <a href="https://wa.me/8801868461577" style="display:inline-block;padding:20px 60px;background:#ffb400;color:#000;font-size:22px;font-weight:800;border-radius:50px;text-decoration:none">
+    Message on WhatsApp →
+  </a>
+</div>
+
+<div class="nav">
+  <a href="index.html">🏠</a>
+  <a href="about.html">👤</a>
+  <a href="services.html">💼</a>
+  <a href="portfolio.html">🖼️</a>
+  <a href="resume.html">📄</a>
+  <a href="blog.html">✍️</a>
+  <a href="contact.html" class="active">💬</a>
+</div>
 </body>
 </html>
