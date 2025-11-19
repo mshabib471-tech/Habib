@@ -3,35 +3,61 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Habibur Rahman</title>
+<title>Habibur Rahman | Mobile Servicing & Digital Services</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
   body{background:#000;color:#fff;font-family:'Poppins',sans-serif;overflow-x:hidden}
   .container{max-width:480px;margin:0 auto;padding:20px;background:#000;height:100vh;display:flex;flex-direction:column}
-  .profile-img{width:220px;height:220px;border-radius:50%;border:8px solid #1a1a1a;margin:40px auto 20px;object-fit:cover}
+  .profile-img{width:220px;height:220px;border-radius:50%;border:8px solid #1a1a1a;margin:40px auto 20px;object-fit:cover;box-shadow:0 0 40px rgba(255,180,0,0.4)}
   .name{color:#ffb400;font-size:42px;font-weight:800;text-align:center;margin:10px 0}
-  .title{font-size:32px;font-weight:600;text-align:center;margin-bottom:30px}
-  .desc{text-align:center;line-height:1.8;font-size:18px;color:#ccc;padding:0 20px}
-  .btn{display:block;margin:50px auto;padding:18px 40px;background:#ffb400;color:#000;font-weight:800;font-size:20px;border-radius:50px;text-decoration:none;width:80%;text-align:center;box-shadow:0 10px 30px rgba(255,180,0,0.4)}
-  .btn::after{content:' →';margin-left:15px;font-size:28px}
+  .title{font-size:32px;font-weight:600;text-align:center;margin-bottom:25px}
+  .desc{text-align:center;line-height:1.8;font-size:18px;color:#ccc;padding:0 20px;margin-bottom:30px}
+  
+  /* Gaming Top Up বক্স */
+  .gaming-box{
+    background:linear-gradient(135deg,#ffb400,#ff8c00);color:#000;margin:30px auto;
+    padding:25px;border-radius:25px;width:90%;text-align:center;box-shadow:0 15px 40px rgba(255,180,0,0.5);
+    animation:pulse 2s infinite;
+  }
+  .gaming-box h3{font-size:28px;font-weight:800;margin-bottom:10px}
+  .gaming-box p{font-size:18px;margin-bottom:20px}
+  .gaming-btn{display:inline-block;padding:18px 40px;background:#000;color:#ffb400;font-weight:800;font-size:20px;border-radius:50px;text-decoration:none;border:3px solid #ffb400;transition:0.4s}
+  .gaming-btn:hover{background:#ffb400;color:#000;transform:scale(1.05)}
+
   .nav{bottom:0;position:fixed;width:100%;background:#111;border-top:1px solid #333;padding:15px 0;display:flex;justify-content:space-around;z-index:99}
-  .nav a{color:#777;font-size:28px}
-  .nav a.active,.nav a:hover{color:#ffb400}
+  .nav a{color:#777;font-size:28px;transition:0.3s}
+  .nav a.active,.nav a:hover{color:#ffb400;transform:scale(1.1)}
+  
+  @keyframes pulse{0%,100%{box-shadow:0 15px 40px rgba(255,180,0,0.5)}50%{box-shadow:0 25px 60px rgba(255,180,0,0.8)}}
 </style>
 </head>
 <body>
 <div class="container">
-  <img src="https://i.ibb.co.com/HLrr8Pnm/Picsart-25-11-19-21-55-28-130.jpg" alt="Habibur" class="profile-img">
+  <img src="https://i.ibb.co.com/HLrr8Pnm/Picsart-25-11-19-21-55-28-130.jpg" alt="Habibur Rahman" class="profile-img">
+  
   <div class="name">I'M HABIBUR RAHMAN.</div>
-  <div class="title">FULL-STACK DEVELOPER</div>
+  <div class="title">MOBILE SERVICING EXPERT</div>
+  
   <p class="desc">
-    আমি Habibur Rahman। React, Next.js, Node.js দিয়ে প্রিমিয়াম ওয়েব অ্যাপ বানাই। TikTok, YouTube-এ ভাইরাল কন্টেন্ট ক্রিয়েট করি। কোড + ক্রিয়েটিভিটি মিশিয়ে যা মনে চায় তাই বানিয়ে দিই।
+    দ্রুত ও নির্ভরযোগ্য মোবাইল সার্ভিসিং সেবা। স্ক্রিন মেরামত, ব্যাটারি পরিবর্তন, সফটওয়্যার সমস্যা সমাধান – সব আপনার ফোনকে নতুনের মতো করে তুলবো।
   </p>
-  <a href="about.html" class="btn">MORE ABOUT ME</a>
+
+  <!-- Gaming Top Up বক্স -->
+  <div class="gaming-box">
+    <h3>🎮 GAMING TOP UP</h3>
+    <p>Free Fire • PUBG • MLBB • COD Mobile</p>
+    <a href="https://habib-yt.vercel.app" target="_blank" class="gaming-btn">
+      TOP UP NOW
+    </a>
+  </div>
+
+  <a href="about.html" style="display:block;margin:20px auto;padding:18px 40px;background:#ffb400;color:#000;font-weight:800;font-size:20px;border-radius:50px;text-decoration:none;width:80%;text-align:center;box-shadow:0 10px 30px rgba(255,180,0,0.4)">
+    MORE ABOUT ME →
+  </a>
 </div>
 
-<!-- Fixed Bottom Navigation -->
+<!-- নিচের নেভিগেশন -->
 <div class="nav">
   <a href="index.html" class="active">🏠</a>
   <a href="about.html">👤</a>
@@ -41,5 +67,6 @@
   <a href="blog.html">✍️</a>
   <a href="contact.html">💬</a>
 </div>
+
 </body>
 </html>
