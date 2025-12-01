@@ -1,0 +1,339 @@
+/* ============================
+   BASE / RESETS
+============================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: #f7f8fa;
+  color: #111;
+  padding-bottom: 70px; /* bottom nav space */
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* ============================
+   DRAWER MENU
+============================ */
+
+.drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.25s;
+  z-index: 50;
+}
+
+.drawer-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.drawer {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 270px;
+  background: #fff;
+  transform: translateX(-100%);
+  transition: 0.3s;
+  z-index: 99;
+  padding: 1rem;
+  overflow-y: auto;
+  border-right: 1px solid #ddd;
+}
+
+.drawer.open {
+  transform: translateX(0);
+}
+
+.drawer-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.drawer-list {
+  list-style: none;
+  margin-top: 1rem;
+}
+
+.drawer-list li {
+  padding: 0.65rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.drawer-list .sub {
+  font-size: 0.9rem;
+  color: #666;
+  border-bottom: none;
+  padding-top: 1.3rem;
+}
+
+/* ============================
+   HEADER (SHOP TOP BAR)
+============================ */
+
+.shop-header {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 30;
+  padding: 0.9rem 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menu-btn {
+  background: none;
+  font-size: 1.5rem;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.cart-icon {
+  position: relative;
+  font-size: 1.5rem;
+}
+
+.cart-icon span {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  background: red;
+  color: #fff;
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  border-radius: 50%;
+}
+
+/* ============================
+   CATEGORY NAV TABS
+============================ */
+
+.category-nav {
+  display: flex;
+  gap: 0.7rem;
+  overflow-x: auto;
+  padding: 0.7rem 1rem;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+}
+
+.cat-btn {
+  padding: 0.45rem 1rem;
+  border-radius: 20px;
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.cat-btn.active {
+  background: #6366f1;
+  color: #fff;
+  border-color: #6366f1;
+}
+
+/* ============================
+   SECTIONS TITLE
+============================ */
+
+.section-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  padding: 1.3rem 1rem 0.5rem;
+}
+
+/* ============================
+   SMARTPHONE LARGE CARD
+============================ */
+
+.phone-card {
+  background: #fff;
+  margin: 1rem;
+  border-radius: 14px;
+  padding: 1rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.phone-img {
+  border-radius: 12px;
+}
+
+.phone-info h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.3rem;
+}
+
+.phone-info p {
+  color: #666;
+  font-size: 0.85rem;
+  margin-bottom: 0.7rem;
+}
+
+.price-row {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #111;
+}
+
+.buttons {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.btn-primary {
+  background: #6366f1;
+  color: #fff;
+  padding: 0.55rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.btn-outline {
+  border: 1px solid #bbb;
+  background: #fff;
+  padding: 0.55rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+/* ============================
+   ACCESSORIES & GADGETS GRID
+============================ */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem;
+  padding: 1rem;
+}
+
+.grid-item {
+  background: #fff;
+  padding: 0.8rem;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+  text-align: center;
+  position: relative;
+}
+
+.grid-item h4 {
+  font-size: 0.9rem;
+  margin-top: 0.4rem;
+}
+
+.acc-price {
+  margin: 0.3rem 0 0.6rem;
+  font-weight: bold;
+  color: #111;
+}
+
+.grid-btn {
+  font-size: 1.1rem;
+  padding: 0.35rem 0.7rem;
+  margin: 0 0.15rem;
+  border-radius: 8px;
+}
+
+.grid-btn:first-child {
+  background: #6366f1;
+  color: #fff;
+}
+
+.grid-btn:last-child {
+  background: #ffe8e8;
+  color: #e63939;
+}
+
+/* ============================
+   BOTTOM NAV BAR
+============================ */
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 63px;
+  background: #fff;
+  border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 40;
+}
+
+.bottom-nav a {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #444;
+}
+
+.bottom-nav span {
+  display: block;
+  font-size: 0.65rem;
+  color: #666;
+  margin-top: -2px;
+}
+
+/* active icon effect */
+.bottom-nav a.active {
+  color: #6366f1;
+}
+
+/* ============================
+   RESPONSIVE
+============================ */
+
+@media (min-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 850px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
