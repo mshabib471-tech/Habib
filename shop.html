@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Habib Mobile Shop</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="shop.css" />
+<link rel="icon" type="image/png" href="https://i.ibb.co/n88CVpsy/habib.png">
+</head>
+
+<body>
+
+<!-- Drawer Menu Background -->
+<div class="drawer-overlay" id="drawerOverlay"></div>
+
+<!-- Drawer Menu -->
+<aside class="drawer" id="drawerMenu">
+  <div class="drawer-header">
+    <h2>Menu</h2>
+    <button id="drawerClose">✕</button>
+  </div>
+
+  <ul class="drawer-list">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="shop.html">Shop</a></li>
+
+    <li class="sub">Categories</li>
+    <li><a href="#smartphones">Smartphones</a></li>
+    <li><a href="#accessories">Accessories</a></li>
+    <li><a href="#gadgets">Gadgets</a></li>
+
+    <li><a href="#sale">Sale</a></li>
+    <li><a href="#about-shop">About Shop</a></li>
+    <li><a href="#blog">Blog</a></li>
+
+    <li><a href="wishlist.html">❤️ Wishlist</a></li>
+    <li><a href="cart.html">🧺 Cart</a></li>
+
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="account.html">My Account</a></li>
+  </ul>
+</aside>
+
+<!-- SHOP HEADER -->
+<header class="shop-header">
+  <button class="menu-btn" id="drawerOpen">☰</button>
+  <h1 class="logo">Habib Shop</h1>
+  <a href="cart.html" class="cart-icon">🧺<span id="cartCount">0</span></a>
+</header>
+
+<!-- CATEGORY NAV -->
+<nav class="category-nav">
+  <button class="cat-btn active" data-cat="all">All</button>
+  <button class="cat-btn" data-cat="smartphone">Smartphones</button>
+  <button class="cat-btn" data-cat="accessory">Accessories</button>
+  <button class="cat-btn" data-cat="gadget">Gadgets</button>
+</nav>
+
+<!-- PRODUCT LIST -->
+<main class="shop-content">
+
+  <!-- LARGE CARD SECTION (SMARTPHONES) -->
+  <section id="smartphones">
+    <h2 class="section-title">Smartphones</h2>
+
+    <!-- Smartphone Big Card -->
+    <div class="phone-card" data-cat="smartphone">
+      <img src="https://i.ibb.co/Z4M61km/image.png" class="phone-img" />
+      <div class="phone-info">
+        <h3>Samsung Galaxy A14</h3>
+        <p>50MP Camera • 5000mAh Battery • Official Warranty</p>
+
+        <div class="price-row">
+          <span class="price">15,999 ৳</span>
+          <del>17,500 ৳</del>
+        </div>
+
+        <div class="buttons">
+          <button class="btn-primary add-cart" data-name="Samsung Galaxy A14" data-price="15999">
+            🧺 Add to Cart
+          </button>
+          <button class="btn-outline wishlist-btn" data-name="Samsung Galaxy A14">❤️ Wishlist</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Another smartphone -->
+    <div class="phone-card" data-cat="smartphone">
+      <img src="https://cdn.iconscout.com/illustration/premium/thumb/mobile-phone-sale-illustration-download-in-svg-png-gif-file-formats--smartphone-shop-electronics-shopping-pack-e-commerce-illustrations-4499986.png" />
+
+      <div class="phone-info">
+        <h3>Redmi Note 12</h3>
+        <p>AMOLED Display • Fast Charging • 6/128 Storage</p>
+
+        <div class="price-row">
+          <span class="price">21,999 ৳</span>
+          <del>23,500 ৳</del>
+        </div>
+
+        <div class="buttons">
+          <button class="btn-primary add-cart" data-name="Redmi Note 12" data-price="21999">
+            🧺 Add to Cart
+          </button>
+          <button class="btn-outline wishlist-btn" data-name="Redmi Note 12">❤️ Wishlist</button>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ACCESSORIES GRID -->
+  <section id="accessories">
+    <h2 class="section-title">Accessories</h2>
+
+    <div class="grid">
+
+      <div class="grid-item" data-cat="accessory">
+        <img src="https://cdn-icons-png.flaticon.com/512/1047/1047711.png" />
+        <h4>Premium Back Cover</h4>
+        <p class="acc-price">250 ৳</p>
+
+        <button class="grid-btn add-cart"
+          data-name="Premium Back Cover"
+          data-price="250">🧺</button>
+
+        <button class="grid-btn wishlist-btn"
+          data-name="Back Cover">❤️</button>
+      </div>
+
+      <div class="grid-item" data-cat="accessory">
+        <img src="https://cdn-icons-png.flaticon.com/512/1047/1047700.png" />
+        <h4>Tempered Glass</h4>
+        <p class="acc-price">120 ৳</p>
+
+        <button class="grid-btn add-cart"
+          data-name="Tempered Glass"
+          data-price="120">🧺</button>
+
+        <button class="grid-btn wishlist-btn"
+          data-name="Tempered Glass">❤️</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- GADGETS -->
+  <section id="gadgets">
+    <h2 class="section-title">Gadgets</h2>
+
+    <div class="grid">
+
+      <div class="grid-item" data-cat="gadget">
+        <img src="https://cdn-icons-png.flaticon.com/512/992/992700.png" />
+        <h4>TWS Earbuds</h4>
+        <p class="acc-price">899 ৳</p>
+
+        <button class="grid-btn add-cart"
+          data-name="TWS Earbuds"
+          data-price="899">🧺</button>
+
+        <button class="grid-btn wishlist-btn"
+          data-name="TWS Earbuds">❤️</button>
+      </div>
+
+      <div class="grid-item" data-cat="gadget">
+        <img src="https://cdn-icons-png.flaticon.com/512/992/992754.png" />
+        <h4>Smart Watch</h4>
+        <p class="acc-price">1299 ৳</p>
+
+        <button class="grid-btn add-cart"
+          data-name="Smart Watch"
+          data-price="1299">🧺</button>
+
+        <button class="grid-btn wishlist-btn"
+          data-name="Smart Watch">❤️</button>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- BOTTOM NAV BAR -->
+<nav class="bottom-nav">
+  <a href="shop.html">🛍️<span>Shop</span></a>
+  <a href="wishlist.html">❤️<span>Wishlist</span></a>
+  <a href="cart.html">🧺<span>Cart</span></a>
+  <a href="account.html">👤<span>Account</span></a>
+  <a href="search.html">🔍<span>Search</span></a>
+</nav>
+
+<script src="shop.js"></script>
+</body>
+</html>
