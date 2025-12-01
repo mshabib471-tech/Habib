@@ -2,12 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Habibur Rahman — Home</title>
+<title>Habibur Rahman — Portfolio & Mobile Shop</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="icon" type="image/png" href="https://i.ibb.co/n88CVpsy/habib.png" />
 
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- (OPTIONAL) GOOGLE ADSENSE SCRIPT: নিজের client-id বসাও -->
+<!--
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXX"
+     crossorigin="anonymous"></script>
+-->
 
 <style>
 /* ============================
@@ -47,10 +53,37 @@ body{
 }
 a{text-decoration:none;color:inherit;}
 img{max-width:100%;display:block;}
+button{font-family:inherit;}
 
 .page-shell{min-height:100vh;display:flex;flex-direction:column;}
 main{flex:1;}
 .container{max-width:1120px;margin:0 auto;padding:0 1.5rem;}
+
+/* Section */
+.section{
+  padding:3.5rem 0;
+}
+.section-header{
+  display:flex;
+  flex-direction:column;
+  gap:0.3rem;
+  margin-bottom:2rem;
+}
+.section-kicker{
+  font-size:0.8rem;
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  color:var(--accent);
+  font-weight:600;
+}
+.section-title{
+  font-size:1.7rem;
+  font-weight:700;
+}
+.section-subtitle{
+  font-size:0.95rem;
+  color:var(--text-soft);
+}
 
 /* ============================
    NAVBAR
@@ -85,19 +118,24 @@ main{flex:1;}
   background:radial-gradient(circle at 30% 0,#f97316 0,#6366f1 50%,#0ea5e9 100%);
   color:white;font-weight:700;
 }
-.nav-links{display:flex;gap:1.6rem;}
+.nav-links{display:flex;gap:1.2rem;}
 .nav-link{
   font-size:0.9rem;color:var(--text-soft);position:relative;
 }
 .nav-link:hover{color:var(--text-main);}
+.nav-link.active{
+  color:var(--accent);
+  font-weight:600;
+}
 
 /* Mobile */
-.nav-controls{display:flex;gap:0.7rem;}
+.nav-controls{display:flex;gap:0.7rem;align-items:center;}
 .theme-toggle{
   padding:0.3rem 0.7rem;
   border-radius:999px;
   background:var(--bg-soft);
   border:1px solid #999;
+  cursor:pointer;
 }
 .nav-toggle{
   display:none;
@@ -106,6 +144,7 @@ main{flex:1;}
   border:1px solid #999;
   background:var(--bg-soft);
   align-items:center;justify-content:center;
+  cursor:pointer;
 }
 .nav-toggle span{
   width:20px;height:2px;background:var(--text-main);border-radius:5px;position:relative;
@@ -118,17 +157,20 @@ main{flex:1;}
 .nav-toggle span:after{top:6px;}
 
 .nav-links-mobile{
-  display:none;flex-direction:column;gap:0.8rem;padding:1rem;border-top:1px solid var(--border-subtle);
+  display:none;flex-direction:column;gap:0.8rem;padding:1rem 1.5rem;border-top:1px solid var(--border-subtle);
+}
+.nav-links-mobile a{
+  font-size:0.95rem;
 }
 .nav-links-mobile.open{display:flex;}
 
 /* ============================
-   HERO
+   HERO (PORTFOLIO)
 ============================ */
-.hero{padding:3.5rem 0;}
+.hero{padding:3.2rem 0 3.8rem;}
 .hero-inner{
   display:grid;
-  grid-template-columns:minmax(0,1.6fr) minmax(260px,1fr);
+  grid-template-columns:minmax(0,1.7fr) minmax(260px,1fr);
   gap:2.5rem;
   align-items:center;
 }
@@ -145,12 +187,11 @@ main{flex:1;}
 }
 
 .hero-big-title{
-  font-size:clamp(3rem,6vw,4rem);
+  font-size:clamp(2.7rem,6vw,3.6rem);
   font-weight:800;
   line-height:1.12;
   margin-bottom:0.4rem;
 }
-
 .hero-big-title span{
   background:linear-gradient(90deg,#6366f1,#a855f7,#22c55e);
   -webkit-background-clip:text;
@@ -158,7 +199,7 @@ main{flex:1;}
 }
 
 .hero-mini-tagline{
-  font-size:1.1rem;
+  font-size:1.05rem;
   font-weight:500;
   color:var(--text-soft);
   margin-bottom:1rem;
@@ -166,28 +207,34 @@ main{flex:1;}
 
 .hero-subtitle{
   max-width:30rem;
-  font-size:1rem;
+  font-size:0.96rem;
   line-height:1.7;
   color:var(--text-soft);
   margin-bottom:1.7rem;
 }
 
-.social-row{display:flex;gap:0.6rem;margin-bottom:1.2rem;}
+.social-row{display:flex;gap:0.6rem;margin-bottom:1.2rem;flex-wrap:wrap;}
 .social-pill{
-  width:38px;height:38px;border-radius:999px;
+  min-width:38px;height:38px;border-radius:999px;
+  padding:0 0.9rem;
   background:var(--bg-soft);
   display:flex;align-items:center;justify-content:center;
-  font-size:18px;color:var(--text-main);
+  font-size:0.8rem;color:var(--text-main);
   box-shadow:0 8px 18px rgba(15,23,42,0.08);
   transition:0.2s;
 }
+.social-pill span{
+  font-weight:600;
+}
 .social-pill:hover{background:var(--accent);color:white;}
 
-.hero-actions{display:flex;gap:0.8rem;flex-wrap:wrap;}
+.hero-actions{display:flex;gap:0.8rem;flex-wrap:wrap;margin-bottom:1rem;}
 .btn{
   border-radius:999px;padding:0.65rem 1.35rem;
   font-size:0.92rem;
   display:inline-flex;align-items:center;gap:0.4rem;
+  border:none;
+  cursor:pointer;
 }
 .btn-primary{
   background:linear-gradient(135deg,#6366f1,#4f46e5);color:white;
@@ -197,30 +244,335 @@ main{flex:1;}
   border:1px solid #999;
 }
 
+.hero-note{
+  font-size:0.85rem;
+  color:var(--text-soft);
+}
+
 .hero-illustration{
   border-radius:20px;
   background:var(--bg-soft);
   border:1px solid var(--border-subtle);
-  padding:1rem;
+  padding:1.1rem 1.1rem 1.3rem;
   box-shadow:var(--shadow-soft);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
+.profile-img{
+  width:150px;height:150px;border-radius:50%;
+  object-fit:cover;margin-bottom:1rem;
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+.hero-badge{
+  font-size:0.8rem;color:var(--text-soft);
+  margin-top:0.3rem;
 }
 
-/* Profile Image */
-.profile-img{
-  width:140px;height:140px;border-radius:50%;
-  object-fit:cover;margin-bottom:1rem;
-  box-shadow:0 10px 25px rgba(0,0,0,0.15);
+/* ============================
+   SERVICES
+============================ */
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:1.4rem;
 }
+.service-card{
+  background:var(--card-bg);
+  border:1px solid var(--border-subtle);
+  border-radius:16px;
+  padding:1.2rem 1.3rem;
+  box-shadow:var(--shadow-soft);
+}
+.service-title{
+  font-size:1rem;
+  font-weight:600;
+  margin-bottom:0.4rem;
+}
+.service-desc{
+  font-size:0.9rem;
+  color:var(--text-soft);
+  margin-bottom:0.7rem;
+}
+.service-meta{
+  font-size:0.8rem;
+  color:var(--text-soft);
+}
+
+/* ============================
+   SHOP
+============================ */
+.shop-wrapper{
+  background:var(--bg-soft);
+  border-radius:20px;
+  padding:1.8rem 1.5rem 2.2rem;
+  border:1px solid var(--border-subtle);
+}
+.shop-header-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:1rem;
+  margin-bottom:1.2rem;
+}
+.shop-highlight{
+  font-size:0.9rem;
+  color:var(--text-soft);
+  max-width:26rem;
+}
+.shop-cart-indicator{
+  font-size:0.85rem;
+  padding:0.4rem 0.8rem;
+  border-radius:999px;
+  background:var(--card-bg);
+  border:1px solid var(--border-subtle);
+}
+
+.shop-categories{
+  display:flex;
+  flex-wrap:wrap;
+  gap:0.5rem;
+  margin-bottom:1.3rem;
+}
+.chip{
+  padding:0.35rem 0.9rem;
+  border-radius:999px;
+  font-size:0.85rem;
+  border:1px solid var(--border-subtle);
+  background:var(--card-bg);
+  cursor:pointer;
+}
+.chip.active{
+  background:var(--accent);
+  color:#fff;
+  border-color:transparent;
+}
+
+.products-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:1.1rem;
+}
+.product-card{
+  background:var(--card-bg);
+  border-radius:16px;
+  padding:0.9rem;
+  border:1px solid var(--border-subtle);
+  display:flex;
+  flex-direction:column;
+  gap:0.35rem;
+}
+.product-tag-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:0.3rem;
+}
+.product-badge{
+  font-size:0.75rem;
+  padding:0.18rem 0.55rem;
+  border-radius:999px;
+  background:var(--accent-soft);
+  color:var(--accent);
+}
+.product-brand{
+  font-size:0.8rem;
+  color:var(--text-soft);
+}
+.product-name{
+  font-size:0.92rem;
+  font-weight:600;
+}
+.product-meta{
+  font-size:0.8rem;
+  color:var(--text-soft);
+}
+.product-price-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  margin-top:0.2rem;
+}
+.product-price{
+  font-size:1rem;
+  font-weight:700;
+}
+.product-price del{
+  font-size:0.8rem;
+  color:var(--text-soft);
+  margin-left:0.35rem;
+}
+.product-emi{
+  font-size:0.75rem;
+  color:var(--text-soft);
+}
+
+.product-actions{
+  margin-top:0.6rem;
+  display:flex;
+  flex-direction:column;
+  gap:0.35rem;
+}
+.product-actions .btn-primary{
+  width:100%;
+  justify-content:center;
+  font-size:0.85rem;
+}
+.order-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:0.3rem;
+}
+.order-btn{
+  flex:1;
+  min-width:0;
+  font-size:0.75rem;
+  padding:0.4rem 0.3rem;
+  border-radius:999px;
+  border:1px solid var(--border-subtle);
+  background:var(--bg-soft);
+  cursor:pointer;
+}
+.order-btn span{
+  font-size:0.8rem;
+}
+
+/* ============================
+   BLOG PREVIEW
+============================ */
+.blog-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:1.2rem;
+}
+.blog-card{
+  background:var(--card-bg);
+  border-radius:16px;
+  border:1px solid var(--border-subtle);
+  padding:1rem 1.1rem;
+  box-shadow:var(--shadow-soft);
+}
+.blog-title{
+  font-size:0.98rem;
+  font-weight:600;
+  margin-bottom:0.4rem;
+}
+.blog-excerpt{
+  font-size:0.85rem;
+  color:var(--text-soft);
+  margin-bottom:0.5rem;
+}
+.blog-meta{
+  font-size:0.78rem;
+  color:var(--text-soft);
+}
+
+/* ============================
+   CONTACT / FOOTER
+============================ */
+.contact-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);
+  gap:1.8rem;
+}
+.contact-card{
+  background:var(--card-bg);
+  border-radius:18px;
+  border:1px solid var(--border-subtle);
+  padding:1.4rem 1.5rem;
+  box-shadow:var(--shadow-soft);
+}
+.contact-card h3{
+  margin-bottom:0.5rem;
+  font-size:1.1rem;
+}
+.contact-card p{
+  font-size:0.9rem;
+  color:var(--text-soft);
+  margin-bottom:0.9rem;
+}
+.contact-row{
+  font-size:0.88rem;
+  margin-bottom:0.35rem;
+}
+.contact-row span{
+  font-weight:600;
+}
+.contact-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:0.4rem;
+  margin-top:0.7rem;
+}
+.contact-actions .btn{
+  font-size:0.8rem;
+}
+
+.contact-form form{
+  display:flex;
+  flex-direction:column;
+  gap:0.6rem;
+}
+.input-row{
+  display:flex;
+  gap:0.6rem;
+}
+.input-row > div{
+  flex:1;
+}
+label{
+  font-size:0.8rem;
+  margin-bottom:0.15rem;
+  display:block;
+}
+input, textarea{
+  width:100%;
+  border-radius:10px;
+  border:1px solid var(--border-subtle);
+  padding:0.5rem 0.6rem;
+  background:var(--bg-soft);
+  color:var(--text-main);
+  font-size:0.86rem;
+}
+textarea{min-height:110px;resize:vertical;}
+.contact-form button{
+  align-self:flex-start;
+  margin-top:0.3rem;
+}
+
+/* Footer */
+footer{
+  padding:1.5rem 1.5rem 1.7rem;
+  text-align:center;
+  color:var(--text-soft);
+  border-top:1px solid var(--border-subtle);
+  font-size:0.86rem;
+}
+footer span{font-weight:600;}
 
 /* Responsive */
 @media(max-width:900px){
   .hero-inner{
     grid-template-columns:1fr;
   }
+  .hero-illustration{
+    order:-1;
+  }
+  .contact-grid{
+    grid-template-columns:1fr;
+  }
 }
 @media(max-width:768px){
   .nav-links{display:none;}
   .nav-toggle{display:flex;}
+  .shop-header-top{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+  .input-row{
+    flex-direction:column;
+  }
 }
 </style>
 </head>
@@ -238,13 +590,11 @@ main{flex:1;}
     </div>
 
     <nav class="nav-links">
-      <a href="index.html" class="nav-link">Home</a>
-      <a href="services.html" class="nav-link">Services</a>
-      <a href="skills.html" class="nav-link">Skills</a>
-      <a href="experience.html" class="nav-link">Experience</a>
-      <a href="education.html" class="nav-link">Education</a>
-      <a href="about.html" class="nav-link">About</a>
-      <a href="contact.html" class="nav-link">Contact</a>
+      <a href="#hero" class="nav-link active">Home</a>
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#shop" class="nav-link">Mobile Shop</a>
+      <a href="#blog" class="nav-link">Blog</a>
+      <a href="#contact" class="nav-link">Contact</a>
     </nav>
 
     <div class="nav-controls">
@@ -254,81 +604,512 @@ main{flex:1;}
   </div>
 
   <nav class="nav-links-mobile">
-      <a href="index.html" class="nav-link">Home</a>
-      <a href="services.html" class="nav-link">Services</a>
-      <a href="skills.html" class="nav-link">Skills</a>
-      <a href="experience.html" class="nav-link">Experience</a>
-      <a href="education.html" class="nav-link">Education</a>
-      <a href="about.html" class="nav-link">About</a>
-      <a href="contact.html" class="nav-link">Contact</a>
-    <button class="theme-toggle">🌙</button>
+      <a href="#hero" class="nav-link">Home</a>
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#shop" class="nav-link">Mobile Shop</a>
+      <a href="#blog" class="nav-link">Blog</a>
+      <a href="#contact" class="nav-link">Contact</a>
+      <button class="theme-toggle">🌙</button>
   </nav>
 </header>
 
-<!-- HERO -->
+<!-- HERO / PORTFOLIO -->
 <main>
-<section class="hero">
+<section id="hero" class="hero">
   <div class="container hero-inner">
+
+    <!-- RIGHT (PHOTO + SHOP SMALL INFO) -->
+    <aside class="hero-illustration">
+      <img src="https://i.ibb.co/n88CVpsy/habib.png"
+           class="profile-img" alt="Habibur Rahman">
+
+      <div class="hero-badge">
+        Habibur Rahman • Developer & Mobile Shop Owner
+      </div>
+      <p class="hero-badge" style="margin-top:0.6rem;">
+        📍 আপনার মোবাইলের বিশ্বস্ত দোকান — (এখানে আপনার এলাকার নাম লিখুন)
+      </p>
+    </aside>
 
     <!-- LEFT -->
     <div>
-
-      <img src="https://i.ibb.co/n88CVpsy/habib.png"
-           class="profile-img" alt="Profile Photo">
-
-      <div class="new-tagline">🚀 Turning Ideas Into Reality</div>
+      <div class="new-tagline">🚀 Turning Ideas & Mobile Deals Into Reality</div>
 
       <h1 class="hero-big-title">
         Hi all, I'm <span>Habibur Rahman</span> 👋
       </h1>
 
       <p class="hero-mini-tagline">
-        Full Stack Developer • UI Crafter • Problem Solver
+        Full Stack Developer • UI Crafter • Mobile Shop Owner
       </p>
 
       <p class="hero-subtitle">
-        I create modern, clean and scalable digital experiences using React, Node,
-        JavaScript and cloud technologies. My focus is simple — build tools that feel effortless.
+        আমি আধুনিক ওয়েবসাইট, পোর্টফোলিও ও অনলাইন শপ তৈরি করি — সাথে অফলাইনে মোবাইল ও
+        মোবাইল এক্সেসরিজ বিক্রি করি। আপনার ব্যবসা বা ব্যক্তিগত ব্র্যান্ডকে একটি প্রফেশনাল
+        অনলাইন উপস্থিতি দিতে চাইলে আমি আছি আপনার পাশে।
       </p>
 
       <div class="social-row">
-        <a href="#" class="social-pill">in</a>
-        <a href="#" class="social-pill">G</a>
-        <a href="#" class="social-pill">F</a>
-        <a href="#" class="social-pill">@</a>
+        <a href="https://wa.me/8801XXXXXXXXX" target="_blank" class="social-pill">
+          <span>WhatsApp</span>
+        </a>
+        <a href="tel:+8801XXXXXXXXX" class="social-pill">
+          <span>Call Now</span>
+        </a>
+        <a href="https://facebook.com/yourfacebookpage" target="_blank" class="social-pill">
+          <span>Facebook Page</span>
+        </a>
+        <a href="#" class="social-pill">
+          <span>GitHub</span>
+        </a>
       </div>
 
       <div class="hero-actions">
-        <a href="#" class="btn btn-primary">Contact Me</a>
-        <a href="#" class="btn btn-ghost">Hire Me Now</a>
+        <a href="#contact" class="btn btn-primary">Contact For Project</a>
+        <a href="#shop" class="btn btn-ghost">Browse Mobile Shop</a>
       </div>
 
+      <p class="hero-note">
+        💡 ফিজিক্যাল দোকান + অনলাইন শপ + প্রফেশনাল পোর্টফোলিও — সব একসাথে একটি ব্র্যান্ড।
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-kicker">Services</div>
+      <h2 class="section-title">আমি যা যা সার্ভিস দেই</h2>
+      <p class="section-subtitle">
+        অফলাইন মোবাইল দোকান থেকে শুরু করে অনলাইন ব্যবসা সেটআপ পর্যন্ত — সব কিছু এক জায়গায়।
+      </p>
     </div>
 
-    <!-- RIGHT -->
-    <aside class="hero-illustration">
-      <img src="https://i.ibb.co/Z4M61km/image.png" 
-           alt="Illustration">
-    </aside>
+    <div class="services-grid">
+      <article class="service-card">
+        <h3 class="service-title">Custom Website & Portfolio</h3>
+        <p class="service-desc">
+          ব্যক্তিগত পোর্টফোলিও, বিজনেস ওয়েবসাইট বা অনলাইন ক্যাটালগ — দ্রুত লোড হয়,
+          সুন্দর ডিজাইন, মোবাইল ফ্রেন্ডলি এবং SEO অপটিমাইজড।
+        </p>
+        <p class="service-meta">💵 Starting From: 3,000 ৳</p>
+      </article>
 
+      <article class="service-card">
+        <h3 class="service-title">Full E-commerce Setup</h3>
+        <p class="service-desc">
+          Vercel/Domain-এ আপনার নিজস্ব ই-কমার্স সাইট, প্রোডাক্ট পেইজ, অর্ডার ফর্ম,
+          WhatsApp / Call / Facebook অর্ডার সিস্টেম — সব সেটআপ।
+        </p>
+        <p class="service-meta">🛒 Ideal For: Small/Medium Shops</p>
+      </article>
+
+      <article class="service-card">
+        <h3 class="service-title">Mobile & Accessories Sale</h3>
+        <p class="service-desc">
+          Samsung, Xiaomi, Realme, Oppo, Vivo, iPhone সহ বিভিন্ন ব্র্যান্ডের অরিজিনাল মোবাইল
+          ফোন ও এক্সেসরিজ (কভার, গ্লাস, চার্জার, ইয়ারফোন, পাওয়ার ব্যাংক ইত্যাদি)।
+        </p>
+        <p class="service-meta">📍 Delivery Available (Talk For Details)</p>
+      </article>
+
+      <article class="service-card">
+        <h3 class="service-title">Basic Software & Setup Support</h3>
+        <p class="service-desc">
+          নতুন মোবাইল সেটআপ, অ্যাপ ইন্সটল, ব্যাকআপ, সফটওয়্যার আপডেট, সহজ সমস্যার সমাধান
+          — দোকানে বা অনলাইনে গাইডলাইন।
+        </p>
+        <p class="service-meta">🧩 On-demand Support</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- MOBILE SHOP (E-COMMERCE STYLE) -->
+<section id="shop" class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-kicker">Mobile Shop</div>
+      <h2 class="section-title">মোবাইল & এক্সেসরিজ — গ্রুপ করে শপ</h2>
+      <p class="section-subtitle">
+        এখানে মোবাইল, স্মার্ট ওয়াচ, ইয়ারফোন, কভার, গ্লাস সহ মোবাইল দোকানে থাকা প্রায় সব ধরনের
+        পণ্য গ্রুপ করে সাজানো রয়েছে। যেটা পছন্দ হবে সেটার নিচে ৩ভাবে অর্ডার দিতে পারবেন — WhatsApp,
+        Call, Facebook।
+      </p>
+    </div>
+
+    <div class="shop-wrapper">
+      <div class="shop-header-top">
+        <p class="shop-highlight">
+          💡 আপনি চাইলে পরে আরও প্রোডাক্ট যোগ করতে পারবেন। প্রতিটি কার্ড একটি করে পণ্য,
+          শীর্ষে ক্যাটাগরি চিপ দিয়ে গ্রুপ করে দেখা যাবে (All / Smartphones / Accessories / Others)।
+        </p>
+        <div class="shop-cart-indicator">
+          Cart Items (demo): <span id="cart-count">0</span>
+        </div>
+      </div>
+
+      <!-- CATEGORY FILTER -->
+      <div class="shop-categories">
+        <button class="chip active" data-filter="all">All</button>
+        <button class="chip" data-filter="smartphone">Smartphones</button>
+        <button class="chip" data-filter="accessory">Accessories</button>
+        <button class="chip" data-filter="others">Others / Gadgets</button>
+      </div>
+
+      <!-- PRODUCTS GRID -->
+      <div class="products-grid" id="products-grid">
+        <!-- SMARTPHONES -->
+        <article class="product-card" data-category="smartphone" data-product="Samsung Galaxy A14">
+          <div class="product-tag-row">
+            <span class="product-badge">Smartphone</span>
+            <span class="product-brand">Samsung</span>
+          </div>
+          <h3 class="product-name">Samsung Galaxy A14 (4/64)</h3>
+          <p class="product-meta">Official Warranty • 5000mAh Battery • 50MP Camera</p>
+          <div class="product-price-row">
+            <div class="product-price">
+              15,999 ৳
+              <del>17,500 ৳</del>
+            </div>
+            <div class="product-emi">EMI/Installment আলোচনা সাপেক্ষে</div>
+          </div>
+          <div class="product-actions">
+            <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+            <div class="order-row">
+              <button class="order-btn order-whatsapp"><span>WhatsApp</span></button>
+              <button class="order-btn order-call"><span>Call</span></button>
+              <button class="order-btn order-fb"><span>Facebook</span></button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="smartphone" data-product="Redmi Note 12">
+          <div class="product-tag-row">
+            <span class="product-badge">Smartphone</span>
+            <span class="product-brand">Xiaomi</span>
+          </div>
+          <h3 class="product-name">Redmi Note 12 (6/128)</h3>
+          <p class="product-meta">AMOLED Display • Fast Charging • Popular Model</p>
+          <div class="product-price-row">
+            <div class="product-price">
+              21,999 ৳
+              <del>23,500 ৳</del>
+            </div>
+            <div class="product-emi">Monthly EMI সম্ভব (শর্তসাপেক্ষ)</div>
+          </div>
+          <div class="product-actions">
+            <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+            <div class="order-row">
+              <button class="order-btn order-whatsapp"><span>WhatsApp</span></button>
+              <button class="order-btn order-call"><span>Call</span></button>
+              <button class="order-btn order-fb"><span>Facebook</span></button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="smartphone" data-product="Realme C53">
+          <div class="product-tag-row">
+            <span class="product-badge">Smartphone</span>
+            <span class="product-brand">Realme</span>
+          </div>
+          <h3 class="product-name">Realme C53 (6/128)</h3>
+          <p class="product-meta">90Hz Display • Great For Students & Gaming</p>
+          <div class="product-price-row">
+            <div class="product-price">
+              16,999 ৳
+              <del>18,000 ৳</del>
+            </div>
+            <div class="product-emi">নগদ / বিকাশ / কার্ড পেমেন্ট</div>
+          </div>
+          <div class="product-actions">
+            <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+            <div class="order-row">
+              <button class="order-btn order-whatsapp"><span>WhatsApp</span></button>
+              <button class="order-btn order-call"><span>Call</span></button>
+              <button class="order-btn order-fb"><span>Facebook</span></button>
+            </div>
+          </div>
+        </article>
+
+        <!-- ACCESSORIES -->
+        <article class="product-card" data-category="accessory" data-product="Premium Back Cover">
+          <div class="product-tag-row">
+            <span class="product-badge">Accessory</span>
+            <span class="product-brand">Back Cover</span>
+          </div>
+          <h3 class="product-name">Premium Back Cover (Multiple Models)</h3>
+          <p class="product-meta">Soft + Hard Case • Anti-slip • বিভিন্ন ডিজাইন ও কালার</p>
+          <div class="product-price-row">
+            <div class="product-price">
+              250 ৳
+              <del>350 ৳</del>
+            </div>
+            <div class="product-emi">Bundle Offer Available</div>
+          </div>
+          <div class="product-actions">
+            <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+            <div class="order-row">
+              <button class="order-btn order-whatsapp"><span>WhatsApp</span></button>
+              <button class="order-btn order-call"><span>Call</span></button>
+              <button class="order-btn order-fb"><span>Facebook</span></button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="accessory" data-product="Tempered Glass Protector">
+          <div class="product-tag-row">
+            <span class="product-badge">Accessory</span>
+            <span class="product-brand">Glass</span>
+          </div>
+          <h3 class="product-name">Tempered Glass (Full Cover)</h3>
+          <p class="product-meta">HD Clear • Scratch Resistant • অনেক মোবাইল মডেলের জন্য</p>
+          <div class="product-price-row">
+            <div class="product-price">
+              120 ৳
+              <del>150 ৳</del>
+            </div>
+            <div class="product-emi">ফ্রি ফিটিং দোকান থেকে</div>
+          </div>
+          <div class="product-actions">
+            <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+            <div class="order-row">
+              <button class="order-btn order-whatsapp"><span>WhatsApp</span></button>
+              <button class="order-btn order-call"><span>Call</span></button>
+              <button class="order-btn order-fb"><span>Facebook</span></button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="accessory" data-product="Fast Charger">
+          <div class="product-tag-row">
+            <span class="product-badge">Accessory</span>
+            <span class="product-brand">Charger</span>
+          </div>
+          <h3 class="product-name">Fast Charger (Original Quality)</h3>
+          <p class="product-meta">Type-C / Micro USB • বিভিন্ন ব্র্যান্ড সাপোর্ট</p>
+          <div class="product-price-row">
+            <div class="product-price">
+              450 ৳
+              <del>550 ৳</del>
+            </div>
+            <div class="product-emi">Bulk Price Possible</div>
+          </div>
+          <div class="product-actions">
+            <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+            <div class="order-row">
+              <button class="order-btn order-whatsapp"><span>WhatsApp</span></button>
+              <button class="order-btn order-call"><span>Call</span></button>
+              <button class="order-btn order-fb"><span>Facebook</span></button>
+            </div>
+          </div>
+        </article>
+
+        <!-- OTHERS / GADGETS -->
+        <article class="product-card" data-category="others" data-product="TWS Earbuds">
+          <div class="product-tag-row">
+            <span class="product-badge">Gadget</span>
+            <span class="product-brand">TWS Earbuds</span>
+          </div>
+          <h3 class="product-name">TWS Earbuds (Bluetooth)</h3>
+          <p class="product-meta">Deep Bass • Noise Reduction • Gaming & Music Friendly</p>
+          <div class="product-price-row">
+            <div class="product-price">
+              899 ৳
+              <del>1,050 ৳</del>
+            </div>
+            <div class="product-emi">Color Choice Available</div>
+          </div>
+          <div class="product-actions">
+            <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+            <div class="order-row">
+              <button class="order-btn order-whatsapp"><span>WhatsApp</span></button>
+              <button class="order-btn order-call"><span>Call</span></button>
+              <button class="order-btn order-fb"><span>Facebook</span></button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="others" data-product="Smart Watch">
+          <div class="product-tag-row">
+            <span class="product-badge">Gadget</span>
+            <span class="product-brand">Smart Watch</span>
+          </div>
+          <h3 class="product-name">Smart Watch (Fitness + Notification)</h3>
+          <p class="product-meta">Heart Rate • Step Count • Call & Message Alert</p>
+          <div class="product-price-row">
+            <div class="product-price">
+              1,299 ৳
+              <del>1,550 ৳</del>
+            </div>
+            <div class="product-emi">Gift Box Available</div>
+          </div>
+          <div class="product-actions">
+            <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+            <div class="order-row">
+              <button class="order-btn order-whatsapp"><span>WhatsApp</span></button>
+              <button class="order-btn order-call"><span>Call</span></button>
+              <button class="order-btn order-fb"><span>Facebook</span></button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="others" data-product="Power Bank">
+          <div class="product-tag-row">
+            <span class="product-badge">Gadget</span>
+            <span class="product-brand">Power Bank</span>
+          </div>
+          <h3 class="product-name">Power Bank 10000mAh / 20000mAh</h3>
+          <p class="product-meta">Fast Charging • নিরাপদ ও দীর্ঘস্থায়ী ব্যাটারি ব্যাকআপ</p>
+          <div class="product-price-row">
+            <div class="product-price">
+              1,650 ৳
+              <del>1,900 ৳</del>
+            </div>
+            <div class="product-emi">Warranty Available</div>
+          </div>
+          <div class="product-actions">
+            <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+            <div class="order-row">
+              <button class="order-btn order-whatsapp"><span>WhatsApp</span></button>
+              <button class="order-btn order-call"><span>Call</span></button>
+              <button class="order-btn order-fb"><span>Facebook</span></button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG PREVIEW (উপর দিয়ে অ্যাডসেন্স চালানোর জন্য ভবিষ্যতে কাজে লাগবে) -->
+<section id="blog" class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-kicker">Blog</div>
+      <h2 class="section-title">Tips, Guides & Mobile Tricks</h2>
+      <p class="section-subtitle">
+        এখানে তুমি Mobile & Tech নিয়ে আর্টিকেল লিখতে পারবে — এগুলো থেকেই পরে Google AdSense ও Affiliate ইনকাম হবে।
+      </p>
+    </div>
+
+    <!-- উদাহরণ ব্লগ কার্ড; পরবর্তীতে তুমি নিজের আর্টিকেল লিংক দিতে পারো -->
+    <div class="blog-grid">
+      <article class="blog-card">
+        <h3 class="blog-title">শুরু করার আগে কোন মোবাইলটা কিনবেন? বাজেট অনুযায়ী গাইড</h3>
+        <p class="blog-excerpt">
+          নতুন মোবাইল কিনতে গেলে প্রসেসর, ব্যাটারি, ক্যামেরা, ডিসপ্লে — সব কিছু একসাথে দেখে নেওয়ার সহজ গাইড...
+        </p>
+        <div class="blog-meta">Reading time: 5 min • Category: Buying Guide</div>
+      </article>
+
+      <article class="blog-card">
+        <h3 class="blog-title">ফোন স্লো হয়ে গেলে কী কী করলে একটু ফাস্ট হবে?</h3>
+        <p class="blog-excerpt">
+          ক্যাশ ক্লিয়ার, অটো-স্টার্ট অ্যাপ বন্ধ, অপ্রয়োজনীয় অ্যাপ আনইনস্টল — এই কয়েকটা টিপস মেনে ফোন অনেকটা ফাস্ট করা যায়...
+        </p>
+        <div class="blog-meta">Reading time: 4 min • Category: Tips</div>
+      </article>
+
+      <article class="blog-card">
+        <h3 class="blog-title">Original চার্জার / কেবল চিনবেন কীভাবে?</h3>
+        <p class="blog-excerpt">
+          কেবল ওয়েট, পিন কোয়ালিটি, প্যাকেটের হোলোগ্রাম, ওয়ারেন্টি-কার্ড — এসব দেখে অনেকটাই বুঝে ফেলা যায় এটা অরিজিনাল কি না...
+        </p>
+        <div class="blog-meta">Reading time: 3 min • Category: Accessories</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-kicker">Contact</div>
+      <h2 class="section-title">যোগাযোগ / Order & Project</h2>
+      <p class="section-subtitle">
+        মোবাইল / এক্সেসরিজ অর্ডার, অথবা ওয়েবসাইট / ই-কমার্স প্রোজেক্ট — নিচের যেকোনো মাধ্যমে যোগাযোগ করতে পারেন।
+      </p>
+    </div>
+
+    <div class="contact-grid">
+      <!-- LEFT: INFO -->
+      <div class="contact-card">
+        <h3>Shop Details</h3>
+        <p>
+          📍 এখানে আপনার দোকানের সঠিক ঠিকানা লিখুন — যেমন:  
+          “Habib Mobile Gallery, New Market Road, [Your City], Bangladesh”
+        </p>
+        <div class="contact-row">
+          <span>Phone:</span> <a href="tel:+8801XXXXXXXXX">+8801XXXXXXXXX</a>
+        </div>
+        <div class="contact-row">
+          <span>WhatsApp:</span> <a href="https://wa.me/8801XXXXXXXXX" target="_blank">WhatsApp Chat</a>
+        </div>
+        <div class="contact-row">
+          <span>Facebook:</span> <a href="https://facebook.com/yourfacebookpage" target="_blank">Facebook Page</a>
+        </div>
+
+        <div class="contact-actions">
+          <a href="https://wa.me/8801XXXXXXXXX" target="_blank" class="btn btn-primary">WhatsApp Order</a>
+          <a href="tel:+8801XXXXXXXXX" class="btn btn-ghost">Call Shop</a>
+          <a href="https://facebook.com/yourfacebookpage" target="_blank" class="btn btn-ghost">Message on Facebook</a>
+        </div>
+      </div>
+
+      <!-- RIGHT: FORM -->
+      <div class="contact-card contact-form">
+        <h3>Quick Contact / Project Request</h3>
+        <p>এই ফর্মটি দিয়ে ওয়েবসাইট / অনলাইন শপ / মোবাইল অর্ডার সম্পর্কে ডিটেইল পাঠাতে পারেন।</p>
+        <!-- Formspree এর জন্য action URL নিজের একাউন্ট থেকে নাও -->
+        <form action="https://formspree.io/f/your-form-id" method="POST">
+          <div class="input-row">
+            <div>
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" placeholder="Your name" required>
+            </div>
+            <div>
+              <label for="phone">Phone / WhatsApp</label>
+              <input id="phone" name="phone" type="text" placeholder="017********" required>
+            </div>
+          </div>
+          <div>
+            <label for="type">What do you need?</label>
+            <input id="type" name="type" type="text" placeholder="Mobile Order / Website / E-commerce / Other">
+          </div>
+          <div>
+            <label for="message">Details</label>
+            <textarea id="message" name="message" placeholder="Write your message..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+      </div>
+    </div>
   </div>
 </section>
 </main>
 
 <!-- FOOTER -->
-<footer style="padding:1rem;text-align:center;color:var(--text-soft);border-top:1px solid var(--border-subtle);">
-  Made with ❤️ — Habibur Rahman
+<footer>
+  Made with ❤️ by <span>Habibur Rahman</span> — Portfolio & Mobile Shop
 </footer>
 
 </div>
 
 <script>
-// DARK MODE + MOBILE MENU
+// DARK MODE + MOBILE MENU + NAV ACTIVE
 document.addEventListener("DOMContentLoaded", function () {
   const body = document.body;
   const themeButtons = document.querySelectorAll(".theme-toggle");
   const navToggle = document.querySelector(".nav-toggle");
   const mobileMenu = document.querySelector(".nav-links-mobile");
+  const navLinks = document.querySelectorAll(".nav-links .nav-link");
+  const sections = document.querySelectorAll("section[id]");
+  const mobileNavLinks = document.querySelectorAll(".nav-links-mobile .nav-link");
 
   themeButtons.forEach(btn => {
     btn.addEventListener("click", () => {
@@ -340,6 +1121,123 @@ document.addEventListener("DOMContentLoaded", function () {
   navToggle.addEventListener("click", () => {
     mobileMenu.classList.toggle("open");
   });
+
+  // Smooth scroll + active link
+  function handleNavClick(e) {
+    if (this.hash) {
+      e.preventDefault();
+      const target = document.querySelector(this.hash);
+      if (target) {
+        window.scrollTo({
+          top: target.offsetTop - 70,
+          behavior: "smooth"
+        });
+      }
+      mobileMenu.classList.remove("open");
+    }
+  }
+
+  navLinks.forEach(link => link.addEventListener("click", handleNavClick));
+  mobileNavLinks.forEach(link => link.addEventListener("click", handleNavClick));
+
+  window.addEventListener("scroll", () => {
+    let current = "";
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 80;
+      if (pageYOffset >= sectionTop) {
+        current = section.getAttribute("id");
+      }
+    });
+    navLinks.forEach(link => {
+      link.classList.remove("active");
+      if (link.getAttribute("href") === "#" + current) {
+        link.classList.add("active");
+      }
+    });
+  });
+
+  // ============================
+  // SHOP FILTER
+  // ============================
+  const chips = document.querySelectorAll(".chip");
+  const productCards = document.querySelectorAll(".product-card");
+
+  chips.forEach(chip => {
+    chip.addEventListener("click", () => {
+      chips.forEach(c => c.classList.remove("active"));
+      chip.classList.add("active");
+
+      const filter = chip.getAttribute("data-filter");
+      productCards.forEach(card => {
+        const category = card.getAttribute("data-category");
+        if (filter === "all" || category === filter) {
+          card.style.display = "flex";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    });
+  });
+
+  // ============================
+  // CART (DEMO LOCAL STORAGE)
+  // ============================
+  const cartCountSpan = document.getElementById("cart-count");
+  const addToCartButtons = document.querySelectorAll(".add-to-cart-btn");
+
+  function updateCartCount() {
+    const cartItems = JSON.parse(localStorage.getItem("habib_cart") || "[]");
+    cartCountSpan.textContent = cartItems.length;
+  }
+  updateCartCount();
+
+  addToCartButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const card = btn.closest(".product-card");
+      const name = card.getAttribute("data-product");
+      const priceText = card.querySelector(".product-price").textContent.trim();
+      const cartItems = JSON.parse(localStorage.getItem("habib_cart") || "[]");
+      cartItems.push({ name, price: priceText });
+      localStorage.setItem("habib_cart", JSON.stringify(cartItems));
+      updateCartCount();
+      btn.textContent = "Added ✔";
+      setTimeout(() => {
+        btn.textContent = "Add to Cart";
+      }, 1200);
+    });
+  });
+
+  // ============================
+  // ORDER BUTTON: WHATSAPP / CALL / FACEBOOK
+  // ============================
+  const WHATSAPP_NUMBER = "8801XXXXXXXXX"; // এখানে তোমার আসল নাম্বার বসাও
+  const PHONE_NUMBER = "+8801XXXXXXXXX";  // এখানে তোমার আসল নাম্বার বসাও
+  const FB_PAGE_URL = "https://facebook.com/yourfacebookpage"; // এখানে তোমার আসল ফেসবুক পেইজ লিংক
+
+  productCards.forEach(card => {
+    const productName = card.getAttribute("data-product") || "a product from your shop";
+    const waBtn = card.querySelector(".order-whatsapp");
+    const callBtn = card.querySelector(".order-call");
+    const fbBtn = card.querySelector(".order-fb");
+
+    if (waBtn) {
+      waBtn.addEventListener("click", () => {
+        const text = encodeURIComponent("Assalamu Alaikum, আমি \"" + productName + "\" অর্ডার করতে চাই।");
+        window.open("https://wa.me/" + WHATSAPP_NUMBER + "?text=" + text, "_blank");
+      });
+    }
+    if (callBtn) {
+      callBtn.addEventListener("click", () => {
+        window.location.href = "tel:" + PHONE_NUMBER;
+      });
+    }
+    if (fbBtn) {
+      fbBtn.addEventListener("click", () => {
+        window.open(FB_PAGE_URL, "_blank");
+      });
+    }
+  });
+
 });
 </script>
 
