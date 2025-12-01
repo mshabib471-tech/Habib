@@ -1,102 +1,347 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Developer Portfolio — Home</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/9131/9131529.png" />
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<title>Demo Portfolio — Home</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/9131/9131529.png" />
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================
+   CSS VARIABLES
+============================ */
+:root {
+  --bg: #ffffff;
+  --bg-soft: #f9fafb;
+  --card-bg: #ffffff;
+  --text-main: #111827;
+  --text-soft: #6b7280;
+  --accent: #6366f1;
+  --accent-soft: rgba(99,102,241,0.09);
+  --border-subtle: #e5e7eb;
+  --shadow-soft: 0 16px 35px rgba(15,23,42,0.06);
+}
+
+body.dark-theme {
+  --bg:#020617;
+  --bg-soft:#020617;
+  --card-bg:#020617;
+  --text-main:#f9fafb;
+  --text-soft:#9ca3af;
+  --accent:#818cf8;
+  --accent-soft:rgba(129,140,248,0.15);
+  --border-subtle:#1f2937;
+  --shadow-soft:0 16px 40px rgba(0,0,0,0.6);
+}
+
+/* Global */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  background:var(--bg);
+  color:var(--text-main);
+  font-family:"Inter",sans-serif;
+  overflow-x:hidden;
+}
+a{text-decoration:none;color:inherit;}
+img{max-width:100%;display:block;}
+
+.page-shell{min-height:100vh;display:flex;flex-direction:column;}
+main{flex:1;}
+.container{max-width:1120px;margin:0 auto;padding:0 1.5rem;}
+
+/* ============================
+   NAVBAR
+============================ */
+.navbar{
+  position:sticky;
+  top:0;
+  z-index:50;
+  backdrop-filter:blur(16px);
+  background:var(--bg-soft);
+  border-bottom:1px solid var(--border-subtle);
+}
+.navbar-inner{
+  max-width:1120px;
+  margin:auto;
+  padding:0.9rem 1.5rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.nav-brand{
+  display:flex;
+  align-items:center;
+  gap:0.7rem;
+  font-weight:600;
+  font-size:0.9rem;
+  text-transform:uppercase;
+}
+.nav-logo{
+  width:32px;height:32px;border-radius:999px;
+  display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(circle at 30% 0,#f97316 0,#6366f1 50%,#0ea5e9 100%);
+  color:white;font-weight:700;
+}
+.nav-links{display:flex;gap:1.6rem;}
+.nav-link{
+  font-size:0.9rem;color:var(--text-soft);position:relative;
+}
+.nav-link:hover{color:var(--text-main);}
+
+/* Mobile */
+.nav-controls{display:flex;gap:0.7rem;}
+.theme-toggle{
+  padding:0.3rem 0.7rem;
+  border-radius:999px;
+  background:var(--bg-soft);
+  border:1px solid #999;
+}
+.nav-toggle{
+  display:none;
+  width:38px;height:32px;
+  border-radius:8px;
+  border:1px solid #999;
+  background:var(--bg-soft);
+  align-items:center;justify-content:center;
+}
+.nav-toggle span{
+  width:20px;height:2px;background:var(--text-main);border-radius:5px;position:relative;
+}
+.nav-toggle span:before,
+.nav-toggle span:after{
+  content:"";position:absolute;left:0;width:20px;height:2px;border-radius:5px;background:var(--text-main);
+}
+.nav-toggle span:before{top:-6px;}
+.nav-toggle span:after{top:6px;}
+
+.nav-links-mobile{
+  display:none;flex-direction:column;gap:0.8rem;padding:1rem;border-top:1px solid var(--border-subtle);
+}
+.nav-links-mobile.open{display:flex;}
+
+/* ============================
+   HERO
+============================ */
+.hero{padding:3.5rem 0;}
+.hero-inner{
+  display:grid;
+  grid-template-columns:minmax(0,1.6fr) minmax(260px,1fr);
+  gap:2.5rem;
+  align-items:center;
+}
+
+.new-tagline{
+  font-size:0.85rem;
+  padding:0.25rem 0.7rem;
+  display:inline-block;
+  border-radius:999px;
+  background:rgba(99,102,241,0.10);
+  border:1px solid rgba(99,102,241,0.6);
+  color:#6366f1;
+  margin-bottom:0.9rem;
+}
+
+.hero-big-title{
+  font-size:clamp(3rem,6vw,4rem);
+  font-weight:800;
+  line-height:1.12;
+  margin-bottom:0.4rem;
+}
+
+.hero-big-title span{
+  background:linear-gradient(90deg,#6366f1,#a855f7,#22c55e);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.hero-mini-tagline{
+  font-size:1.1rem;
+  font-weight:500;
+  color:var(--text-soft);
+  margin-bottom:1rem;
+}
+
+.hero-subtitle{
+  max-width:30rem;
+  font-size:1rem;
+  line-height:1.7;
+  color:var(--text-soft);
+  margin-bottom:1.7rem;
+}
+
+.social-row{display:flex;gap:0.6rem;margin-bottom:1.2rem;}
+.social-pill{
+  width:38px;height:38px;border-radius:999px;
+  background:var(--bg-soft);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;color:var(--text-main);
+  box-shadow:0 8px 18px rgba(15,23,42,0.08);
+  transition:0.2s;
+}
+.social-pill:hover{background:var(--accent);color:white;}
+
+.hero-actions{display:flex;gap:0.8rem;flex-wrap:wrap;}
+.btn{
+  border-radius:999px;padding:0.65rem 1.35rem;
+  font-size:0.92rem;
+  display:inline-flex;align-items:center;gap:0.4rem;
+}
+.btn-primary{
+  background:linear-gradient(135deg,#6366f1,#4f46e5);color:white;
+}
+.btn-ghost{
+  background:var(--bg-soft);
+  border:1px solid #999;
+}
+
+.hero-illustration{
+  border-radius:20px;
+  background:var(--bg-soft);
+  border:1px solid var(--border-subtle);
+  padding:1rem;
+  box-shadow:var(--shadow-soft);
+}
+
+/* Profile Image */
+.profile-img{
+  width:140px;height:140px;border-radius:50%;
+  object-fit:cover;margin-bottom:1rem;
+  box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* Responsive */
+@media(max-width:900px){
+  .hero-inner{
+    grid-template-columns:1fr;
+  }
+}
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .nav-toggle{display:flex;}
+}
+</style>
 </head>
+
 <body>
+
 <div class="page-shell">
-  <!-- NAVBAR -->
-  <header class="navbar">
-    <div class="navbar-inner">
-      <div class="nav-brand">
-        <div class="nav-logo">&lt;/&gt;</div>
-        <div>Demo Dev</div>
-      </div>
 
-      <nav class="nav-links">
-        <a class="nav-link" href="index.html">Home</a>
-        <a class="nav-link" href="services.html">Services</a>
-        <a class="nav-link" href="skills.html">Skills</a>
-        <a class="nav-link" href="experience.html">Experience</a>
-        <a class="nav-link" href="education.html">Education</a>
-        <a class="nav-link" href="about.html">About</a>
-        <a class="nav-link" href="contact.html">Contact</a>
-      </nav>
-
-      <div class="nav-controls">
-        <button class="theme-toggle" type="button">🌙</button>
-        <button class="nav-toggle" type="button">
-          <span></span>
-        </button>
-      </div>
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="navbar-inner">
+    <div class="nav-brand">
+      <div class="nav-logo">&lt;/&gt;</div>
+      <div>Demo Dev</div>
     </div>
 
-    <!-- mobile links -->
-    <nav class="nav-links-mobile">
-      <a class="nav-link" href="index.html">Home</a>
-      <a class="nav-link" href="services.html">Services</a>
-      <a class="nav-link" href="skills.html">Skills</a>
-      <a class="nav-link" href="experience.html">Experience</a>
-      <a class="nav-link" href="education.html">Education</a>
-      <a class="nav-link" href="about.html">About</a>
-      <a class="nav-link" href="contact.html">Contact</a>
-      <button class="theme-toggle" type="button">🌙</button>
+    <nav class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="#" class="nav-link">Services</a>
+      <a href="#" class="nav-link">Skills</a>
+      <a href="#" class="nav-link">Experience</a>
+      <a href="#" class="nav-link">Education</a>
+      <a href="#" class="nav-link">About</a>
+      <a href="#" class="nav-link">Contact</a>
     </nav>
-  </header>
 
-  <!-- HERO -->
-  <main>
-    <section class="hero">
-      <div class="container hero-inner">
-        <div>
-          <div class="hero-eyebrow">
-            <span>Hi all, I'm Demo Dev 👋</span>
-          </div>
-
-          <h1 class="hero-title">
-            A passionate <span>Full Stack Developer 🚀</span>
-          </h1>
-
-          <p class="hero-subtitle">
-            I build modern Web & Mobile applications using JavaScript, React, Node.js
-            and other powerful tools. Clean UI, smooth UX and scalable backends —
-            all in one place.
-          </p>
-
-          <div class="social-row">
-            <a href="#" class="social-pill">in</a>
-            <a href="#" class="social-pill">G</a>
-            <a href="#" class="social-pill">F</a>
-            <a href="#" class="social-pill">@</a>
-          </div>
-
-          <div class="hero-actions">
-            <a href="contact.html" class="btn btn-primary">Contact Me</a>
-            <a href="#" class="btn btn-ghost">Download Resume</a>
-          </div>
-        </div>
-
-        <aside class="hero-illustration">
-          <img src="https://cdni.iconscout.com/illustration/premium/thumb/web-developer-working-on-laptop-6772453-5606896.png"
-               alt="Developer illustration" />
-        </aside>
-      </div>
-    </section>
-  </main>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-inner">
-      <div>Made with ❤️ — Demo Portfolio</div>
-      <div>Theme inspired by DeveloperFolio</div>
+    <div class="nav-controls">
+      <button class="theme-toggle">🌙</button>
+      <button class="nav-toggle"><span></span></button>
     </div>
-  </footer>
+  </div>
+
+  <nav class="nav-links-mobile">
+    <a href="#" class="nav-link">Home</a>
+    <a href="#" class="nav-link">Services</a>
+    <a href="#" class="nav-link">Skills</a>
+    <a href="#" class="nav-link">Experience</a>
+    <a href="#" class="nav-link">Education</a>
+    <a href="#" class="nav-link">About</a>
+    <a href="#" class="nav-link">Contact</a>
+    <button class="theme-toggle">🌙</button>
+  </nav>
+</header>
+
+<!-- HERO -->
+<main>
+<section class="hero">
+  <div class="container hero-inner">
+
+    <!-- LEFT -->
+    <div>
+
+      <img src="https://cdn-icons-png.flaticon.com/512/921/921347.png"
+           class="profile-img" alt="Profile Photo">
+
+      <div class="new-tagline">🚀 Turning Ideas Into Reality</div>
+
+      <h1 class="hero-big-title">
+        Hi all, I'm <span>Demo Dev</span> 👋
+      </h1>
+
+      <p class="hero-mini-tagline">
+        Full Stack Developer • UI Crafter • Problem Solver
+      </p>
+
+      <p class="hero-subtitle">
+        I create modern, clean and scalable digital experiences using React, Node,
+        JavaScript and cloud technologies. My focus is simple — build tools that feel effortless.
+      </p>
+
+      <div class="social-row">
+        <a href="#" class="social-pill">in</a>
+        <a href="#" class="social-pill">G</a>
+        <a href="#" class="social-pill">F</a>
+        <a href="#" class="social-pill">@</a>
+      </div>
+
+      <div class="hero-actions">
+        <a href="#" class="btn btn-primary">Contact Me</a>
+        <a href="#" class="btn btn-ghost">Hire Me Now</a>
+      </div>
+
+    </div>
+
+    <!-- RIGHT -->
+    <aside class="hero-illustration">
+      <img src="https://cdni.iconscout.com/illustration/free/thumb/online-education-illustration-9029937-7432291.png" 
+           alt="Illustration">
+    </aside>
+
+  </div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer style="padding:1rem;text-align:center;color:var(--text-soft);border-top:1px solid var(--border-subtle);">
+  Made with ❤️ — Demo Portfolio
+</footer>
+
 </div>
 
-<script src="script.js"></script>
+<script>
+// DARK MODE + MOBILE MENU
+document.addEventListener("DOMContentLoaded", function () {
+  const body = document.body;
+  const themeButtons = document.querySelectorAll(".theme-toggle");
+  const navToggle = document.querySelector(".nav-toggle");
+  const mobileMenu = document.querySelector(".nav-links-mobile");
+
+  themeButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const isDark = body.classList.toggle("dark-theme");
+      themeButtons.forEach(b => b.textContent = isDark ? "☀️" : "🌙");
+    });
+  });
+
+  navToggle.addEventListener("click", () => {
+    mobileMenu.classList.toggle("open");
+  });
+});
+</script>
+
 </body>
 </html>
