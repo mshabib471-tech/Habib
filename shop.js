@@ -1,157 +1,101 @@
-/* =====================================================
-   DRAWER MENU OPEN/CLOSE
-===================================================== */
+/* ----------------------------------------------------
+   DARK / LIGHT MODE
+---------------------------------------------------- */
 
-const drawer = document.getElementById("drawerMenu");
-const drawerOverlay = document.getElementById("drawerOverlay");
-const drawerOpen = document.getElementById("drawerOpen");
-const drawerClose = document.getElementById("drawerClose");
+const body = document.body;
+const themeToggle = document.getElementById("themeToggle");
 
-drawerOpen.addEventListener("click", () => {
-  drawer.classList.add("open");
-  drawerOverlay.classList.add("active");
-});
-
-drawerClose.addEventListener("click", () => {
-  drawer.classList.remove("open");
-  drawerOverlay.classList.remove("active");
-});
-
-drawerOverlay.addEventListener("click", () => {
-  drawer.classList.remove("open");
-  drawerOverlay.classList.remove("active");
-});
-
-
-/* =====================================================
-   LOCAL STORAGE HELPERS
-===================================================== */
-
-function getCart() {
-  return JSON.parse(localStorage.getItem("cart") || "[]");
+const savedTheme = localStorage.getItem("shop-theme");
+if(savedTheme === "dark"){
+  body.classList.add("dark");
+  themeToggle.textContent = "🌙";
+} else {
+  themeToggle.textContent = "☀️";
 }
 
-function saveCart(cart) {
-  localStorage.setItem("cart", JSON.stringify(cart));
-}
+themeToggle.addEventListener("click", ()=>{
+  body.classList.toggle("dark");
 
-function getWishlist() {
-  return JSON.parse(localStorage.getItem("wishlist") || "[]");
-}
-
-function saveWishlist(list) {
-  localStorage.setItem("wishlist", JSON.stringify(list));
-}
-
-
-/* =====================================================
-   CART COUNT UPDATE
-===================================================== */
-
-function updateCartCount() {
-  const cart = getCart();
-  const count = cart.reduce((total, item) => total + item.qty, 0);
-
-  const countBadge = document.getElementById("cartCount");
-  if (countBadge) {
-    countBadge.textContent = count;
+  if(body.classList.contains("dark")){
+    themeToggle.textContent = "🌙";
+    localStorage.setItem("shop-theme","dark");
+  } else {
+    themeToggle.textContent = "☀️";
+    localStorage.setItem("shop-theme","light");
   }
+});
+
+/* ----------------------------------------------------
+   DRAWER MENU
+---------------------------------------------------- */
+
+const drawer = document.getElementById("drawer");
+const overlay = document.getElementById("drawer-overlay");
+const openBtn = document.getElementById("menu-open");
+const closeBtn = document.getElementById("menu-close");
+
+openBtn.onclick = ()=>{
+  drawer.classList.add("open");
+  overlay.style.display="block";
+};
+closeBtn.onclick = closeDrawer;
+overlay.onclick = closeDrawer;
+
+function closeDrawer(){
+  drawer.classList.remove("open");
+  overlay.style.display="none";
 }
 
-updateCartCount();
-
-
-/* =====================================================
-   ADD TO CART FUNCTION
-===================================================== */
-
-document.querySelectorAll(".add-cart").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const name = btn.dataset.name;
-    const price = parseInt(btn.dataset.price);
-
-    let cart = getCart();
-
-    // check if exists
-    const existing = cart.find(item => item.name === name);
-    if (existing) {
-      existing.qty += 1;
-    } else {
-      cart.push({ name, price, qty: 1 });
-    }
-
-    saveCart(cart);
-    updateCartCount();
-
-    // Button feedback
-    btn.textContent = "✓ Added";
-    setTimeout(() => {
-      btn.textContent = "🧺 Add to Cart";
-    }, 1000);
-  });
-});
-
-
-/* =====================================================
-   ADD TO WISHLIST
-===================================================== */
-
-document.querySelectorAll(".wishlist-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const name = btn.dataset.name;
-
-    let list = getWishlist();
-
-    if (!list.includes(name)) {
-      list.push(name);
-      saveWishlist(list);
-
-      btn.textContent = "❤️ Added";
-      setTimeout(() => {
-        btn.textContent = "❤️ Wishlist";
-      }, 800);
-    }
-  });
-});
-
-
-/* =====================================================
+/* ----------------------------------------------------
    CATEGORY FILTER
-===================================================== */
+---------------------------------------------------- */
 
-const buttons = document.querySelectorAll(".cat-btn");
-const products = document.querySelectorAll("[data-cat]");
+const catBtns = document.querySelectorAll(".cat-btn");
+const products = document.querySelectorAll(".product-card");
 
-buttons.forEach(btn => {
-  btn.addEventListener("click", () => {
-    const cat = btn.dataset.cat;
-
-    buttons.forEach(b => b.classList.remove("active"));
+catBtns.forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    
+    catBtns.forEach(b=>b.classList.remove("active"));
     btn.classList.add("active");
 
-    products.forEach(p => {
-      if (cat === "all" || p.dataset.cat === cat) {
-        p.style.display = "block";
+    const cat = btn.dataset.cat;
+
+    products.forEach(card=>{
+      if(cat === "all" || card.dataset.cat === cat){
+        card.style.display="block";
       } else {
-        p.style.display = "none";
+        card.style.display="none";
       }
     });
+
   });
 });
 
+/* ----------------------------------------------------
+   CART / WISHLIST (LOCALSTORAGE COUNTER ONLY)
+---------------------------------------------------- */
 
-/* =====================================================
-   SMOOTH SCROLL (for #smartphones, #accessories links)
-===================================================== */
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-  link.addEventListener("click", e => {
-    const target = document.querySelector(link.getAttribute("href"));
-    if (target) {
-      e.preventDefault();
-      window.scrollTo({
-        top: target.offsetTop - 80,
-        behavior: "smooth"
-      });
-    }
+let cartCount = localStorage.getItem("cart-count") || 0;
+let wishCount = localStorage.getItem("wish-count") || 0;
+
+function updateCounters(){
+  const cartEl = document.getElementById("cartCount");
+  if(cartEl) cartEl.textContent = cartCount;
+}
+updateCounters();
+
+document.querySelectorAll(".add-cart").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    cartCount++;
+    localStorage.setItem("cart-count", cartCount);
+    updateCounters();
+  });
+});
+
+document.querySelectorAll(".wishlist-btn").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    wishCount++;
+    localStorage.setItem("wish-count", wishCount);
   });
 });
