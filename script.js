@@ -4,46 +4,49 @@
 document.addEventListener("DOMContentLoaded", () => {
   const preloader = document.getElementById("preloader");
 
-  if (preloader) {
-    setTimeout(() => {
-      preloader.style.opacity = "0";
-      preloader.style.pointerEvents = "none";
+  setTimeout(() => {
+    preloader.style.opacity = "0";
+    preloader.style.pointerEvents = "none";
 
-      setTimeout(() => {
-        preloader.style.display = "none";
-      }, 300);
-    }, 1200); // 1.2s পরে হাইড
-  }
+    setTimeout(() => preloader.style.display = "none", 300);
+  }, 900);
 });
 
 
 /* ===========================================================
    DARK / LIGHT MODE
 =========================================================== */
-const body = document.body;
 const themeToggle = document.getElementById("themeToggle");
+const body = document.body;
 
-const savedTheme = localStorage.getItem("habib-theme");
+// Load saved theme
+const savedTheme = localStorage.getItem("theme");
 
 if (savedTheme === "dark") {
   body.classList.add("dark");
-  if (themeToggle) themeToggle.textContent = "☀️"; // light আইকন
+  if (themeToggle) themeToggle.textContent = "☀️";
 } else {
-  body.classList.remove("dark");
-  if (themeToggle) themeToggle.textContent = "🌙"; // dark আইকন
+  if (themeToggle) themeToggle.textContent = "🌙";
 }
 
+// Toggle theme
 if (themeToggle) {
   themeToggle.addEventListener("click", () => {
-    const isDark = body.classList.toggle("dark");
-    themeToggle.textContent = isDark ? "☀️" : "🌙";
-    localStorage.setItem("habib-theme", isDark ? "dark" : "light");
+    body.classList.toggle("dark");
+
+    if (body.classList.contains("dark")) {
+      themeToggle.textContent = "☀️";
+      localStorage.setItem("theme", "dark");
+    } else {
+      themeToggle.textContent = "🌙";
+      localStorage.setItem("theme", "light");
+    }
   });
 }
 
 
 /* ===========================================================
-   MOBILE MENU TOGGLE
+   MOBILE MENU (3 LINE MENU)
 =========================================================== */
 const navToggle = document.getElementById("navToggle");
 const mobileMenu = document.getElementById("mobileMenu");
@@ -52,12 +55,22 @@ if (navToggle && mobileMenu) {
   navToggle.addEventListener("click", () => {
     mobileMenu.classList.toggle("open");
   });
+}
 
-  // কোনো মেনু লিঙ্কে ক্লিক করলে মেনু বন্ধ হবে
-  mobileMenu.querySelectorAll("a").forEach(link => {
-    link.addEventListener("click", () => {
-      mobileMenu.classList.remove("open");
-    });
+
+/* ===========================================================
+   TOAST NOTIFICATION
+=========================================================== */
+const toast = document.getElementById("toast");
+const toastClose = document.getElementById("toastClose");
+
+setTimeout(() => {
+  if (toast) toast.classList.add("show");
+}, 1500);
+
+if (toastClose) {
+  toastClose.addEventListener("click", () => {
+    toast.classList.remove("show");
   });
 }
 
@@ -72,7 +85,28 @@ if (yearSpan) {
 
 
 /* ===========================================================
-   SMOOTH SCROLL FOR INTERNAL LINKS
+   SCROLL REVEAL ANIMATIONS
+=========================================================== */
+const revealElements = document.querySelectorAll(".reveal");
+
+function revealOnScroll() {
+  const trigger = window.innerHeight * 0.85;
+
+  revealElements.forEach((el) => {
+    const top = el.getBoundingClientRect().top;
+
+    if (top < trigger) {
+      el.classList.add("visible");
+    }
+  });
+}
+
+window.addEventListener("scroll", revealOnScroll);
+window.addEventListener("load", revealOnScroll);
+
+
+/* ===========================================================
+   SMOOTH ANCHOR SCROLL
 =========================================================== */
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener("click", function (e) {
@@ -80,73 +114,23 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     if (target) {
       e.preventDefault();
       target.scrollIntoView({ behavior: "smooth", block: "start" });
+      mobileMenu?.classList.remove("open");
     }
   });
 });
 
 
 /* ===========================================================
-   SCROLL ANIMATIONS FOR .reveal
+   PWA INSTALL BUTTON
 =========================================================== */
-const revealEls = document.querySelectorAll(".reveal");
-
-if ("IntersectionObserver" in window) {
-  const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.18 }
-  );
-
-  revealEls.forEach(el => observer.observe(el));
-} else {
-  // পুরনো ব্রাউজার হলে সরাসরি visible করে দেই
-  revealEls.forEach(el => el.classList.add("visible"));
-}
-
-
-/* ===========================================================
-   TOAST NOTIFICATION
-=========================================================== */
-const toast = document.getElementById("toast");
-const toastClose = document.getElementById("toastClose");
-
-if (toast) {
-  setTimeout(() => {
-    toast.classList.add("show");
-  }, 2500);
-
-  if (toastClose) {
-    toastClose.addEventListener("click", () => {
-      toast.classList.remove("show");
-    });
-  }
-}
-
-
-/* ===========================================================
-   PWA — SERVICE WORKER + INSTALL BUTTON
-=========================================================== */
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("sw.js").catch(err => {
-    console.log("SW register error:", err);
-  });
-}
-
 let deferredPrompt;
 const installBtn = document.getElementById("installBtn");
 
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
   deferredPrompt = e;
-  if (installBtn) {
-    installBtn.style.display = "inline-flex";
-  }
+
+  if (installBtn) installBtn.style.display = "inline-flex";
 });
 
 if (installBtn) {
@@ -154,7 +138,12 @@ if (installBtn) {
     if (!deferredPrompt) return;
 
     deferredPrompt.prompt();
-    await deferredPrompt.userChoice;
+    const result = await deferredPrompt.userChoice;
+
+    if (result.outcome === "accepted") {
+      console.log("App Installed");
+    }
+
     deferredPrompt = null;
   });
 }
