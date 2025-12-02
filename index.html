@@ -10,433 +10,85 @@
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<style>
-/* ----------------------------------------------------
-   GLOBAL COLOR SYSTEM
----------------------------------------------------- */
-:root {
-  --bg: #ffffff;
-  --bg-soft: #f5f6f8;
-  --card-bg: #ffffff;
-  --text-main: #111;
-  --text-soft: #555;
-  --border: #e5e7eb;
+<!-- External CSS -->
+<link rel="stylesheet" href="style.css" />
+</head>
 
-  --accent: #6366f1;
-  --accent-soft: rgba(99,102,241,0.12);
+<body>
 
-  --shadow-soft: 0 4px 18px rgba(0,0,0,0.08);
-  --shadow-card: 0 12px 32px rgba(15,23,42,0.12);
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="navbar-inner">
 
-  --qr-bg: #ffffff;
-  --qr-border: rgba(0,0,0,0.1);
-}
+    <div class="nav-brand">
+      <div class="nav-logo"></div>
+      <div>
+        <div class="nav-title">Habibur Rahman</div>
+        <div class="nav-sub">Full Stack Developer & Mobile Shop Owner</div>
+      </div>
+    </div>
 
-body.dark {
-  --bg: #0b0f19;
-  --bg-soft: #111827;
-  --card-bg: #1a2333;
-  --text-main: #f3f4f6;
-  --text-soft: #a5a7ae;
-  --border: #2d3748;
+    <nav class="nav-links">
+      <a href="#hero" class="nav-link">Home</a>
+      <a href="#card" class="nav-link">Visiting Card</a>
+      <a href="#shop" class="nav-link">Shop</a>
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
 
-  --accent: #818cf8;
-  --accent-soft: rgba(129,140,248,0.18);
+    <div class="nav-controls">
+      <button class="theme-toggle">🌙</button>
+      <button class="nav-toggle"><span></span></button>
+    </div>
 
-  --shadow-soft: 0 6px 22px rgba(0,0,0,0.55);
-  --shadow-card: 0 14px 38px rgba(0,0,0,0.65);
+  </div>
 
-  --qr-bg: #1e293b;
-  --qr-border: rgba(255,255,255,0.1);
-}
+  <nav class="nav-links-mobile">
+      <a href="#hero" class="nav-link">Home</a>
+      <a href="#card" class="nav-link">Visiting Card</a>
+      <a href="#shop" class="nav-link">Shop</a>
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#contact" class="nav-link">Contact</a>
+      <button class="theme-toggle">🌙</button>
+  </nav>
+</header>
 
-/* ----------------------------------------------------
-   RESET + BASE
----------------------------------------------------- */
-* { margin:0; padding:0; box-sizing:border-box; }
-body {
-  background: var(--bg);
-  color: var(--text-main);
-  font-family: "Inter", sans-serif;
-  transition: background 0.25s ease, color 0.25s ease;
-}
-a { color: inherit; text-decoration: none; }
-img { max-width: 100%; display: block; }
+<!-- HERO -->
+<section id="hero" class="hero">
+  <div class="container hero-inner">
 
-.container {
-  max-width: 1180px;
-  margin: auto;
-  padding: 0 1.6rem;
-}
+    <div>
+      <div class="hero-kicker">🚀 Professional Portfolio & Mobile Business</div>
 
-.section { padding: 3.4rem 0; }
-.section-title {
-  font-size: 2rem;
-  font-weight: 700;
-}
-.section-subtitle {
-  font-size: 0.95rem;
-  margin-top: .4rem;
-  color: var(--text-soft);
-}
+      <h1 class="hero-title">
+        Hi, I'm <span>Habib</span>
+      </h1>
 
-/* ----------------------------------------------------
-   NAVBAR
----------------------------------------------------- */
-.navbar {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background: var(--bg-soft);
-  border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(14px);
-}
-.navbar-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: .85rem 1.4rem;
-}
-.nav-brand {
-  display: flex;
-  align-items: center;
-  gap: .6rem;
-}
-.nav-logo {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: conic-gradient(#6366f1, #a855f7, #ec4899, #22c55e, #6366f1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  color: white;
-}
-.nav-title { font-size: .95rem; font-weight: 700; }
-.nav-sub { font-size: .72rem; color: var(--text-soft); }
+      <p class="hero-sub">
+        I create modern, fast, responsive websites and also run a physical mobile shop.
+        Both digital and real-world work combined in one brand.
+      </p>
 
-.nav-links {
-  display: flex;
-  gap: 1.2rem;
-  align-items: center;
-}
-.nav-link {
-  font-size: .9rem;
-  color: var(--text-soft);
-}
-.nav-link:hover { color: var(--text-main); }
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">Contact Me</a>
+        <a href="#shop" class="btn btn-outline">Visit Mobile Shop</a>
+      </div>
 
-.nav-controls {
-  display: flex;
-  gap: .7rem;
-}
-.theme-toggle {
-  padding: .35rem .75rem;
-  border-radius: 999px;
-  font-size: .85rem;
-  border: 1px solid var(--border);
-  background: var(--card-bg);
-  cursor: pointer;
-}
+      <p class="hero-note">✨ Portfolio + Business = Habib Business App</p>
+    </div>
 
-/* MOBILE MENU */
-.nav-toggle {
-  display: none;
-  width: 34px;
-  height: 30px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--card-bg);
-  align-items: center;
-  justify-content: center;
-}
-.nav-toggle span {
-  width: 18px;
-  height: 2px;
-  background: var(--text-main);
-  position: relative;
-}
-.nav-toggle span:before,
-.nav-toggle span:after {
-  content: "";
-  position: absolute;
-  width: 18px;
-  height: 2px;
-  background: var(--text-main);
-  left: 0;
-}
-.nav-toggle span:before { top: -5px; }
-.nav-toggle span:after { top: 5px; }
+    <aside class="hero-side">
+      <div class="hero-side-title">About My Work</div>
+      <div class="hero-side-text">
+        Web Design, E-commerce Setup, Mobile Accessories, Smartphones — সবকিছু
+        একদম সঠিক দামে এবং বিশ্বাসযোগ্যভাবে।
+      </div>
+    </aside>
 
-.nav-links-mobile {
-  display: none;
-  flex-direction: column;
-  gap: .8rem;
-  background: var(--bg-soft);
-  padding: 1rem 1.4rem;
-  border-top: 1px solid var(--border);
-}
-.nav-links-mobile.open { display: flex; }
+  </div>
+</section>
 
-/* ----------------------------------------------------
-   HERO
----------------------------------------------------- */
-.hero {
-  padding: 4.2rem 0 3rem;
-}
-.hero-inner {
-  display: grid;
-  grid-template-columns: minmax(0, 1.6fr) minmax(260px, 1fr);
-  gap: 2.8rem;
-  align-items: center;
-}
-
-.hero-kicker {
-  background: var(--accent-soft);
-  color: var(--accent);
-  border: 1px solid var(--accent);
-  padding: .35rem .9rem;
-  border-radius: 999px;
-  font-size: .8rem;
-  display: inline-block;
-  margin-bottom: 1rem;
-}
-.hero-title {
-  font-size: clamp(2.6rem, 6vw, 3.6rem);
-  line-height: 1.14;
-  font-weight: 800;
-  margin-bottom: .45rem;
-}
-.hero-title span {
-  background: linear-gradient(90deg,#6366f1,#a855f7,#22c55e);
-  -webkit-background-clip: text;
-  color: transparent;
-}
-.hero-sub {
-  color: var(--text-soft);
-  margin-bottom: 1.2rem;
-  font-size: 1rem;
-  line-height: 1.75;
-  max-width: 32rem;
-}
-
-.hero-actions {
-  display: flex;
-  gap: .8rem;
-  margin-bottom: 1.1rem;
-}
-.btn {
-  padding: .75rem 1.45rem;
-  border-radius: 999px;
-  font-size: .9rem;
-}
-.btn-primary {
-  background: linear-gradient(135deg,#6366f1,#4f46e5);
-  color: white;
-  border: none;
-}
-.btn-outline {
-  background: transparent;
-  color: var(--text-main);
-  border: 1px solid var(--border);
-}
-
-.hero-note {
-  color: var(--text-soft);
-  font-size: .85rem;
-}
-
-/* Hero Right */
-.hero-side {
-  background: var(--card-bg);
-  border-radius: 18px;
-  padding: 1.3rem 1.4rem;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-card);
-}
-.hero-side-title {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: .4rem;
-}
-.hero-side-text {
-  color: var(--text-soft);
-  font-size: .85rem;
-  line-height: 1.55;
-}
-
-@media(max-width:850px){
-  .hero-inner {
-    grid-template-columns: 1fr;
-  }
-  .hero-side { order: -1; }
-}
-
-/* ----------------------------------------------------
-   DIGITAL VISITING CARD
----------------------------------------------------- */
-.card-section {
-  padding-top: 1rem;
-  padding-bottom: 3rem;
-}
-
-.visiting-wrapper {
-  display: flex;
-  justify-content: center;
-}
-
-.visiting-card {
-  position: relative;
-  width: 100%;
-  max-width: 520px;
-  border-radius: 24px;
-  padding: 1.4rem 1.5rem;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-card);
-  overflow: hidden;
-}
-
-/* soft gradient glow inside card */
-.visiting-card::before {
-  content: "";
-  position: absolute;
-  inset: -40%;
-  background:
-    radial-gradient(circle at 0 0, rgba(99,102,241,0.25), transparent 55%),
-    radial-gradient(circle at 100% 100%, rgba(56,189,248,0.25), transparent 55%);
-  opacity: 0.55;
-  pointer-events: none;
-}
-
-.card-content {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0,1.4fr) minmax(0,1fr);
-  gap: 1rem;
-  align-items: center;
-}
-
-.card-info h2 {
-  font-size: 1.4rem;
-  font-weight: 700;
-}
-.card-info h2 span {
-  font-size: 1rem;
-  opacity: .8;
-  font-weight: 400;
-}
-.card-role {
-  margin-top: .2rem;
-  font-size: .85rem;
-  color: var(--text-soft);
-}
-.card-tagline {
-  margin-top: .55rem;
-  font-size: .9rem;
-  color: var(--text-main);
-}
-.card-meta {
-  margin-top: .55rem;
-  font-size: .78rem;
-  color: var(--text-soft);
-}
-
-/* card chips */
-.card-contact {
-  margin-top: .75rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: .4rem;
-}
-.card-chip {
-  padding: .32rem .7rem;
-  border-radius: 999px;
-  background: var(--bg-soft);
-  border: 1px solid var(--border);
-  font-size: .78rem;
-  color: var(--text-main);
-}
-
-/* right side */
-.card-right {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.card-photo {
-  width: 120px;
-  height: 120px;
-  border-radius: 24px;
-  padding: 3px;
-  background: conic-gradient(#6366f1,#a855f7,#ec4899,#22c55e,#6366f1);
-}
-.card-photo-inner {
-  width: 100%;
-  height: 100%;
-  border-radius: 20px;
-  overflow: hidden;
-}
-.card-photo-inner img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.card-handle {
-  margin-top: .45rem;
-  font-size: .8rem;
-  color: var(--text-soft);
-}
-
-/* QR CODE BOX ------------------------------ */
-
-.qr-box {
-  margin-top: 1rem;
-  text-align: center;
-}
-
-.qr-wrapper {
-  display: inline-block;
-  padding: .55rem;
-  border-radius: 14px;
-  background: var(--qr-bg);
-  border: 1px solid var(--qr-border);
-  box-shadow: 0 0 22px rgba(0,0,0,0.15);
-  transition: background .25s ease, border .25s ease;
-}
-
-body.dark .qr-wrapper {
-  box-shadow: 0 0 22px rgba(255,255,255,0.08);
-}
-
-.qr-wrapper img {
-  width: 95px;
-  height: 95px;
-  border-radius: 10px;
-}
-
-/* SCAN ME text */
-.qr-text {
-  margin-top: .25rem;
-  font-size: .75rem;
-  color: var(--text-soft);
-}
-
-/* RESPONSIVE FIX */
-@media(max-width: 850px){
-  .card-content {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-  .card-right {
-    margin-top: .6rem;
-  }
-}
-
-<!-- DIGITAL VISITING CARD -->
+<!-- VISITING CARD -->
 <section id="card" class="section card-section">
   <div class="container">
 
@@ -448,18 +100,15 @@ body.dark .qr-wrapper {
 
         <div class="card-content">
 
-          <!-- LEFT -->
           <div class="card-info">
             <h2>Habibur Rahman <span>(Habib)</span></h2>
             <div class="card-role">Full Stack Developer • Mobile Shop Owner</div>
 
             <div class="card-tagline">
-              “একই জায়গায় ওয়েবসাইট, ই-কমার্স এবং মোবাইল শপ — সব কিছুর সলিউশন।”
+              “একই জায়গায় ওয়েবসাইট, ই-কমার্স এবং মোবাইল শপ—সবকিছুর সলিউশন।”
             </div>
 
-            <div class="card-meta">
-              Web • E-commerce • Mobile • Accessories • Tech Support
-            </div>
+            <div class="card-meta">Web • E-commerce • Mobile • Accessories</div>
 
             <div class="card-contact">
               <div class="card-chip">📞 +8801XXXXXXXXX</div>
@@ -468,8 +117,8 @@ body.dark .qr-wrapper {
             </div>
           </div>
 
-          <!-- RIGHT -->
           <div class="card-right">
+
             <div class="card-photo">
               <div class="card-photo-inner">
                 <img src="https://i.ibb.co/n88CVpsy/habib.png" alt="Habib">
@@ -481,7 +130,9 @@ body.dark .qr-wrapper {
             <!-- QR CODE -->
             <div class="qr-box">
               <div class="qr-wrapper">
-                <img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=https://habib-web.vercel.app" alt="QR">
+                <img 
+                  src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=https://habib-web.vercel.app" 
+                  alt="QR">
               </div>
               <div class="qr-text">SCAN ME</div>
             </div>
@@ -496,157 +147,6 @@ body.dark .qr-wrapper {
   </div>
 </section>
 
-/* ----------------------------------------------------
-   SHOP HIGHLIGHT GLASS CARD
----------------------------------------------------- */
-
-.shop-highlight {
-  padding: 3rem 0 1rem;
-}
-
-.shop-card-wrap {
-  display: flex;
-  justify-content: center;
-}
-
-.shop-card {
-  width: 100%;
-  max-width: 960px;
-  border-radius: 26px;
-  padding: 1.6rem 1.8rem;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-card);
-  position: relative;
-  overflow: hidden;
-}
-
-.shop-card::before {
-  content: "";
-  position: absolute;
-  inset: -40%;
-  background:
-    radial-gradient(circle at 0 0, rgba(129,140,248,0.32), transparent 55%),
-    radial-gradient(circle at 90% 100%, rgba(56,189,248,0.25), transparent 55%);
-  opacity: 0.55;
-  pointer-events: none;
-}
-
-.shop-inner {
-  display: grid;
-  grid-template-columns: minmax(0,1.4fr) minmax(0,1fr);
-  gap: 1.4rem;
-  align-items: center;
-  position: relative;
-}
-
-.shop-label {
-  font-size: .78rem;
-  text-transform: uppercase;
-  letter-spacing: .12em;
-  color: var(--text-soft);
-}
-
-.shop-title {
-  margin-top: .4rem;
-  font-size: 1.55rem;
-  font-weight: 700;
-}
-
-.shop-text {
-  margin-top: .5rem;
-  font-size: .92rem;
-  line-height: 1.6;
-  color: var(--text-soft);
-  max-width: 26rem;
-}
-
-.shop-pills {
-  margin-top: .8rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: .5rem;
-}
-.shop-pill {
-  padding: .3rem .75rem;
-  font-size: .78rem;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: var(--bg-soft);
-}
-
-.shop-buttons {
-  margin-top: 1rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: .75rem;
-}
-
-.shop-btn-main {
-  padding: .75rem 1.45rem;
-  border-radius: 999px;
-  font-size: .9rem;
-  color: white;
-  background: linear-gradient(135deg,#22c55e,#16a34a);
-  border: none;
-}
-
-.shop-btn-alt {
-  padding: .75rem 1.45rem;
-  border-radius: 999px;
-  font-size: .9rem;
-  background: var(--bg-soft);
-  border: 1px solid var(--border);
-  color: var(--text-main);
-}
-
-.shop-meta {
-  margin-top: .7rem;
-  font-size: .8rem;
-  color: var(--text-soft);
-}
-
-/* phone visual */
-.shop-phone {
-  position: relative;
-  width: 210px;
-  margin: auto;
-  background: var(--bg-soft);
-  border-radius: 22px;
-  padding: .9rem;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-soft);
-}
-
-.shop-phone-screen {
-  border-radius: 16px;
-  overflow: hidden;
-  background: #000;
-}
-.shop-phone-screen img {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-}
-
-.shop-phone-meta {
-  margin-top: .45rem;
-  font-size: .8rem;
-  color: var(--text-soft);
-}
-.shop-phone-price {
-  font-size: .9rem;
-  font-weight: 600;
-  margin-top: .1rem;
-  color: var(--accent);
-}
-
-@media(max-width:850px){
-  .shop-inner {
-    grid-template-columns: 1fr;
-  }
-}
-
 <!-- SHOP HIGHLIGHT -->
 <section id="shop" class="section shop-highlight">
   <div class="container">
@@ -656,6 +156,7 @@ body.dark .qr-wrapper {
 
     <div class="shop-card-wrap">
       <div class="shop-card">
+
         <div class="shop-inner">
 
           <div>
@@ -663,9 +164,8 @@ body.dark .qr-wrapper {
             <div class="shop-title">Your trusted mobile shop — online + offline</div>
 
             <p class="shop-text">
-              Samsung, Xiaomi, Realme, Vivo, iPhone, Smart Watch, TWS, Glass, Cover,
-              Charger—সব Available। অনলাইন অর্ডারে হোম ডেলিভারি এবং দোকানে ডাইরেক্ট
-              নেওয়ার সুবিধা।
+              Samsung, Xiaomi, Realme, Vivo, iPhone, Smart Watch, TWS—সব Available।
+              অনলাইন অর্ডারে হোম ডেলিভারি এবং দোকানে সরাসরি নেওয়ার সুবিধা।
             </p>
 
             <div class="shop-pills">
@@ -690,8 +190,7 @@ body.dark .qr-wrapper {
           <div>
             <div class="shop-phone">
               <div class="shop-phone-screen">
-                <img src="https://cdni.iconscout.com/illustration/premium/thumb/online-mobile-shopping-illustration-3123927-2606008.png"
-                     alt="Shop Preview">
+                <img src="https://cdni.iconscout.com/illustration/premium/thumb/online-mobile-shopping-illustration-3123927-2606008.png" />
               </div>
               <div class="shop-phone-meta">Samsung • Xiaomi • Realme • Accessories</div>
               <div class="shop-phone-price">Price starts at 120৳+</div>
@@ -699,59 +198,14 @@ body.dark .qr-wrapper {
           </div>
 
         </div>
+
       </div>
     </div>
 
   </div>
 </section>
 
-<!-- SERVICES -->
-<section id="services" class="section">
-  <div class="container">
-
-    <h2 class="section-title">Services</h2>
-    <p class="section-subtitle">Digital + Physical service both available</p>
-
-    <div class="services-grid">
-
-      <div class="service-card">
-        <h3>Portfolio / Website</h3>
-        <p class="service-desc">
-          Personal website, business site, landing page — clean, fast, mobile-friendly.
-        </p>
-        <div class="service-meta">Starting 3,000৳</div>
-      </div>
-
-      <div class="service-card">
-        <h3>Full E-commerce Setup</h3>
-        <p class="service-desc">
-          Vercel / custom domain shop, product page, cart, wishlist full setup.
-        </p>
-        <div class="service-meta">Online Store Ready</div>
-      </div>
-
-      <div class="service-card">
-        <h3>Mobile Phone & Accessories</h3>
-        <p class="service-desc">
-          All brands mobile + cover, glass, TWS, charger, smart watch, etc.
-        </p>
-        <div class="service-meta">Online + Offline</div>
-      </div>
-
-      <div class="service-card">
-        <h3>Tech Support</h3>
-        <p class="service-desc">
-          New phone setup, app install, backup, small tech help.
-        </p>
-        <div class="service-meta">Quick Support</div>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
-<!-- CONTACT SECTION -->
+<!-- CONTACT -->
 <section id="contact" class="section">
   <div class="container">
 
@@ -760,10 +214,9 @@ body.dark .qr-wrapper {
 
     <div class="contact-grid">
 
-      <!-- contact info -->
       <div class="contact-card">
         <h3>Shop & Direct Contact</h3>
-        <p>📍 আপনার দোকানের ঠিকানা এখানে লিখুন</p>
+        <p>📍 আপনার দোকানের ঠিকানা</p>
 
         <div class="contact-lines">
           <div><span>Phone:</span> +8801XXXXXXXXX</div>
@@ -777,7 +230,6 @@ body.dark .qr-wrapper {
         </div>
       </div>
 
-      <!-- form -->
       <div class="contact-card contact-form">
         <h3>Send Quick Message</h3>
 
@@ -786,18 +238,18 @@ body.dark .qr-wrapper {
           <div class="form-row">
             <div>
               <label>Name</label>
-              <input type="text" name="name" required />
+              <input type="text" name="name" required>
             </div>
 
             <div>
               <label>Phone</label>
-              <input type="text" name="phone" required />
+              <input type="text" name="phone" required>
             </div>
           </div>
 
           <div>
             <label>What do you need?</label>
-            <input type="text" name="need" placeholder="Mobile / Website / Accessories" />
+            <input type="text" name="need" placeholder="Mobile / Website / Accessories">
           </div>
 
           <div>
@@ -806,8 +258,8 @@ body.dark .qr-wrapper {
           </div>
 
           <button class="btn btn-primary" type="submit">Send</button>
-        </form>
 
+        </form>
       </div>
 
     </div>
@@ -816,40 +268,13 @@ body.dark .qr-wrapper {
 </section>
 
 <footer>
-  <p style="text-align:center; padding:1.6rem; color:var(--text-soft);">
+  <p style="text-align:center; padding:1.4rem; color:var(--text-soft);">
     © Habib Business App — All Rights Reserved
   </p>
 </footer>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
+<!-- JS -->
+<script src="script.js"></script>
 
-  const body = document.body;
-  const themeBtns = document.querySelectorAll(".theme-toggle");
-  const navToggle = document.querySelector(".nav-toggle");
-  const mobileMenu = document.querySelector(".nav-links-mobile");
-
-  /* DARK / LIGHT MODE */
-  let darkMode = false;
-  themeBtns.forEach(btn => {
-    btn.addEventListener("click", () => {
-      darkMode = !darkMode;
-      if(darkMode){
-        body.classList.add("dark");
-        themeBtns.forEach(b => b.textContent = "☀️");
-      } else {
-        body.classList.remove("dark");
-        themeBtns.forEach(b => b.textContent = "🌙");
-      }
-    });
-  });
-
-  /* MOBILE MENU */
-  navToggle.addEventListener("click", () => {
-    mobileMenu.classList.toggle("open");
-  });
-
-});
-</script>
 </body>
 </html>
