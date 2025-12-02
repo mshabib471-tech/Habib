@@ -1,3 +1,17 @@
+// ==============================
+// PRELOADER (SAFE VERSION)
+// ==============================
+document.addEventListener("DOMContentLoaded", () => {
+  const preloader = document.getElementById("preloader");
+
+  setTimeout(() => {
+    preloader.style.opacity = "0";
+    preloader.style.pointerEvents = "none";
+
+    setTimeout(() => preloader.style.display = "none", 300);
+  }, 1200); // 1.2 seconds
+});
+
 /* ===========================================================
    DARK / LIGHT MODE
 =========================================================== */
