@@ -182,16 +182,25 @@
       <div class="container">
         <h2 class="section-title">Contact / Quick Order</h2>
 
-        <form class="contact-form" action="https://formspree.io/f/your-id" method="POST">
+        <form action="https://formspree.io/f/xdkqzpng" method="POST">
+  <div class="form-row">
+    <div>
+      <label>Name</label>
+      <input type="text" name="name" placeholder="Your Name" required />
+    </div>
+    <div>
+      <label>Phone</label>
+      <input type="text" name="phone" placeholder="Your Phone Number" required />
+    </div>
+  </div>
 
-          <input type="text" name="name" placeholder="Your name" required />
-          <input type="text" name="phone" placeholder="Phone number" required />
-          <textarea name="msg" placeholder="Message"></textarea>
+  <div>
+    <label>Message</label>
+    <textarea name="message" placeholder="Write your message..." required></textarea>
+  </div>
 
-          <button type="submit" class="btn-primary">Send</button>
-        </form>
-      </div>
-    </section>
+  <button type="submit" class="btn btn-primary">Send</button>
+</form>
 
     <!-- PWA INSTALL -->
     <section class="install-banner section">
