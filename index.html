@@ -14,62 +14,60 @@
    CSS VARIABLES
 ============================ */
 :root {
+  --bg: #0f172a;
+  --bg-soft: #020617;
+  --card-bg: #020617;
+  --text-main: #f9fafb;
+  --text-soft: #9ca3af;
+  --accent: #6366f1;
+  --accent-soft: rgba(99,102,241,0.15);
+  --border-subtle: #1f2937;
+  --shadow-soft: 0 24px 55px rgba(15,23,42,0.8);
+}
+
+body.light-theme {
   --bg: #ffffff;
-  --bg-soft: #f9fafb;
+  --bg-soft: #f3f4f6;
   --card-bg: #ffffff;
   --text-main: #111827;
   --text-soft: #6b7280;
   --accent: #6366f1;
-  --accent-soft: rgba(99,102,241,0.09);
+  --accent-soft: rgba(99,102,241,0.12);
   --border-subtle: #e5e7eb;
-  --shadow-soft: 0 16px 35px rgba(15,23,42,0.06);
-}
-
-body.dark-theme {
-  --bg:#020617;
-  --bg-soft:#020617;
-  --card-bg:#020617;
-  --text-main:#f9fafb;
-  --text-soft:#9ca3af;
-  --accent:#818cf8;
-  --accent-soft:rgba(129,140,248,0.15);
-  --border-subtle:#1f2937;
-  --shadow-soft:0 16px 40px rgba(0,0,0,0.6);
+  --shadow-soft: 0 16px 35px rgba(15,23,42,0.08);
 }
 
 /* Global */
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
-  background:var(--bg);
+  background:radial-gradient(circle at top, #1d2538 0, #020617 40%, #020617 100%);
   color:var(--text-main);
   font-family:"Inter",sans-serif;
   overflow-x:hidden;
 }
 a{text-decoration:none;color:inherit;}
 img{max-width:100%;display:block;}
-button{font-family:inherit;}
+button,input,textarea{font-family:inherit;}
 
 .page-shell{min-height:100vh;display:flex;flex-direction:column;}
 main{flex:1;}
 .container{max-width:1120px;margin:0 auto;padding:0 1.5rem;}
 
-/* Section */
 .section{
-  padding:3rem 0;
+  padding:3.2rem 0;
 }
 .section-header{
-  margin-bottom:2rem;
+  margin-bottom:1.8rem;
 }
 .section-title{
   font-size:1.9rem;
   font-weight:700;
-  margin-bottom:0.4rem;
 }
 .section-subtitle{
-  font-size:0.9rem;
+  margin-top:0.4rem;
+  font-size:0.92rem;
   color:var(--text-soft);
 }
-
 
 /* ============================
    NAVBAR
@@ -77,15 +75,20 @@ main{flex:1;}
 .navbar{
   position:sticky;
   top:0;
-  z-index:50;
-  backdrop-filter:blur(16px);
-  background:var(--bg-soft);
+  z-index:40;
+  backdrop-filter:blur(18px);
+  background:rgba(15,23,42,0.85);
+  border-bottom:1px solid rgba(148,163,184,0.25);
+}
+body.light-theme .navbar{
+  background:rgba(255,255,255,0.92);
   border-bottom:1px solid var(--border-subtle);
 }
+
 .navbar-inner{
   max-width:1120px;
   margin:auto;
-  padding:0.9rem 1.5rem;
+  padding:0.85rem 1.5rem;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -93,310 +96,865 @@ main{flex:1;}
 .nav-brand{
   display:flex;
   align-items:center;
-  gap:0.7rem;
-  font-weight:600;
-  font-size:1rem;
-  text-transform:uppercase;
+  gap:0.65rem;
 }
 .nav-logo{
-  width:32px;height:32px;border-radius:999px;
+  width:34px;height:34px;border-radius:999px;
   display:flex;align-items:center;justify-content:center;
-  background:radial-gradient(circle at 30% 0,#f97316 0,#6366f1 50%,#0ea5e9 100%);
-  color:white;font-weight:700;
+  background:conic-gradient(from 180deg,#6366f1,#a855f7,#ec4899,#22c55e,#6366f1);
+  color:#f9fafb;
+  font-weight:800;
+  font-size:0.9rem;
 }
-.nav-links{display:flex;gap:1.2rem;}
+.nav-text-main{
+  font-weight:600;
+  letter-spacing:0.05em;
+  font-size:0.9rem;
+  text-transform:uppercase;
+}
+.nav-text-sub{
+  font-size:0.7rem;
+  color:var(--text-soft);
+}
+
+.nav-links{display:flex;gap:1.3rem;align-items:center;}
 .nav-link{
-  font-size:0.9rem;color:var(--text-soft);
+  font-size:0.88rem;
+  color:var(--text-soft);
 }
 .nav-link:hover{color:var(--text-main);}
+.nav-link.highlight{
+  padding:0.4rem 0.85rem;
+  border-radius:999px;
+  background:rgba(56,189,248,0.08);
+  border:1px solid rgba(56,189,248,0.4);
+  font-size:0.82rem;
+}
 
 .nav-controls{
-  display:flex;gap:0.7rem;
+  display:flex;align-items:center;gap:0.6rem;
+}
+.theme-toggle{
+  padding:0.3rem 0.65rem;
+  border-radius:999px;
+  border:1px solid rgba(148,163,184,0.6);
+  background:rgba(15,23,42,0.8);
+  color:#e5e7eb;
+  font-size:0.8rem;
+  cursor:pointer;
+}
+body.light-theme .theme-toggle{
+  background:var(--bg-soft);
+  color:var(--text-main);
 }
 
-.theme-toggle{
-  padding:0.3rem 0.7rem;
-  border-radius:999px;
-  background:var(--bg-soft);
-  border:1px solid #999;
-}
 .nav-toggle{
   display:none;
-  width:38px;height:32px;
-  border-radius:8px;
-  border:1px solid #999;
-  background:var(--bg-soft);
+  width:36px;height:30px;
+  border-radius:9px;
+  border:1px solid rgba(148,163,184,0.7);
+  background:rgba(15,23,42,0.7);
   align-items:center;justify-content:center;
+  cursor:pointer;
 }
 .nav-toggle span{
-  width:20px;height:2px;background:var(--text-main);border-radius:5px;position:relative;
+  width:18px;height:2px;background:#e5e7eb;border-radius:999px;position:relative;
 }
-.nav-toggle span::before,
-.nav-toggle span::after{
-  content:"";position:absolute;left:0;width:20px;height:2px;background:var(--text-main);
+.nav-toggle span:before,
+.nav-toggle span:after{
+  content:"";position:absolute;left:0;width:18px;height:2px;background:#e5e7eb;border-radius:999px;
 }
-.nav-toggle span::before{top:-6px;}
-.nav-toggle span::after{top:6px;}
+.nav-toggle span:before{top:-5px;}
+.nav-toggle span:after{top:5px;}
+body.light-theme .nav-toggle{
+  background:var(--bg-soft);
+  border-color:var(--border-subtle);
+}
+body.light-theme .nav-toggle span,
+body.light-theme .nav-toggle span:before,
+body.light-theme .nav-toggle span:after{
+  background:#111827;
+}
 
 .nav-links-mobile{
-  display:none;
-  flex-direction:column;
-  gap:0.8rem;
-  padding:1rem 1.3rem;
-  border-top:1px solid var(--border-subtle);
+  display:none;flex-direction:column;gap:0.7rem;
+  padding:0.85rem 1.5rem 1rem;
+  border-top:1px solid rgba(148,163,184,0.3);
+  background:rgba(15,23,42,0.98);
+}
+body.light-theme .nav-links-mobile{
+  background:var(--bg-soft);
 }
 .nav-links-mobile.open{display:flex;}
-
+.nav-links-mobile .nav-link{font-size:0.92rem;}
 
 /* ============================
    HERO
 ============================ */
 .hero{
-  padding:3rem 0;
+  padding:3.4rem 0 2.4rem;
 }
 .hero-inner{
   display:grid;
   grid-template-columns:minmax(0,1.7fr) minmax(260px,1fr);
-  gap:2rem;
+  gap:2.6rem;
   align-items:center;
 }
 
-.new-tagline{
-  font-size:0.82rem;
-  padding:0.25rem 0.6rem;
+.hero-kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:0.5rem;
+  padding:0.26rem 0.7rem;
   border-radius:999px;
-  border:1px solid var(--accent);
-  background:var(--accent-soft);
-  color:var(--accent);
-  margin-bottom:1rem;
+  border:1px solid rgba(52,211,153,0.55);
+  background:linear-gradient(120deg,rgba(16,185,129,0.18),rgba(15,23,42,0.9));
+  font-size:0.78rem;
+  color:#bbf7d0;
+  margin-bottom:0.95rem;
+}
+.hero-dot{
+  width:6px;height:6px;border-radius:999px;
+  background:#22c55e;
 }
 
-.hero-big-title{
-  font-size:clamp(2.6rem,6vw,3.6rem);
+.hero-title{
+  font-size:clamp(2.6rem,6vw,3.4rem);
   font-weight:800;
-  margin-bottom:0.5rem;
+  line-height:1.1;
+  margin-bottom:0.35rem;
 }
-.hero-big-title span{
-  background:linear-gradient(90deg,#6366f1,#a855f7,#22c55e);
+.hero-title span{
+  background:linear-gradient(90deg,#a855f7,#6366f1,#22c55e);
   -webkit-background-clip:text;
   color:transparent;
 }
-
-.hero-mini-tagline{
-  font-size:1.05rem;
+.hero-subtitle{
+  font-size:0.98rem;
   color:var(--text-soft);
-  margin-bottom:0.7rem;
+  max-width:34rem;
+  line-height:1.8;
+  margin-bottom:1.3rem;
 }
 
-.hero-subtitle{
-  max-width:30rem;
-  font-size:0.93rem;
-  line-height:1.75;
-  color:var(--text-soft);
+.hero-badges{
+  display:flex;flex-wrap:wrap;gap:0.55rem;
   margin-bottom:1.4rem;
 }
-
-.social-row{
-  display:flex;gap:0.6rem;flex-wrap:wrap;
-  margin-bottom:1.2rem;
-}
-.social-pill{
-  padding:0.45rem 0.9rem;
+.hero-pill{
+  padding:0.32rem 0.75rem;
   border-radius:999px;
-  background:var(--bg-soft);
-  color:var(--text-main);
-  font-size:0.85rem;
-  box-shadow:0 8px 16px rgba(0,0,0,0.06);
+  background:rgba(15,23,42,0.8);
+  border:1px solid rgba(148,163,184,0.4);
+  font-size:0.8rem;
+  color:#e5e7eb;
 }
-.social-pill:hover{
-  background:var(--accent);
-  color:white;
+body.light-theme .hero-pill{
+  background:var(--bg-soft);
+  border-color:var(--border-subtle);
+  color:var(--text-soft);
 }
 
 .hero-actions{
-  display:flex;gap:1rem;flex-wrap:wrap;
+  display:flex;flex-wrap:wrap;gap:0.8rem;
+  margin-bottom:0.9rem;
 }
-
 .btn{
-  padding:0.65rem 1.4rem;
   border-radius:999px;
+  padding:0.7rem 1.4rem;
   font-size:0.9rem;
   display:inline-flex;
   align-items:center;
-  gap:0.3rem;
+  gap:0.4rem;
+  cursor:pointer;
 }
 .btn-primary{
   background:linear-gradient(135deg,#6366f1,#4f46e5);
   color:white;
+  border:none;
 }
-.btn-ghost{
-  border:1px solid var(--border-subtle);
-  background:var(--bg-soft);
+.btn-outline{
+  background:transparent;
+  border:1px solid rgba(148,163,184,0.7);
+  color:var(--text-main);
+}
+.btn-soft{
+  background:rgba(56,189,248,0.12);
+  border:none;
+  color:#7dd3fc;
 }
 
-.hero-illustration{
-  background:var(--bg-soft);
-  border:1px solid var(--border-subtle);
+.hero-note{
+  font-size:0.85rem;
+  color:var(--text-soft);
+}
+
+/* Hero Right small mini info */
+.hero-side{
+  background:radial-gradient(circle at top,#1f2937 0,#020617 55%);
   border-radius:20px;
-  padding:1rem;
-  text-align:center;
-}
-.profile-img{
-  width:150px;height:150px;border-radius:50%;
-  object-fit:cover;
-  margin-bottom:1rem;
-}
-
-
-/* SERVICES */
-.services-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:1.4rem;
-}
-.service-card{
-  background:var(--card-bg);
-  border:1px solid var(--border-subtle);
-  border-radius:16px;
-  padding:1.2rem 1.3rem;
+  padding:1.1rem 1.3rem;
+  border:1px solid rgba(148,163,184,0.35);
   box-shadow:var(--shadow-soft);
 }
+.hero-side-title{
+  font-size:0.95rem;
+  font-weight:600;
+  margin-bottom:0.3rem;
+}
+.hero-side-sub{
+  font-size:0.8rem;
+  color:var(--text-soft);
+  margin-bottom:0.8rem;
+}
+.hero-side-stat{
+  font-size:0.8rem;
+  color:#a5b4fc;
+}
+
+/* ============================
+   DIGITAL VISITING CARD SECTION
+============================ */
+.card-section{
+  padding-bottom:2.5rem;
+}
+.visiting-wrapper{
+  display:flex;
+  justify-content:center;
+}
+.visiting-card{
+  position:relative;
+  width:100%;
+  max-width:540px;
+  border-radius:24px;
+  padding:1.2rem 1.4rem;
+  background:linear-gradient(135deg,rgba(15,23,42,0.96),rgba(30,64,175,0.98));
+  overflow:hidden;
+  box-shadow:0 26px 70px rgba(15,23,42,0.9);
+  border:1px solid rgba(129,140,248,0.8);
+}
+body.light-theme .visiting-card{
+  background:linear-gradient(135deg,#eef2ff,#e0f2fe);
+  border-color:rgba(129,140,248,0.65);
+  box-shadow:0 18px 45px rgba(15,23,42,0.24);
+}
+.card-glow{
+  position:absolute;
+  inset:-40%;
+  background:radial-gradient(circle at 0 0,rgba(244,114,182,0.5),transparent 55%),
+             radial-gradient(circle at 100% 100%,rgba(56,189,248,0.45),transparent 52%);
+  opacity:0.6;
+  pointer-events:none;
+}
+.card-content{
+  position:relative;
+  display:grid;
+  grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);
+  gap:1.1rem;
+  align-items:center;
+}
+
+.card-info h2{
+  font-size:1.3rem;
+  font-weight:700;
+}
+.card-info h2 span{
+  font-weight:400;
+  font-size:1.05rem;
+  opacity:0.9;
+}
+.card-role{
+  margin-top:0.15rem;
+  font-size:0.85rem;
+  color:#c7d2fe;
+}
+body.light-theme .card-role{
+  color:#4b5563;
+}
+.card-tagline{
+  margin-top:0.55rem;
+  font-size:0.9rem;
+  color:#e5e7eb;
+}
+body.light-theme .card-tagline{
+  color:#374151;
+}
+.card-meta{
+  margin-top:0.7rem;
+  font-size:0.78rem;
+  color:#cbd5f5;
+}
+body.light-theme .card-meta{
+  color:#4b5563;
+}
+
+.card-contact{
+  margin-top:0.8rem;
+  display:flex;
+  flex-wrap:wrap;
+  gap:0.4rem;
+}
+.card-chip{
+  padding:0.3rem 0.7rem;
+  border-radius:999px;
+  font-size:0.78rem;
+  background:rgba(15,23,42,0.8);
+  border:1px solid rgba(148,163,184,0.6);
+  color:#e5e7eb;
+}
+body.light-theme .card-chip{
+  background:rgba(255,255,255,0.85);
+  border-color:rgba(148,163,184,0.5);
+  color:#111827;
+}
+
+/* Card right */
+.card-right{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:0.45rem;
+}
+.card-photo{
+  width:120px;height:120px;border-radius:24px;
+  padding:3px;
+  background:conic-gradient(from 180deg,#6366f1,#a855f7,#ec4899,#22c55e,#6366f1);
+}
+.card-photo-inner{
+  width:100%;height:100%;border-radius:20px;
+  overflow:hidden;
+  background:#020617;
+}
+.card-photo-inner img{
+  width:100%;height:100%;object-fit:cover;
+}
+.card-handle{
+  font-size:0.78rem;
+  color:#e5e7eb;
+}
+body.light-theme .card-handle{
+  color:#1f2937;
+}
+.card-mini{
+  font-size:0.7rem;
+  color:#a5b4fc;
+}
+body.light-theme .card-mini{
+  color:#6b7280;
+}
+
+/* ============================
+   SHOP HIGHLIGHT (GLASS CARD)
+============================ */
+.shop-highlight{
+  padding-top:1rem;
+}
+.shop-card-wrap{
+  display:flex;justify-content:center;
+}
+.shop-card{
+  position:relative;
+  width:100%;
+  max-width:980px;
+  border-radius:26px;
+  padding:1.5rem 1.6rem;
+  background:linear-gradient(145deg,rgba(15,23,42,0.85),rgba(30,64,175,0.9),rgba(15,23,42,0.95));
+  border:1px solid rgba(129,140,248,0.75);
+  box-shadow:0 26px 70px rgba(15,23,42,1);
+  overflow:hidden;
+}
+body.light-theme .shop-card{
+  background:linear-gradient(135deg,#eff6ff,#e0f2fe,#e5e7eb);
+  border-color:rgba(129,140,248,0.7);
+  box-shadow:0 20px 55px rgba(15,23,42,0.25);
+}
+
+.shop-glow{
+  position:absolute;
+  inset:-40%;
+  background:radial-gradient(circle at 10% 0,rgba(248,250,252,0.85),transparent 50%),
+             radial-gradient(circle at 90% 80%,rgba(56,189,248,0.6),transparent 55%);
+  opacity:0.6;
+  pointer-events:none;
+}
+
+.shop-inner{
+  position:relative;
+  display:grid;
+  grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);
+  gap:1.2rem;
+  align-items:center;
+}
+
+.shop-label{
+  font-size:0.8rem;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:#bfdbfe;
+  margin-bottom:0.35rem;
+}
+body.light-theme .shop-label{
+  color:#4b5563;
+}
+.shop-title{
+  font-size:1.6rem;
+  font-weight:700;
+  margin-bottom:0.45rem;
+}
+.shop-text{
+  font-size:0.92rem;
+  color:#e5e7eb;
+  max-width:23rem;
+  margin-bottom:0.9rem;
+}
+body.light-theme .shop-text{
+  color:#374151;
+}
+.shop-pills{
+  display:flex;flex-wrap:wrap;gap:0.4rem;
+  margin-bottom:1.05rem;
+}
+.shop-pill{
+  font-size:0.78rem;
+  padding:0.28rem 0.7rem;
+  border-radius:999px;
+  border:1px solid rgba(191,219,254,0.65);
+  background:rgba(15,23,42,0.7);
+  color:#e5e7eb;
+}
+body.light-theme .shop-pill{
+  background:rgba(255,255,255,0.9);
+  border-color:rgba(148,163,184,0.6);
+  color:#111827;
+}
+
+.shop-actions{
+  display:flex;flex-wrap:wrap;gap:0.7rem;
+}
+.btn-shop-main{
+  background:linear-gradient(135deg,#22c55e,#16a34a);
+  color:white;
+  border:none;
+}
+.btn-shop-alt{
+  border:1px solid rgba(191,219,254,0.7);
+  background:rgba(15,23,42,0.8);
+  color:#e5e7eb;
+}
+body.light-theme .btn-shop-alt{
+  background:rgba(255,255,255,0.9);
+  color:#111827;
+}
+
+.shop-badge-row{
+  margin-top:0.7rem;
+  font-size:0.78rem;
+  color:#cbd5f5;
+}
+body.light-theme .shop-badge-row{
+  color:#4b5563;
+}
+
+/* shop illustration */
+.shop-visual{
+  position:relative;
+  display:flex;
+  justify-content:center;
+}
+.shop-phone-card{
+  position:relative;
+  width:210px;
+  border-radius:22px;
+  padding:0.9rem;
+  background:radial-gradient(circle at top,#1e293b 0,#020617 65%);
+  border:1px solid rgba(148,163,184,0.6);
+  box-shadow:0 20px 40px rgba(15,23,42,0.9);
+}
+body.light-theme .shop-phone-card{
+  background:radial-gradient(circle at top,#e5e7eb 0,#020617 65%);
+}
+.shop-phone-screen{
+  border-radius:16px;
+  overflow:hidden;
+  background:#020617;
+}
+.shop-phone-screen img{
+  width:100%;
+  height:150px;
+  object-fit:cover;
+}
+.shop-phone-meta{
+  margin-top:0.5rem;
+  font-size:0.8rem;
+  color:#e5e7eb;
+}
+.shop-phone-price{
+  margin-top:0.15rem;
+  font-size:0.9rem;
+  font-weight:600;
+  color:#bbf7d0;
+}
+
+/* ============================
+   SERVICES
+============================ */
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:1.3rem;
+}
+.service-card{
+  background:radial-gradient(circle at top,#0b1120 0,#020617 70%);
+  border:1px solid rgba(148,163,184,0.45);
+  border-radius:18px;
+  padding:1.2rem 1.25rem;
+  box-shadow:var(--shadow-soft);
+}
+body.light-theme .service-card{
+  background:var(--card-bg);
+  border-color:var(--border-subtle);
+  box-shadow:0 12px 30px rgba(15,23,42,0.1);
+}
 .service-title{
-  font-size:1.1rem;
-  margin-bottom:0.5rem;
+  font-size:1.05rem;
+  font-weight:600;
+  margin-bottom:0.4rem;
 }
 .service-desc{
-  font-size:0.9rem;
+  font-size:0.88rem;
   color:var(--text-soft);
   margin-bottom:0.6rem;
 }
 .service-meta{
   font-size:0.8rem;
-  color:var(--text-soft);
+  color:#a5b4fc;
+}
+body.light-theme .service-meta{
+  color:#4b5563;
 }
 
-
-/* CONTACT */
+/* ============================
+   CONTACT
+============================ */
 .contact-grid{
   display:grid;
-  grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);
+  grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);
   gap:1.8rem;
 }
 .contact-card{
-  background:var(--card-bg);
-  border:1px solid var(--border-subtle);
+  background:radial-gradient(circle at top,#020617 0,#020617 70%);
   border-radius:18px;
   padding:1.4rem 1.5rem;
+  border:1px solid rgba(148,163,184,0.5);
   box-shadow:var(--shadow-soft);
 }
+body.light-theme .contact-card{
+  background:var(--card-bg);
+  border-color:var(--border-subtle);
+  box-shadow:0 14px 35px rgba(15,23,42,0.14);
+}
 .contact-card h3{
-  margin-bottom:0.6rem;
+  margin-bottom:0.5rem;
+  font-size:1.05rem;
 }
 .contact-card p{
-  color:var(--text-soft);
   margin-bottom:0.7rem;
+  font-size:0.88rem;
+  color:var(--text-soft);
+}
+.contact-lines{
+  font-size:0.86rem;
+}
+.contact-lines div{
+  margin-bottom:0.25rem;
+}
+.contact-lines span{
+  font-weight:600;
 }
 .contact-actions{
-  display:flex;gap:0.5rem;flex-wrap:wrap;
+  margin-top:0.9rem;
+  display:flex;
+  flex-wrap:wrap;
+  gap:0.5rem;
 }
 
+/* contact form */
+.contact-form form{
+  display:flex;
+  flex-direction:column;
+  gap:0.7rem;
+}
+.form-row{
+  display:flex;
+  gap:0.6rem;
+}
+.form-row > div{
+  flex:1;
+}
+label{
+  font-size:0.78rem;
+  margin-bottom:0.18rem;
+  display:block;
+  color:var(--text-soft);
+}
+input,textarea{
+  width:100%;
+  border-radius:10px;
+  border:1px solid rgba(148,163,184,0.6);
+  padding:0.5rem 0.65rem;
+  background:rgba(15,23,42,0.8);
+  color:var(--text-main);
+  font-size:0.86rem;
+}
+textarea{
+  min-height:110px;
+  resize:vertical;
+}
+body.light-theme input,
+body.light-theme textarea{
+  background:var(--bg-soft);
+  border-color:var(--border-subtle);
+}
+input:focus,textarea:focus{
+  outline:none;
+  border-color:#6366f1;
+  box-shadow:0 0 0 1px rgba(99,102,241,0.4);
+}
 
 /* FOOTER */
 footer{
-  padding:1.5rem;
+  padding:1.5rem 1.5rem 1.7rem;
   text-align:center;
+  font-size:0.85rem;
   color:var(--text-soft);
-  border-top:1px solid var(--border-subtle);
+  border-top:1px solid rgba(148,163,184,0.4);
 }
-
 
 /* Responsive */
 @media(max-width:900px){
   .hero-inner{
     grid-template-columns:1fr;
   }
+  .hero-side{
+    order:-1;
+  }
+  .card-content{
+    grid-template-columns:1fr;
+  }
+  .contact-grid{
+    grid-template-columns:1fr;
+  }
 }
 @media(max-width:768px){
   .nav-links{display:none;}
   .nav-toggle{display:flex;}
+  .section{padding:2.6rem 0;}
+  .shop-inner{
+    grid-template-columns:1fr;
+  }
+  .shop-phone-card{
+    margin-top:0.6rem;
+  }
+  .form-row{
+    flex-direction:column;
+  }
 }
 </style>
 </head>
-
-<body>
+<body class="dark-theme"><!-- JS এ এটা light/dark টগল করবে -->
 
 <div class="page-shell">
 
 <!-- NAVBAR -->
 <header class="navbar">
   <div class="navbar-inner">
-
     <div class="nav-brand">
       <div class="nav-logo">&lt;/&gt;</div>
-      <div>Habibur</div>
+      <div>
+        <div class="nav-text-main">Habibur Rahman</div>
+        <div class="nav-text-sub">Developer & Mobile Shop</div>
+      </div>
     </div>
 
     <nav class="nav-links">
       <a href="#hero" class="nav-link">Home</a>
+      <a href="#card" class="nav-link">Visiting Card</a>
+      <a href="#shop-highlight" class="nav-link">Mobile Shop</a>
       <a href="#services" class="nav-link">Services</a>
-      <a href="shop.html" class="nav-link">Mobile Shop</a>
       <a href="#contact" class="nav-link">Contact</a>
+      <a href="shop.html" class="nav-link highlight">Open Full Shop</a>
     </nav>
 
     <div class="nav-controls">
       <button class="theme-toggle">🌙</button>
       <button class="nav-toggle"><span></span></button>
     </div>
-
   </div>
 
   <nav class="nav-links-mobile">
     <a href="#hero" class="nav-link">Home</a>
+    <a href="#card" class="nav-link">Visiting Card</a>
+    <a href="#shop-highlight" class="nav-link">Mobile Shop</a>
     <a href="#services" class="nav-link">Services</a>
-    <a href="shop.html" class="nav-link">Mobile Shop</a>
     <a href="#contact" class="nav-link">Contact</a>
-    <button class="theme-toggle">🌙</button>
+    <a href="shop.html" class="nav-link">Open Full Shop</a>
+    <button class="theme-toggle" style="align-self:flex-start;margin-top:0.3rem;">🌙</button>
   </nav>
 </header>
 
+<main>
 
 <!-- HERO -->
-<main>
 <section id="hero" class="hero">
   <div class="container hero-inner">
-
-    <!-- LEFT -->
+    
     <div>
-      <div class="new-tagline">🚀 Turning Ideas & Mobile Sales Into Reality</div>
+      <div class="hero-kicker">
+        <span class="hero-dot"></span>
+        <span>Available for Web Projects & Mobile Orders</span>
+      </div>
 
-      <h1 class="hero-big-title">
-        Hi, I'm <span>Habibur Rahman</span> 👋
+      <h1 class="hero-title">
+        Building interfaces & <span>mobile sales</span> from one brand.
       </h1>
 
-      <p class="hero-mini-tagline">Full Stack Developer • UI Crafter • Mobile Shop Owner</p>
-
       <p class="hero-subtitle">
-        আমি ওয়েবসাইট তৈরি করি, অনলাইন শপ সেটআপ করি এবং একই সাথে আপনার
-        বিশ্বস্ত মোবাইল দোকান পরিচালনা করি। সব এক প্ল্যাটফর্মে—Portfolio + Shop + Service।
+        আমি একদিকে আধুনিক ওয়েবসাইট, পোর্টফোলিও ও ই-কমার্স তৈরি করি, একই সাথে আপনার
+        কাছের <strong>মোবাইল শপ</strong> হিসেবেও কাজ করি — অনলাইন + অফলাইন দুই দিক থেকে
+        আপনাকে সাপোর্ট দেওয়াই আমার কাজ।
       </p>
 
-      <div class="social-row">
-        <a href="https://wa.me/8801XXXXXXXXX" class="social-pill">WhatsApp</a>
-        <a href="tel:+8801XXXXXXXXX" class="social-pill">Call</a>
-        <a href="https://facebook.com/yourfacebookpage" class="social-pill">Facebook</a>
+      <div class="hero-badges">
+        <div class="hero-pill">Full Stack Web</div>
+        <div class="hero-pill">Mobile & Accessories Shop</div>
+        <div class="hero-pill">BD Based • Remote Friendly</div>
       </div>
 
       <div class="hero-actions">
-        <a href="shop.html" class="btn btn-primary">Visit Mobile Shop</a>
-        <a href="#contact" class="btn btn-ghost">Hire Me</a>
+        <a href="shop.html" class="btn btn-primary">Visit Full Mobile Shop</a>
+        <a href="#contact" class="btn btn-outline">Order / Project Discuss</a>
+        <a href="#services" class="btn btn-soft">See What I Do →</a>
+      </div>
+
+      <p class="hero-note">
+        💡 ফিজিক্যাল দোকান + অনলাইন শপ + প্রফেশনাল পোর্টফোলিও — সব এক প্ল্যাটফর্মে, Habib ব্র্যান্ড নামে।
+      </p>
+    </div>
+
+    <aside class="hero-side">
+      <div class="hero-side-title">Habib Mobile Gallery</div>
+      <div class="hero-side-sub">
+        📍 এখানে আপনার দোকানের ঠিকানা লিখুন — যেমন “New Market Road, [Your City]”
+      </div>
+      <div class="hero-side-stat">
+        মোবাইল, এক্সেসরিজ, Smart Watch, Earbuds, Charger, Glass সহ সবকিছু পাওয়া যাবে — অনলাইন অর্ডার ও দোকান থেকে সরাসরি।
+      </div>
+    </aside>
+
+  </div>
+</section>
+
+<!-- DIGITAL VISITING CARD -->
+<section id="card" class="section card-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Digital Visiting Card</h2>
+      <p class="section-subtitle">
+        যেকোনো ক্লায়েন্ট বা কাস্টমারকে শুধু এই লিঙ্ক দিলেই আপনার সম্পূর্ণ পরিচয় — Developer + Shop Owner — এক ভিজিটিং কার্ডেই।
+      </p>
+    </div>
+
+    <div class="visiting-wrapper">
+      <div class="visiting-card">
+        <div class="card-glow"></div>
+
+        <div class="card-content">
+          <div class="card-info">
+            <h2>Habibur Rahman <span>(Habib)</span></h2>
+            <div class="card-role">Full Stack Developer • Mobile Shop Owner</div>
+            <div class="card-tagline">
+              “একই জায়গায় ওয়েবসাইট, ই-কমার্স এবং মোবাইল শপ — সব কিছুর সলিউশন।”
+            </div>
+
+            <div class="card-meta">
+              Web • E-commerce • Landing Page • Mobile & Accessories • Tech Support
+            </div>
+
+            <div class="card-contact">
+              <div class="card-chip">📞 +8801XXXXXXXXX</div>
+              <div class="card-chip">📱 WhatsApp Available</div>
+              <div class="card-chip">🌐 habib-portfolio.vercel.app</div>
+            </div>
+          </div>
+
+          <div class="card-right">
+            <div class="card-photo">
+              <div class="card-photo-inner">
+                <img src="https://i.ibb.co/n88CVpsy/habib.png" alt="Habibur Rahman">
+              </div>
+            </div>
+            <div class="card-handle">@HabibDev</div>
+            <div class="card-mini">Scan / Save / Share as Digital Visiting Card</div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- RIGHT -->
-    <aside class="hero-illustration">
-      <img src="https://i.ibb.co/n88CVpsy/habib.png" class="profile-img">
-      <div>Habib Mobile Gallery</div>
-    </aside>
+  </div>
+</section>
+
+<!-- SHOP HIGHLIGHT GLASS CARD -->
+<section id="shop-highlight" class="section shop-highlight">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Mobile Shop Highlight</h2>
+      <p class="section-subtitle">
+        আপনার মোবাইল দোকানের জন্য আলাদা Shopify-স্টাইল শপ তৈরি করা হয়েছে। নিচের কার্ড থেকে সরাসরি শপে যেতে পারবেন।
+      </p>
+    </div>
+
+    <div class="shop-card-wrap">
+      <div class="shop-card">
+        <div class="shop-glow"></div>
+        <div class="shop-inner">
+          <div>
+            <div class="shop-label">MOBILE & ACCESSORIES SHOP</div>
+            <div class="shop-title">Habib Mobile Gallery — Online & Offline</div>
+            <p class="shop-text">
+              ব্র্যান্ডেড স্মার্টফোন, কভার, গ্লাস, চার্জার, ইয়ারফোন, TWS, Smart Watch এবং আরো অনেক কিছু।
+              অনলাইন অর্ডার, দোকান থেকে নিয়ে যাওয়া — দুইই সম্ভব।
+            </p>
+
+            <div class="shop-pills">
+              <div class="shop-pill">Smartphones</div>
+              <div class="shop-pill">Back Cover & Glass</div>
+              <div class="shop-pill">TWS & Smart Watch</div>
+              <div class="shop-pill">Power Bank & Accessories</div>
+            </div>
+
+            <div class="shop-actions">
+              <a href="shop.html" class="btn btn-shop-main">Open Full Shop →</a>
+              <a href="https://wa.me/8801XXXXXXXXX" class="btn btn-shop-alt">WhatsApp Quick Order</a>
+            </div>
+
+            <div class="shop-badge-row">
+              🔐 Cash on Delivery / ইনস্টলমেন্ট (আলোচনার ভিত্তিতে) • দোকান থেকে সরাসরি নেয়ার ব্যবস্থা আছে
+            </div>
+          </div>
+
+          <div class="shop-visual">
+            <div class="shop-phone-card">
+              <div class="shop-phone-screen">
+                <!-- চাইলে এখানে নিজের শপের স্ক্রিনশট আপলোড করে লিংক দিতে পারো -->
+                <img src="https://cdni.iconscout.com/illustration/premium/thumb/online-mobile-shopping-illustration-download-in-svg-png-gif-file-formats--smartphone-shop-order-e-commerce-pack-commerce-illustrations-6991512.png" alt="Shop Preview">
+              </div>
+              <div class="shop-phone-meta">Samsung / Redmi / Realme / Accessories</div>
+              <div class="shop-phone-price">Starting from মাত্র ১২০৳+</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </div>
 </section>
@@ -405,78 +963,108 @@ footer{
 <section id="services" class="section">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title">My Services</h2>
-      <p class="section-subtitle">Website, Portfolio, E-commerce & Mobile Shop Support</p>
+      <h2 class="section-title">Services I Provide</h2>
+      <p class="section-subtitle">ডিজিটাল আর ফিজিক্যাল — দুই দিকেই সাপোর্ট।</p>
     </div>
 
     <div class="services-grid">
-
       <article class="service-card">
-        <h3 class="service-title">Custom Website</h3>
-        <p class="service-desc">Business, Portfolio, Personal or Shop website.</p>
-        <p class="service-meta">Start: 3000৳</p>
+        <h3 class="service-title">Custom Website & Portfolio</h3>
+        <p class="service-desc">
+          Personal portfolio, business website, service landing page— সবই clean UI, fast load এবং mobile-friendly।
+        </p>
+        <div class="service-meta">Starting from ~ 3,000৳</div>
       </article>
 
       <article class="service-card">
         <h3 class="service-title">Full E-commerce Setup</h3>
-        <p class="service-desc">Online shop with payment, order & inventory.</p>
-        <p class="service-meta">Perfect for any shop</p>
+        <p class="service-desc">
+          Vercel/Custom domain-এ পুরো online shop, product page, shop.html, cart, wishlist, basics সব সেটআপ।
+        </p>
+        <div class="service-meta">Perfect for small & medium shops</div>
       </article>
 
       <article class="service-card">
-        <h3 class="service-title">Mobile Phone Sales</h3>
-        <p class="service-desc">Samsung, Xiaomi, Realme এবং সকল Accessories.</p>
+        <h3 class="service-title">Mobile Phone & Accessories</h3>
+        <p class="service-desc">
+          Samsung, Xiaomi, Realme, iPhone, plus cover, glass, charger, TWS, Smart Watch, power bank সহ সবকিছু।
+        </p>
+        <div class="service-meta">Online + Offline service</div>
       </article>
 
       <article class="service-card">
-        <h3 class="service-title">Tech Support</h3>
-        <p class="service-desc">Mobile setup, software update, basic fixes.</p>
+        <h3 class="service-title">Tech Setup & Support</h3>
+        <p class="service-desc">
+          নতুন ফোন সেটআপ, basic software install, backup, app install, ছোটখাটো টেক সাপোর্ট।
+        </p>
+        <div class="service-meta">On demand help</div>
       </article>
-
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
+<!-- CONTACT / QUICK FORM -->
 <section id="contact" class="section">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title">Contact</h2>
-      <p class="section-subtitle">Order OR Project — message anytime</p>
+      <h2 class="section-title">Contact & Quick Order Form</h2>
+      <p class="section-subtitle">
+        মোবাইল / এক্সেসরিজ অর্ডার বা ওয়েবসাইট / ই-কমার্স প্রোজেক্ট — নিচের যেকোনো মাধ্যমে যোগাযোগ করতে পারেন।
+      </p>
     </div>
 
     <div class="contact-grid">
-
       <div class="contact-card">
-        <h3>Shop Info</h3>
-        <p>📍 Your area address here...</p>
+        <h3>Shop & Direct Contact</h3>
+        <p>
+          📍 এখানে আপনার দোকানের ঠিকানা লিখুন — যেমন “Habib Mobile Gallery, New Market Road, [Your City], Bangladesh”
+        </p>
+        <div class="contact-lines">
+          <div><span>Phone:</span> <a href="tel:+8801XXXXXXXXX">+8801XXXXXXXXX</a></div>
+          <div><span>WhatsApp:</span> <a href="https://wa.me/8801XXXXXXXXX" target="_blank">Chat on WhatsApp</a></div>
+          <div><span>Facebook:</span> <a href="https://facebook.com/yourfacebookpage" target="_blank">Facebook Page</a></div>
+        </div>
 
         <div class="contact-actions">
-          <a href="https://wa.me/8801XXXXXXXXX" class="btn btn-primary">WhatsApp</a>
-          <a href="tel:+8801XXXXXXXXX" class="btn btn-ghost">Call</a>
-          <a href="https://facebook.com/yourfacebookpage" class="btn btn-ghost">Facebook</a>
+          <a href="https://wa.me/8801XXXXXXXXX" class="btn btn-primary">WhatsApp Order</a>
+          <a href="tel:+8801XXXXXXXXX" class="btn btn-outline">Call Now</a>
+          <a href="https://facebook.com/yourfacebookpage" class="btn btn-outline">Message on Facebook</a>
         </div>
       </div>
 
-      <div class="contact-card">
-        <h3>Quick Form</h3>
-        <p>Website OR Mobile Order Message</p>
+      <div class="contact-card contact-form">
+        <h3>Quick Form — Order / Project</h3>
+        <p>এই ফর্মের মাধ্যমে ডিটেইল পাঠালে আমি WhatsApp / Phone দিয়ে রিপ্লাই দেব।</p>
 
+        <!-- Formspree: নিজের form-id দিয়ে আপডেট করবে -->
         <form action="https://formspree.io/f/your-form-id" method="POST">
-          <input type="text" name="name" placeholder="Name" required>
-          <input type="text" name="phone" placeholder="Phone / WhatsApp" required>
-          <textarea name="message" placeholder="Message..."></textarea>
-          <button class="btn btn-primary" type="submit">Send</button>
+          <div class="form-row">
+            <div>
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" placeholder="Your name" required>
+            </div>
+            <div>
+              <label for="phone">Phone / WhatsApp</label>
+              <input id="phone" name="phone" type="text" placeholder="017********" required>
+            </div>
+          </div>
+          <div>
+            <label for="need">What do you need?</label>
+            <input id="need" name="need" type="text" placeholder="Mobile Order / Website / E-commerce / Other">
+          </div>
+          <div>
+            <label for="message">Details</label>
+            <textarea id="message" name="message" placeholder="Write your details here..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send Message</button>
         </form>
       </div>
-
     </div>
   </div>
 </section>
 
 </main>
 
-<!-- FOOTER -->
 <footer>
   Made with ❤️ by Habibur Rahman — Portfolio & Mobile Shop
 </footer>
@@ -490,10 +1078,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const navToggle = document.querySelector(".nav-toggle");
   const mobileMenu = document.querySelector(".nav-links-mobile");
 
+  // default theme: dark-theme, but we use class light-theme to invert
+  // এখন toggle করলে light/dark switch হবে
+  function setTheme(isLight) {
+    if(isLight){
+      body.classList.add("light-theme");
+    } else {
+      body.classList.remove("light-theme");
+    }
+  }
+
+  let light = false;
   themeButtons.forEach(btn => {
     btn.addEventListener("click", () => {
-      const isDark = body.classList.toggle("dark-theme");
-      themeButtons.forEach(b => b.textContent = isDark ? "☀️" : "🌙");
+      light = !light;
+      setTheme(light);
+      themeButtons.forEach(b => b.textContent = light ? "☀️" : "🌙");
     });
   });
 
