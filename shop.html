@@ -2,53 +2,59 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Habib Mobile Shop</title>
+<title>Habib Mobile Shop — Full Store</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="shop.css" />
+
+<!-- Favicon -->
 <link rel="icon" type="image/png" href="https://i.ibb.co/n88CVpsy/habib.png">
+
+<!-- Styles -->
+<link rel="stylesheet" href="shop.css" />
 </head>
 
 <body>
 
-<!-- Drawer Menu Background -->
-<div class="drawer-overlay" id="drawerOverlay"></div>
+<div class="page-shell">
 
-<!-- Drawer Menu -->
-<aside class="drawer" id="drawerMenu">
-  <div class="drawer-header">
-    <h2>Menu</h2>
-    <button id="drawerClose">✕</button>
-  </div>
-
-  <ul class="drawer-list">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="shop.html">Shop</a></li>
-
-    <li class="sub">Categories</li>
-    <li><a href="#smartphones">Smartphones</a></li>
-    <li><a href="#accessories">Accessories</a></li>
-    <li><a href="#gadgets">Gadgets</a></li>
-
-    <li><a href="#sale">Sale</a></li>
-    <li><a href="#about-shop">About Shop</a></li>
-    <li><a href="#blog">Blog</a></li>
-
-    <li><a href="wishlist.html">❤️ Wishlist</a></li>
-    <li><a href="cart.html">🧺 Cart</a></li>
-
-    <li><a href="contact.html">Contact</a></li>
-    <li><a href="account.html">My Account</a></li>
-  </ul>
-</aside>
-
-<!-- SHOP HEADER -->
+<!-- HEADER / TOP NAV -->
 <header class="shop-header">
-  <button class="menu-btn" id="drawerOpen">☰</button>
-  <h1 class="logo">Habib Shop</h1>
-  <a href="cart.html" class="cart-icon">🧺<span id="cartCount">0</span></a>
+  <div class="shop-header-inner">
+
+    <button id="menu-open" class="menu-btn">☰</button>
+
+    <div class="shop-brand">
+      <img src="https://i.ibb.co/n88CVpsy/habib.png" class="brand-logo">
+      <span>Habib Mobile Shop</span>
+    </div>
+
+    <button id="themeToggle" class="theme-toggle">🌙</button>
+
+  </div>
 </header>
 
-<!-- CATEGORY NAV -->
+<!-- DRAWER SIDEBAR -->
+<aside id="drawer" class="drawer">
+  <div class="drawer-head">
+    <h2>Menu</h2>
+    <button id="menu-close">✕</button>
+  </div>
+
+  <div class="drawer-links">
+    <a href="index.html">🏠 Home</a>
+    <a href="shop.html">🛍️ Shop</a>
+    <a href="#smartphones">📱 Smartphones</a>
+    <a href="#accessories">🎧 Accessories</a>
+    <a href="#gadgets">⌚ Gadgets</a>
+    <a href="cart.html">🧺 Cart</a>
+    <a href="wishlist.html">❤️ Wishlist</a>
+    <a href="account.html">👤 My Account</a>
+    <a href="#topup">🎮 Games Topup</a>
+  </div>
+</aside>
+
+<div id="drawer-overlay" class="drawer-overlay"></div>
+
+<!-- CATEGORY TABS -->
 <nav class="category-nav">
   <button class="cat-btn active" data-cat="all">All</button>
   <button class="cat-btn" data-cat="smartphone">Smartphones</button>
@@ -56,133 +62,125 @@
   <button class="cat-btn" data-cat="gadget">Gadgets</button>
 </nav>
 
-<!-- PRODUCT LIST -->
+<!-- MAIN SHOP CONTENT -->
 <main class="shop-content">
 
-  <!-- LARGE CARD SECTION (SMARTPHONES) -->
+  <!-- SMARTPHONES -->
   <section id="smartphones">
-    <h2 class="section-title">Smartphones</h2>
+    <h2 class="section-title">📱 Smartphones</h2>
 
-    <!-- Smartphone Big Card -->
-    <div class="phone-card" data-cat="smartphone">
-      <img src="https://i.ibb.co/Z4M61km/image.png" class="phone-img" />
-      <div class="phone-info">
+    <div class="product-grid">
+
+      <div class="product-card" data-cat="smartphone">
+        <img src="https://i.ibb.co/Z4M61km/image.png">
         <h3>Samsung Galaxy A14</h3>
-        <p>50MP Camera • 5000mAh Battery • Official Warranty</p>
-
-        <div class="price-row">
+        <p>50MP • 5000mAh • Warranty</p>
+        <div class="p-row">
           <span class="price">15,999 ৳</span>
           <del>17,500 ৳</del>
         </div>
 
-        <div class="buttons">
-          <button class="btn-primary add-cart" data-name="Samsung Galaxy A14" data-price="15999">
-            🧺 Add to Cart
-          </button>
-          <button class="btn-outline wishlist-btn" data-name="Samsung Galaxy A14">❤️ Wishlist</button>
+        <div class="p-actions">
+          <button class="btn-primary add-cart" data-name="Samsung A14" data-price="15999">🧺 Add</button>
+          <button class="btn-outline wishlist-btn" data-name="Samsung A14">❤️</button>
         </div>
-
       </div>
-    </div>
 
-    <!-- Another smartphone -->
-    <div class="phone-card" data-cat="smartphone">
-      <img src="https://cdn.iconscout.com/illustration/premium/thumb/mobile-phone-sale-illustration-download-in-svg-png-gif-file-formats--smartphone-shop-electronics-shopping-pack-e-commerce-illustrations-4499986.png" />
-
-      <div class="phone-info">
+      <div class="product-card" data-cat="smartphone">
+        <img src="https://cdn.iconscout.com/illustration/premium/thumb/mobile-phone-sale-illustration-download-in-svg-png-gif-file-formats--smartphone-shop-electronics-shopping-pack-e-commerce-illustrations-4499986.png">
         <h3>Redmi Note 12</h3>
-        <p>AMOLED Display • Fast Charging • 6/128 Storage</p>
-
-        <div class="price-row">
+        <p>AMOLED • Fast Charge • 128GB</p>
+        <div class="p-row">
           <span class="price">21,999 ৳</span>
           <del>23,500 ৳</del>
         </div>
 
-        <div class="buttons">
-          <button class="btn-primary add-cart" data-name="Redmi Note 12" data-price="21999">
-            🧺 Add to Cart
-          </button>
-          <button class="btn-outline wishlist-btn" data-name="Redmi Note 12">❤️ Wishlist</button>
+        <div class="p-actions">
+          <button class="btn-primary add-cart" data-name="Redmi 12" data-price="21999">🧺 Add</button>
+          <button class="btn-outline wishlist-btn" data-name="Redmi 12">❤️</button>
         </div>
-
       </div>
-    </div>
 
+    </div>
   </section>
 
-  <!-- ACCESSORIES GRID -->
+
+  <!-- ACCESSORIES -->
   <section id="accessories">
-    <h2 class="section-title">Accessories</h2>
+    <h2 class="section-title">🎧 Accessories</h2>
 
-    <div class="grid">
+    <div class="product-grid small">
 
-      <div class="grid-item" data-cat="accessory">
-        <img src="https://cdn-icons-png.flaticon.com/512/1047/1047711.png" />
+      <div class="product-card small" data-cat="accessory">
+        <img src="https://cdn-icons-png.flaticon.com/512/1047/1047711.png">
         <h4>Premium Back Cover</h4>
-        <p class="acc-price">250 ৳</p>
+        <div class="price">250 ৳</div>
 
-        <button class="grid-btn add-cart"
-          data-name="Premium Back Cover"
-          data-price="250">🧺</button>
-
-        <button class="grid-btn wishlist-btn"
-          data-name="Back Cover">❤️</button>
+        <div class="p-actions small">
+          <button class="btn-primary add-cart" data-name="Back Cover" data-price="250">🧺</button>
+          <button class="btn-outline wishlist-btn" data-name="Back Cover">❤️</button>
+        </div>
       </div>
 
-      <div class="grid-item" data-cat="accessory">
-        <img src="https://cdn-icons-png.flaticon.com/512/1047/1047700.png" />
+      <div class="product-card small" data-cat="accessory">
+        <img src="https://cdn-icons-png.flaticon.com/512/1047/1047700.png">
         <h4>Tempered Glass</h4>
-        <p class="acc-price">120 ৳</p>
+        <div class="price">120 ৳</div>
 
-        <button class="grid-btn add-cart"
-          data-name="Tempered Glass"
-          data-price="120">🧺</button>
-
-        <button class="grid-btn wishlist-btn"
-          data-name="Tempered Glass">❤️</button>
+        <div class="p-actions small">
+          <button class="btn-primary add-cart" data-name="Glass" data-price="120">🧺</button>
+          <button class="btn-outline wishlist-btn" data-name="Glass">❤️</button>
+        </div>
       </div>
 
     </div>
   </section>
+
 
   <!-- GADGETS -->
   <section id="gadgets">
-    <h2 class="section-title">Gadgets</h2>
+    <h2 class="section-title">⌚ Gadgets</h2>
 
-    <div class="grid">
+    <div class="product-grid small">
 
-      <div class="grid-item" data-cat="gadget">
-        <img src="https://cdn-icons-png.flaticon.com/512/992/992700.png" />
+      <div class="product-card small" data-cat="gadget">
+        <img src="https://cdn-icons-png.flaticon.com/512/992/992700.png">
         <h4>TWS Earbuds</h4>
-        <p class="acc-price">899 ৳</p>
+        <div class="price">899 ৳</div>
 
-        <button class="grid-btn add-cart"
-          data-name="TWS Earbuds"
-          data-price="899">🧺</button>
-
-        <button class="grid-btn wishlist-btn"
-          data-name="TWS Earbuds">❤️</button>
+        <div class="p-actions small">
+          <button class="btn-primary add-cart" data-name="TWS" data-price="899">🧺</button>
+          <button class="btn-outline wishlist-btn" data-name="TWS">❤️</button>
+        </div>
       </div>
 
-      <div class="grid-item" data-cat="gadget">
-        <img src="https://cdn-icons-png.flaticon.com/512/992/992754.png" />
+      <div class="product-card small" data-cat="gadget">
+        <img src="https://cdn-icons-png.flaticon.com/512/992/992754.png">
         <h4>Smart Watch</h4>
-        <p class="acc-price">1299 ৳</p>
+        <div class="price">1299 ৳</div>
 
-        <button class="grid-btn add-cart"
-          data-name="Smart Watch"
-          data-price="1299">🧺</button>
-
-        <button class="grid-btn wishlist-btn"
-          data-name="Smart Watch">❤️</button>
+        <div class="p-actions small">
+          <button class="btn-primary add-cart" data-name="Smart Watch" data-price="1299">🧺</button>
+          <button class="btn-outline wishlist-btn" data-name="Smart Watch">❤️</button>
+        </div>
       </div>
 
     </div>
+  </section>
+
+  <!-- GAME TOPUP PAGE LINK -->
+  <section id="topup">
+    <h2 class="section-title">🎮 Games Topup</h2>
+    <p class="topup-text">PUBG • Free Fire • Diamond • UC — সব পাওয়া যাবে।</p>
+
+    <a href="https://habib-yt.vercel.app" class="topup-btn" target="_blank">
+      OPEN TOPUP SITE →
+    </a>
   </section>
 
 </main>
 
-<!-- BOTTOM NAV BAR -->
+<!-- BOTTOM NAV -->
 <nav class="bottom-nav">
   <a href="shop.html">🛍️<span>Shop</span></a>
   <a href="wishlist.html">❤️<span>Wishlist</span></a>
@@ -190,6 +188,8 @@
   <a href="account.html">👤<span>Account</span></a>
   <a href="search.html">🔍<span>Search</span></a>
 </nav>
+
+</div>
 
 <script src="shop.js"></script>
 </body>
