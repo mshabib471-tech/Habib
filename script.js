@@ -1,6 +1,6 @@
-// ==============================
-// PRELOADER (SAFE VERSION)
-// ==============================
+/* ===========================================================
+   PRELOADER (SAFE VERSION)
+=========================================================== */
 document.addEventListener("DOMContentLoaded", () => {
   const preloader = document.getElementById("preloader");
 
@@ -8,78 +8,71 @@ document.addEventListener("DOMContentLoaded", () => {
     preloader.style.opacity = "0";
     preloader.style.pointerEvents = "none";
 
-    setTimeout(() => preloader.style.display = "none", 300);
-  }, 1200); // 1.2 seconds
+    setTimeout(() => {
+      preloader.style.display = "none";
+    }, 300);
+  }, 1200);
 });
 
-/* ===========================================================
-   DARK / LIGHT MODE
-=========================================================== */
 
+/* ===========================================================
+   DARK / LIGHT MODE (Optimized)
+=========================================================== */
 const themeToggle = document.getElementById("theme-toggle");
 const body = document.body;
 
-// Load saved theme
 const savedTheme = localStorage.getItem("theme");
+
 if (savedTheme === "dark") {
-    body.classList.add("dark");
-    themeToggle.textContent = "🌙";
+  body.classList.add("dark");
+  themeToggle.textContent = "☀️"; // light mode icon
 } else {
-    themeToggle.textContent = "☀️";
+  body.classList.remove("dark");
+  themeToggle.textContent = "🌙"; // dark mode icon
 }
 
-// Toggle theme
 themeToggle.addEventListener("click", () => {
-    body.classList.toggle("dark");
+  body.classList.toggle("dark");
 
-    if (body.classList.contains("dark")) {
-        themeToggle.textContent = "🌙";
-        localStorage.setItem("theme", "dark");
-    } else {
-        themeToggle.textContent = "☀️";
-        localStorage.setItem("theme", "light");
-    }
+  if (body.classList.contains("dark")) {
+    themeToggle.textContent = "☀️";
+    localStorage.setItem("theme", "dark");
+  } else {
+    themeToggle.textContent = "🌙";
+    localStorage.setItem("theme", "light");
+  }
 });
 
 
 /* ===========================================================
-   MOBILE MENU TOGGLE
+   MOBILE MENU
 =========================================================== */
-
 const menuToggle = document.getElementById("menu-toggle");
 const mobileMenu = document.getElementById("mobile-menu");
 
 menuToggle.addEventListener("click", () => {
-    mobileMenu.classList.toggle("open");
+  mobileMenu.classList.toggle("open");
 });
 
 
 /* ===========================================================
-   AUTO YEAR IN FOOTER
+   AUTO YEAR FOOTER
 =========================================================== */
-
 const yearSpan = document.getElementById("year");
 if (yearSpan) {
-    yearSpan.textContent = new Date().getFullYear();
+  yearSpan.textContent = new Date().getFullYear();
 }
 
 
 /* ===========================================================
-   SMOOTH SCROLL (if needed later)
+   SMOOTH SCROLL
 =========================================================== */
-
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener("click", function (e) {
-        const target = document.querySelector(this.getAttribute("href"));
-        if (target) {
-            e.preventDefault();
-            target.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-    });
+  anchor.addEventListener("click", function (e) {
+    const target = document.querySelector(this.getAttribute("href"));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+  });
 });
-
-
-/* ===========================================================
-   FUTURE EXPANDABLE (Animations / LazyLoad)
-=========================================================== */
-// Placeholder for future upgrades
