@@ -1,51 +1,147 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blog | Habibur Rahman</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;900&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:linear-gradient(135deg,#000 0%,#1a1a2e 100%);color:#fff;font-family:'Poppins',sans-serif;min-height:100vh}
-.container{max-width:480px;margin:0 auto;padding:20px 20px 160px}
-h1{font-size:46px;color:#ffb400;text-align:center;margin:40px 0;font-weight:900;text-shadow:0 0 20px #ffb400}
-.post{background:rgba(255,255,255,0.05);border-radius:20px;padding:25px;margin:25px 0;border:1px solid #444}
-.post h3{font-size:24px;color:#ffb400;margin-bottom:12px}
-.post p{color:#aaa;line-height:1.8}
-.footer{text-align:center;padding:30px 0;color:#666;font-size:15px;border-top:1px solid #333;margin-top:50px}
-.nav{position:fixed;bottom:0;left:0;width:100%;background:rgba(17,17,17,0.95);backdrop-filter:blur(10px);border-top:2px solid #ffb400;
-padding:16px 0;display:flex;justify-content:space-around;z-index:999}
-.nav a{color:#888;font-size:32px;transition:0.3s}
-.nav a.active,.nav a:hover{color:#ffb400;transform:scale(1.25)}
-</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blogs & Entertainment — Habib Business App</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="https://i.ibb.co/n88CVpsy/habib.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Main Styles (same as your style.css) -->
+  <link rel="stylesheet" href="style.css?v=3">
 </head>
+
 <body>
-<div class="container">
-  <h1>BLOG</h1>
-  <div class="post"><h3>মোবাইল সফটওয়্যার সমস্যা সমাধান ২০২5</h3><p>হ্যাং, বুটলুপ, প্যাটার্ন লক – সবার সমাধান এক পোস্টে</p></div>
-  <div class="post"><h3>গেমিং টপ-আপ কীভাবে সস্তায় করবেন?</h3><p>আমার সিস্তায় UC/ডায়মন্ড কেনার সিক্রেট</p></div>
-  <div class="post"><h3>NID দিয়ে কী কী করা যায় ২০২5</h3><p>লুকানো ১০টা সার্ভিস যা ৯৯% লোক জানে না</p></div>
-  <div class="footer">© 2025 Habibur Rahman. All Rights Reserved.</div>
-</div>
-<!-- Bottom Navigation -->
-<div class="nav">
-  <a href="index.html">Home</a>
-  <a href="about.html">Person</a>
-  <a href="services.html">Briefcase</a>
-  <a href="portfolio.html">Image</a>
-  <a href="resume.html">Document</a>
-  <a href="blog.html" style="color:#ffb400">Pen</a>
-  <a href="contact.html">Chat</a>
-</div>
 
+<!-- Navbar -->
+<header class="navbar">
+  <div class="navbar-inner container">
+    <a href="index.html" class="brand">
+      <div class="brand-avatar">
+        <div class="brand-avatar-inner">
+          <img src="https://i.ibb.co/n88CVpsy/habib.png" alt="">
+        </div>
+      </div>
+      <div>
+        <div class="brand-title">Habibur Rahman</div>
+        <div class="brand-sub">Web Developer • Tech Consultant • Mobile Retail Owner</div>
+      </div>
+    </a>
 
-<!-- Bottom Navigation -->
-<div class="nav">
-  <a href="index.html">🏠</a>
-  <a href="about.html" style="color:#ffb400">👤</a>
-  <a href="services.html">💼</a>
-  <a href="portfolio.html">🖼️</a>
-  <a href="resume.html">📄</a>
-  <a href="blog.html">✍️</a>
-  <a href="contact.html">💬</a>
-</div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="card.html">Card</a>
+      <a href="shop.html">Shop</a>
+      <a href="blog.html" class="active">Blog</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <div class="nav-controls">
+      <button id="themeToggle" class="theme-toggle">🌙</button>
+      <button id="navToggle" class="nav-toggle"><span></span></button>
+    </div>
+  </div>
+
+  <nav id="mobileMenu" class="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="card.html">Card</a>
+    <a href="shop.html">Shop</a>
+    <a href="blog.html">Blog</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main class="container" style="padding-top: 1.6rem;">
+
+  <h1 class="section-title">Latest Movies • Natok • Updates</h1>
+  <p class="section-subtitle">বাংলা মুভি, নাটক ও ট্রেলার — জনপ্রিয় সব কনটেন্ট এক জায়গায়।</p>
+
+  <!-- 🔥 GOOGLE ADSENSE SLOT (TOP BANNER) -->
+  <div class="ads-box">
+    <!-- এখানে Google AdSense code বসাবেন -->
+    <p>⬆ Google Ad Banner (728×90) Area</p>
+  </div>
+
+  <div class="blog-list">
+
+    <!-- POST 1 -->
+    <div class="blog-card-2" onclick="openPost('post1.html')">
+      <img src="https://i.ibb.co/7XVjQx3/movie1.jpg" class="blog-thumb">
+
+      <div class="blog-content">
+        <div class="blog-category">কলকাতা মুভি</div>
+        <h2 class="blog-title">টোটাল দাদাগিরি মুভি ডাউনলোড — Total Dadagiri</h2>
+        <div class="blog-date">December 3, 2025</div>
+        <p class="blog-excerpt">
+          ২০১৮ সালে মুক্তি পাওয়া জনপ্রিয় বাংলা সিনেমা। জয় ও মিশালির গল্প নিয়ে তৈরি...
+        </p>
+      </div>
+    </div>
+
+    <!-- POST 2 -->
+    <div class="blog-card-2" onclick="openPost('post2.html')">
+      <img src="https://i.ibb.co/b183Dj6/movie2.jpg" class="blog-thumb">
+
+      <div class="blog-content">
+        <div class="blog-category">দেব মুভি</div>
+        <h2 class="blog-title">Kidnap Movie Download — কিডন্যাপ</h2>
+        <div class="blog-date">December 2, 2025</div>
+        <p class="blog-excerpt">
+          সুপারস্টার দেব অভিনীত অ্যাকশন থ্রিলার, বাস্তব ঘটনা অবলম্বনে নির্মিত...
+        </p>
+      </div>
+    </div>
+
+    <!-- POST 3 -->
+    <div class="blog-card-2" onclick="openPost('post3.html')">
+      <img src="https://i.ibb.co/pxQmVJ5/movie3.jpg" class="blog-thumb">
+
+      <div class="blog-content">
+        <div class="blog-category">মুভি ডাউনলোড</div>
+        <h2 class="blog-title">নীলচক্র মুভি ডাউনলোড — NeelChokro</h2>
+        <div class="blog-date">November 29, 2025</div>
+        <p class="blog-excerpt">
+          ঈমানজ শো অভিনীত নতুন বাংলা থ্রিলার — সম্পূর্ণ রিভিউ ও ডাউনলোড লিংক...
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 🔥 GOOGLE ADSENSE SLOT (BOTTOM) -->
+  <div class="ads-box">
+    <p>⬆ Google Ad Banner (Responsive) Area</p>
+  </div>
+
+</main>
+
+<!-- FLOATING WA -->
+<a href="https://wa.me/8801868461577" class="wa-btn">
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<!-- Bottom Nav -->
+<nav class="bottom-nav">
+  <a href="index.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
+  <a href="shop.html"><i class="fa-solid fa-bag-shopping"></i><span>Shop</span></a>
+  <a href="contact.html"><i class="fa-regular fa-envelope"></i><span>Contact</span></a>
+  <a href="account.html"><i class="fa-regular fa-user"></i><span>My Account</span></a>
+</nav>
+
+<script src="script.js?v=3"></script>
+
+<script>
+function openPost(page){
+  window.location.href = page;
+}
+</script>
 
 </body>
 </html>
