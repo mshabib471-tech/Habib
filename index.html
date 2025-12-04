@@ -1,310 +1,189 @@
 <!doctype html>
 <html lang="bn">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="utf-8">
   <title>Habib Business App — Portfolio & Mobile Shop</title>
-  <meta name="theme-color" content="#020617" />
+
+  <!-- 🔥 FINAL ZOOM FIX -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="theme-color" content="#020617">
 
   <!-- favicon -->
   <link rel="icon" href="https://i.ibb.co/n88CVpsy/habib.png">
 
   <!-- fonts & icons -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!-- main css -->
-  <link rel="stylesheet" href="style.css?v=1">
+  <link rel="stylesheet" href="style.css?v=10">
 </head>
 <body>
 
-  <!-- PRELOADER (auto-hide after ~3s) -->
-  <div id="preloader" class="preloader" aria-hidden="false">
-    <div class="preloader-inner">
-      <img src="https://i.ibb.co/n88CVpsy/habib.png" alt="Habib Logo" class="preloader-logo" />
-      <div class="loader-ring" aria-hidden="true"></div>
-      <div class="loader-text">Loading Habib Business App...</div>
-    </div>
+  <!-- TOAST -->
+  <div id="toast" class="toast hidden">
+    <div class="toast-text">📢 আজকের অফার: Selected মডেলে Special Discount চলছে!</div>
+    <button id="toastClose" class="toast-close">×</button>
   </div>
 
-  <div class="page-shell">
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="navbar-inner container">
+      <a href="index.html" class="brand">
+        <div class="brand-avatar"><img src="https://i.ibb.co/n88CVpsy/habib.png" alt=""></div>
+        <div class="brand-text">
+          <div class="brand-title">Habibur Rahman</div>
+          <div class="brand-sub">Web Developer • Tech Consultant • Mobile Retail Owner</div>
+        </div>
+      </a>
 
-    <!-- TOAST (placed visually above WA button via JS) -->
-    <div id="toast" class="toast" role="status" aria-live="polite">
-      <div class="toast-text">📢 আজকের অফার: Selected মডেলে Special Discount চলছে!</div>
-      <button id="toastClose" class="toast-close" aria-label="Close toast">×</button>
+      <nav class="nav-links desktop-nav">
+        <a href="index.html">Home</a>
+        <a href="card.html">Card</a>
+        <a href="shop.html">Shop</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="nav-controls">
+        <button id="themeToggle" class="theme-toggle">🌙</button>
+
+        <button id="menuToggle" class="menu-toggle">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
 
-    <!-- NAVBAR -->
-    <header class="navbar">
-      <div class="navbar-inner container">
-        <a href="index.html" class="brand">
-          <div class="brand-avatar"><img src="https://i.ibb.co/n88CVpsy/habib.png" alt="Habib"></div>
-          <div class="brand-text">
-            <div class="brand-title">Habibur Rahman</div>
-            <div class="brand-sub">Web Developer • Tech Consultant • Mobile Retail Owner</div>
+    <!-- mobile drawer -->
+    <div id="mobileDrawer" class="mobile-drawer">
+      <div class="drawer-top">
+        <div class="drawer-user">
+          <img src="https://i.ibb.co/n88CVpsy/habib.png">
+          <div>
+            <div class="drawer-name">Habibur Rahman</div>
+            <div class="drawer-sub">Mobile Shop Owner</div>
           </div>
-        </a>
-
-        <nav class="nav-links desktop-nav" id="desktopNav">
-          <a href="index.html">Home</a>
-          <a href="card.html">Card</a>
-          <a href="shop.html">Shop</a>
-          <a href="blog.html">Blog</a>
-          <a href="contact.html">Contact</a>
-        </nav>
-
-        <div class="nav-controls">
-          <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
-          <button id="menuToggle" class="menu-toggle" aria-label="Open menu">
-            <span></span><span></span><span></span>
-          </button>
         </div>
+        <button id="closeDrawer" class="drawer-close">✕</button>
       </div>
 
-      <!-- MOBILE DRAWER -->
-      <div id="mobileDrawer" class="mobile-drawer" aria-hidden="true">
-        <div class="drawer-top">
-          <div class="drawer-user">
-            <img src="https://i.ibb.co/n88CVpsy/habib.png" alt="Habib" />
-            <div>
-              <div class="drawer-name">Habibur Rahman</div>
-              <div class="drawer-sub">Mobile Shop Owner</div>
-            </div>
-          </div>
-          <button id="closeDrawer" class="drawer-close" aria-label="Close">✕</button>
+      <nav class="drawer-links">
+        <a href="index.html">Home</a>
+        <a href="card.html">Card</a>
+        <a href="shop.html">Shop</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html" id="drawerAuth">Login / Register</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- VISITING CARD -->
+    <section class="vc-section container">
+      <div class="vc-card">
+        <div class="vc-photo-wrap">
+          <img src="https://i.ibb.co/n88CVpsy/habib.png">
         </div>
 
-        <nav class="drawer-links">
-          <a href="index.html">Home</a>
-          <a href="card.html">Card</a>
-          <a href="shop.html">Shop</a>
-          <a href="blog.html">Blog</a>
-          <a href="contact.html">Contact</a>
-          <a href="#" id="drawerAuthAction">Login / Register</a>
-        </nav>
+        <div class="vc-info">
+          <h1 class="vc-name">Habibur Rahman <span>(Habib)</span></h1>
+          <div class="vc-role">Web Developer • Tech Consultant • Mobile Retail Owner</div>
+          <div class="vc-company">Habib Business</div>
+          <div class="vc-address">Gachbaria College Gate, Chandanish, Chattogram</div>
 
-        <div class="drawer-actions">
-          <a href="tel:+8801868461577" class="drawer-call"><i class="fa-solid fa-phone"></i> Call Now</a>
-          <a href="https://wa.me/8801868461577" target="_blank" class="drawer-wa"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-        </div>
-      </div>
-    </header>
+          <div class="vc-ctas">
+            <a href="habib.vcf" download class="btn btn-save"><i class="fa-regular fa-address-card"></i> Save</a>
+            <a href="tel:+8801868461577" class="btn btn-call"><i class="fa-solid fa-phone"></i> Call</a>
 
-    <main>
+            <a href="login.html" id="loginBtn" class="btn btn-outline">
+              <i class="fa-solid fa-right-to-bracket"></i> Login
+            </a>
 
-      <!-- VISITING CARD (glass, sticky under navbar) -->
-      <section class="vc-section container">
-        <div class="vc-card vc-glass">
-          <div class="vc-left">
-            <div class="vc-photo-wrap"><img src="https://i.ibb.co/n88CVpsy/habib.png" alt="Habib"></div>
-          </div>
-
-          <div class="vc-right">
-            <h1 class="vc-name">Habibur Rahman <span class="vc-nick">(Habib)</span></h1>
-            <div class="vc-role">Web Developer • Tech Consultant • Mobile Retail Owner</div>
-            <div class="vc-company">Habib Business</div>
-            <div class="vc-address">Gachbaria College Gate, Chandanish, Chattogram</div>
-
-            <div class="vc-ctas">
-              <a href="habib.vcf" download class="btn btn-save"><i class="fa-regular fa-address-card"></i> Save Contact</a>
-              <a href="tel:+8801868461577" class="btn btn-call"><i class="fa-solid fa-phone"></i> Call Now</a>
-
-              <!-- login / my account toggled by JS -->
-              <a href="#" id="myAccountBtn" class="btn btn-primary" style="display:none"><i class="fa-regular fa-user"></i> My Account</a>
-              <button id="loginBtn" class="btn btn-outline"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
-            </div>
-
-            <div class="vc-socials">
-              <a href="https://www.facebook.com/share/1adkemEFLo/" target="_blank" class="social-circle"><i class="fa-brands fa-facebook-f"></i></a>
-              <a href="https://www.instagram.com/md_habibur__rahman" target="_blank" class="social-circle"><i class="fa-brands fa-instagram"></i></a>
-              <a href="https://youtube.com/@h_a_b_i_b-yt?si=KzptsxRXXNw0t635" target="_blank" class="social-circle"><i class="fa-brands fa-youtube"></i></a>
-              <a href="https://wa.me/8801868461577" target="_blank" class="social-circle"><i class="fa-brands fa-whatsapp"></i></a>
-              <a href="mailto:mshabib471@gmail.com" class="social-circle"><i class="fa-regular fa-envelope"></i></a>
-              <a href="https://habib-web.vercel.app" class="social-circle" target="_blank"><i class="fa-solid fa-globe"></i></a>
-              <a href="https://www.tiktok.com/@habibur_._rahman" class="social-circle" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- HERO -->
-      <section id="hero" class="hero section">
-        <div class="container hero-grid">
-          <div class="hero-left">
-            <h2 class="hero-title">Your trusted mobile shop — online + offline</h2>
-            <p class="hero-text">Samsung • Xiaomi • Realme • Vivo • iPhone • Smart Watch • TWS — সব Available। অনলাইন অর্ডারে হোম ডেলিভারি এবং দোকানে সরাসরি নেওয়ার সুবিধা।</p>
-
-            <div class="hero-pills">
-              <span>Smartphones</span>
-              <span>Back Cover</span>
-              <span>Glass</span>
-              <span>Smart Watch</span>
-              <span>TWS</span>
-              <span>Power Bank</span>
-            </div>
-
-            <div class="hero-ctas">
-              <a href="shop.html" class="btn btn-primary"><i class="fa-solid fa-shop"></i> Open Full Shop</a>
-              <a href="https://wa.me/8801868461577" class="btn btn-ghost" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp Order</a>
-            </div>
-
-            <div class="hero-meta">⦿ Cash on Delivery • ⦿ Warranty Support • ⦿ দোকান থেকে নেওয়ার সুবিধা</div>
-          </div>
-
-          <aside class="hero-right">
-            <div class="phone-frame">
-              <img src="https://cdni.iconscout.com/illustration/premium/thumb/online-mobile-shopping-illustration-3123927-2606008.png" alt="Preview">
-            </div>
-            <div class="phone-caption">Brand phones + accessories এক জায়গায় — Habib Mobile Gallery।</div>
-          </aside>
-        </div>
-      </section>
-
-      <!-- QUICK LINKS -->
-      <section class="quick-links section">
-        <div class="container">
-          <h3 class="section-title">Everything in one place</h3>
-          <p class="section-subtitle">Visiting card, full shop, blog, contact & account — সবকিছুর আলাদা পেইজ।</p>
-
-          <div class="quick-grid">
-            <a class="quick-item" href="card.html"><i class="fa-regular fa-address-card qc-icon"></i><div class="qc-title">Digital Card</div></a>
-            <a class="quick-item" href="shop.html"><i class="fa-solid fa-bag-shopping qc-icon"></i><div class="qc-title">Mobile Shop</div></a>
-            <a class="quick-item" href="blog.html"><i class="fa-regular fa-newspaper qc-icon"></i><div class="qc-title">Mini Blogs</div></a>
-            <a class="quick-item" href="contact.html"><i class="fa-regular fa-envelope qc-icon"></i><div class="qc-title">Quick Order</div></a>
-            <a class="quick-item" href="account.html" id="accountQuick"><i class="fa-regular fa-user qc-icon"></i><div class="qc-title">My Account</div></a>
-            <a class="quick-item" href="https://habib-yt.vercel.app" target="_blank"><i class="fa-solid fa-gamepad qc-icon"></i><div class="qc-title">Games Top-up</div></a>
-          </div>
-        </div>
-      </section>
-
-      <!-- BLOG -->
-      <section id="blog" class="section">
-        <div class="container blog-grid">
-          <article class="blog-card"><div class="label">Offer</div><h4>নতুন ফোনের Special Discount</h4><p>Selected Samsung, Xiaomi, Realme মডেলে সীমিত সময়ের জন্য ডিসকাউন্ট।</p></article>
-          <article class="blog-card"><div class="label">Tips</div><h4>Battery Health টিপস</h4><p>Fast charging কবে ব্যবহার করবেন — কিছু সহজ টিপস।</p></article>
-          <article class="blog-card"><div class="label">Service</div><h4>Website & Ecommerce setup</h4><p>Domain, Hosting ও Design সহ Full Setup করা হবে।</p></article>
-        </div>
-      </section>
-
-      <!-- CONTACT -->
-      <section id="contact" class="section">
-        <div class="container contact-grid">
-          <div class="contact-card">
-            <h3>Send a quick message</h3>
-            <form action="https://formspree.io/f/xdkqzpng" method="POST" class="contact-form">
-              <div class="form-row">
-                <div class="form-field"><label for="name">Name</label><input id="name" name="name" type="text" placeholder="Your Name" required></div>
-                <div class="form-field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="you@example.com" required></div>
-              </div>
-              <div class="form-field"><label for="need">What do you need?</label><input id="need" name="need" placeholder="Mobile / Website / Accessories"></div>
-              <div class="form-field"><label for="message">Message</label><textarea id="message" name="message" placeholder="Write your message..." required></textarea></div>
-              <button type="submit" class="btn btn-primary">Send</button>
-            </form>
-          </div>
-
-          <div class="contact-card">
-            <h3>Shop & Direct Contact</h3>
-            <p>📍 Gachbaria College Gate, Chandanish, Chattogram</p>
-            <div class="contact-lines">
-              <div><strong>Phone:</strong> 01868461577</div>
-              <div><strong>WhatsApp:</strong> <a href="https://wa.me/8801868461577" target="_blank">Chat on WhatsApp</a></div>
-              <div><strong>Email:</strong> <a href="mailto:mshabib471@gmail.com">mshabib471@gmail.com</a></div>
-            </div>
-            <div class="contact-actions">
-              <a href="https://wa.me/8801868461577" class="btn btn-primary"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-              <a href="tel:+8801868461577" class="btn btn-ghost"><i class="fa-solid fa-phone"></i> Call Now</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- INSTALL BANNER -->
-      <section class="install section">
-        <div class="container install-card">
-          <div>
-            <h3>Habib Business App — Install on your phone</h3>
-            <p>Add to Home Screen করে এক ক্লিকে আপনার shop + portfolio খুলুন।</p>
-          </div>
-          <div><button id="installBtn" class="btn btn-primary"><i class="fa-solid fa-download"></i> Install Now</button></div>
-        </div>
-      </section>
-
-      <!-- SUPPORT -->
-      <section class="social-section">
-        <div class="container social-grid">
-          <div>
-            <h4 class="social-title">STAY CONNECTED</h4>
-            <div class="social-icons glass-row">
-              <a href="https://www.facebook.com/share/1adkemEFLo/" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
-              <a href="https://www.instagram.com/md_habibur__rahman" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
-              <a href="https://youtube.com/@h_a_b_i_b-yt?si=KzptsxRXXNw0t635" class="social-btn"><i class="fa-brands fa-youtube"></i></a>
-              <a href="https://wa.me/8801868461577" class="social-btn"><i class="fa-brands fa-whatsapp"></i></a>
-              <a href="mailto:mshabib471@gmail.com" class="social-btn"><i class="fa-regular fa-envelope"></i></a>
-              <a href="https://www.tiktok.com/@habibur_._rahman" class="social-btn"><i class="fa-brands fa-tiktok"></i></a>
-            </div>
-          </div>
-
-          <div>
-            <h4 class="social-title">SUPPORT CENTER</h4>
-            <a class="support-card" href="https://t.me/H_A_B_I_B_Top_1" target="_blank">
-              <div class="support-icon"><i class="fa-brands fa-telegram"></i></div>
-              <div class="support-body"><div class="support-heading">Help line [9AM–12PM]</div><div class="support-sub">@habib_support</div></div>
+            <a href="account.html" id="myAccountBtn" class="btn btn-outline hidden">
+              <i class="fa-regular fa-user"></i> My Account
             </a>
           </div>
+
+          <div class="vc-socials">
+            <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://youtube.com" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://wa.me/8801868461577" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="mailto:mshabib471@gmail.com"><i class="fa-regular fa-envelope"></i></a>
+            <a href="https://habib-web.vercel.app" target="_blank"><i class="fa-solid fa-globe"></i></a>
+            <a href="https://tiktok.com" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+          </div>
         </div>
-      </section>
-
-    </main>
-
-    <footer class="footer">
-      <div class="container footer-inner">
-        <div>© <span id="year"></span> Habib Business App — Portfolio & Mobile Shop. All Rights Reserved.</div>
-        <div class="footer-links"><a href="privacy.html">Privacy</a> <a href="terms.html">Terms</a></div>
       </div>
-    </footer>
+    </section>
 
-    <!-- WhatsApp floating -->
-    <a id="floatingWa" class="floating-wa" href="https://wa.me/8801868461577" target="_blank" aria-label="WhatsApp">
-      <i class="fa-brands fa-whatsapp"></i>
-    </a>
+    <!-- HERO -->
+    <section class="hero container">
+      <h2>Your trusted mobile shop — online + offline</h2>
+      <p>Samsung • Xiaomi • Realme • Vivo • iPhone • Smart Watch • TWS — সব Available।</p>
 
-    <!-- Bottom nav -->
-    <nav class="bottom-nav">
-      <a href="index.html" class="bn"><i class="fa-solid fa-house"></i><span>Home</span></a>
-      <a href="shop.html" class="bn"><i class="fa-solid fa-bag-shopping"></i><span>Shop</span></a>
-      <a href="#contact" class="bn"><i class="fa-regular fa-envelope"></i><span>Contact</span></a>
-      <a href="account.html" class="bn"><i class="fa-regular fa-user"></i><span>My Account</span></a>
-    </nav>
+      <div class="hero-pills">
+        <span>Smartphones</span>
+        <span>Back Cover</span>
+        <span>Glass</span>
+        <span>Smart Watch</span>
+        <span>TWS</span>
+        <span>Power Bank</span>
+      </div>
 
-  </div>
+      <div class="hero-btns">
+        <a class="btn btn-primary" href="shop.html">Open Shop</a>
+        <a class="btn btn-ghost" href="https://wa.me/8801868461577">WhatsApp Order</a>
+      </div>
+    </section>
 
-  <!-- LOGIN / REGISTER MODAL -->
-  <div id="authModal" class="auth-modal" aria-hidden="true">
-    <div class="auth-card">
-      <button class="auth-close" id="authClose" aria-label="Close">×</button>
-      <h3 id="authTitle">Login</h3>
+    <!-- STAY CONNECTED -->
+    <section class="social-card container glass">
+      <h3>STAY CONNECTED</h3>
 
-      <form id="authForm">
-        <div class="form-row">
-          <label>Email</label>
-          <input id="authEmail" type="email" required placeholder="you@example.com">
-        </div>
-        <div class="form-row">
-          <label>Password</label>
-          <input id="authPass" type="password" required placeholder="Password">
-        </div>
+      <div class="social-row">
+        <a class="social-icon" href="#"><i class="fa-brands fa-facebook-f"></i></a>
+        <a class="social-icon" href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a class="social-icon" href="#"><i class="fa-brands fa-youtube"></i></a>
+        <a class="social-icon" href="#"><i class="fa-brands fa-whatsapp"></i></a>
+        <a class="social-icon" href="#"><i class="fa-regular fa-envelope"></i></a>
+        <a class="social-icon" href="#"><i class="fa-brands fa-tiktok"></i></a>
+      </div>
+    </section>
 
-        <div class="auth-actions">
-          <button type="submit" class="btn btn-primary" id="authSubmit">Login</button>
-          <button type="button" class="btn btn-ghost" id="switchToRegister">Create Account</button>
-        </div>
-      </form>
-    </div>
-  </div>
+    <!-- INSTALL -->
+    <section class="install-card container glass">
+      <div>
+        <h3>Habib Business App — Install Now</h3>
+        <p>Add to Home Screen → এক ক্লিকে shop + portfolio খুলুন।</p>
+      </div>
 
-  <script src="script.js?v=1"></script>
+      <button id="installBtn" class="btn btn-primary">
+        <i class="fa-solid fa-download"></i> Install
+      </button>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    © <span id="year"></span> Habib Business App — All Rights Reserved.
+  </footer>
+
+  <a class="floating-wa" href="https://wa.me/8801868461577"><i class="fa-brands fa-whatsapp"></i></a>
+
+  <nav class="bottom-nav">
+    <a href="index.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
+    <a href="shop.html"><i class="fa-solid fa-bag-shopping"></i><span>Shop</span></a>
+    <a href="#contact"><i class="fa-regular fa-envelope"></i><span>Contact</span></a>
+    <a href="account.html"><i class="fa-regular fa-user"></i><span>Account</span></a>
+  </nav>
+
+  <script src="script.js?v=10"></script>
 </body>
 </html>
