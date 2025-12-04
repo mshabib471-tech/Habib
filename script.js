@@ -1,154 +1,123 @@
-/* -----------------------------------
-   PRELOADER
------------------------------------ */
-window.addEventListener("load", () => {
-  const preloader = document.getElementById("preloader");
-  if (preloader) {
-    setTimeout(() => preloader.style.opacity = "0", 300);
-    setTimeout(() => preloader.style.display = "none", 800);
+/* Main behavior for index.html */
+/* Handles: preloader, theme toggle, mobile drawer, toast, reveal on scroll, install prompt, login state UI */
+
+const preloader = document.getElementById('preloader');
+const themeToggle = document.getElementById('themeToggle');
+const menuToggle = document.getElementById('menuToggle');
+const mobileDrawer = document.getElementById('mobileDrawer');
+const closeDrawer = document.getElementById('closeDrawer');
+const toast = document.getElementById('toast');
+const toastClose = document.getElementById('toastClose');
+const installBtn = document.getElementById('installBtn');
+const loginBtn = document.getElementById('loginBtn');
+const myAccountBtn = document.getElementById('myAccountBtn');
+const drawerAuthAction = document.getElementById('drawerAuthAction');
+const accountQuick = document.getElementById('accountQuick');
+
+// ---------- PRELOADER ----------
+document.addEventListener('DOMContentLoaded', () => {
+  // small delay so user sees loading once
+  setTimeout(() => {
+    if (preloader) preloader.style.display = 'none';
+    // show toast shortly after load
+    setTimeout(() => showToast(), 600);
+    revealOnScroll(); // run once
+  }, 700);
+});
+
+// ---------- THEME ----------
+const savedTheme = localStorage.getItem('habib_theme');
+if (savedTheme === 'dark') document.body.classList.add('dark');
+
+themeToggle?.addEventListener('click', () => {
+  document.body.classList.toggle('dark');
+  localStorage.setItem('habib_theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+  themeToggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+});
+
+// ---------- MOBILE DRAWER ----------
+menuToggle?.addEventListener('click', () => {
+  mobileDrawer.classList.add('open');
+  mobileDrawer.setAttribute('aria-hidden', 'false');
+});
+closeDrawer?.addEventListener('click', () => {
+  mobileDrawer.classList.remove('open');
+  mobileDrawer.setAttribute('aria-hidden', 'true');
+});
+document.addEventListener('click', (e) => {
+  if (!mobileDrawer.contains(e.target) && !menuToggle.contains(e.target) && mobileDrawer.classList.contains('open')) {
+    mobileDrawer.classList.remove('open');
   }
 });
 
-/* -----------------------------------
-   TOAST CLOSE
------------------------------------ */
-const toast = document.getElementById("toast");
-const toastClose = document.getElementById("toastClose");
-
-if (toastClose) {
-  toastClose.addEventListener("click", () => {
-    toast.style.display = "none";
-  });
+// ---------- TOAST ----------
+function showToast(){
+  if(!toast) return;
+  toast.classList.add('show');
 }
-
-/* -----------------------------------
-   MOBILE DRAWER
------------------------------------ */
-const mobileDrawer = document.getElementById("mobileDrawer");
-const menuToggle = document.getElementById("menuToggle");
-const closeDrawer = document.getElementById("closeDrawer");
-
-if (menuToggle) {
-  menuToggle.addEventListener("click", () => {
-    mobileDrawer.classList.add("open");
-  });
-}
-
-if (closeDrawer) {
-  closeDrawer.addEventListener("click", () => {
-    mobileDrawer.classList.remove("open");
-  });
-}
-
-/* Close drawer when clicking outside */
-document.addEventListener("click", (e) => {
-  if (
-    mobileDrawer &&
-    !mobileDrawer.contains(e.target) &&
-    !menuToggle.contains(e.target)
-  ) {
-    mobileDrawer.classList.remove("open");
-  }
+toastClose?.addEventListener('click', () => {
+  toast.classList.remove('show');
 });
 
-/* -----------------------------------
-   THEME TOGGLE (Dark / Light)
------------------------------------ */
-const themeToggle = document.getElementById("themeToggle");
-
-function applyTheme(theme) {
-  if (theme === "light") {
-    document.body.classList.add("light-mode");
-    themeToggle.textContent = "🌙";
-  } else {
-    document.body.classList.remove("light-mode");
-    themeToggle.textContent = "☀️";
-  }
-  localStorage.setItem("theme", theme);
+// ---------- REVEAL ON SCROLL ----------
+function revealOnScroll(){
+  const items = document.querySelectorAll('.reveal');
+  const offset = window.innerHeight * 0.85;
+  items.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if(rect.top < offset) el.classList.add('visible');
+  });
 }
+window.addEventListener('scroll', revealOnScroll);
+window.addEventListener('resize', revealOnScroll);
 
-let savedTheme = localStorage.getItem("theme") || "dark";
-applyTheme(savedTheme);
-
-themeToggle?.addEventListener("click", () => {
-  savedTheme = savedTheme === "dark" ? "light" : "dark";
-  applyTheme(savedTheme);
-});
-
-/* -----------------------------------
-   PWA INSTALL BUTTON
------------------------------------ */
+// ---------- INSTALL (PWA) - simple prompt capture ----------
 let deferredPrompt;
-const installBtn = document.getElementById("installBtn");
-
-window.addEventListener("beforeinstallprompt", (e) => {
+window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredPrompt = e;
-
-  if (installBtn) installBtn.style.display = "block";
-
-  installBtn?.addEventListener("click", () => {
-    if (!deferredPrompt) return;
-
+  if (installBtn) installBtn.style.display = 'inline-flex';
+});
+installBtn?.addEventListener('click', async () => {
+  if (deferredPrompt) {
     deferredPrompt.prompt();
-    deferredPrompt.userChoice.then(() => {
-      deferredPrompt = null;
-      installBtn.style.display = "none";
-    });
-  });
+    const choice = await deferredPrompt.userChoice;
+    deferredPrompt = null;
+  } else {
+    // fallback: show instructions (not runtime installable)
+    alert('Add to Home Screen: use your browser menu → Add to home screen.');
+  }
 });
 
-/* -----------------------------------
-   LOGIN / REGISTER MODALS
------------------------------------ */
-const loginModal = document.getElementById("loginModal");
-const registerModal = document.getElementById("registerModal");
-
-const openLogin = document.getElementById("openLogin");
-const openRegister = document.getElementById("openRegister");
-const closeLogin = document.getElementById("closeLogin");
-const closeRegister = document.getElementById("closeRegister");
-
-openLogin?.addEventListener("click", () => {
-  loginModal.style.display = "flex";
-});
-
-openRegister?.addEventListener("click", () => {
-  registerModal.style.display = "flex";
-});
-
-closeLogin?.addEventListener("click", () => {
-  loginModal.style.display = "none";
-});
-
-closeRegister?.addEventListener("click", () => {
-  registerModal.style.display = "none";
-});
-
-/* Close modal by clicking outside */
-window.addEventListener("click", (e) => {
-  if (e.target === loginModal) loginModal.style.display = "none";
-  if (e.target === registerModal) registerModal.style.display = "none";
-});
-
-/* -----------------------------------
-   SCROLL REVEAL EFFECT
------------------------------------ */
-const revealElements = document.querySelectorAll(".reveal");
-
-function revealOnScroll() {
-  revealElements.forEach((el) => {
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 80) {
-      el.classList.add("visible");
-    }
-  });
+// ---------- LOGIN STATE (simple localStorage toggle) ----------
+function updateAuthUI() {
+  const token = localStorage.getItem('habib_auth');
+  if (token === '1') {
+    loginBtn.style.display = 'none';
+    myAccountBtn.style.display = 'inline-flex';
+    drawerAuthAction.textContent = 'My Account';
+    accountQuick.setAttribute('href','account.html');
+  } else {
+    loginBtn.style.display = 'inline-flex';
+    myAccountBtn.style.display = 'none';
+    drawerAuthAction.textContent = 'Login / Register';
+    accountQuick.setAttribute('href','login.html');
+  }
 }
+updateAuthUI();
 
-window.addEventListener("scroll", revealOnScroll);
-revealOnScroll();
+// If drawer auth clicked, route to login or account
+drawerAuthAction?.addEventListener('click', (e)=>{
+  e.preventDefault();
+  const token = localStorage.getItem('habib_auth');
+  if(token==='1') window.location.href = 'account.html';
+  else window.location.href = 'login.html';
+});
 
-/* -----------------------------------
-   AUTO YEAR
------------------------------------ */
-document.getElementById("year").textContent = new Date().getFullYear();
+// ---------- small accessibility fixes ----------
+document.querySelectorAll('a').forEach(a => {
+  if (a.getAttribute('href') === '#') a.addEventListener('click', e => e.preventDefault());
+});
+
+// On page load, set year
+document.getElementById('year')?.innerText = new Date().getFullYear();
