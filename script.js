@@ -1,20 +1,28 @@
 // ================================
-// PRELOADER AUTO HIDE (3 SECONDS)
+// FORCE HIDE PRELOADER (3 SEC)
 // ================================
-document.addEventListener("DOMContentLoaded", () => {
+function hidePreloader() {
   const preloader = document.getElementById("preloader");
-
   if (!preloader) return;
 
-  // Auto hide after 3 seconds
-  setTimeout(() => {
-    preloader.style.opacity = "0";
-    preloader.style.visibility = "hidden";
+  preloader.style.transition = "all 0.4s ease";
+  preloader.style.opacity = "0";
+  preloader.style.pointerEvents = "none";
+  preloader.style.visibility = "hidden";
 
-    // remove from DOM
-    setTimeout(() => preloader.remove(), 500);
-  }, 3000);
+  setTimeout(() => {
+    if (preloader) preloader.remove();
+  }, 500);
+}
+
+// 1) Hide after page fully loaded
+window.addEventListener("load", () => {
+  setTimeout(hidePreloader, 3000);
 });
+
+// 2) Alternate fail-safe (যদি load event কাজ না করে তবুও)
+setTimeout(hidePreloader, 6000);
+
 /* Main behavior for index.html */
 /* Handles: preloader, theme toggle, mobile drawer, toast, reveal on scroll, install prompt, login state UI */
 
