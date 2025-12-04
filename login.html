@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8">
+  <title>Login — Habib Business</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    /* Minimal self-contained login style (you can move to style.css if you want) */
+    :root{--bg1:#0b1226;--card:#091022;--accent:#00eaff}
+    body{margin:0;font-family:"Poppins",sans-serif;background:linear-gradient(135deg,#071022,#071a2a);color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+    .wrap{max-width:420px;width:100%;background:rgba(255,255,255,0.03);padding:28px;border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.04)}
+    h2{font-size:28px;margin-bottom:8px;background:linear-gradient(90deg,#00eaff,#00ff88);-webkit-background-clip:text;color:transparent}
+    label{display:block;color:#cfeaff;margin-top:12px;font-weight:600}
+    input{width:100%;padding:12px;border-radius:10px;border:none;margin-top:6px;background:rgba(255,255,255,0.05);color:#fff}
+    .btn{margin-top:18px;padding:12px;border-radius:10px;border:none;width:100%;font-weight:700;cursor:pointer}
+    .btn-primary{background:linear-gradient(90deg,#00eaff,#00ff88);color:#000}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.08);color:#fff}
+    .sm{display:flex;gap:10px;margin-top:12px}
+    .link{display:block;margin-top:10px;color:#7ee0ff;cursor:pointer;text-decoration:underline}
+    .note{font-size:13px;color:#9ad; margin-top:8px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h2>🔐 Login</h2>
+    <div class="note">Use demo login to test. (This page is ready to integrate Firebase.)</div>
+
+    <label for="loginEmail">Email</label>
+    <input id="loginEmail" type="email" placeholder="you@example.com" />
+
+    <label for="loginPassword">Password</label>
+    <input id="loginPassword" type="password" placeholder="Password" />
+
+    <button class="btn btn-primary" id="doLogin">Login</button>
+    <button class="btn btn-ghost" id="googleLogin"><i class="fa-brands fa-google"></i> Login with Google</button>
+
+    <a class="link" id="openSignup">Don't have an account? Create one</a>
+    <a class="link" href="index.html">← Back to Home</a>
+  </div>
+
+  <script>
+    /* Simple demo login. Replace with Firebase auth in production. */
+    document.getElementById('doLogin').addEventListener('click', () => {
+      const email = document.getElementById('loginEmail').value.trim();
+      const pass = document.getElementById('loginPassword').value.trim();
+      if (!email || !pass) return alert('Enter email and password');
+      // demo success:
+      localStorage.setItem('habib_auth','1'); // mark as logged in
+      alert('Login successful — redirecting to home');
+      window.location.href = 'index.html';
+    });
+
+    document.getElementById('openSignup').addEventListener('click', () => {
+      window.location.href = 'register.html';
+    });
+
+    document.getElementById('googleLogin').addEventListener('click', () => {
+      // placeholder — integrate Firebase Google Auth here
+      alert('Google login not wired in demo. Use normal login.');
+    });
+
+    // If already logged in redirect to account
+    if (localStorage.getItem('habib_auth') === '1') {
+      window.location.href = 'account.html';
+    }
+  </script>
+</body>
+</html>
