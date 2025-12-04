@@ -1,154 +1,284 @@
-/* -----------------------------------
-   PRELOADER
------------------------------------ */
-window.addEventListener("load", () => {
-  const preloader = document.getElementById("preloader");
-  if (preloader) {
-    setTimeout(() => preloader.style.opacity = "0", 300);
-    setTimeout(() => preloader.style.display = "none", 800);
-  }
-});
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8">
+  <title>Habib Business App — Portfolio & Mobile Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#020617">
 
-/* -----------------------------------
-   TOAST CLOSE
------------------------------------ */
-const toast = document.getElementById("toast");
-const toastClose = document.getElementById("toastClose");
+  <!-- favicon -->
+  <link rel="icon" href="https://i.ibb.co/n88CVpsy/habib.png">
 
-if (toastClose) {
-  toastClose.addEventListener("click", () => {
-    toast.style.display = "none";
-  });
-}
+  <!-- fonts & icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-/* -----------------------------------
-   MOBILE DRAWER
------------------------------------ */
-const mobileDrawer = document.getElementById("mobileDrawer");
-const menuToggle = document.getElementById("menuToggle");
-const closeDrawer = document.getElementById("closeDrawer");
+  <!-- main css -->
+  <link rel="stylesheet" href="style.css?v=1">
+</head>
+<body>
 
-if (menuToggle) {
-  menuToggle.addEventListener("click", () => {
-    mobileDrawer.classList.add("open");
-  });
-}
+  <!-- PRELOADER -->
+  <div id="preloader" class="preloader" aria-hidden="false">
+    <img src="https://i.ibb.co/n88CVpsy/habib.png" alt="Habib Logo" class="preloader-logo">
+    <div class="loader-ring" aria-hidden="true"></div>
+    <div class="loader-text">Loading Habib Business App...</div>
+  </div>
 
-if (closeDrawer) {
-  closeDrawer.addEventListener("click", () => {
-    mobileDrawer.classList.remove("open");
-  });
-}
+  <div class="page-shell">
 
-/* Close drawer when clicking outside */
-document.addEventListener("click", (e) => {
-  if (
-    mobileDrawer &&
-    !mobileDrawer.contains(e.target) &&
-    !menuToggle.contains(e.target)
-  ) {
-    mobileDrawer.classList.remove("open");
-  }
-});
+    <!-- TOAST -->
+    <div id="toast" class="toast">
+      <div class="toast-text">📢 আজকের অফার: Selected মডেলে Special Discount চলছে!</div>
+      <button id="toastClose" class="toast-close" aria-label="Close">×</button>
+    </div>
 
-/* -----------------------------------
-   THEME TOGGLE (Dark / Light)
------------------------------------ */
-const themeToggle = document.getElementById("themeToggle");
+    <!-- NAVBAR -->
+    <header class="navbar">
+      <div class="navbar-inner container">
+        <a href="index.html" class="brand">
+          <div class="brand-avatar"><img src="https://i.ibb.co/n88CVpsy/habib.png" alt="Habib"></div>
+          <div class="brand-text">
+            <div class="brand-title">Habibur Rahman</div>
+            <div class="brand-sub">Web Developer • Tech Consultant • Mobile Retail Owner</div>
+          </div>
+        </a>
 
-function applyTheme(theme) {
-  if (theme === "light") {
-    document.body.classList.add("light-mode");
-    themeToggle.textContent = "🌙";
-  } else {
-    document.body.classList.remove("light-mode");
-    themeToggle.textContent = "☀️";
-  }
-  localStorage.setItem("theme", theme);
-}
+        <nav class="nav-links desktop-nav" id="desktopNav">
+          <a href="index.html">Home</a>
+          <a href="card.html">Card</a>
+          <a href="shop.html">Shop</a>
+          <a href="blog.html">Blog</a>
+          <a href="contact.html">Contact</a>
+        </nav>
 
-let savedTheme = localStorage.getItem("theme") || "dark";
-applyTheme(savedTheme);
+        <div class="nav-controls">
+          <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
 
-themeToggle?.addEventListener("click", () => {
-  savedTheme = savedTheme === "dark" ? "light" : "dark";
-  applyTheme(savedTheme);
-});
+          <!-- hamburger -->
+          <button id="menuToggle" class="menu-toggle" aria-label="Open menu">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
 
-/* -----------------------------------
-   PWA INSTALL BUTTON
------------------------------------ */
-let deferredPrompt;
-const installBtn = document.getElementById("installBtn");
+      <!-- mobile drawer -->
+      <div id="mobileDrawer" class="mobile-drawer" aria-hidden="true">
+        <div class="drawer-top">
+          <div class="drawer-user">
+            <img src="https://i.ibb.co/n88CVpsy/habib.png" alt="Habib" />
+            <div>
+              <div class="drawer-name">Habibur Rahman</div>
+              <div class="drawer-sub">Mobile Shop Owner</div>
+            </div>
+          </div>
+          <button id="closeDrawer" class="drawer-close" aria-label="Close">✕</button>
+        </div>
 
-window.addEventListener("beforeinstallprompt", (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
+        <nav class="drawer-links">
+          <a href="index.html">Home</a>
+          <a href="card.html">Card</a>
+          <a href="shop.html">Shop</a>
+          <a href="blog.html">Blog</a>
+          <a href="contact.html">Contact</a>
+          <a href="#" id="drawerAuthAction">Login / Register</a>
+        </nav>
 
-  if (installBtn) installBtn.style.display = "block";
+        <div class="drawer-actions">
+          <a href="tel:+8801868461577" class="drawer-call"><i class="fa-solid fa-phone"></i> Call Now</a>
+          <a href="https://wa.me/8801868461577" target="_blank" class="drawer-wa"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+        </div>
+      </div>
 
-  installBtn?.addEventListener("click", () => {
-    if (!deferredPrompt) return;
+    </header>
 
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then(() => {
-      deferredPrompt = null;
-      installBtn.style.display = "none";
-    });
-  });
-});
+    <main>
 
-/* -----------------------------------
-   LOGIN / REGISTER MODALS
------------------------------------ */
-const loginModal = document.getElementById("loginModal");
-const registerModal = document.getElementById("registerModal");
+      <!-- VISITING CARD (STICKY TOP) -->
+      <section class="vc-section container">
+        <div class="vc-card vc-sticky">
+          <div class="vc-left">
+            <div class="vc-photo-wrap"><img src="https://i.ibb.co/n88CVpsy/habib.png" alt="Habib"></div>
+          </div>
 
-const openLogin = document.getElementById("openLogin");
-const openRegister = document.getElementById("openRegister");
-const closeLogin = document.getElementById("closeLogin");
-const closeRegister = document.getElementById("closeRegister");
+          <div class="vc-right">
+            <h1 class="vc-name">Habibur Rahman <span class="vc-nick">(Habib)</span></h1>
+            <div class="vc-role">Web Developer • Tech Consultant • Mobile Retail Owner</div>
+            <div class="vc-company">Habib Business</div>
+            <div class="vc-address">Gachbaria College Gate, Chandanish, Chattogram</div>
 
-openLogin?.addEventListener("click", () => {
-  loginModal.style.display = "flex";
-});
+            <div class="vc-ctas">
+              <a href="habib.vcf" download class="btn btn-save"><i class="fa-regular fa-address-card"></i> Save Contact</a>
+              <a href="tel:+8801868461577" class="btn btn-call"><i class="fa-solid fa-phone"></i> Call Now</a>
+              <a href="login.html" id="myAccountBtn" class="btn btn-outline" style="display:none"><i class="fa-regular fa-user"></i> My Account</a>
+              <a href="login.html" id="loginBtn" class="btn btn-outline"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+            </div>
 
-openRegister?.addEventListener("click", () => {
-  registerModal.style.display = "flex";
-});
+            <div class="vc-socials">
+              <a href="https://www.facebook.com/share/1adkemEFLo/" target="_blank" class="social-circle" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+              <a href="https://www.instagram.com/md_habibur__rahman" target="_blank" class="social-circle" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+              <a href="https://youtube.com/@h_a_b_i_b-yt?si=KzptsxRXXNw0t635" target="_blank" class="social-circle" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+              <a href="https://wa.me/8801868461577" target="_blank" class="social-circle" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+              <a href="mailto:mshabib471@gmail.com" class="social-circle" aria-label="Email"><i class="fa-regular fa-envelope"></i></a>
+              <a href="https://habib-web.vercel.app" class="social-circle" aria-label="Website" target="_blank"><i class="fa-solid fa-globe"></i></a>
+              <a href="https://www.tiktok.com/@habibur_._rahman" class="social-circle" aria-label="TikTok" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+          </div>
+        </div>
+      </section>
 
-closeLogin?.addEventListener("click", () => {
-  loginModal.style.display = "none";
-});
+      <!-- HERO -->
+      <section id="hero" class="hero section">
+        <div class="container hero-grid">
+          <div class="hero-left">
+            <h2 class="hero-title">Your trusted mobile shop — online + offline</h2>
+            <p class="hero-text">Samsung • Xiaomi • Realme • Vivo • iPhone • Smart Watch • TWS — সব Available। অনলাইন অর্ডারে হোম ডেলিভারি এবং দোকানে সরাসরি নেওয়ার সুবিধা।</p>
 
-closeRegister?.addEventListener("click", () => {
-  registerModal.style.display = "none";
-});
+            <div class="hero-pills">
+              <span>Smartphones</span>
+              <span>Back Cover</span>
+              <span>Glass</span>
+              <span>Smart Watch</span>
+              <span>TWS</span>
+              <span>Power Bank</span>
+            </div>
 
-/* Close modal by clicking outside */
-window.addEventListener("click", (e) => {
-  if (e.target === loginModal) loginModal.style.display = "none";
-  if (e.target === registerModal) registerModal.style.display = "none";
-});
+            <div class="hero-ctas">
+              <a href="shop.html" class="btn btn-primary"><i class="fa-solid fa-shop"></i> Open Full Shop</a>
+              <a href="https://wa.me/8801868461577" class="btn btn-ghost" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp Order</a>
+            </div>
 
-/* -----------------------------------
-   SCROLL REVEAL EFFECT
------------------------------------ */
-const revealElements = document.querySelectorAll(".reveal");
+            <div class="hero-meta">⦿ Cash on Delivery • ⦿ Warranty Support • ⦿ দোকান থেকে নেওয়ার সুবিধা</div>
+          </div>
 
-function revealOnScroll() {
-  revealElements.forEach((el) => {
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 80) {
-      el.classList.add("visible");
-    }
-  });
-}
+          <aside class="hero-right">
+            <div class="phone-frame">
+              <img src="https://cdni.iconscout.com/illustration/premium/thumb/online-mobile-shopping-illustration-3123927-2606008.png" alt="Preview">
+            </div>
+            <div class="phone-caption">Brand phones + accessories এক জায়গায় — Habib Mobile Gallery।</div>
+          </aside>
+        </div>
+      </section>
 
-window.addEventListener("scroll", revealOnScroll);
-revealOnScroll();
+      <!-- QUICK LINKS -->
+      <section class="quick-links section">
+        <div class="container">
+          <h3 class="section-title">Everything in one place</h3>
+          <p class="section-subtitle">Visiting card, full shop, blog, contact & account — সবকিছুর আলাদা পেইজ।</p>
 
-/* -----------------------------------
-   AUTO YEAR
------------------------------------ */
-document.getElementById("year").textContent = new Date().getFullYear();
+          <div class="quick-grid">
+            <a class="quick-item" href="card.html"><i class="fa-regular fa-address-card qc-icon"></i><div class="qc-title">Digital Card</div></a>
+            <a class="quick-item" href="shop.html"><i class="fa-solid fa-bag-shopping qc-icon"></i><div class="qc-title">Mobile Shop</div></a>
+            <a class="quick-item" href="blog.html"><i class="fa-regular fa-newspaper qc-icon"></i><div class="qc-title">Mini Blogs</div></a>
+            <a class="quick-item" href="contact.html"><i class="fa-regular fa-envelope qc-icon"></i><div class="qc-title">Quick Order</div></a>
+            <a class="quick-item" href="account.html" id="accountQuick"><i class="fa-regular fa-user qc-icon"></i><div class="qc-title">My Account</div></a>
+            <a class="quick-item" href="https://habib-yt.vercel.app" target="_blank"><i class="fa-solid fa-gamepad qc-icon"></i><div class="qc-title">Games Top-up</div></a>
+          </div>
+        </div>
+      </section>
+
+      <!-- BLOG -->
+      <section id="blog" class="section">
+        <div class="container">
+          <h3 class="section-title">Mini Blogs & Updates</h3>
+          <div class="blog-grid">
+            <article class="blog-card"><div class="label">Offer</div><h4>নতুন ফোনের Special Discount</h4><p>Selected Samsung, Xiaomi, Realme মডেলে সীমিত সময়ের জন্য ডিসকাউন্ট।</p></article>
+            <article class="blog-card"><div class="label">Tips</div><h4>Battery Health টিপস</h4><p>Fast charging কবে ব্যবহার করবেন — কিছু সহজ টিপস।</p></article>
+            <article class="blog-card"><div class="label">Service</div><h4>Website & Ecommerce setup</h4><p>Domain, Hosting ও Design সহ Full Setup করা হবে।</p></article>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="section">
+        <div class="container contact-grid">
+          <div class="contact-card">
+            <h3>Send a quick message</h3>
+            <form action="https://formspree.io/f/xdkqzpng" method="POST" class="contact-form">
+              <div class="form-row">
+                <div class="form-field"><label for="name">Name</label><input id="name" name="name" type="text" placeholder="Your Name" required></div>
+                <div class="form-field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="you@example.com" required></div>
+              </div>
+              <div class="form-field"><label for="need">What do you need?</label><input id="need" name="need" placeholder="Mobile / Website / Accessories"></div>
+              <div class="form-field"><label for="message">Message</label><textarea id="message" name="message" placeholder="Write your message..." required></textarea></div>
+              <button type="submit" class="btn btn-primary">Send</button>
+            </form>
+          </div>
+
+          <div class="contact-card">
+            <h3>Shop & Direct Contact</h3>
+            <p>📍 Gachbaria College Gate, Chandanish, Chattogram</p>
+            <div class="contact-lines">
+              <div><strong>Phone:</strong> 01868461577</div>
+              <div><strong>WhatsApp:</strong> <a href="https://wa.me/8801868461577" target="_blank">Chat on WhatsApp</a></div>
+              <div><strong>Email:</strong> <a href="mailto:mshabib471@gmail.com">mshabib471@gmail.com</a></div>
+            </div>
+            <div class="contact-actions">
+              <a href="https://wa.me/8801868461577" class="btn btn-primary"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+              <a href="tel:+8801868461577" class="btn btn-ghost"><i class="fa-solid fa-phone"></i> Call Now</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- INSTALL BANNER -->
+      <section class="install section">
+        <div class="container install-card">
+          <div>
+            <h3>Habib Business App — Install on your phone</h3>
+            <p>Add to Home Screen করে এক ক্লিকে আপনার shop + portfolio খুলুন।</p>
+          </div>
+          <div><button id="installBtn" class="btn btn-primary"><i class="fa-solid fa-download"></i> Install Now</button></div>
+        </div>
+      </section>
+
+      <!-- SUPPORT -->
+      <section class="social-section">
+        <div class="container social-grid">
+          <div>
+            <h4 class="social-title">STAY CONNECTED</h4>
+            <div class="social-icons">
+              <a href="https://www.facebook.com/share/1adkemEFLo/" target="_blank" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+              <a href="https://www.instagram.com/md_habibur__rahman" target="_blank" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+              <a href="https://youtube.com/@h_a_b_i_b-yt?si=KzptsxRXXNw0t635" target="_blank" class="social-btn"><i class="fa-brands fa-youtube"></i></a>
+              <a href="https://wa.me/8801868461577" target="_blank" class="social-btn"><i class="fa-brands fa-whatsapp"></i></a>
+              <a href="mailto:mshabib471@gmail.com" class="social-btn"><i class="fa-regular fa-envelope"></i></a>
+              <a href="https://www.tiktok.com/@habibur_._rahman" target="_blank" class="social-btn"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="social-title">SUPPORT CENTER</h4>
+            <a class="support-card" href="https://t.me/H_A_B_I_B_Top_1" target="_blank">
+              <div class="support-icon"><i class="fa-brands fa-telegram"></i></div>
+              <div class="support-body"><div class="support-heading">Help line [9AM–12PM]</div><div class="support-sub">@habib_support</div></div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div>© <span id="year"></span> Habib Business App — Portfolio & Mobile Shop. All Rights Reserved.</div>
+        <div class="footer-links"><a href="privacy.html">Privacy</a> <a href="terms.html">Terms</a></div>
+      </div>
+    </footer>
+
+    <a class="floating-wa" href="https://wa.me/8801868461577" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+
+    <nav class="bottom-nav">
+      <a href="index.html" class="bn"><i class="fa-solid fa-house"></i><span>Home</span></a>
+      <a href="shop.html" class="bn"><i class="fa-solid fa-bag-shopping"></i><span>Shop</span></a>
+      <a href="#contact" class="bn"><i class="fa-regular fa-envelope"></i><span>Contact</span></a>
+      <a href="account.html" class="bn"><i class="fa-regular fa-user"></i><span>My Account</span></a>
+    </nav>
+
+  </div>
+
+  <script src="script.js?v=1"></script>
+</body>
+</html>
