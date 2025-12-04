@@ -1,3 +1,20 @@
+// ================================
+// PRELOADER AUTO HIDE (3 SECONDS)
+// ================================
+document.addEventListener("DOMContentLoaded", () => {
+  const preloader = document.getElementById("preloader");
+
+  if (!preloader) return;
+
+  // Auto hide after 3 seconds
+  setTimeout(() => {
+    preloader.style.opacity = "0";
+    preloader.style.visibility = "hidden";
+
+    // remove from DOM
+    setTimeout(() => preloader.remove(), 500);
+  }, 3000);
+});
 /* Main behavior for index.html */
 /* Handles: preloader, theme toggle, mobile drawer, toast, reveal on scroll, install prompt, login state UI */
 
