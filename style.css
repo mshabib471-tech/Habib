@@ -770,3 +770,154 @@ footer{
     font-size:.7rem;
   }
 }
+
+/* ==========================================
+   COMPACT VISITING CARD (INDEX VERSION)
+========================================== */
+.compact-card {
+  padding-top: 1rem;
+}
+
+.compact-card-box {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.3rem;
+  border-radius: 20px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+}
+
+body.dark .compact-card-box {
+  background: #0f172a;
+}
+
+.cc-photo img {
+  width: 95px;
+  height: 95px;
+  border-radius: 16px;
+  object-fit: cover;
+  border: 3px solid var(--accent);
+  box-shadow: var(--shadow-soft);
+}
+
+.cc-info {
+  flex: 1;
+}
+
+.cc-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.cc-short {
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  margin-top: -2px;
+}
+
+.cc-role {
+  margin-top: 4px;
+  font-size: 0.82rem;
+  color: var(--text-soft);
+}
+
+.cc-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 8px;
+  gap: 0.4rem;
+}
+
+.cc-buttons .btn {
+  padding: 0.45rem 0.75rem;
+  font-size: 0.8rem;
+  border-radius: 8px;
+}
+
+/* Mobile */
+@media(max-width: 550px) {
+  .compact-card-box {
+    flex-direction: column;
+    text-align: center;
+  }
+  .cc-buttons {
+    justify-content: center;
+  }
+}
+/* ==========================================
+   COMPACT VISITING CARD (INDEX VERSION)
+========================================== */
+.compact-card {
+  padding-top: 1rem;
+}
+
+.compact-card-box {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.3rem;
+  border-radius: 20px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+}
+
+body.dark .compact-card-box {
+  background: #0f172a;
+}
+
+.cc-photo img {
+  width: 95px;
+  height: 95px;
+  border-radius: 16px;
+  object-fit: cover;
+  border: 3px solid var(--accent);
+  box-shadow: var(--shadow-soft);
+}
+
+.cc-info {
+  flex: 1;
+}
+
+.cc-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.cc-short {
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  margin-top: -2px;
+}
+
+.cc-role {
+  margin-top: 4px;
+  font-size: 0.82rem;
+  color: var(--text-soft);
+}
+
+.cc-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 8px;
+  gap: 0.4rem;
+}
+
+.cc-buttons .btn {
+  padding: 0.45rem 0.75rem;
+  font-size: 0.8rem;
+  border-radius: 8px;
+}
+
+/* Mobile */
+@media(max-width: 550px) {
+  .compact-card-box {
+    flex-direction: column;
+    text-align: center;
+  }
+  .cc-buttons {
+    justify-content: center;
+  }
+}
