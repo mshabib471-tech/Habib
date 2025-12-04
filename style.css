@@ -36,28 +36,38 @@ body{
 /* container */
 .container{max-width:1120px;margin:0 auto;padding:0 16px}
 
-/* ========= PRELOADER ========= */
+/* ======== FIXED PRELOADER LOGO SIZE ======== */
 .preloader {
   position: fixed;
   inset: 0;
+  background: var(--bg, #ffffff);
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  background: var(--bg, #ffffff);
+  align-items: center;
   z-index: 99999;
-  transition: opacity 0.6s ease, visibility 0.6s ease;
-  opacity: 1;
-  visibility: visible;
+  transition: opacity .5s ease, visibility .5s ease;
 }
 
+.preloader-logo {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.loader-text {
+  margin-top: 14px;
+  font-size: 15px;
+  color: var(--text, #111);
+}
+
+/* Fade-out */
 .preloader.fade-out {
   opacity: 0;
   visibility: hidden;
-}
-
-.preloader-hidden {
-  display: none !important;
 }
 
 /* TOAST */
