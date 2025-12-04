@@ -1,296 +1,269 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="utf-8" />
-<title>Habib Business App — Portfolio & Mobile Shop</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-<meta name="theme-color" content="#020617" />
+  <meta charset="utf-8" />
+  <title>Habib Business App — Portfolio & Mobile Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#020617" />
 
-<!-- Font -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Favicon -->
+  <link rel="icon" href="https://i.ibb.co/n88CVpsy/habib.png" />
 
-<!-- Icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<style>
-/* =========================== RESET =========================== */
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{
-  font-family:"Inter",sans-serif;background:#f5f7fb;color:#0b1220;line-height:1.45;
-}
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-/* =========================== THEME =========================== */
-:root{
-  --bg:#f5f7fb;
-  --card:#fff;
-  --text:#0b1220;
-  --muted:#6b7280;
-  --primary:#0b63ff;
-  --accent:#22c55e;
-  --radius:16px;
-  --shadow:0 8px 26px rgba(2,6,23,0.06);
-}
-body.dark{
-  --bg:#07080b;
-  --card:#101623;
-  --text:#e5ecf5;
-  --muted:#9aa5b7;
-  --primary:#4ea3ff;
-  --shadow:0 8px 26px rgba(0,0,0,0.6);
-}
-
-/* page wrapper */
-.page{background:var(--bg);min-height:100vh;}
-.container{width:100%;max-width:950px;margin:0 auto;padding:0 16px;}
-
-/* =========================== NAV =========================== */
-.navbar{
-  position:sticky;top:0;z-index:999;background:var(--card);
-  padding:10px 0;box-shadow:var(--shadow);
-}
-.nav-inner{display:flex;justify-content:space-between;align-items:center;gap:12px;}
-.brand{display:flex;gap:12px;text-decoration:none;color:var(--text);}
-.brand img{width:48px;height:48px;border-radius:50%;object-fit:cover;}
-.brand-title{font-size:17px;font-weight:700;}
-.brand-sub{font-size:13px;color:var(--muted);}
-
-/* Hamburger */
-.menu-toggle{border:none;background:none;width:40px;height:40px;display:flex;flex-direction:column;justify-content:center;gap:6px;}
-.menu-toggle span{width:22px;height:3px;background:var(--muted);border-radius:4px;margin-left:8px;}
-
-/* ================= DRAWER ================= */
-.drawer{
-  position:fixed;top:0;right:-100%;width:80%;max-width:340px;
-  height:100vh;background:var(--card);
-  transition:.3s;z-index:9999;padding:16px;box-shadow:var(--shadow);
-}
-.drawer.open{right:0;}
-.drawer-links{display:flex;flex-direction:column;gap:12px;margin-top:20px;}
-.drawer-links a{text-decoration:none;padding:10px;border-radius:10px;background:#00000008;color:var(--text);}
-
-/* =========================== VISITING CARD =========================== */
-.card{
-  margin-top:14px;background:var(--card);padding:16px;border-radius:18px;box-shadow:var(--shadow);
-  display:flex;gap:14px;align-items:flex-start;
-}
-.card img{width:90px;height:90px;border-radius:18px;object-fit:cover;}
-.card-name{font-size:20px;font-weight:700;}
-.card-sub{font-size:14px;color:var(--muted);}
-.card-socials{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;}
-.card-socials a{
-  width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  background:var(--card);box-shadow:var(--shadow);color:var(--text);text-decoration:none;
-}
-
-/* =========================== HERO =========================== */
-.hero{margin-top:20px;}
-.hero-title{font-size:28px;font-weight:800;margin-bottom:8px;}
-.hero-text{color:var(--muted);font-size:15px;}
-.hero-pills{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;}
-.hero-pills span{padding:8px 12px;border-radius:50px;background:var(--card);box-shadow:var(--shadow);font-size:13px;color:var(--muted);}
-.btn{padding:12px 16px;border-radius:12px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;font-weight:600;}
-.btn-primary{background:var(--primary);color:#fff;}
-.btn-ghost{border:1px solid #0001;color:var(--text);}
-.hero-ctas{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap;}
-
-/* =========================== QUICK GRID =========================== */
-.q-grid{display:grid;gap:12px;margin-top:20px;}
-.q-item{background:var(--card);padding:16px;border-radius:14px;box-shadow:var(--shadow);text-align:center;text-decoration:none;color:var(--text);}
-
-/* =========================== BLOG =========================== */
-.blog-grid{display:grid;gap:12px;margin-top:20px;}
-.blog-card{background:var(--card);padding:14px;border-radius:14px;box-shadow:var(--shadow);}
-.blog-label{background:var(--primary);color:#fff;padding:4px 8px;border-radius:6px;font-size:12px;margin-bottom:6px;display:inline-block;}
-
-/* =========================== CONTACT =========================== */
-.contact-grid{display:grid;gap:12px;margin-top:20px;}
-.contact-card{background:var(--card);padding:14px;border-radius:14px;box-shadow:var(--shadow);}
-.contact-card input,.contact-card textarea{
-  width:100%;padding:12px;border-radius:10px;border:1px solid #0002;background:none;color:var(--text);
-  margin-bottom:10px;
-}
-
-/* =========================== SUPPORT =========================== */
-.support-card{
-  margin-top:18px;background:var(--card);padding:14px;border-radius:14px;box-shadow:var(--shadow);
-  display:flex;gap:12px;text-decoration:none;color:var(--text);
-}
-
-/* =========================== FOOTER =========================== */
-.footer{text-align:center;margin:30px 0;color:var(--muted);font-size:13px;}
-
-/* =========================== BOTTOM NAV =========================== */
-.bottom-nav{
-  position:fixed;bottom:0;left:0;width:100%;background:var(--card);
-  display:flex;justify-content:space-around;padding:8px 0;border-top:1px solid #0001;z-index:999;
-}
-.bottom-nav a{text-decoration:none;color:var(--text);display:flex;flex-direction:column;align-items:center;font-size:12px;gap:4px;}
-
-/* =========================== RESPONSIVE =========================== */
-@media(min-width:700px){
-  .q-grid{grid-template-columns:repeat(2,1fr);}
-  .blog-grid{grid-template-columns:repeat(2,1fr);}
-  .contact-grid{grid-template-columns:repeat(2,1fr);}
-}
-@media(min-width:950px){
-  .q-grid{grid-template-columns:repeat(3,1fr);}
-  .blog-grid{grid-template-columns:repeat(3,1fr);}
-}
-</style>
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="style.css?v=5" />
 </head>
-
 <body>
-<div class="page">
 
-<!-- ==================== NAV ==================== -->
-<header class="navbar">
-  <div class="container nav-inner">
-    <a class="brand" href="#">
-      <img src="https://i.ibb.co/n88CVpsy/habib.png">
-      <div>
-        <div class="brand-title">Habibur Rahman</div>
-        <div class="brand-sub">Web Developer • Tech Consultant • Mobile Retail Owner</div>
+  <!-- PRELOADER -->
+  <div id="preloader" class="preloader">
+    <img src="https://i.ibb.co/n88CVpsy/habib.png" class="preloader-logo" />
+    <div class="loader-ring"></div>
+    <div class="loader-text">Loading Habib Business App...</div>
+  </div>
+
+  <!-- PAGE WRAPPER -->
+  <div class="page-shell">
+
+    <!-- TOAST -->
+    <div id="toast" class="toast">
+      <div class="toast-text">📢 আজকের অফার: Selected মডেলে Special Discount চলছে!</div>
+      <button id="toastClose" class="toast-close">×</button>
+    </div>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+      <div class="navbar-inner container">
+        <a href="index.html" class="brand">
+          <img src="https://i.ibb.co/n88CVpsy/habib.png" class="brand-avatar" />
+          <div>
+            <div class="brand-title">Habibur Rahman</div>
+            <div class="brand-sub">Web Developer • Tech Consultant • Mobile Retail Owner</div>
+          </div>
+        </a>
+
+        <nav class="desktop-nav">
+          <a href="index.html">Home</a>
+          <a href="card.html">Card</a>
+          <a href="shop.html">Shop</a>
+          <a href="blog.html">Blog</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+
+        <div class="nav-controls">
+          <button id="themeToggle" class="theme-toggle">🌙</button>
+
+          <button id="menuToggle" class="menu-toggle">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
       </div>
+
+      <!-- MOBILE DRAWER -->
+      <div id="mobileDrawer" class="mobile-drawer">
+        <div class="drawer-top">
+          <div class="drawer-user">
+            <img src="https://i.ibb.co/n88CVpsy/habib.png" />
+            <div>
+              <div class="drawer-name">Habibur Rahman</div>
+              <div class="drawer-sub">Mobile Shop Owner</div>
+            </div>
+          </div>
+
+          <div class="drawer-auth">
+            <button class="btn-sm">Login</button>
+            <button class="btn-sm btn-outline">Register</button>
+          </div>
+
+          <button id="closeDrawer" class="drawer-close">×</button>
+        </div>
+
+        <nav class="drawer-links">
+          <a href="index.html">Home</a>
+          <a href="card.html">Card</a>
+          <a href="shop.html">Shop</a>
+          <a href="blog.html">Blog</a>
+          <a href="contact.html">Contact</a>
+          <a href="account.html">My Account</a>
+        </nav>
+
+        <div class="drawer-actions">
+          <a href="tel:+8801868461577" class="drawer-call"><i class="fa fa-phone"></i> Call</a>
+          <a href="https://wa.me/8801868461577" target="_blank" class="drawer-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+
+      <!-- VISITING CARD (FULL WIDTH) -->
+      <section class="vc-section">
+        <div class="vc-card">
+          <div class="vc-left">
+            <img src="https://i.ibb.co/n88CVpsy/habib.png" class="vc-photo" />
+          </div>
+
+          <div class="vc-right">
+            <h1 class="vc-name">Habibur Rahman <span class="vc-nick">(Habib)</span></h1>
+            <div class="vc-role">Web Developer • Tech Consultant • Mobile Retail Owner</div>
+            <div class="vc-company">Habib Business</div>
+            <div class="vc-address">Gachbaria College Gate, Chandanish, Chattogram</div>
+
+            <div class="vc-ctas">
+              <a href="habib.vcf" class="btn btn-save">Save Contact</a>
+              <a href="tel:+8801868461577" class="btn btn-call">Call Now</a>
+            </div>
+
+            <div class="vc-socials">
+              <a href="https://www.facebook.com/share/1adkemEFLo/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://www.instagram.com/md_habibur__rahman" target="_blank"><i class="fab fa-instagram"></i></a>
+              <a href="https://youtube.com/@h_a_b_i_b-yt" target="_blank"><i class="fab fa-youtube"></i></a>
+              <a href="https://wa.me/8801868461577" target="_blank"><i class="fab fa-whatsapp"></i></a>
+              <a href="mailto:mshabib471@gmail.com"><i class="fa fa-envelope"></i></a>
+              <a href="https://habib-web.vercel.app" target="_blank"><i class="fa fa-globe"></i></a>
+              <a href="https://www.tiktok.com/@habibur_._rahman" target="_blank"><i class="fab fa-tiktok"></i></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- HERO -->
+      <section class="hero">
+        <div class="container hero-grid">
+
+          <div class="hero-left">
+            <h2 class="hero-title">Your trusted mobile shop — online + offline</h2>
+            <p class="hero-text">Samsung • Xiaomi • Realme • Vivo • iPhone — সব Available।</p>
+
+            <div class="hero-pills">
+              <span>Smartphones</span><span>Glass</span><span>Back Cover</span>
+              <span>TWS</span><span>Watch</span><span>Power Bank</span>
+            </div>
+
+            <div class="hero-ctas">
+              <a href="shop.html" class="btn btn-primary">Open Shop</a>
+              <a href="https://wa.me/8801868461577" class="btn btn-ghost">WhatsApp</a>
+            </div>
+          </div>
+
+          <div class="hero-right">
+            <img src="https://cdni.iconscout.com/illustration/premium/thumb/online-mobile-shopping-illustration-3123927-2606008.png" class="hero-img">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- QUICK LINKS -->
+      <section class="quick-links">
+        <div class="container">
+          <h3 class="section-title">Everything In One Place</h3>
+
+          <div class="quick-grid">
+            <a href="card.html" class="quick-item"><i class="fa-regular fa-address-card"></i> Digital Card</a>
+            <a href="shop.html" class="quick-item"><i class="fa-solid fa-bag-shopping"></i> Mobile Shop</a>
+            <a href="blog.html" class="quick-item"><i class="fa-regular fa-newspaper"></i> Blogs</a>
+            <a href="contact.html" class="quick-item"><i class="fa-regular fa-envelope"></i> Contact</a>
+            <a href="account.html" class="quick-item"><i class="fa-regular fa-user"></i> My Account</a>
+            <a href="https://habib-yt.vercel.app" target="_blank" class="quick-item"><i class="fa-solid fa-gamepad"></i> Games Top-up</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- BLOG -->
+      <section class="blog">
+        <div class="container">
+          <h3 class="section-title">Mini Blogs</h3>
+
+          <div class="blog-grid">
+            <div class="blog-card"><span class="label">Offer</span> নতুন ফোনের ডিসকাউন্ট!</div>
+            <div class="blog-card"><span class="label">Tips</span> Battery Health Tips</div>
+            <div class="blog-card"><span class="label">Service</span> Website & Ecommerce Setup</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="contact">
+        <div class="container contact-grid">
+
+          <div class="contact-card">
+            <h3>Send a quick message</h3>
+
+            <form action="https://formspree.io/f/xdkqzpng" method="POST">
+              <label>Name</label>
+              <input name="name" required>
+
+              <label>Email</label>
+              <input name="email" required type="email">
+
+              <label>Message</label>
+              <textarea name="message" required></textarea>
+
+              <button class="btn btn-primary">Send</button>
+            </form>
+          </div>
+
+          <div class="contact-card">
+            <h3>Shop Contact</h3>
+            <p>📍 Gachbaria College Gate, Chandanish, Chattogram</p>
+
+            <p><b>Phone:</b> 01868461577</p>
+            <p><b>Email:</b> mshabib471@gmail.com</p>
+
+            <a href="tel:+8801868461577" class="btn btn-ghost">Call Now</a>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SOCIAL -->
+      <section class="social">
+        <div class="container">
+          <h3 class="section-title">Stay Connected</h3>
+
+          <div class="social-icons">
+            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://wa.me/8801868461577" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="mailto:mshabib471@gmail.com"><i class="fa fa-envelope"></i></a>
+            <a href="https://tiktok.com" target="_blank"><i class="fab fa-tiktok"></i></a>
+          </div>
+
+          <a href="https://t.me/H_A_B_I_B_Top_1" class="support-card">
+            <i class="fab fa-telegram"></i> Telegram Support
+          </a>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      © <span id="year"></span> Habib Business App — All Rights Reserved
+    </footer>
+
+    <!-- FLOATING WHATSAPP -->
+    <a href="https://wa.me/8801868461577" class="floating-wa">
+      <i class="fab fa-whatsapp"></i>
     </a>
 
-    <button class="menu-toggle" id="menuBtn">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</header>
+    <!-- BOTTOM NAV -->
+    <nav class="bottom-nav">
+      <a href="index.html" class="bn"><i class="fa-solid fa-house"></i><span>Home</span></a>
+      <a href="shop.html" class="bn"><i class="fa-solid fa-bag-shopping"></i><span>Shop</span></a>
+      <a href="contact.html" class="bn"><i class="fa-regular fa-envelope"></i><span>Contact</span></a>
+      <a href="account.html" class="bn"><i class="fa-regular fa-user"></i><span>Account</span></a>
+    </nav>
 
-<!-- DRAWER -->
-<div class="drawer" id="drawer">
-  <div class="drawer-links">
-    <a href="#">Home</a>
-    <a href="#">Card</a>
-    <a href="#">Shop</a>
-    <a href="#">Blog</a>
-    <a href="#">Contact</a>
-  </div>
-</div>
-
-<div class="container">
-
-<!-- ==================== VISITING CARD ==================== -->
-<section class="card">
-  <img src="https://i.ibb.co/n88CVpsy/habib.png">
-  <div>
-    <div class="card-name">Habibur Rahman (Habib)</div>
-    <div class="card-sub">Web Developer • Tech Consultant • Mobile Retail Owner</div>
-    <div class="card-sub">Gachbaria College Gate, Chandanish</div>
-
-    <div class="card-socials">
-      <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-      <a href="#"><i class="fa-brands fa-instagram"></i></a>
-      <a href="#"><i class="fa-brands fa-youtube"></i></a>
-      <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
-      <a href="#"><i class="fa-regular fa-envelope"></i></a>
-      <a href="#"><i class="fa-solid fa-globe"></i></a>
-      <a href="#"><i class="fa-brands fa-tiktok"></i></a>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== HERO ==================== -->
-<section class="hero">
-  <h2 class="hero-title">Your trusted mobile shop — online + offline</h2>
-  <p class="hero-text">Samsung • Xiaomi • Realme • Vivo • iPhone — সব Available।</p>
-
-  <div class="hero-pills">
-    <span>Smartphones</span><span>Glass</span><span>Cover</span>
-    <span>Smart Watch</span><span>TWS</span><span>Power Bank</span>
   </div>
 
-  <div class="hero-ctas">
-    <a href="#" class="btn btn-primary"><i class="fa-solid fa-shop"></i> Open Shop</a>
-    <a href="#" class="btn btn-ghost"><i class="fa-brands fa-whatsapp"></i> WhatsApp Order</a>
-  </div>
-</section>
-
-<!-- ==================== QUICK LINKS ==================== -->
-<h3 style="margin-top:25px;font-size:20px;font-weight:700;">Everything in one place</h3>
-<div class="q-grid">
-  <a class="q-item">Digital Card</a>
-  <a class="q-item">Mobile Shop</a>
-  <a class="q-item">Mini Blogs</a>
-  <a class="q-item">Quick Order</a>
-  <a class="q-item">My Account</a>
-  <a class="q-item">Games Top-up</a>
-</div>
-
-<!-- ==================== BLOG ==================== -->
-<h3 style="margin-top:30px;font-size:20px;font-weight:700;">Mini Blogs</h3>
-<div class="blog-grid">
-  <div class="blog-card">
-    <div class="blog-label">Offer</div>
-    <b>Special Phone Discount</b>
-    <p style="font-size:14px;color:var(--muted);">Selected models এ অফার চলছে।</p>
-  </div>
-
-  <div class="blog-card">
-    <div class="blog-label">Tips</div>
-    <b>Battery Health Tips</b>
-    <p style="font-size:14px;color:var(--muted);">Fast charging কখন ব্যবহার করবেন।</p>
-  </div>
-</div>
-
-<!-- ==================== CONTACT ==================== -->
-<h3 style="margin-top:30px;font-size:20px;font-weight:700;">Quick Message</h3>
-<div class="contact-grid">
-  <div class="contact-card">
-    <input placeholder="Name">
-    <input placeholder="Email">
-    <textarea placeholder="Message"></textarea>
-    <a class="btn btn-primary" style="margin-top:4px;">Send</a>
-  </div>
-
-  <div class="contact-card">
-    <p>📍 Gachbaria College Gate, Chandanish</p>
-    <p><b>Phone:</b> 01868461577</p>
-    <p><b>WhatsApp:</b> Chat Now</p>
-    <p><b>Email:</b> mshabib471@gmail.com</p>
-  </div>
-</div>
-
-<!-- ==================== SUPPORT ==================== -->
-<a class="support-card" href="#">
-  <i class="fa-brands fa-telegram" style="font-size:22px;color:var(--primary);"></i>
-  <div>
-    <b>Help Line (9AM–12PM)</b>
-    <div>@habib_support</div>
-  </div>
-</a>
-
-<!-- ==================== FOOTER ==================== -->
-<footer class="footer">
-  © 2025 Habib Business App — All Rights Reserved.
-</footer>
-
-</div>
-
-<!-- ==================== BOTTOM NAV ==================== -->
-<nav class="bottom-nav">
-  <a href="#"><i class="fa-solid fa-house"></i>Home</a>
-  <a href="#"><i class="fa-solid fa-bag-shopping"></i>Shop</a>
-  <a href="#"><i class="fa-regular fa-envelope"></i>Contact</a>
-  <a href="#"><i class="fa-regular fa-user"></i>Account</a>
-</nav>
-
-</div>
-
-<!-- ==================== JS ==================== -->
-<script>
-const drawer = document.getElementById("drawer");
-document.getElementById("menuBtn").onclick = ()=> drawer.classList.toggle("open");
-
-document.onclick = (e)=>{
-  if(drawer.classList.contains("open") && !drawer.contains(e.target) && e.target.id !== "menuBtn"){
-    drawer.classList.remove("open");
-  }
-};
-</script>
-
+  <script src="script.js?v=5"></script>
 </body>
 </html>
