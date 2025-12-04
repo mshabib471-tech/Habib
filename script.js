@@ -1,45 +1,49 @@
-/* -------------------------------------------------------------
+/* -----------------------------------
    PRELOADER
--------------------------------------------------------------*/
+----------------------------------- */
 window.addEventListener("load", () => {
   const preloader = document.getElementById("preloader");
-  setTimeout(() => {
-    preloader.style.opacity = "0";
-    setTimeout(() => (preloader.style.display = "none"), 400);
-  }, 700);
+  if (preloader) {
+    setTimeout(() => preloader.style.opacity = "0", 300);
+    setTimeout(() => preloader.style.display = "none", 800);
+  }
 });
 
-/* -------------------------------------------------------------
+/* -----------------------------------
    TOAST CLOSE
--------------------------------------------------------------*/
-document.getElementById("toastClose")?.addEventListener("click", () => {
-  document.getElementById("toast").style.display = "none";
-});
+----------------------------------- */
+const toast = document.getElementById("toast");
+const toastClose = document.getElementById("toastClose");
 
-/* -------------------------------------------------------------
-   YEAR AUTO UPDATE (FOOTER)
--------------------------------------------------------------*/
-document.getElementById("year").textContent = new Date().getFullYear();
+if (toastClose) {
+  toastClose.addEventListener("click", () => {
+    toast.style.display = "none";
+  });
+}
 
-/* -------------------------------------------------------------
+/* -----------------------------------
    MOBILE DRAWER
--------------------------------------------------------------*/
-const menuToggle = document.getElementById("menuToggle");
+----------------------------------- */
 const mobileDrawer = document.getElementById("mobileDrawer");
+const menuToggle = document.getElementById("menuToggle");
 const closeDrawer = document.getElementById("closeDrawer");
 
-menuToggle?.addEventListener("click", () => {
-  mobileDrawer.classList.add("open");
-});
+if (menuToggle) {
+  menuToggle.addEventListener("click", () => {
+    mobileDrawer.classList.add("open");
+  });
+}
 
-closeDrawer?.addEventListener("click", () => {
-  mobileDrawer.classList.remove("open");
-});
+if (closeDrawer) {
+  closeDrawer.addEventListener("click", () => {
+    mobileDrawer.classList.remove("open");
+  });
+}
 
-// Close drawer by clicking outside
+/* Close drawer when clicking outside */
 document.addEventListener("click", (e) => {
   if (
-    mobileDrawer.classList.contains("open") &&
+    mobileDrawer &&
     !mobileDrawer.contains(e.target) &&
     !menuToggle.contains(e.target)
   ) {
@@ -47,78 +51,104 @@ document.addEventListener("click", (e) => {
   }
 });
 
-/* -------------------------------------------------------------
-   THEME TOGGLE (Light / Dark)
--------------------------------------------------------------*/
+/* -----------------------------------
+   THEME TOGGLE (Dark / Light)
+----------------------------------- */
 const themeToggle = document.getElementById("themeToggle");
 
-function applyTheme(mode) {
-  if (mode === "dark") {
-    document.body.classList.add("dark");
-    themeToggle.textContent = "☀️";
-  } else {
-    document.body.classList.remove("dark");
+function applyTheme(theme) {
+  if (theme === "light") {
+    document.body.classList.add("light-mode");
     themeToggle.textContent = "🌙";
+  } else {
+    document.body.classList.remove("light-mode");
+    themeToggle.textContent = "☀️";
   }
+  localStorage.setItem("theme", theme);
 }
 
-// Load saved theme
-let savedTheme = localStorage.getItem("theme") || "light";
+let savedTheme = localStorage.getItem("theme") || "dark";
 applyTheme(savedTheme);
 
-// Toggle theme
-themeToggle.addEventListener("click", () => {
-  savedTheme = savedTheme === "light" ? "dark" : "light";
-  localStorage.setItem("theme", savedTheme);
+themeToggle?.addEventListener("click", () => {
+  savedTheme = savedTheme === "dark" ? "light" : "dark";
   applyTheme(savedTheme);
 });
 
-/* -------------------------------------------------------------
-   SCROLL REVEAL ANIMATION
--------------------------------------------------------------*/
-const revealElements = document.querySelectorAll(".reveal");
-
-function revealOnScroll() {
-  revealElements.forEach((el) => {
-    const top = el.getBoundingClientRect().top;
-    if (top < window.innerHeight - 60) el.classList.add("active");
-  });
-}
-
-window.addEventListener("scroll", revealOnScroll);
-window.addEventListener("load", revealOnScroll);
-
-/* -------------------------------------------------------------
+/* -----------------------------------
    PWA INSTALL BUTTON
--------------------------------------------------------------*/
+----------------------------------- */
 let deferredPrompt;
 const installBtn = document.getElementById("installBtn");
 
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
   deferredPrompt = e;
-  installBtn.style.display = "block";
-});
 
-installBtn?.addEventListener("click", async () => {
-  if (!deferredPrompt) return;
+  if (installBtn) installBtn.style.display = "block";
 
-  deferredPrompt.prompt();
-  const choice = await deferredPrompt.userChoice;
-  if (choice.outcome === "accepted") {
-    installBtn.style.display = "none";
-  }
-  deferredPrompt = null;
-});
+  installBtn?.addEventListener("click", () => {
+    if (!deferredPrompt) return;
 
-/* -------------------------------------------------------------
-   SMOOTH SCROLL FOR BOTTOM CONTACT
--------------------------------------------------------------*/
-document.querySelectorAll('.bn[href="#contact"]').forEach((item) => {
-  item.addEventListener("click", (e) => {
-    e.preventDefault();
-    document.querySelector("#contact").scrollIntoView({
-      behavior: "smooth",
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(() => {
+      deferredPrompt = null;
+      installBtn.style.display = "none";
     });
   });
 });
+
+/* -----------------------------------
+   LOGIN / REGISTER MODALS
+----------------------------------- */
+const loginModal = document.getElementById("loginModal");
+const registerModal = document.getElementById("registerModal");
+
+const openLogin = document.getElementById("openLogin");
+const openRegister = document.getElementById("openRegister");
+const closeLogin = document.getElementById("closeLogin");
+const closeRegister = document.getElementById("closeRegister");
+
+openLogin?.addEventListener("click", () => {
+  loginModal.style.display = "flex";
+});
+
+openRegister?.addEventListener("click", () => {
+  registerModal.style.display = "flex";
+});
+
+closeLogin?.addEventListener("click", () => {
+  loginModal.style.display = "none";
+});
+
+closeRegister?.addEventListener("click", () => {
+  registerModal.style.display = "none";
+});
+
+/* Close modal by clicking outside */
+window.addEventListener("click", (e) => {
+  if (e.target === loginModal) loginModal.style.display = "none";
+  if (e.target === registerModal) registerModal.style.display = "none";
+});
+
+/* -----------------------------------
+   SCROLL REVEAL EFFECT
+----------------------------------- */
+const revealElements = document.querySelectorAll(".reveal");
+
+function revealOnScroll() {
+  revealElements.forEach((el) => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 80) {
+      el.classList.add("visible");
+    }
+  });
+}
+
+window.addEventListener("scroll", revealOnScroll);
+revealOnScroll();
+
+/* -----------------------------------
+   AUTO YEAR
+----------------------------------- */
+document.getElementById("year").textContent = new Date().getFullYear();
