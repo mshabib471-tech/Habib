@@ -1,13 +1,13 @@
 <!doctype html>
 <html lang="bn">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Habib Business App — Portfolio & Mobile Shop</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#020617">
+  <meta name="theme-color" content="#020617" />
 
   <!-- favicon -->
-  <link rel="icon" href="https://i.ibb.co/n88CVpsy/habib.png">
+  <link rel="icon" href="https://i.ibb.co/n88CVpsy/habib.png" />
 
   <!-- fonts & icons -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -16,11 +16,12 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!-- main css -->
-  <link rel="stylesheet" href="style.css?v=1">
+  <link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
 
-  
+  <div class="page-shell">
+
     <!-- TOAST -->
     <div id="toast" class="toast">
       <div class="toast-text">📢 আজকের অফার: Selected মডেলে Special Discount চলছে!</div>
@@ -90,7 +91,7 @@
 
       <!-- VISITING CARD (STICKY TOP) -->
       <section class="vc-section container">
-        <div class="vc-card vc-sticky">
+        <div class="vc-card vc-sticky" id="vcCard">
           <div class="vc-left">
             <div class="vc-photo-wrap"><img src="https://i.ibb.co/n88CVpsy/habib.png" alt="Habib"></div>
           </div>
@@ -104,8 +105,8 @@
             <div class="vc-ctas">
               <a href="habib.vcf" download class="btn btn-save"><i class="fa-regular fa-address-card"></i> Save Contact</a>
               <a href="tel:+8801868461577" class="btn btn-call"><i class="fa-solid fa-phone"></i> Call Now</a>
-              <a href="login.html" id="myAccountBtn" class="btn btn-outline" style="display:none"><i class="fa-regular fa-user"></i> My Account</a>
-              <a href="login.html" id="loginBtn" class="btn btn-outline"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+              <a href="#" id="myAccountBtn" class="btn btn-outline" style="display:none"><i class="fa-regular fa-user"></i> My Account</a>
+              <a href="#" id="loginBtn" class="btn btn-outline"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
             </div>
 
             <div class="vc-socials">
@@ -165,7 +166,7 @@
             <a class="quick-item" href="shop.html"><i class="fa-solid fa-bag-shopping qc-icon"></i><div class="qc-title">Mobile Shop</div></a>
             <a class="quick-item" href="blog.html"><i class="fa-regular fa-newspaper qc-icon"></i><div class="qc-title">Mini Blogs</div></a>
             <a class="quick-item" href="contact.html"><i class="fa-regular fa-envelope qc-icon"></i><div class="qc-title">Quick Order</div></a>
-            <a class="quick-item" href="account.html" id="accountQuick"><i class="fa-regular fa-user qc-icon"></i><div class="qc-title">My Account</div></a>
+            <a class="quick-item" href="#" id="accountQuick"><i class="fa-regular fa-user qc-icon"></i><div class="qc-title">My Account</div></a>
             <a class="quick-item" href="https://habib-yt.vercel.app" target="_blank"><i class="fa-solid fa-gamepad qc-icon"></i><div class="qc-title">Games Top-up</div></a>
           </div>
         </div>
@@ -266,11 +267,42 @@
       <a href="index.html" class="bn"><i class="fa-solid fa-house"></i><span>Home</span></a>
       <a href="shop.html" class="bn"><i class="fa-solid fa-bag-shopping"></i><span>Shop</span></a>
       <a href="#contact" class="bn"><i class="fa-regular fa-envelope"></i><span>Contact</span></a>
-      <a href="account.html" class="bn"><i class="fa-regular fa-user"></i><span>My Account</span></a>
+      <a href="#" id="bottomAccount" class="bn"><i class="fa-regular fa-user"></i><span>My Account</span></a>
     </nav>
+
+    <!-- LOGIN / REGISTER MODAL (works on desktop & mobile) -->
+    <div id="authModal" class="auth-modal" aria-hidden="true">
+      <div class="auth-card">
+        <button class="auth-close" id="authClose">✕</button>
+
+        <div class="auth-tabs">
+          <button id="tabLogin" class="tab active">Login</button>
+          <button id="tabSignup" class="tab">Register</button>
+        </div>
+
+        <div id="loginForm" class="auth-form">
+          <label>Email</label>
+          <input id="loginEmail" type="email" placeholder="you@example.com">
+          <label>Password</label>
+          <input id="loginPassword" type="password" placeholder="Password">
+          <button id="doLogin" class="btn btn-primary">Login</button>
+        </div>
+
+        <div id="signupForm" class="auth-form hidden">
+          <label>First name</label>
+          <input id="signupFirst" type="text" placeholder="First name">
+          <label>Email</label>
+          <input id="signupEmail" type="email" placeholder="Email">
+          <label>Password</label>
+          <input id="signupPassword" type="password" placeholder="Password">
+          <button id="doSignup" class="btn btn-primary">Create account</button>
+        </div>
+      </div>
+    </div>
 
   </div>
 
-  <script src="script.js?v=1"></script>
+  <!-- main script -->
+  <script src="script.js?v=2"></script>
 </body>
 </html>
