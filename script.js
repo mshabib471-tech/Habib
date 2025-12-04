@@ -1,160 +1,133 @@
-/* ---------------------------------------------------------
-   AUTO FIX MOBILE ZOOM (IMPORTANT)
-----------------------------------------------------------*/
-document.addEventListener("gesturestart", function (e) {
-  e.preventDefault();
-});
-document.addEventListener("gesturechange", function (e) {
-  e.preventDefault();
-});
-document.addEventListener("gestureend", function (e) {
-  e.preventDefault();
-});
+/* ============================
+   Basic UI interactivity
+   ============================ */
 
+/* CONFIG */
+const PRELOADER_ENABLED = true; // set false to disable preloader completely
+const PRELOADER_TIMEOUT = 3000; // ms
 
-/* ---------------------------------------------------------
-   YEAR FOOTER
-----------------------------------------------------------*/
-document.getElementById("year").textContent = new Date().getFullYear();
+document.addEventListener('DOMContentLoaded', () => {
+  // year
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-
-/* ---------------------------------------------------------
-   TOAST AUTO-HIDE
-----------------------------------------------------------*/
-const toast = document.getElementById("toast");
-const toastClose = document.getElementById("toastClose");
-
-setTimeout(() => {
-  toast.style.display = "none";
-}, 3500);
-
-toastClose.addEventListener("click", () => {
-  toast.style.display = "none";
-});
-
-
-/* ---------------------------------------------------------
-   THEME TOGGLE (DARK / LIGHT)
-----------------------------------------------------------*/
-const themeToggle = document.getElementById("themeToggle");
-let currentTheme = localStorage.getItem("theme") || "light";
-
-if (currentTheme === "dark") document.body.classList.add("dark");
-
-themeToggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-
-  if (document.body.classList.contains("dark")) {
-    localStorage.setItem("theme", "dark");
-    themeToggle.textContent = "☀️";
+  // preloader
+  const preloader = document.getElementById('preloader');
+  if (!PRELOADER_ENABLED) {
+    preloader.classList.add('hidden');
   } else {
-    localStorage.setItem("theme", "light");
-    themeToggle.textContent = "🌙";
+    setTimeout(() => {
+      preloader.classList.add('hidden');
+    }, PRELOADER_TIMEOUT);
   }
-});
 
-// initial icon
-themeToggle.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
+  // toast close
+  const toastClose = document.getElementById('toastClose');
+  const toast = document.getElementById('toast');
+  toastClose?.addEventListener('click', () => toast.style.display = 'none');
 
+  // mobile drawer
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileDrawer = document.getElementById('mobileDrawer');
+  const closeDrawer = document.getElementById('closeDrawer');
+  menuToggle?.addEventListener('click', () => {
+    mobileDrawer.classList.toggle('open');
+    mobileDrawer.setAttribute('aria-hidden', mobileDrawer.classList.contains('open') ? 'false' : 'true');
+  });
+  closeDrawer?.addEventListener('click', () => {
+    mobileDrawer.classList.remove('open');
+    mobileDrawer.setAttribute('aria-hidden', 'true');
+  });
 
-/* ---------------------------------------------------------
-   MOBILE DRAWER
-----------------------------------------------------------*/
-const menuToggle = document.getElementById("menuToggle");
-const mobileDrawer = document.getElementById("mobileDrawer");
-const closeDrawer = document.getElementById("closeDrawer");
+  // theme toggle (light/dark)
+  const themeToggle = document.getElementById('themeToggle');
+  const currentTheme = localStorage.getItem('hb_theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  if (currentTheme === 'dark') document.body.classList.add('dark');
+  themeToggle?.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    localStorage.setItem('hb_theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+  });
 
-menuToggle.addEventListener("click", () => {
-  mobileDrawer.classList.add("open");
-});
+  // login/register simulation using localStorage
+  const loginBtn = document.getElementById('loginBtn');
+  const myAccountBtn = document.getElementById('myAccountBtn');
+  const drawerAuthAction = document.getElementById('drawerAuthAction');
+  const accountQuick = document.getElementById('accountQuick');
 
-closeDrawer.addEventListener("click", () => {
-  mobileDrawer.classList.remove("open");
-});
-
-
-/* ---------------------------------------------------------
-   LOGIN STATUS DETECTION (LOCALSTORAGE)
-----------------------------------------------------------*/
-// যদি firebase login ব্যবহার করো = এখানে firebase দিয়ে detect হবে
-// এখন demo না—REAL login.html ব্যবহার করবে।
-
-const loginBtn = document.getElementById("loginBtn");
-const myAccountBtn = document.getElementById("myAccountBtn");
-const accountQuick = document.getElementById("accountQuick");
-const drawerAuthAction = document.getElementById("drawerAuthAction");
-
-// চেক ইউজার লগইন কিনা
-let userLogged = localStorage.getItem("userLogged") || "no";
-
-function updateLoginUI() {
-  if (userLogged === "yes") {
-    loginBtn.style.display = "none";
-    myAccountBtn.style.display = "inline-block";
-    accountQuick.href = "account.html";
-    drawerAuthAction.textContent = "My Account";
-    drawerAuthAction.href = "account.html";
-  } else {
-    loginBtn.style.display = "inline-block";
-    myAccountBtn.style.display = "none";
-    drawerAuthAction.textContent = "Login / Register";
-    drawerAuthAction.href = "login.html";
-  }
-}
-updateLoginUI();
-
-
-/* ---------------------------------------------------------
-   PWA INSTALL
-----------------------------------------------------------*/
-let deferredPrompt;
-const installBtn = document.getElementById("installBtn");
-
-window.addEventListener("beforeinstallprompt", (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  installBtn.style.display = "inline-block";
-});
-
-installBtn.addEventListener("click", async () => {
-  if (!deferredPrompt) return;
-
-  deferredPrompt.prompt();
-
-  const result = await deferredPrompt.userChoice;
-
-  if (result.outcome === "accepted") {
-    console.log("App Installed");
-  }
-});
-
-
-/* ---------------------------------------------------------
-   SCROLL REVEAL ANIMATION
-----------------------------------------------------------*/
-const revealElements = document.querySelectorAll(".reveal");
-
-function revealOnScroll() {
-  for (let el of revealElements) {
-    let top = el.getBoundingClientRect().top;
-    if (top < window.innerHeight - 80) {
-      el.classList.add("active");
+  function updateAuthUI(){
+    const logged = localStorage.getItem('hb_logged') === '1';
+    if (logged) {
+      loginBtn && (loginBtn.style.display = 'none');
+      myAccountBtn && (myAccountBtn.style.display = 'inline-flex');
+      drawerAuthAction && (drawerAuthAction.textContent = 'My Account');
+      accountQuick && (accountQuick.setAttribute('href','account.html'));
+    } else {
+      loginBtn && (loginBtn.style.display = 'inline-flex');
+      myAccountBtn && (myAccountBtn.style.display = 'none');
+      drawerAuthAction && (drawerAuthAction.textContent = 'Login / Register');
+      accountQuick && (accountQuick.setAttribute('href','login.html'));
     }
   }
-}
-window.addEventListener("scroll", revealOnScroll);
-revealOnScroll();
+  updateAuthUI();
 
+  // quick login simulation (for testing) — click loginBtn will toggle logged state for now
+  loginBtn?.addEventListener('click', (e)=>{
+    e.preventDefault();
+    // open actual login page if you have one
+    // for demo toggle:
+    const realLoginUrl = 'login.html';
+    // if you want demo quick toggle uncomment:
+    // localStorage.setItem('hb_logged','1'); updateAuthUI(); return;
+    window.location.href = realLoginUrl;
+  });
 
-/* ---------------------------------------------------------
-   REMOVE DOUBLE-TAP ZOOM ON MOBILE
-----------------------------------------------------------*/
-let lastTouchTime = 0;
+  // drawer auth action -> if logged go account else login
+  drawerAuthAction?.addEventListener('click', (e)=>{
+    e.preventDefault();
+    const logged = localStorage.getItem('hb_logged') === '1';
+    if (logged) window.location.href = 'account.html';
+    else window.location.href = 'login.html';
+  });
 
-document.addEventListener("touchend", function (event) {
-  const now = new Date().getTime();
-  if (now - lastTouchTime <= 300) {
-    event.preventDefault();
+  // connect icons: ensure they are clickable and keyboard accessible (no further js needed)
+
+  // Install PWA prompt handling
+  let deferredPrompt = null;
+  const installBtn = document.getElementById('installBtn');
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (installBtn) installBtn.style.display = 'inline-block';
+  });
+
+  installBtn?.addEventListener('click', async (e) => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const choice = await deferredPrompt.userChoice;
+      if (choice.outcome === 'accepted') {
+        console.log('User accepted the A2HS prompt');
+      } else {
+        console.log('User dismissed the A2HS prompt');
+      }
+      deferredPrompt = null;
+      installBtn.style.display = 'none';
+    } else {
+      // If no PWA prompt available, you might show instructions
+      alert('Install prompt not available. Use browser menu → Add to Home screen.');
+    }
+  });
+
+  // Prevent horizontal zoom/overflow: ensure body scale stays 1 on mobile double-tap etc.
+  // (We keep accessibility - do not fully disable user zoom; but CSS responsive fixes layout)
+});
+
+/* ============================
+   Small helper functions
+   ============================ */
+(function(){
+  // Expose simple auth helpers for your real login page
+  window.hbAuth = {
+    login: function(){ localStorage.setItem('hb_logged','1'); location.href = 'index.html'; },
+    logout: function(){ localStorage.removeItem('hb_logged'); location.href = 'index.html'; },
+    isLogged: function(){ return localStorage.getItem('hb_logged') === '1'; }
   }
-  lastTouchTime = now;
-}, false);
+})();
