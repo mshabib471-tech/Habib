@@ -39,32 +39,6 @@ const myAccountBtn = document.getElementById('myAccountBtn');
 const drawerAuthAction = document.getElementById('drawerAuthAction');
 const accountQuick = document.getElementById('accountQuick');
 
-/* ======== PRELOADER SYSTEM ======== */
-const PRELOADER_TIME = 2800; // Best timing (smooth + premium feel)
-
-(function () {
-  const preloader = document.getElementById("preloader");
-  if (!preloader) return;
-
-  // Hide Function
-  const hidePreloader = () => {
-    if (!preloader.classList.contains("fade-out")) {
-      preloader.classList.add("fade-out");
-      setTimeout(() => {
-        preloader.classList.add("preloader-hidden");
-      }, 700);
-    }
-  };
-
-  // Timer Hide
-  setTimeout(hidePreloader, PRELOADER_TIME);
-
-  // If page loads earlier/later – still hide smoothly
-  window.addEventListener("load", () => {
-    setTimeout(hidePreloader, 300);
-  });
-})();
-
 // ---------- THEME ----------
 const savedTheme = localStorage.getItem('habib_theme');
 if (savedTheme === 'dark') document.body.classList.add('dark');
