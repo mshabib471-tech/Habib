@@ -1,147 +1,181 @@
-/* ============================
-   Global UI Script
-   - Preloader safe hide
-   - Theme toggle (localStorage)
-   - Mobile menu toggle
-   - Reveal on scroll
-   - Toast control
-   - PWA install prompt handling
-   - Auto year
-   ============================ */
-
-document.addEventListener("DOMContentLoaded", () => {
-
-  const body = document.body;
-  const preloader = document.getElementById("preloader");
-  const themeToggle = document.getElementById("themeToggle");
-  const navToggle = document.getElementById("navToggle");
-  const mobileMenu = document.getElementById("mobileMenu");
-  const toast = document.getElementById("toast");
-  const toastClose = document.getElementById("toastClose");
-  const installBtn = document.getElementById("installBtn");
-  const yearSpan = document.getElementById("year");
-
-  /* -------------------------
-     PRELOADER (SAFE)
-  ------------------------- */
+/* =========================================================
+   1. PRELOADER
+========================================================= */
+window.addEventListener("load", () => {
+  const pre = document.getElementById("preloader");
   setTimeout(() => {
-    if(preloader){
-      preloader.style.opacity = "0";
-      preloader.style.pointerEvents = "none";
-      setTimeout(()=> { preloader.style.display = "none"; }, 350);
-    }
-  }, 900); // 0.9s to feel snappy
+    pre.style.opacity = "0";
+    pre.style.pointerEvents = "none";
+  }, 300);
+});
 
-  /* -------------------------
-     THEME TOGGLE (persist)
-  ------------------------- */
-  const savedTheme = localStorage.getItem("theme");
-  if(savedTheme === "dark"){
-    body.classList.add("dark");
-    if(themeToggle) themeToggle.textContent = "☀️";
+/* =========================================================
+   2. THEME TOGGLE (Light / Dark Mode)
+========================================================= */
+const themeBtn = document.getElementById("themeToggle");
+
+function applyTheme(mode) {
+  if (mode === "dark") {
+    document.body.classList.add("dark");
+    themeBtn.textContent = "☀️";
   } else {
-    body.classList.remove("dark");
-    if(themeToggle) themeToggle.textContent = "🌙";
+    document.body.classList.remove("dark");
+    themeBtn.textContent = "🌙";
   }
+}
 
-  if(themeToggle){
-    themeToggle.addEventListener("click", () => {
-      body.classList.toggle("dark");
-      const isDark = body.classList.contains("dark");
-      localStorage.setItem("theme", isDark ? "dark" : "light");
-      themeToggle.textContent = isDark ? "☀️" : "🌙";
-    });
+if (localStorage.getItem("theme")) {
+  applyTheme(localStorage.getItem("theme"));
+}
+
+themeBtn.addEventListener("click", () => {
+  const current = document.body.classList.contains("dark") ? "dark" : "light";
+  const newTheme = current === "dark" ? "light" : "dark";
+  localStorage.setItem("theme", newTheme);
+  applyTheme(newTheme);
+});
+
+/* =========================================================
+   3. MOBILE DRAWER MENU
+========================================================= */
+const drawer = document.getElementById("mobileDrawer");
+const menuBtn = document.getElementById("navToggle");
+const closeBtn = document.getElementById("drawerClose");
+
+menuBtn.addEventListener("click", () => {
+  drawer.classList.add("open");
+});
+closeBtn.addEventListener("click", () => {
+  drawer.classList.remove("open");
+});
+
+/* CLICK OUTSIDE TO CLOSE */
+document.addEventListener("click", (e) => {
+  if (!drawer.contains(e.target) && !menuBtn.contains(e.target)) {
+    drawer.classList.remove("open");
   }
+});
 
-  /* -------------------------
-     MOBILE MENU
-  ------------------------- */
-  if(navToggle && mobileMenu){
-    navToggle.addEventListener("click", () => {
-      mobileMenu.classList.toggle("open");
-      // accessibility flag
-      const open = mobileMenu.classList.contains("open");
-      mobileMenu.setAttribute("aria-hidden", !open);
-    });
+/* =========================================================
+   4. TOAST ALERT
+========================================================= */
+const toast = document.getElementById("toast");
+const toastClose = document.getElementById("toastClose");
+
+setTimeout(() => {
+  toast.classList.add("show");
+}, 1500);
+
+toastClose.addEventListener("click", () => {
+  toast.classList.remove("show");
+});
+
+/* =========================================================
+   5. FOOTER YEAR
+========================================================= */
+document.getElementById("year").textContent = new Date().getFullYear();
+
+/* =========================================================
+   6. PWA INSTALL HANDLER
+========================================================= */
+let deferredPrompt;
+const installBtn = document.getElementById("installBtn");
+
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  installBtn.style.display = "inline-flex";
+});
+
+installBtn.addEventListener("click", () => {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt = null;
   }
+});
 
-  /* -------------------------
-     REVEAL ON SCROLL
-  ------------------------- */
-  const revealElems = document.querySelectorAll(".reveal");
-  const revealOnScroll = () => {
-    revealElems.forEach(el => {
-      const rect = el.getBoundingClientRect();
-      if(rect.top < (window.innerHeight - 80)) el.classList.add("visible");
-    });
-  };
-  revealOnScroll();
-  window.addEventListener("scroll", revealOnScroll, { passive: true });
+/* =========================================================
+   7. ANIMATION ON SCROLL
+========================================================= */
+const revealElements = document.querySelectorAll(".reveal");
 
-  /* -------------------------
-     TOAST
-  ------------------------- */
-  // show toast 2.4s after load for a short time
-  setTimeout(()=> {
-    if(toast) toast.classList.add("show");
-  }, 2400);
-
-  if(toastClose){
-    toastClose.addEventListener("click", () => {
-      if(toast) toast.classList.remove("show");
-    });
-  }
-
-  // auto hide after 8s
-  setTimeout(()=> { if(toast) toast.classList.remove("show"); }, 11000);
-
-  /* -------------------------
-     PWA INSTALL PROMPT
-  ------------------------- */
-  let deferredPrompt = null;
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    // show install button if available
-    if(installBtn) installBtn.style.display = "inline-flex";
-  });
-
-  if(installBtn){
-    installBtn.addEventListener("click", async () => {
-      if(deferredPrompt){
-        deferredPrompt.prompt();
-        const choice = await deferredPrompt.userChoice;
-        // optional: track result
-        deferredPrompt = null;
-      } else {
-        // fallback: show instructions to add to home screen
-        alert("অ্যাপ ইনস্টল করতে: ব্রাউজারের মেনু → Add to Home screen.");
-      }
-    });
-  }
-
-  /* -------------------------
-     AUTO YEAR
-  ------------------------- */
-  if(yearSpan) yearSpan.textContent = new Date().getFullYear();
-
-  /* -------------------------
-     Bottom nav active highlight
-  ------------------------- */
-  const bnLinks = document.querySelectorAll(".bottom-nav a");
-  bnLinks.forEach(a => {
-    if(a.getAttribute("href") && location.href.includes(a.getAttribute("href"))){
-      a.classList.add("active");
+function revealOnScroll() {
+  const windowHeight = window.innerHeight;
+  revealElements.forEach((el) => {
+    const elementTop = el.getBoundingClientRect().top;
+    if (elementTop < windowHeight - 80) {
+      el.classList.add("active");
     }
   });
+}
 
-  /* -------------------------
-     Accessibility helpers (escape to close mobile menu)
-  ------------------------- */
-  document.addEventListener("keydown", (e) => {
-    if(e.key === "Escape" && mobileMenu && mobileMenu.classList.contains("open")){
-      mobileMenu.classList.remove("open");
+window.addEventListener("scroll", revealOnScroll);
+revealOnScroll();
+
+/* =========================================================
+   8. FORM SAFE SUBMIT
+========================================================= */
+const forms = document.querySelectorAll("form");
+
+forms.forEach((form) => {
+  form.addEventListener("submit", () => {
+    const btn = form.querySelector("button[type='submit']");
+    if (btn) {
+      btn.textContent = "Sending...";
+      btn.disabled = true;
     }
   });
+});
 
-}); // DOMContentLoaded end
+/* =========================================================
+   9. LOGIN / REGISTER AUTOMATIC SWITCH
+========================================================= */
+const loginBtn = document.getElementById("drawerLogin");
+const registerBtn = document.getElementById("drawerRegister");
+const drawerTitle = document.getElementById("drawerTitle");
+
+let loggedIn = false;  
+// future: real login system (firebase/php)
+
+function updateDrawer() {
+  if (loggedIn) {
+    drawerTitle.textContent = "My Account";
+    loginBtn.style.display = "none";
+    registerBtn.style.display = "none";
+  } else {
+    drawerTitle.textContent = "Welcome!";
+    loginBtn.style.display = "inline-block";
+    registerBtn.style.display = "inline-block";
+  }
+}
+
+updateDrawer();
+
+/* DEMO LOGIN */
+if (loginBtn) {
+  loginBtn.addEventListener("click", () => {
+    loggedIn = true;
+    localStorage.setItem("logged", true);
+    updateDrawer();
+    alert("Logged in (demo). Now drawer shows My Account!");
+  });
+}
+
+if (localStorage.getItem("logged")) {
+  loggedIn = true;
+  updateDrawer();
+}
+
+/* =========================================================
+   10. FIX EMPTY LINKS SCROLL TOP
+========================================================= */
+document.querySelectorAll("a[href='#']").forEach((a) => {
+  a.addEventListener("click", (e) => e.preventDefault());
+});
+
+/* =========================================================
+   11. TOUCH SCROLL LOCK ON DRAWER
+========================================================= */
+drawer.addEventListener("touchmove", function (e) {
+  e.stopPropagation();
+});
