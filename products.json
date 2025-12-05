@@ -1,0 +1,61 @@
+{
+  "categories": [
+    { "name": "Smartphones", "icon": "https://i.ibb.co/8m1ZV4x/phone.png" },
+    { "name": "Back Cover", "icon": "https://i.ibb.co/NKbhCzk/case.png" },
+    { "name": "Glass", "icon": "https://i.ibb.co/0JrnLWz/glass.png" },
+    { "name": "Smart Watch", "icon": "https://i.ibb.co/Db6bzcp/watch.png" },
+    { "name": "TWS", "icon": "https://i.ibb.co/7Q8ZL2M/earbuds.png" },
+    { "name": "Power Bank", "icon": "https://i.ibb.co/smCdjXM/powerbank.png" }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Samsung A54 5G",
+      "price": 38990,
+      "category": "Smartphones",
+      "image": "https://i.ibb.co/k9NhVqX/a54.png"
+    },
+    {
+      "id": 2,
+      "name": "Realme 11 Pro",
+      "price": 32990,
+      "category": "Smartphones",
+      "image": "https://i.ibb.co/9nY1QN1/realme11.png"
+    },
+    {
+      "id": 3,
+      "name": "Gorilla Glass Pro",
+      "price": 150,
+      "category": "Glass",
+      "image": "https://i.ibb.co/QvTqMJq/glass2.png"
+    },
+    {
+      "id": 4,
+      "name": "Premium Back Cover",
+      "price": 250,
+      "category": "Back Cover",
+      "image": "https://i.ibb.co/3r0FBZP/backcover.png"
+    },
+    {
+      "id": 5,
+      "name": "Haylou LS02 Smart Watch",
+      "price": 1990,
+      "category": "Smart Watch",
+      "image": "https://i.ibb.co/9rPbfz3/watch2.png"
+    },
+    {
+      "id": 6,
+      "name": "Lenovo LP40 TWS",
+      "price": 750,
+      "category": "TWS",
+      "image": "https://i.ibb.co/ZT1WjFc/tws.png"
+    },
+    {
+      "id": 7,
+      "name": "Baseus 20W Power Bank",
+      "price": 1290,
+      "category": "Power Bank",
+      "image": "https://i.ibb.co/Zmnc1tT/pb.png"
+    }
+  ]
+}
