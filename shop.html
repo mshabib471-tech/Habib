@@ -1,278 +1,623 @@
-<!doctype html>
-<html lang="bn">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Shop — Habib Business App</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Shop — Demo E-Commerce Landing</title>
 
-  <!-- Prevent mobile zoom jump (user requested) -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <meta name="theme-color" content="#0b1220" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 
-  <!-- favicon -->
-  <link rel="icon" href="https://i.ibb.co/n88CVpsy/habib.png">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-NY6mVQe..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <!-- fonts & icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-  <!-- main css (Part 2 will provide full style.css) -->
-  <link rel="stylesheet" href="shop.css">
-
-  <!-- small inline styles for immediate layout safety -->
   <style>
-    :root{--container:1200px}
-    body{font-family:Inter,system-ui,Arial;margin:0;background:linear-gradient(180deg,#f6f7fb,#eef1f6)}
-    .container{max-width:var(--container);margin:0 auto;padding:18px}
-    a{color:inherit;text-decoration:none}
+    /* RESET & BASE */
+    * { box-sizing: border-box; }
+    html,body { margin:0; padding:0; font-family: 'Poppins', sans-serif; background:#f2f4f7; color:#222; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width:100%; display:block; }
+
+    /* LAYOUT CONTAINER */
+    .wrap { max-width:1200px; margin:30px auto; background:#fff; box-shadow:0 10px 30px rgba(0,0,0,0.06); border-radius:6px; overflow:hidden; }
+
+    /* TOP BAR / NAV */
+    .topbar { display:flex; align-items:center; justify-content:space-between; padding:16px 28px; border-bottom:4px solid #6b2fa3; }
+    .logo { display:flex; align-items:center; gap:12px; }
+    .logo img { width:120px; height:auto; }
+    .searchbar { flex:1; margin:0 24px; position:relative; }
+    .searchbar input { width:100%; padding:12px 48px 12px 18px; border-radius:30px; border:1px solid #e6e6e6; outline:none; font-size:14px; }
+    .searchbar button { position:absolute; right:6px; top:6px; bottom:6px; background:#6b2fa3; color:#fff; border:none; padding:0 18px; border-radius:24px; cursor:pointer; }
+    .top-actions { display:flex; gap:12px; align-items:center; }
+    .top-actions a { font-size:14px; color:#555; padding:8px 10px; border-radius:6px; }
+    .cart { background:#fff; border:1px solid #eee; padding:8px 12px; border-radius:6px; display:flex; gap:8px; align-items:center; }
+
+    /* MAIN NAV */
+    .mainnav { background:#6b2fa3; color:#fff; padding:10px 28px; display:flex; gap:18px; align-items:center; }
+    .mainnav .menu { display:flex; gap:12px; align-items:center; }
+    .mainnav a { color:#fff; font-weight:600; font-size:14px; padding:8px 10px; border-radius:6px; }
+    .mainnav .show-cat { background:#5a2289; padding:8px 12px; border-radius:6px; }
+
+    /* HERO (slider imitation) */
+    .hero { padding:34px 40px; display:flex; gap:28px; align-items:center; justify-content:space-between; }
+    .hero .left { flex:1; }
+    .hero h3 { color:#6b2fa3; margin:0 0 8px 0; font-weight:700; }
+    .hero h1 { font-size:30px; margin:0 0 12px; }
+    .hero p { color:#666; margin:0 0 18px; line-height:1.4; }
+    .hero .cta { display:inline-block; background:#ff7a00; color:#fff; padding:12px 20px; border-radius:28px; font-weight:700; }
+    .hero .right { width:360px; text-align:center; }
+    .hero .product-mock { display:inline-block; width:260px; transform:rotate(-12deg); }
+
+    /* CATEGORIES ICON ROW */
+    .categories { padding:12px 40px 28px; display:flex; gap:18px; justify-content:space-between; align-items:center; flex-wrap:wrap; }
+    .cat { width:110px; text-align:center; background:#fff; border-radius:10px; padding:12px; box-shadow:0 6px 18px rgba(0,0,0,0.04); }
+    .cat img { width:54px; height:54px; margin-bottom:8px; }
+    .cat span { display:block; font-size:13px; color:#333; font-weight:600; }
+
+    /* SECTION TITLE */
+    .section { padding:30px 40px; }
+    .section .title-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; }
+    .section h2 { margin:0; font-size:20px; }
+    .view-all { background:#5a2a86; color:#fff; padding:8px 12px; border-radius:8px; font-size:13px; }
+
+    /* PRODUCT GRID */
+    .product-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:18px; }
+    .product { background:#fff; border-radius:10px; padding:12px; border:1px solid #f0f0f0; box-shadow:0 6px 18px rgba(0,0,0,0.03); position:relative; overflow:hidden; }
+    .product .badge { position:absolute; left:12px; top:12px; background:#ff4d7a; color:#fff; padding:4px 8px; font-size:12px; border-radius:6px; font-weight:700; }
+    .product img { width:100%; height:140px; object-fit:contain; margin-bottom:8px; }
+    .product .meta { font-size:12px; color:#7a7a7a; margin-bottom:6px; }
+    .product .name { font-weight:700; margin-bottom:6px; font-size:14px; }
+    .product .price { font-weight:800; color:#e04b3c; }
+    .product .oldprice { text-decoration:line-through; color:#b0b0b0; font-size:12px; margin-right:8px; }
+
+    .card-actions { display:flex; gap:8px; margin-top:10px; align-items:center; }
+    .action-btn { border:1px solid #eee; padding:8px 10px; border-radius:8px; font-size:13px; cursor:pointer; background:#fafafa; }
+    .fav { margin-left:auto; color:#6b2fa3; font-weight:700; }
+
+    /* BANNERS (two-column) */
+    .banners { display:grid; grid-template-columns:1fr 1fr; gap:18px; padding:20px 40px; }
+    .banner { background-size:cover; background-position:center; border-radius:12px; min-height:160px; position:relative; overflow:hidden; color:#fff; }
+    .banner .overlay { position:absolute; inset:0; background:linear-gradient(90deg, rgba(0,0,0,0.35), rgba(0,0,0,0.15)); display:flex; align-items:center; padding:18px; }
+    .banner h3 { margin:0; font-size:22px; }
+    .banner .btn { margin-top:10px; display:inline-block; background:#ff7a00; padding:8px 12px; border-radius:8px; color:#fff; font-weight:700; }
+
+    /* BRANDS CAROUSEL */
+    .brands { display:flex; gap:12px; padding:18px 40px; overflow-x:auto; }
+    .brand { min-width:110px; background:#fff; border-radius:8px; padding:18px; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 18px rgba(0,0,0,0.03); }
+
+    /* NEWSLETTER / FOOTER */
+    .newsletter { background:#f6f6fb; padding:20px 40px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .newsletter input { padding:12px 16px; border-radius:30px; border:1px solid #e7e7e7; width:70%; }
+    .newsletter button { background:#6b2fa3; color:#fff; border:none; padding:12px 18px; border-radius:30px; cursor:pointer; }
+
+    footer { background:#fff; padding:28px 40px; color:#666; display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+    footer .col { width:240px; }
+    footer small { color:#999; }
+
+    /* RESPONSIVE */
+    @media (max-width:1100px) {
+      .product-grid { grid-template-columns:repeat(3,1fr); }
+      .hero .right { display:none; }
+    }
+    @media (max-width:720px) {
+      .wrap { margin:12px; }
+      .topbar { flex-direction:column; gap:12px; align-items:flex-start; }
+      .searchbar { width:100%; margin:0; }
+      .categories { justify-content:flex-start; gap:12px; overflow-x:auto; padding-left:18px; }
+      .product-grid { grid-template-columns:repeat(2,1fr); }
+      .banners { grid-template-columns:1fr; padding:12px; }
+      .brands { padding-left:12px; }
+      footer .col { width:100%; }
+    }
+
+    /* small utility */
+    .muted { color:#7a7a7a; font-size:13px; }
   </style>
 </head>
 <body>
 
-  <!-- NAVBAR (sticky) -->
-  <header class="navbar">
-    <div class="navbar-inner container">
-      <a href="index.html" class="brand">
-        <div class="brand-avatar"><img src="https://i.ibb.co/n88CVpsy/habib.png" alt="Habib"></div>
-        <div class="brand-text">
-          <div class="brand-title">Habibur Rahman</div>
-          <div class="brand-sub">Web Developer • Mobile Retail Owner</div>
+  <div class="wrap">
+
+    <!-- TOP HEADER -->
+    <div class="topbar">
+      <div class="logo">
+        <img src="https://via.placeholder.com/160x40?text=LOGO" alt="Logo">
+      </div>
+
+      <div class="searchbar" role="search">
+        <input type="search" id="q" placeholder="Search Products, brands and more..." aria-label="Search">
+        <button type="button"><i class="fa fa-search"></i></button>
+      </div>
+
+      <div class="top-actions">
+        <a href="#" class="muted"><i class="fa fa-globe"></i> বাংলা</a>
+        <a href="#" class="muted"><i class="fa fa-user"></i> Sign in</a>
+        <div class="cart">
+          <i class="fa fa-shopping-cart"></i>
+          <div style="font-size:13px;">Cart <strong style="margin-left:6px;color:#6b2fa3;">2</strong></div>
         </div>
-      </a>
-
-      <nav class="nav-links desktop-nav" id="desktopNav">
-        <a href="index.html">Home</a>
-        <a href="card.html">Card</a>
-        <a class="active" href="shop.html">Shop</a>
-        <a href="blog.html">Blog</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-
-      <div class="nav-controls">
-        <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
-        <button id="menuToggle" class="menu-toggle" aria-label="Open menu">
-          <span></span><span></span><span></span>
-        </button>
       </div>
     </div>
 
-    <!-- mobile drawer -->
-    <div id="mobileDrawer" class="mobile-drawer" aria-hidden="true">
-      <div class="drawer-top">
-        <div class="drawer-user">
-          <img src="https://i.ibb.co/n88CVpsy/habib.png" alt="Habib" />
-          <div>
-            <div class="drawer-name">Habibur Rahman</div>
-            <div class="drawer-sub">Mobile Shop Owner</div>
-          </div>
-        </div>
-        <button id="closeDrawer" class="drawer-close">✕</button>
+    <!-- NAV -->
+    <div class="mainnav">
+      <div class="menu">
+        <a href="#" class="show-cat"><i class="fa fa-bars"></i> Show all categories</a>
+        <a href="#">My Orders</a>
+        <a href="#">Today's Deals</a>
+        <a href="#">Campaigns</a>
+        <a href="#">Top Brands</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
       </div>
-
-      <nav class="drawer-links">
-        <a href="index.html">Home</a>
-        <a href="card.html">Card</a>
-        <a href="shop.html">Shop</a>
-        <a href="blog.html">Blog</a>
-        <a href="contact.html">Contact</a>
-        <a href="login.html" id="drawerAuthAction">Login / Register</a>
-      </nav>
     </div>
-  </header>
 
-  <main>
-
-    <!-- HERO / TOP SLIDER AREA -->
+    <!-- HERO -->
     <section class="hero">
-      <div class="container hero-inner">
-        <div class="hero-left">
-          <h1 class="hero-title">Shop — Mobile, Accessories & More</h1>
-          <p class="hero-sub">Premium phones, accessories, and local warranty — সবই এক জায়গায়।</p>
-
-          <!-- category chips -->
-          <div class="category-chips" id="categoryChips">
-            <!-- JS: will render categories here -->
-          </div>
-
-          <!-- quick CTAs -->
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#productsGrid">Open Shop →</a>
-            <a class="btn btn-ghost" href="https://wa.me/8801868461577" target="_blank">WhatsApp Order</a>
-          </div>
-        </div>
-
-        <div class="hero-right">
-          <!-- slider placeholder (JS will enable slider images or keep static fallback) -->
-          <div class="main-slider" id="mainSlider">
-            <div class="slide">
-              <img src="https://cdni.iconscout.com/illustration/premium/thumb/online-mobile-shopping-illustration-3123927-2606008.png" alt="Slide">
-            </div>
-          </div>
-        </div>
+      <div class="left">
+        <h3>XIAOMI</h3>
+        <h1>Xiaomi Smart Band 8 Active</h1>
+        <p>Enjoy water resistance to a depth of 50 meters and an impressive battery life lasting up to 14 days. Embrace style and functionality with the latest fitness band.</p>
+        <a class="cta" href="#">অর্ডার করুন</a>
+      </div>
+      <div class="right">
+        <img class="product-mock" src="https://via.placeholder.com/260x260?text=Band" alt="Band">
       </div>
     </section>
 
-    <!-- CATEGORIES ROW (icons) -->
-    <section class="categories-section">
-      <div class="container">
-        <div class="categories-row" id="categoriesRow">
-          <!-- JS will populate categories icons -->
-        </div>
+    <!-- CATEGORIES ROW -->
+    <section class="categories" aria-label="Categories">
+      <div class="cat">
+        <img src="https://via.placeholder.com/64?text=📱" alt="Mobiles">
+        <span>Mobiles</span>
+      </div>
+      <div class="cat">
+        <img src="https://via.placeholder.com/64?text=💻" alt="Laptops">
+        <span>Laptops</span>
+      </div>
+      <div class="cat">
+        <img src="https://via.placeholder.com/64?text=🎮" alt="Kidsgame">
+        <span>Kidsgame</span>
+      </div>
+      <div class="cat">
+        <img src="https://via.placeholder.com/64?text=🍳" alt="Home & Kitchen">
+        <span>Home & Kitchen</span>
+      </div>
+      <div class="cat">
+        <img src="https://via.placeholder.com/64?text=🔋" alt="Powerbank">
+        <span>Powerbank</span>
+      </div>
+      <div class="cat">
+        <img src="https://via.placeholder.com/64?text=⌚" alt="Watches">
+        <span>Watches</span>
+      </div>
+      <div class="cat">
+        <img src="https://via.placeholder.com/64?text=🛴" alt="Electric">
+        <span>Electric</span>
       </div>
     </section>
 
-    <!-- HOT PRODUCTS (dynamic from products.json) -->
-    <section class="products-section">
-      <div class="container">
-        <div class="section-head">
-          <h2>Hot Products</h2>
-          <div class="products-controls">
-            <label class="small">Sort:</label>
-            <select id="sortSelect">
-              <option value="featured">Featured</option>
-              <option value="price-asc">Price low → high</option>
-              <option value="price-desc">Price high → low</option>
-              <option value="newest">Newest</option>
-            </select>
-          </div>
-        </div>
-
-        <div id="productsGrid" class="products-grid">
-          <!-- JS renders product cards here from products.json -->
-        </div>
-
-        <!-- load more -->
-        <div class="load-more-wrap">
-          <button id="loadMoreBtn" class="btn btn-outline">Load more</button>
-        </div>
+    <!-- HOT PRODUCT -->
+    <section class="section">
+      <div class="title-row">
+        <h2>Hot Product</h2>
+        <a class="view-all" href="#">View All</a>
       </div>
-    </section>
 
-    <!-- SECTIONS (category-by-category) -->
-    <section class="sections-list">
-      <div class="container" id="sectionsContainer">
-        <!-- JS will render category sections (e.g., Smart Watches, Powerbank, etc.) -->
-      </div>
-    </section>
-
-    <!-- STAY CONNECTED (glass card) -->
-    <section class="stay-connected">
-      <div class="container">
-        <div class="glass-card stay-card">
-          <h3>STAY CONNECTED</h3>
-          <div class="social-row" id="staySocials">
-            <!-- icons horizontally aligned -->
-            <a class="social-btn" href="https://www.facebook.com/share/1adkemEFLo/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
-            <a class="social-btn" href="https://www.instagram.com/md_habibur__rahman" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-            <a class="social-btn" href="https://youtube.com/@h_a_b_i_b-yt?si=KzptsxRXXNw0t635" target="_blank"><i class="fa-brands fa-youtube"></i></a>
-            <a class="social-btn" href="https://wa.me/8801868461577" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
-            <a class="social-btn" href="mailto:mshabib471@gmail.com"><i class="fa-regular fa-envelope"></i></a>
-            <a class="social-btn" href="https://www.tiktok.com/@habibur_._rahman" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PWA / INSTALL CARD -->
-    <section class="install-section">
-      <div class="container">
-        <div class="glass-card install-card">
+      <div class="product-grid" aria-live="polite">
+        <!-- repeat card 5 times (use sample data) -->
+        <article class="product" aria-label="Product 1">
+          <div class="badge">Trending</div>
+          <img src="https://via.placeholder.com/260x140?text=Phone" alt="Product image">
+          <div class="meta">Xiaomi</div>
+          <div class="name">New Google Speaker Nest Audio</div>
           <div>
-            <h3>Habib Business App — Install Now</h3>
-            <p>Add to Home Screen করে এক ক্লিকে আপনার shop + portfolio খুলুন।</p>
+            <span class="oldprice">2800 SAR</span>
+            <span class="price">1950 SAR</span>
           </div>
+          <div class="card-actions">
+            <button class="action-btn">Add to cart</button>
+            <button class="action-btn">Compare</button>
+            <div class="fav"><i class="fa-regular fa-heart"></i></div>
+          </div>
+        </article>
+
+        <!-- card 2 -->
+        <article class="product" aria-label="Product 2">
+          <div class="badge">Trending</div>
+          <img src="https://via.placeholder.com/260x140?text=Speaker" alt="Product image">
+          <div class="meta">Xiaomi</div>
+          <div class="name">Wireless Charger Pro</div>
           <div>
-            <button id="installBtn" class="btn btn-primary">Install</button>
+            <span class="oldprice">2800 SAR</span>
+            <span class="price">1950 SAR</span>
+          </div>
+          <div class="card-actions">
+            <button class="action-btn">Add to cart</button>
+            <button class="action-btn">Compare</button>
+            <div class="fav"><i class="fa-regular fa-heart"></i></div>
+          </div>
+        </article>
+
+        <!-- card 3 -->
+        <article class="product" aria-label="Product 3">
+          <div class="badge">Trending</div>
+          <img src="https://via.placeholder.com/260x140?text=Vacuum" alt="Product image">
+          <div class="meta">Xiaomi</div>
+          <div class="name">Robot Vacuum Cleaner</div>
+          <div>
+            <span class="oldprice">2800 SAR</span>
+            <span class="price">1950 SAR</span>
+          </div>
+          <div class="card-actions">
+            <button class="action-btn">Add to cart</button>
+            <button class="action-btn">Compare</button>
+            <div class="fav"><i class="fa-regular fa-heart"></i></div>
+          </div>
+        </article>
+
+        <!-- card 4 -->
+        <article class="product" aria-label="Product 4">
+          <div class="badge">Trending</div>
+          <img src="https://via.placeholder.com/260x140?text=Phone2" alt="Product image">
+          <div class="meta">Xiaomi</div>
+          <div class="name">Smartphone X Pro</div>
+          <div>
+            <span class="oldprice">2800 SAR</span>
+            <span class="price">1950 SAR</span>
+          </div>
+          <div class="card-actions">
+            <button class="action-btn">Add to cart</button>
+            <button class="action-btn">Compare</button>
+            <div class="fav"><i class="fa-regular fa-heart"></i></div>
+          </div>
+        </article>
+
+        <!-- card 5 -->
+        <article class="product" aria-label="Product 5">
+          <div class="badge">Trending</div>
+          <img src="https://via.placeholder.com/260x140?text=Coffee+Maker" alt="Product image">
+          <div class="meta">Xiaomi</div>
+          <div class="name">Compact Coffee Machine</div>
+          <div>
+            <span class="oldprice">2800 SAR</span>
+            <span class="price">1950 SAR</span>
+          </div>
+          <div class="card-actions">
+            <button class="action-btn">Add to cart</button>
+            <button class="action-btn">Compare</button>
+            <div class="fav"><i class="fa-regular fa-heart"></i></div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- BANNERS -->
+    <div class="banners">
+      <div class="banner" style="background-image:url('https://via.placeholder.com/600x300?text=Outdoor+Systems');">
+        <div class="overlay">
+          <div>
+            <h3>Tracking Systems</h3>
+            <div class="muted">QZSS and more</div>
+            <a class="btn" href="#">Shop Now</a>
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- SUPPORT & FOOTER -->
-    <section class="support-section">
-      <div class="container">
-        <div class="support-card glass-card">
-          <h3>SUPPORT CENTER</h3>
-          <p>Help line [9AM–12PM] — <a href="https://t.me/H_A_B_I_B_Top_1" target="_blank">@habib_support</a></p>
+      <div class="banner" style="background-image:url('https://via.placeholder.com/600x300?text=Health+Management');">
+        <div class="overlay">
+          <div>
+            <h3>Health Management</h3>
+            <div class="muted">Monitor heart rate and more</div>
+            <a class="btn" href="#">Shop Now</a>
+          </div>
         </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-inner">
-        <div>© <span id="year"></span> Habib Business App — Portfolio & Mobile Shop. All Rights Reserved.</div>
-        <div class="footer-links"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
       </div>
     </div>
-  </footer>
 
-  <!-- Floating WhatsApp -->
-  <a class="floating-wa" href="https://wa.me/8801868461577" target="_blank" aria-label="WhatsApp">
-    <i class="fa-brands fa-whatsapp"></i>
-  </a>
+    <!-- HOME & KITCHEN -->
+    <section class="section">
+      <div class="title-row">
+        <h2>Home and Kitchen</h2>
+        <a class="view-all" href="#">View All</a>
+      </div>
 
-  <!-- Bottom Nav -->
-  <nav class="bottom-nav">
-    <a href="index.html" class="bn"><i class="fa-solid fa-house"></i><span>Home</span></a>
-    <a href="shop.html" class="bn active"><i class="fa-solid fa-bag-shopping"></i><span>Shop</span></a>
-    <a href="#contact" class="bn"><i class="fa-regular fa-envelope"></i><span>Contact</span></a>
-    <a href="login.html" class="bn"><i class="fa-regular fa-user"></i><span>Account</span></a>
-  </nav>
+      <div class="product-grid" aria-label="Home and Kitchen list">
+        <!-- sample small product cards -->
+        <article class="product">
+          <div class="badge">Trending</div>
+          <img src="https://via.placeholder.com/260x140?text=Kettle" alt="">
+          <div class="meta">Xiaomi</div>
+          <div class="name">Smart Electric Kettle</div>
+          <div>
+            <span class="oldprice">2800 SAR</span>
+            <span class="price">1950 SAR</span>
+          </div>
+          <div class="card-actions">
+            <button class="action-btn">Add to cart</button>
+            <div class="fav"><i class="fa-regular fa-heart"></i></div>
+          </div>
+        </article>
 
-  <!-- dependencies + product loader script (Part 3 will provide shop.js) -->
+        <article class="product">
+          <div class="badge">Trending</div>
+          <img src="https://via.placeholder.com/260x140?text=Cooker" alt="">
+          <div class="meta">Xiaomi</div>
+          <div class="name">Smart Rice Cooker</div>
+          <div>
+            <span class="oldprice">2800 SAR</span>
+            <span class="price">1950 SAR</span>
+          </div>
+          <div class="card-actions">
+            <button class="action-btn">Add to cart</button>
+            <div class="fav"><i class="fa-regular fa-heart"></i></div>
+          </div>
+        </article>
+
+        <article class="product">
+          <div class="badge">Trending</div>
+          <img src="https://via.placeholder.com/260x140?text=Blender" alt="">
+          <div class="meta">Xiaomi</div>
+          <div class="name">Multipurpose Blender</div>
+          <div>
+            <span class="oldprice">2800 SAR</span>
+            <span class="price">1950 SAR</span>
+          </div>
+          <div class="card-actions">
+            <button class="action-btn">Add to cart</button>
+            <div class="fav"><i class="fa-regular fa-heart"></i></div>
+          </div>
+        </article>
+
+        <article class="product">
+          <div class="badge">Trending</div>
+          <img src="https://via.placeholder.com/260x140?text=Air+Fryer" alt="">
+          <div class="meta">Xiaomi</div>
+          <div class="name">Air Fryer</div>
+          <div>
+            <span class="oldprice">2800 SAR</span>
+            <span class="price">1950 SAR</span>
+          </div>
+          <div class="card-actions">
+            <button class="action-btn">Add to cart</button>
+            <div class="fav"><i class="fa-regular fa-heart"></i></div>
+          </div>
+        </article>
+
+        <article class="product">
+          <div class="badge">Trending</div>
+          <img src="https://via.placeholder.com/260x140?text=Milk+Frother" alt="">
+          <div class="meta">Xiaomi</div>
+          <div class="name">Mini Milk Frother</div>
+          <div>
+            <span class="oldprice">2800 SAR</span>
+            <span class="price">1950 SAR</span>
+          </div>
+          <div class="card-actions">
+            <button class="action-btn">Add to cart</button>
+            <div class="fav"><i class="fa-regular fa-heart"></i></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- PROMO BANNERS (vertical) -->
+    <section style="padding:16px 40px;">
+      <div style="display:grid; gap:12px;">
+        <div style="background:#fff; border-radius:12px; padding:18px; display:flex; gap:18px; align-items:center;">
+          <img src="https://via.placeholder.com/180x90?text=Popcorn" alt="">
+          <div>
+            <h3 style="margin:0 0 6px;">Popcorn maker for Friday nights</h3>
+            <a class="btn" href="#" style="margin-top:6px;">Shop Now</a>
+          </div>
+        </div>
+
+        <div style="background:#fff; border-radius:12px; padding:18px; display:flex; gap:18px; align-items:center;">
+          <img src="https://via.placeholder.com/180x90?text=Coffee" alt="">
+          <div>
+            <h3 style="margin:0 0 6px;">Your coffee your mood!</h3>
+            <a class="btn" href="#" style="margin-top:6px;">Shop Now</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Smart Watches -->
+    <section class="section">
+      <div class="title-row">
+        <h2>Smart Watches</h2>
+        <a class="view-all" href="#">View All</a>
+      </div>
+
+      <div class="product-grid" aria-label="Smart watches">
+        <!-- repeat a few -->
+        <article class="product">
+          <div class="badge">Trending</div>
+          <img src="https://via.placeholder.com/260x140?text=Watch1" alt="">
+          <div class="meta">Xiaomi</div>
+          <div class="name">Smart Watch Active</div>
+          <div>
+            <span class="oldprice">2800 SAR</span>
+            <span class="price">1950 SAR</span>
+          </div>
+          <div class="card-actions">
+            <button class="action-btn">Add to cart</button>
+            <div class="fav"><i class="fa-regular fa-heart"></i></div>
+          </div>
+        </article>
+
+        <article class="product">
+          <div class="badge">Trending</div>
+          <img src="https://via.placeholder.com/260x140?text=Watch2" alt="">
+          <div class="meta">Xiaomi</div>
+          <div class="name">Fitness Watch Mini</div>
+          <div>
+            <span class="oldprice">2800 SAR</span>
+            <span class="price">1950 SAR</span>
+          </div>
+          <div class="card-actions">
+            <button class="action-btn">Add to cart</button>
+            <div class="fav"><i class="fa-regular fa-heart"></i></div>
+          </div>
+        </article>
+
+        <article class="product">
+          <div class="badge">Trending</div>
+          <img src="https://via.placeholder.com/260x140?text=Watch3" alt="">
+          <div class="meta">Xiaomi</div>
+          <div class="name">Classic Leather Watch</div>
+          <div>
+            <span class="oldprice">2800 SAR</span>
+            <span class="price">1950 SAR</span>
+          </div>
+          <div class="card-actions">
+            <button class="action-btn">Add to cart</button>
+            <div class="fav"><i class="fa-regular fa-heart"></i></div>
+          </div>
+        </article>
+
+        <article class="product">
+          <div class="badge">Trending</div>
+          <img src="https://via.placeholder.com/260x140?text=Watch4" alt="">
+          <div class="meta">Xiaomi</div>
+          <div class="name">Sleek Smart Watch</div>
+          <div>
+            <span class="oldprice">2800 SAR</span>
+            <span class="price">1950 SAR</span>
+          </div>
+          <div class="card-actions">
+            <button class="action-btn">Add to cart</button>
+            <div class="fav"><i class="fa-regular fa-heart"></i></div>
+          </div>
+        </article>
+
+        <article class="product">
+          <div class="badge">Trending</div>
+          <img src="https://via.placeholder.com/260x140?text=Watch5" alt="">
+          <div class="meta">Xiaomi</div>
+          <div class="name">Mini Health Band</div>
+          <div>
+            <span class="oldprice">2800 SAR</span>
+            <span class="price">1950 SAR</span>
+          </div>
+          <div class="card-actions">
+            <button class="action-btn">Add to cart</button>
+            <div class="fav"><i class="fa-regular fa-heart"></i></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Routers and Networks -->
+    <section class="section">
+      <div class="title-row">
+        <h2>Routers and Networks</h2>
+        <a class="view-all" href="#">View All</a>
+      </div>
+
+      <div class="product-grid" aria-label="Routers and Networks">
+        <article class="product"><img src="https://via.placeholder.com/260x140?text=Router1"><div class="meta">Xiaomi</div><div class="name">Home Router</div><div><span class="oldprice">2800 SAR</span> <span class="price">1950 SAR</span></div></article>
+        <article class="product"><img src="https://via.placeholder.com/260x140?text=Router2"><div class="meta">Xiaomi</div><div class="name">Mesh WiFi Node</div><div><span class="oldprice">2800 SAR</span> <span class="price">1950 SAR</span></div></article>
+        <article class="product"><img src="https://via.placeholder.com/260x140?text=Adapter"><div class="meta">Xiaomi</div><div class="name">POE Adapter</div><div><span class="oldprice">2800 SAR</span> <span class="price">1950 SAR</span></div></article>
+        <article class="product"><img src="https://via.placeholder.com/260x140?text=Modem"><div class="meta">Xiaomi</div><div class="name">4G Modem</div><div><span class="oldprice">2800 SAR</span> <span class="price">1950 SAR</span></div></article>
+        <article class="product"><img src="https://via.placeholder.com/260x140?text=Repeater"><div class="meta">Xiaomi</div><div class="name">WiFi Repeater</div><div><span class="oldprice">2800 SAR</span> <span class="price">1950 SAR</span></div></article>
+      </div>
+    </section>
+
+    <!-- BANNERS AGAIN -->
+    <div class="banners" style="padding-top:8px;">
+      <div class="banner" style="background-image:url('https://via.placeholder.com/600x300?text=Promo+1'); min-height:140px;">
+        <div class="overlay"><div><h3>Quality Accessories</h3><a class="btn" href="#">Shop Now</a></div></div>
+      </div>
+      <div class="banner" style="background-image:url('https://via.placeholder.com/600x300?text=Promo+2'); min-height:140px;">
+        <div class="overlay"><div><h3>Best Deals</h3><a class="btn" href="#">Shop Now</a></div></div>
+      </div>
+    </div>
+
+    <!-- FEATURED BRANDS -->
+    <section class="section">
+      <div class="title-row">
+        <h2>Featured Brands</h2>
+        <a class="view-all" href="#">View All</a>
+      </div>
+
+      <div class="brands" aria-label="Brands list">
+        <div class="brand"><img src="https://via.placeholder.com/90x30?text=Braun" alt="Braun"></div>
+        <div class="brand"><img src="https://via.placeholder.com/90x30?text=Eufy" alt="Eufy"></div>
+        <div class="brand"><img src="https://via.placeholder.com/90x30?text=Honor" alt="Honor"></div>
+        <div class="brand"><img src="https://via.placeholder.com/90x30?text=Huawei" alt="Huawei"></div>
+        <div class="brand"><img src="https://via.placeholder.com/90x30?text=Oppo" alt="Oppo"></div>
+        <div class="brand"><img src="https://via.placeholder.com/90x30?text=Infinix" alt="Infinix"></div>
+        <div class="brand"><img src="https://via.placeholder.com/90x30?text=Lenovo" alt="Lenovo"></div>
+        <div class="brand"><img src="https://via.placeholder.com/90x30?text=Amazfit" alt="Amazfit"></div>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <div class="newsletter">
+      <div>
+        <strong>Let's keep you posted!</strong>
+        <div class="muted">Subscribe to stay updated on the latest news and tips.</div>
+      </div>
+      <div style="display:flex; gap:8px; width:50%; justify-content:flex-end;">
+        <input type="email" placeholder="Email address" aria-label="Email">
+        <button>Subscribe</button>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="col">
+        <h4>Shop</h4>
+        <p class="muted">About us · Contact · Careers · FAQ</p>
+      </div>
+
+      <div class="col">
+        <h4>Products</h4>
+        <p class="muted">Phones · Laptops · Home Appliances · Accessories</p>
+      </div>
+
+      <div class="col">
+        <h4>Payment</h4>
+        <p class="muted">Cash on Delivery · Card · Wallets</p>
+      </div>
+
+      <div class="col">
+        <h4>Support</h4>
+        <p class="muted">Call our customer service: +(800) 123-456</p>
+      </div>
+
+      <div style="width:100%; margin-top:10px;">
+        <small>© 2025 Demo Shop. All rights reserved.</small>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Light JS for simple interactions (no library) -->
   <script>
-    // small helpers so page already somewhat functional until full script arrives
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Mobile drawer toggles
-    const menuToggle = document.getElementById('menuToggle');
-    const mobileDrawer = document.getElementById('mobileDrawer');
-    const closeDrawer = document.getElementById('closeDrawer');
-
-    menuToggle?.addEventListener('click', () => {
-      mobileDrawer.classList.add('open');
-      mobileDrawer.setAttribute('aria-hidden', 'false');
-    });
-    closeDrawer?.addEventListener('click', () => {
-      mobileDrawer.classList.remove('open');
-      mobileDrawer.setAttribute('aria-hidden', 'true');
-    });
-
-    // Theme toggle stub (Part 3 will fully implement)
-    const themeToggle = document.getElementById('themeToggle');
-    themeToggle?.addEventListener('click', () => {
-      document.body.classList.toggle('dark');
-      themeToggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
-    });
-
-    // Install prompt handling skeleton — Part3 will wire beforeinstallprompt
-    let deferredPrompt;
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      // enable installBtn
-      const btn = document.getElementById('installBtn');
-      if (btn) btn.style.display = 'inline-block';
-    });
-    document.getElementById('installBtn')?.addEventListener('click', async () => {
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        const choice = await deferredPrompt.userChoice;
-        deferredPrompt = null;
-      } else {
-        // If PWA prompt not available, fallback to manual install instructions or just do nothing
-        alert('Install not available: make sure this site is served over HTTPS and has manifest/service worker.');
+    // Add basic behaviors: favorite toggle, simple keyboard search submit
+    document.addEventListener('click', function(e){
+      if(e.target.closest('.fav')){
+        const heart = e.target.closest('.fav');
+        heart.classList.toggle('liked');
+        // toggle icon
+        const i = heart.querySelector('i');
+        if(i){
+          if(heart.classList.contains('liked')) i.className = 'fa-solid fa-heart';
+          else i.className = 'fa-regular fa-heart';
+        }
       }
     });
 
-    // fix for "no zoom" behavior already set via meta viewport above
+    // simple enter-to-search
+    document.getElementById('q').addEventListener('keydown', function(e){
+      if(e.key === 'Enter'){
+        const q = this.value.trim();
+        if(q) window.location.href = '/search?q=' + encodeURIComponent(q);
+      }
+    });
   </script>
 
-  <!-- main shop script (Part 3) -->
-  <script src="shop.js" defer></script>
 </body>
 </html>
