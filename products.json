@@ -1,61 +1,67 @@
-{
-  "categories": [
-    { "name": "Smartphones", "icon": "https://i.ibb.co/8m1ZV4x/phone.png" },
-    { "name": "Back Cover", "icon": "https://i.ibb.co/NKbhCzk/case.png" },
-    { "name": "Glass", "icon": "https://i.ibb.co/0JrnLWz/glass.png" },
-    { "name": "Smart Watch", "icon": "https://i.ibb.co/Db6bzcp/watch.png" },
-    { "name": "TWS", "icon": "https://i.ibb.co/7Q8ZL2M/earbuds.png" },
-    { "name": "Power Bank", "icon": "https://i.ibb.co/smCdjXM/powerbank.png" }
-  ],
-  "products": [
-    {
-      "id": 1,
-      "name": "Samsung A54 5G",
-      "price": 38990,
-      "category": "Smartphones",
-      "image": "https://i.ibb.co/k9NhVqX/a54.png"
-    },
-    {
-      "id": 2,
-      "name": "Realme 11 Pro",
-      "price": 32990,
-      "category": "Smartphones",
-      "image": "https://i.ibb.co/9nY1QN1/realme11.png"
-    },
-    {
-      "id": 3,
-      "name": "Gorilla Glass Pro",
-      "price": 150,
-      "category": "Glass",
-      "image": "https://i.ibb.co/QvTqMJq/glass2.png"
-    },
-    {
-      "id": 4,
-      "name": "Premium Back Cover",
-      "price": 250,
-      "category": "Back Cover",
-      "image": "https://i.ibb.co/3r0FBZP/backcover.png"
-    },
-    {
-      "id": 5,
-      "name": "Haylou LS02 Smart Watch",
-      "price": 1990,
-      "category": "Smart Watch",
-      "image": "https://i.ibb.co/9rPbfz3/watch2.png"
-    },
-    {
-      "id": 6,
-      "name": "Lenovo LP40 TWS",
-      "price": 750,
-      "category": "TWS",
-      "image": "https://i.ibb.co/ZT1WjFc/tws.png"
-    },
-    {
-      "id": 7,
-      "name": "Baseus 20W Power Bank",
-      "price": 1290,
-      "category": "Power Bank",
-      "image": "https://i.ibb.co/Zmnc1tT/pb.png"
-    }
-  ]
-}
+[
+  {
+    "id": "p001",
+    "title": "Xiaomi Smart Band 8 Active",
+    "brand": "Xiaomi",
+    "price": 1950,
+    "currency": "SAR",
+    "old_price": 2800,
+    "image": "https://via.placeholder.com/800x600?text=Smart+Band+8",
+    "thumb": "https://via.placeholder.com/360x260?text=Smart+Band+8",
+    "short": "Water resistant to 50 meters. Up to 14 days battery life.",
+    "description": "Xiaomi Smart Band 8 Active — long battery life, heart-rate monitoring, sleep tracking and multiple sports modes. Premium silicon strap and lightweight.",
+    "category": "watches"
+  },
+  {
+    "id": "p002",
+    "title": "New Google Speaker Nest Audio",
+    "brand": "Google",
+    "price": 1950,
+    "currency": "SAR",
+    "old_price": 2800,
+    "image": "https://via.placeholder.com/900x700?text=Nest+Audio",
+    "thumb": "https://via.placeholder.com/360x260?text=Nest+Audio",
+    "short": "Rich sound with strong bass.",
+    "description": "Google Nest Audio delivers clear sound, improved bass and voice assistant features. Compact and stylish design fits any home.",
+    "category": "home"
+  },
+  {
+    "id": "p003",
+    "title": "Robot Vacuum Cleaner",
+    "brand": "Xiaomi",
+    "price": 1950,
+    "currency": "SAR",
+    "old_price": 2800,
+    "image": "https://via.placeholder.com/900x700?text=Robot+Vacuum",
+    "thumb": "https://via.placeholder.com/360x260?text=Robot+Vacuum",
+    "short": "Smart navigation and suction power.",
+    "description": "Automated floor cleaning robot with multiple cleaning modes, remote control via app and scheduled cleaning.",
+    "category": "home"
+  },
+  {
+    "id": "p004",
+    "title": "Compact Coffee Machine",
+    "brand": "BrewPro",
+    "price": 1950,
+    "currency": "SAR",
+    "old_price": 2800,
+    "image": "https://via.placeholder.com/900x700?text=Coffee+Machine",
+    "thumb": "https://via.placeholder.com/360x260?text=Coffee+Machine",
+    "short": "Brew coffee like a barista.",
+    "description": "Compact and stylish coffee maker suitable for espresso, americano and more. Easy to clean and maintain.",
+    "category": "kitchen"
+  },
+  {
+    "id": "p005",
+    "title": "Wireless Charger Pro",
+    "brand": "ChargeX",
+    "price": 350,
+    "currency": "SAR",
+    "old_price": 590,
+    "image": "https://via.placeholder.com/900x700?text=Wireless+Charger",
+    "thumb": "https://via.placeholder.com/360x260?text=Wireless+Charger",
+    "short": "Fast wireless charging.",
+    "description": "Fast 20W wireless charger with thermal protection and smart coil alignment.",
+    "category": "power"
+  }
+]
