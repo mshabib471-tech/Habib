@@ -1,96 +1,67 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Shop — Modern (v3)</title>
-  <meta name="author" content="Generated">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+  <title>Habib Telecom — Shop</title>
+  <meta name="author" content="Habib">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
-  /* ============================
-     THEME: iOS Clean Mode (Light + Dark)
-     ============================ */
+  /* ---------------------------
+     Variables & Base
+  ----------------------------*/
   :root{
-    --bg:#f5f7fb;
-    --card:#ffffff;
-    --muted:#6b7280;
-    --accent:#6b2fa3;
-    --accent-2:#ff7a00;
-    --text:#0f1724;
-    --soft-shadow:0 8px 20px rgba(17,24,39,0.06);
-    --glass:rgba(255,255,255,0.6);
-    --glass-border: rgba(15,23,36,0.04);
+    --bg:#f5f7fb; --card:#fff; --muted:#6b7280; --accent:#6b2fa3; --accent-2:#ff7a00;
+    --text:#0f1724; --glass:rgba(255,255,255,0.6); --glass-border:rgba(15,23,36,0.04);
+    --shadow:0 8px 20px rgba(17,24,39,0.06);
   }
   [data-theme="dark"]{
-    --bg:#0b0f14;
-    --card:#0f1720;
-    --muted:#9aa3ad;
-    --accent:#8a63d9;
-    --accent-2:#ff9a4a;
-    --text:#ecf0f6;
-    --soft-shadow:none;
-    --glass:rgba(255,255,255,0.03);
-    --glass-border: rgba(255,255,255,0.06);
+    --bg:#0b0f14; --card:#0f1720; --muted:#9aa3ad; --accent:#8a63d9; --accent-2:#ff9a4a;
+    --text:#ecf0f6; --glass:rgba(255,255,255,0.03); --glass-border:rgba(255,255,255,0.06);
+    --shadow:none;
   }
-
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%;font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
   a{color:inherit;text-decoration:none}
-  button{font-family:inherit;cursor:pointer}
-
-  .container{max-width:1180px;margin:18px auto;padding:0 16px}
-
-  /* ============================
-     HEADER (updated for mobile)
-     - Mobile: Logo + action icons on top row
-     - Search: next line full-width
-     ============================ */
-  .header{background:var(--card);border-radius:12px;padding:10px;box-shadow:var(--soft-shadow);display:flex;flex-direction:column;gap:8px;position:relative;z-index:50}
+  button{font-family:inherit}
+  .container{max-width:1180px;margin:16px auto;padding:0 14px}
+  /* ---------------------------
+     Header
+  ----------------------------*/
+  .header{background:var(--card);border-radius:12px;padding:10px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px;position:relative;z-index:40}
   .top-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
-  .logo{display:flex;align-items:center;gap:12px}
-  .logo img{width:110px;height:auto}
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand img{width:92px;height:auto;border-radius:6px}
+  .brand .title{font-weight:800;font-size:18px}
   .actions{display:flex;align-items:center;gap:8px}
   .icon-btn{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--glass-border);padding:8px 12px;border-radius:10px}
-  .icon-btn.small{padding:8px;border-radius:10px}
-  .cart-count{color:var(--accent);font-weight:800;margin-left:6px}
   .hamburger{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;border:1px solid var(--glass-border);background:var(--card);font-size:20px}
-  .user-avatar{width:40px;height:40px;border-radius:999px;object-fit:cover;border:2px solid var(--glass-border)}
-
-  /* SEARCH row is separate on mobile (full width) */
+  .user-avatar{width:40px;height:40px;border-radius:999px;object-fit:cover;border:2px solid var(--glass-border);background:#fff}
+  /* search row */
   .search-row{display:flex;gap:8px;align-items:center}
   .search{flex:1;position:relative}
   .search input{width:100%;padding:12px 44px 12px 14px;border-radius:999px;border:1px solid var(--glass-border);background:var(--glass);font-size:14px;color:var(--text)}
-  .search button{position:absolute;right:6px;top:6px;bottom:6px;width:40px;border-radius:12px;border:none;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center}
-
-  /* hide sign in on small header (we move sign-in into drawer) */
-  .desktop-hide{display:none}
-
-  /* top nav (desktop only) */
+  .search button{position:absolute;right:6px;top:6px;bottom:6px;width:42px;border-radius:10px;border:none;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center}
+  /* desktop nav */
   .topnav{margin-top:8px;background:linear-gradient(90deg,var(--accent),#7b3ed1);color:#fff;padding:8px 12px;border-radius:10px;display:flex;gap:14px;align-items:center;overflow:auto}
   .topnav a{color:#fff;font-weight:700;white-space:nowrap;padding:6px 8px;border-radius:8px}
-
-  /* ============================
-     Drawer (mobile) + language + dark toggle inside drawer
-     ============================ */
-  .drawer-back{position:fixed;inset:0;background:rgba(2,6,23,0.3);opacity:0;pointer-events:none;transition:opacity .22s;z-index:140}
+  /* ---------------------------
+     Drawer
+  ----------------------------*/
+  .drawer-back{position:fixed;inset:0;background:rgba(2,6,23,0.32);opacity:0;pointer-events:none;transition:opacity .22s;z-index:140}
   .drawer-back.open{opacity:1;pointer-events:auto}
-  .drawer{position:fixed;left:-100%;top:0;height:100vh;width:86%;max-width:420px;background:var(--card);box-shadow:10px 0 40px rgba(2,6,23,0.18);transition:left .28s ease;border-radius:0 14px 14px 0;z-index:150;padding:18px;overflow:auto}
+  .drawer{position:fixed;left:-100%;top:0;height:100vh;width:86%;max-width:420px;background:var(--card);box-shadow:10px 0 40px rgba(2,6,23,0.18);transition:left .28s ease;border-radius:0 14px 14px 0;z-index:150;padding:16px;overflow:auto}
   .drawer.open{left:0}
   .drawer .close-wrap{display:flex;justify-content:flex-end}
   .drawer .close-btn{background:var(--card);border:1px solid var(--glass-border);padding:8px 10px;border-radius:12px;cursor:pointer}
-  .drawer nav{display:flex;flex-direction:column;gap:12px;margin-top:12px}
-  .drawer nav a{display:block;padding:14px;border-radius:12px;background:linear-gradient(180deg,rgba(250,250,253,0.6),rgba(245,246,250,0.8));font-weight:700;color:var(--text)}
-  .drawer .muted{color:var(--muted)}
-
+  .drawer nav{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+  .drawer nav a{display:block;padding:12px;border-radius:10px;background:linear-gradient(180deg,rgba(250,250,253,0.6),rgba(245,246,250,0.8));font-weight:700;color:var(--text)}
   .drawer .section-title{margin-top:10px;font-weight:800}
-
-  .theme-toggle-row{display:flex;align-items:center;gap:10px;padding:10px 6px;border-radius:10px;border:1px solid var(--glass-border);background:var(--glass);margin-top:8px}
-  .theme-switch{display:inline-flex;align-items:center;gap:8px;padding:8px;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,0.95),rgba(250,250,253,0.9));border:1px solid var(--glass-border)}
-
-  /* ============================
-     HERO
-     ============================ */
-  .hero{background:var(--card);border-radius:14px;padding:18px;display:flex;gap:18px;align-items:center;box-shadow:var(--soft-shadow)}
+  .theme-toggle-row{display:flex;align-items:center;gap:10px;padding:10px;border-radius:10px;border:1px solid var(--glass-border);background:var(--glass);margin-top:8px}
+  /* ---------------------------
+     Hero
+  ----------------------------*/
+  .hero{background:var(--card);border-radius:14px;padding:18px;display:flex;gap:18px;align-items:center;box-shadow:var(--shadow)}
   .hero .left{flex:1}
   .hero .kicker{color:var(--accent);font-weight:800;margin-bottom:6px}
   .hero h1{font-size:28px;line-height:1.02;margin-bottom:8px;font-weight:800}
@@ -98,22 +69,19 @@
   .cta{background:var(--accent-2);color:#fff;padding:12px 18px;border-radius:999px;font-weight:800;box-shadow:0 8px 28px rgba(255,122,0,0.12);display:inline-block}
   .img-wrap{width:260px;display:flex;align-items:center;justify-content:center}
   .img-wrap img{width:220px;transform:rotate(-6deg);filter:drop-shadow(0 12px 30px rgba(6,10,20,0.06));border-radius:10px}
-
-  /* ============================
-     Category grid
-     ============================ */
+  /* ---------------------------
+     Categories
+  ----------------------------*/
   .cat-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:16px}
-  .cat{background:var(--card);padding:12px;border-radius:14px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;box-shadow:var(--soft-shadow);cursor:pointer;transition:transform .18s}
-  .cat:hover{transform:translateY(-6px)}
-  .cat img, .cat .emoji{width:68px;height:68px;border-radius:12px;object-fit:cover;display:inline-flex;align-items:center;justify-content:center}
-
-  /* ============================
-     Products grid & cards
-     ============================ */
+  .cat{background:var(--card);padding:12px;border-radius:14px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;box-shadow:var(--shadow);cursor:pointer;transition:transform .18s}
+  .cat img,.cat .emoji{width:68px;height:68px;border-radius:12px;object-fit:cover;display:inline-flex;align-items:center;justify-content:center}
+  /* ---------------------------
+     Product grid
+  ----------------------------*/
   .section{margin-top:18px}
   .section .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
   .products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-  .card{background:var(--card);border-radius:14px;overflow:hidden;box-shadow:var(--soft-shadow);transition:transform .18s;cursor:pointer}
+  .card{background:var(--card);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);transition:transform .18s;cursor:pointer}
   .card:hover{transform:translateY(-6px)}
   .card .media{background:linear-gradient(180deg,rgba(250,250,253,0.6),rgba(245,246,250,0.8));display:flex;align-items:center;justify-content:center;padding:18px;height:170px}
   .card .media img{max-width:100%;max-height:130px;object-fit:contain}
@@ -123,32 +91,24 @@
   .price-row{display:flex;align-items:center;gap:8px}
   .oldprice{text-decoration:line-through;color:rgba(15,23,36,0.25)}
   .price{color:var(--accent-2);font-weight:900}
-
-  /* banners */
+  /* banners & brands */
   .banners{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
-  .banner{background:var(--card);padding:14px;border-radius:12px;box-shadow:var(--soft-shadow)}
-
-  /* brands */
+  .banner{background:var(--card);padding:14px;border-radius:12px;box-shadow:var(--shadow)}
   .brand-row{display:flex;gap:12px;overflow:auto;padding:8px 0}
-
-  /* ============================
-     STAY CONNECTED (glass box above footer)
-     ============================ */
+  /* ---------------------------
+     Stay Connected (fixed above footer)
+  ----------------------------*/
   .stay-connected{margin-top:18px}
-  .stay-box{background:var(--glass);border:1px solid var(--glass-border);padding:14px;border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:var(--soft-shadow)}
-  .stay-box h4{font-weight:800}
-  .connect-icons{display:flex;gap:10px;align-items:center}
-  .connect-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--card);border:1px solid var(--glass-border);color:var(--muted;font-weight:700)}
-  .connect-icon i{font-size:18px;color:var(--accent)}
-
-  /* Footer */
-  .footer{margin-top:14px;padding:16px;background:var(--card);border-radius:12px;box-shadow:var(--soft-shadow);display:flex;gap:14px;flex-wrap:wrap}
+  .stay-box{background:var(--glass);border:1px solid var(--glass-border);padding:12px;border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:var(--shadow);overflow:hidden}
+  .stay-left{font-weight:800}
+  .connect-icons{display:flex;gap:8px;align-items:center;overflow:auto;padding-bottom:2px}
+  .connect-icon{min-width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--card);border:1px solid var(--glass-border);color:var(--muted);flex:0 0 auto}
+  .connect-icon i{font-size:18px}
+  /* footer */
+  .footer{margin-top:14px;padding:16px;background:var(--card);border-radius:12px;box-shadow:var(--shadow);display:flex;gap:14px;flex-wrap:wrap}
   .footer .col{min-width:160px}
   .small{color:var(--muted);font-size:14px}
-
-  /* ============================
-     Product modal (responsive)
-     ============================ */
+  /* modal */
   .modal-back{position:fixed;inset:0;background:rgba(2,6,23,0.55);display:none;align-items:center;justify-content:center;z-index:220;padding:16px}
   .modal-back.open{display:flex}
   .modal{width:100%;max-width:920px;background:var(--card);border-radius:12px;padding:16px;display:flex;gap:12px;box-shadow:0 20px 50px rgba(2,6,23,0.5)}
@@ -160,20 +120,13 @@
   .m-price{color:var(--accent-2);font-weight:900;font-size:20px}
   .qty{display:flex;gap:8px;align-items:center}
   .qty button{width:36px;height:36px;border-radius:10px;border:1px solid var(--glass-border);background:var(--card);cursor:pointer}
-
-  /* ============================
-     Floating WhatsApp + Chat (Chat button C - circle glossy)
-     ============================ */
+  /* ---------------------------
+     Floating chat & whatsapp
+  ----------------------------*/
   .floating-col{position:fixed;right:18px;bottom:18px;display:flex;flex-direction:column;gap:12px;z-index:9999}
-  .floating-whatsapp, .floating-chat{
-    width:56px;height:56px;border-radius:999px;display:flex;align-items:center;justify-content:center;
-    background:linear-gradient(180deg,#25D366,#128C7E);color:#fff;box-shadow:0 12px 30px rgba(18,28,47,0.18);border:4px solid rgba(255,255,255,0.06);
-    cursor:pointer;font-weight:800;font-size:20px;
-  }
-  .floating-chat{background:linear-gradient(180deg,#7b3ed1,#5f2ab8);}
-
-  /* Chat widget panel */
-  .chat-panel{position:fixed;right:18px;bottom:86px;width:320px;max-width:92vw;border-radius:12px;background:var(--card);box-shadow:0 30px 80px rgba(2,6,23,0.3);overflow:hidden;display:none;flex-direction:column;z-index:99999}
+  .floating-whatsapp, .floating-chat{width:56px;height:56px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#25D366,#128C7E);color:#fff;box-shadow:0 12px 30px rgba(18,28,47,0.18);border:4px solid rgba(255,255,255,0.06);cursor:pointer;font-weight:800;font-size:20px}
+  .floating-chat{background:linear-gradient(180deg,#7b3ed1,#5f2ab8)}
+  .chat-panel{position:fixed;right:18px;bottom:88px;width:320px;max-width:92vw;border-radius:12px;background:var(--card);box-shadow:0 30px 80px rgba(2,6,23,0.3);overflow:hidden;display:none;flex-direction:column;z-index:99999}
   .chat-panel.open{display:flex}
   .chat-header{padding:12px;border-bottom:1px solid var(--glass-border);display:flex;align-items:center;gap:10px}
   .chat-body{padding:10px;max-height:300px;overflow:auto;display:flex;flex-direction:column;gap:8px}
@@ -182,15 +135,13 @@
   .msg{max-width:78%;padding:10px 12px;border-radius:12px}
   .msg.user{align-self:flex-end;background:linear-gradient(180deg,#eaf2ff,#dbe9ff)}
   .msg.bot{align-self:flex-start;background:linear-gradient(180deg,#f3f3f6,#ededf8);color:var(--text)}
-
-  /* ============================
-     Responsive tweaks
-     ============================ */
+  .chat-close{margin-left:auto;background:transparent;border:none;font-size:18px;cursor:pointer}
+  /* responsive */
   @media (max-width:1100px){ .cat-grid{grid-template-columns:repeat(4,1fr)} .products-grid{grid-template-columns:repeat(3,1fr)} .img-wrap{width:200px} }
-  @media (max-width:820px){ .hero{flex-direction:column;align-items:flex-start} .products-grid{grid-template-columns:repeat(2,1fr)} .modal{flex-direction:column;max-width:680px} .modal .left,.modal .right{width:100%} .hamburger{display:flex} .topnav{display:none} }
+  @media (max-width:820px){ .hero{flex-direction:column;align-items:flex-start} .products-grid{grid-template-columns:repeat(2,1fr)} .modal{flex-direction:column;max-width:680px} .modal .left,.modal .right{width:100%} .hamburger{display:flex} .topnav{display:none} .drawer{width:86%} }
   @media (max-width:540px){
     .container{padding:10px}
-    .logo img{width:96px}
+    .brand img{width:72px}
     .hero h1{font-size:22px}
     .cat-grid{grid-template-columns:repeat(2,1fr)}
     .products-grid{grid-template-columns:1fr}
@@ -198,32 +149,27 @@
     .img-wrap img{width:220px}
     .drawer{width:86%}
     .chat-panel{right:12px;bottom:86px;width:90vw}
-    /* Move search below on small screens (search-row is flex-col) */
-    .top-row{flex-direction:row;align-items:center}
     .search-row{flex-direction:column;gap:8px}
-    .desktop-hide{display:none}
   }
   </style>
-  <!-- fontawesome for icons in stay connected -->
+  <!-- Fontawesome for brand icons -->
   <script src="https://kit.fontawesome.com/a2f6f2b0a7.js" crossorigin="anonymous"></script>
 </head>
 <body data-theme="light">
-
-  <!-- DRAWER BACKDROP -->
+  <!-- Drawer backdrop -->
   <div id="drawerBack" class="drawer-back" aria-hidden="true"></div>
 
-  <!-- DRAWER -->
+  <!-- Drawer -->
   <aside id="drawer" class="drawer" aria-hidden="true">
     <div class="close-wrap">
       <button id="drawerClose" class="close-btn" aria-label="Close menu">Close ✕</button>
     </div>
 
-    <!-- Account area -->
-    <div style="display:flex;align-items:center;gap:10px">
-      <img id="userAvatar" class="user-avatar" src="https://i.ibb.co/4Y3m8Kw/default-avatar.png" alt="avatar">
+    <div style="display:flex;align-items:center;gap:10px;margin-top:6px">
+      <img id="drawerAvatar" class="user-avatar" src="https://i.ibb.co/4Y3m8Kw/default-avatar.png" alt="avatar">
       <div>
-        <div id="userName" style="font-weight:800">Guest</div>
-        <div class="muted" id="userEmail">Not signed in</div>
+        <div id="drawerName" style="font-weight:800">Guest</div>
+        <div class="muted" id="drawerEmail">Not signed in</div>
       </div>
     </div>
 
@@ -236,12 +182,12 @@
       <a href="brands.html">Top Brands</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
+
       <div class="section-title">Account</div>
-      <a href="#" id="openSignIn">Sign in with Google (demo)</a>
-      <a href="#" id="myAccountLink" class="muted">My Account</a>
+      <a href="#" id="drawerSignBtn">Sign in</a>
+      <a href="#" id="drawerAccountLink" style="display:none">My Account</a>
 
       <div class="section-title">Preferences</div>
-      <div class="muted" style="font-size:13px">Language</div>
       <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
         <button class="icon-btn lang-select" data-code="en">English</button>
         <button class="icon-btn lang-select" data-code="bn">বাংলা</button>
@@ -250,20 +196,16 @@
 
       <div style="margin-top:10px">
         <div class="theme-toggle-row">
-          <div class="theme-switch">
-            <span id="themeLabel">Light</span>
-          </div>
           <div class="muted">Theme</div>
-          <button id="toggleThemeDrawer" class="icon-btn" style="margin-left:auto">Toggle</button>
+          <div style="margin-left:auto">
+            <button id="toggleThemeDrawer" class="icon-btn">Toggle</button>
+          </div>
         </div>
       </div>
     </nav>
   </aside>
 
-  <!-- LANGUAGE MODAL (fallback) -->
-  <div id="langModal" class="drawer-back" style="display:none" aria-hidden="true"></div>
-
-  <!-- PRODUCT MODAL -->
+  <!-- Product modal -->
   <div id="modalBack" class="modal-back" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
@@ -301,22 +243,22 @@
     </div>
   </div>
 
-  <!-- PAGE HEADER -->
+  <!-- Header -->
   <header class="container">
     <div class="header" id="header">
-
       <div class="top-row">
-        <div class="logo"><a href="shop.html"><img src="https://via.placeholder.com/160x40?text=logo" alt="logo"></a></div>
+        <div class="brand">
+          <a href="shop.html"><img src="https://via.placeholder.com/160x40?text=LOGO" alt="logo"></a>
+          <div class="title">Habib Telecom</div>
+        </div>
 
-        <div style="display:flex;align-items:center;gap:8px" class="actions">
-          <!-- On mobile we show only avatar/cart/menu; sign-in is in drawer -->
-          <a id="avatarBtn" class="icon-btn" title="Account"><img id="topAvatar" class="user-avatar" src="https://i.ibb.co/4Y3m8Kw/default-avatar.png" alt="user"></a>
-          <a href="cart.html" class="icon-btn"><span>Cart</span> <span class="cart-count">0</span></a>
+        <div class="actions">
+          <a id="avatarBtn" title="Account" class="icon-btn"><img id="topAvatar" class="user-avatar" src="https://i.ibb.co/4Y3m8Kw/default-avatar.png" alt="user"></a>
+          <a href="cart.html" class="icon-btn">Cart <span style="color:var(--accent);font-weight:800;margin-left:6px" id="cartCount">0</span></a>
           <button id="hamburger" class="hamburger" aria-label="Open menu">☰</button>
         </div>
       </div>
 
-      <!-- Search row (mobile: full width below logo) -->
       <div class="search-row">
         <div class="search" style="width:100%">
           <input id="searchInput" type="search" placeholder="Search Products, brands and more..." aria-label="Search">
@@ -324,7 +266,6 @@
         </div>
       </div>
 
-      <!-- Desktop nav -->
       <nav class="topnav" aria-label="Primary navigation">
         <a href="categories.html">Show all categories</a>
         <a href="orders.html">My Orders</a>
@@ -337,20 +278,20 @@
     </div>
   </header>
 
-  <!-- MAIN -->
+  <!-- Main -->
   <main class="container" id="main">
-    <!-- HERO -->
+    <!-- Hero -->
     <section class="hero" id="home">
       <div class="left">
         <div class="kicker">XIAOMI</div>
         <h1>Xiaomi Smart Band 8 Active</h1>
-        <p>Enjoy water resistance to a depth of 50 meters and an impressive battery life lasting up to 14 days. Embrace style and functionality with the latest fitness band.</p>
+        <p>Enjoy water resistance to a depth of 50 meters and an impressive battery life lasting up to 14 days.</p>
         <a class="cta" href="#" id="heroCTABtn">অর্ডার করুন</a>
       </div>
       <div class="img-wrap"><img src="https://via.placeholder.com/420x360?text=Smart+Band" alt="hero"></div>
     </section>
 
-    <!-- CATEGORIES -->
+    <!-- Categories -->
     <section class="section">
       <div class="head">
         <h2>Categories</h2>
@@ -359,7 +300,7 @@
       <div class="cat-grid" id="catGrid" aria-label="Categories"></div>
     </section>
 
-    <!-- HOT PRODUCTS -->
+    <!-- Hot Products -->
     <section class="section">
       <div class="head">
         <h2>Hot Product</h2>
@@ -368,7 +309,7 @@
       <div class="products-grid" id="productsGrid" aria-live="polite"></div>
     </section>
 
-    <!-- BANNERS -->
+    <!-- Banners -->
     <section class="section">
       <div class="banners">
         <div class="banner">
@@ -382,7 +323,7 @@
       </div>
     </section>
 
-    <!-- BRANDS -->
+    <!-- Brands -->
     <section class="section">
       <div class="head">
         <h2>Featured Brands</h2>
@@ -397,40 +338,39 @@
       </div>
     </section>
 
-    <!-- STAY CONNECTED (Option A: footer above) -->
+    <!-- Stay Connected -->
     <section class="stay-connected section" aria-label="Stay connected">
       <div class="stay-box">
-        <h4>STAY CONNECTED</h4>
-        <div class="connect-icons" role="list">
-          <a class="connect-icon" href="https://www.facebook.com/share/1adkemEFLo/" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-          <a class="connect-icon" href="https://www.instagram.com/md_habibur__rahman" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-          <a class="connect-icon" href="https://youtube.com/@h_a_b_i_b-yt?si=KzptsxRXXNw0t635" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-          <a class="connect-icon" href="https://wa.me/8801868461577" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-          <a class="connect-icon" href="mailto:mshabib471@gmail.com" aria-label="Email"><i class="fa-regular fa-envelope"></i></a>
-          <a class="connect-icon" href="https://www.tiktok.com/@habibur_._rahman" target="_blank" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        <div class="stay-left">STAY CONNECTED</div>
+        <div class="connect-icons" role="list" aria-label="social links">
+          <a class="connect-icon" href="https://www.facebook.com/share/1adkemEFLo/" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f" style="color:#1877F2"></i></a>
+          <a class="connect-icon" href="https://www.instagram.com/md_habibur__rahman" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram" style="color:#E1306C"></i></a>
+          <a class="connect-icon" href="https://youtube.com/@h_a_b_i_b-yt?si=KzptsxRXXNw0t635" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube" style="color:#FF0000"></i></a>
+          <a class="connect-icon" href="https://wa.me/8801868461577" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp" style="color:#25D366"></i></a>
+          <a class="connect-icon" href="mailto:mshabib471@gmail.com" aria-label="Email"><i class="fa-regular fa-envelope" style="color:#6b7280"></i></a>
+          <a class="connect-icon" href="https://www.tiktok.com/@habibur_._rahman" target="_blank" aria-label="TikTok"><i class="fa-brands fa-tiktok" style="color:#000"></i></a>
         </div>
       </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- Footer -->
     <section class="section footer" aria-label="Footer">
       <div class="col"><strong>Shop</strong><div class="small">About us · Contact · Careers · FAQ</div></div>
       <div class="col"><strong>Products</strong><div class="small">Phones · Laptops · Home Appliances · Accessories</div></div>
       <div class="col"><strong>Payment</strong><div class="small">Cash on Delivery · Card · Wallets</div></div>
       <div class="col"><strong>Support</strong><div class="small">Call our customer service: +(800) 123-456</div></div>
     </section>
-
   </main>
 
-  <!-- Floating Chat + WhatsApp -->
+  <!-- Floating chat + whatsapp -->
   <div class="floating-col" aria-hidden="false">
     <div id="chatPanel" class="chat-panel" role="dialog" aria-hidden="true">
       <div class="chat-header">
         <img src="https://i.ibb.co/4Y3m8Kw/default-avatar.png" alt="bot" style="width:44px;height:44px;border-radius:999px">
         <div style="font-weight:800">Shop Assistant</div>
+        <button id="chatClose" class="chat-close" aria-label="Close chat">✕</button>
       </div>
       <div class="chat-body" id="chatBody">
-        <!-- messages -->
         <div class="msg bot">Hi — I am your shopping assistant. Ask me about products, deals or shipping.</div>
       </div>
       <div class="chat-input-row">
@@ -443,86 +383,82 @@
     <a class="floating-whatsapp" title="WhatsApp" href="https://wa.me/8801868461577" target="_blank" aria-label="WhatsApp">🟢</a>
   </div>
 
-  <script>
-  /* ============================
-     Demo products array — edit here or later move to products.json
-     ============================ */
+  <!-- PRODUCTS DATA & LOGIC -->
+  <script type="module">
+  // import firebase exports from your firebase.js (you provided earlier)
+  import { auth } from './firebase.js';
+  import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+
+  /* -------------------------
+     Demo products (editable)
+  --------------------------*/
   const products = [
-    { id:"p001", title:"Xiaomi Smart Band 8 Active", brand:"Xiaomi", price:1950, currency:"SAR", old_price:2800, image:"https://via.placeholder.com/900x700?text=Smart+Band+8", thumb:"https://via.placeholder.com/360x260?text=Smart+Band+8", short:"Water resistant to 50m. 14 days battery.", description:"Xiaomi Smart Band 8 Active — long battery life, heart-rate monitoring, sleep tracking and multiple sports modes.", category:"watches", sku:"XMB-8A" },
-    { id:"p002", title:"New Google Speaker Nest Audio", brand:"Google", price:1950, currency:"SAR", old_price:2800, image:"https://via.placeholder.com/900x700?text=Nest+Audio", thumb:"https://via.placeholder.com/360x260?text=Nest+Audio", short:"Rich sound with strong bass.", description:"Google Nest Audio delivers clear sound and voice assistant features.", category:"home", sku:"GNA-01" },
-    { id:"p003", title:"Robot Vacuum Cleaner", brand:"Xiaomi", price:1950, currency:"SAR", old_price:2800, image:"https://via.placeholder.com/900x700?text=Robot+Vacuum", thumb:"https://via.placeholder.com/360x260?text=Robot+Vacuum", short:"Smart navigation and suction power.", description:"Automated floor cleaning robot with multiple modes.", category:"home", sku:"RBV-300" },
-    { id:"p004", title:"Compact Coffee Machine", brand:"BrewPro", price:1950, currency:"SAR", old_price:2800, image:"https://via.placeholder.com/900x700?text=Coffee+Machine", thumb:"https://via.placeholder.com/360x260?text=Coffee+Machine", short:"Brew coffee like a barista.", description:"Compact and stylish coffee maker.", category:"kitchen", sku:"BPM-09" },
-    { id:"p005", title:"Wireless Charger Pro", brand:"ChargeX", price:350, currency:"SAR", old_price:590, image:"https://via.placeholder.com/900x700?text=Wireless+Charger", thumb:"https://via.placeholder.com/360x260?text=Wireless+Charger", short:"Fast wireless charging.", description:"Fast 20W wireless charger.", category:"power", sku:"WCP-20" }
+    { id:"p001", title:"Xiaomi Smart Band 8 Active", brand:"Xiaomi", price:1950, currency:"SAR", old_price:2800, image:"https://via.placeholder.com/900x700?text=Smart+Band+8", thumb:"https://via.placeholder.com/360x260?text=Smart+Band+8", short:"Water resistant to 50m. 14 days battery.", description:"Xiaomi Smart Band 8 Active — long battery life, heart-rate monitoring.", category:"watches", sku:"XMB-8A" },
+    { id:"p002", title:"New Google Speaker Nest Audio", brand:"Google", price:1950, currency:"SAR", old_price:2800, image:"https://via.placeholder.com/900x700?text=Nest+Audio", thumb:"https://via.placeholder.com/360x260?text=Nest+Audio", short:"Rich sound.", description:"Google Nest Audio delivers clear sound.", category:"home", sku:"GNA-01" },
+    { id:"p003", title:"Robot Vacuum Cleaner", brand:"Xiaomi", price:1950, currency:"SAR", old_price:2800, image:"https://via.placeholder.com/900x700?text=Robot+Vacuum", thumb:"https://via.placeholder.com/360x260?text=Robot+Vacuum", short:"Smart navigation.", description:"Automated floor cleaning robot.", category:"home", sku:"RBV-300" },
+    { id:"p004", title:"Compact Coffee Machine", brand:"BrewPro", price:1950, currency:"SAR", old_price:2800, image:"https://via.placeholder.com/900x700?text=Coffee+Machine", thumb:"https://via.placeholder.com/360x260?text=Coffee+Machine", short:"Brew like a barista.", description:"Compact and stylish coffee maker.", category:"kitchen", sku:"BPM-09" },
+    { id:"p005", title:"Wireless Charger Pro", brand:"ChargeX", price:350, currency:"SAR", old_price:590, image:"https://via.placeholder.com/900x700?text=Wireless+Charger", thumb:"https://via.placeholder.com/360x260?text=Wireless+Charger", short:"Fast charging.", description:"Fast 20W wireless charger.", category:"power", sku:"WCP-20" }
   ];
 
-  /* DOM refs */
+  /* -------------------------
+     DOM refs
+  --------------------------*/
   const catGrid = document.getElementById('catGrid');
   const productsGrid = document.getElementById('productsGrid');
   const drawer = document.getElementById('drawer');
   const drawerBack = document.getElementById('drawerBack');
   const hamburger = document.getElementById('hamburger');
   const drawerClose = document.getElementById('drawerClose');
-  const openSignIn = document.getElementById('openSignIn');
-  const userAvatar = document.getElementById('userAvatar');
+  const drawerSignBtn = document.getElementById('drawerSignBtn');
+  const drawerAccountLink = document.getElementById('drawerAccountLink');
+  const drawerAvatar = document.getElementById('drawerAvatar');
+  const drawerName = document.getElementById('drawerName');
+  const drawerEmail = document.getElementById('drawerEmail');
+  const avatarBtn = document.getElementById('avatarBtn');
   const topAvatar = document.getElementById('topAvatar');
-  const userNameEl = document.getElementById('userName');
-  const userEmailEl = document.getElementById('userEmail');
-  const myAccountLink = document.getElementById('myAccountLink');
-  const toggleThemeDrawer = document.getElementById('toggleThemeDrawer');
-  const themeLabel = document.getElementById('themeLabel');
-  const searchInput = document.getElementById('searchInput');
-  const searchBtn = document.getElementById('searchBtn');
-  const cartCountEls = document.querySelectorAll('.cart-count');
-
-  /* Chat refs */
-  const floatingChat = document.getElementById('floatingChat');
+  const cartCountEl = document.getElementById('cartCount');
   const chatPanel = document.getElementById('chatPanel');
+  const floatingChat = document.getElementById('floatingChat');
+  const chatClose = document.getElementById('chatClose');
   const chatBody = document.getElementById('chatBody');
   const chatInput = document.getElementById('chatInput');
   const sendChat = document.getElementById('sendChat');
+  const modalBack = document.getElementById('modalBack');
+  const modalClose = document.getElementById('modalClose');
+  const toggleThemeDrawer = document.getElementById('toggleThemeDrawer');
 
-  /* constants */
-  const CART_KEY = 'shop_v3_cart';
-  const USER_KEY = 'shop_v3_user';
+  /* -------------------------
+     Utils
+  --------------------------*/
+  function el(tag, cls){ const e = document.createElement(tag); if(cls) e.className = cls; return e; }
+  function escapeHtml(s){ return String(s||'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
 
-  /* Cart helpers */
-  function getCart(){ try{ return JSON.parse(localStorage.getItem(CART_KEY)) || []; }catch(e){ return []; } }
-  function saveCart(c){ localStorage.setItem(CART_KEY, JSON.stringify(c)); updateCart(); }
-  function updateCart(){ const n = getCart().reduce((s,i)=>s+i.qty,0); cartCountEls.forEach(el=>el.innerText = n); }
-
-  /* Drawer open/close */
-  function openDrawer(){
-    drawer.classList.add('open');
-    drawerBack.classList.add('open');
-    drawer.setAttribute('aria-hidden','false');
-    drawerBack.setAttribute('aria-hidden','false');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeDrawer(){
-    drawer.classList.remove('open');
-    drawerBack.classList.remove('open');
-    drawer.setAttribute('aria-hidden','true');
-    drawerBack.setAttribute('aria-hidden','true');
-    document.body.style.overflow = '';
-  }
+  /* -------------------------
+     Drawer open/close
+  --------------------------*/
+  function openDrawer(){ drawer.classList.add('open'); drawerBack.classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeDrawer(){ drawer.classList.remove('open'); drawerBack.classList.remove('open'); document.body.style.overflow=''; }
   hamburger.addEventListener('click', openDrawer);
   drawerClose.addEventListener('click', closeDrawer);
   drawerBack.addEventListener('click', closeDrawer);
 
-  /* Theme handling (drawer toggle) */
+  /* -------------------------
+     Theme
+  --------------------------*/
   function setTheme(t){
     document.body.setAttribute('data-theme', t);
     localStorage.setItem('shop_theme', t);
-    themeLabel.innerText = t === 'dark' ? 'Dark' : 'Light';
   }
-  // init theme
-  setTheme(localStorage.getItem('shop_theme') || 'light');
-  toggleThemeDrawer.addEventListener('click', ()=>{
+  const initialTheme = localStorage.getItem('shop_theme') || 'light';
+  setTheme(initialTheme);
+  toggleThemeDrawer.addEventListener('click', ()=> {
     const cur = document.body.getAttribute('data-theme') || 'light';
     setTheme(cur === 'light' ? 'dark' : 'light');
   });
 
-  /* Simple categories render */
+  /* -------------------------
+     Categories render
+  --------------------------*/
   const categories = [
     {id:'mobiles',label:'Mobiles',icon:'📱'},
     {id:'laptops',label:'Laptops',icon:'💻'},
@@ -533,45 +469,34 @@
     {id:'electric',label:'Electric',icon:'🛴'},
     {id:'more',label:'More',icon:'⋯'}
   ];
-  function renderCategories(){
-    catGrid.innerHTML = '';
-    categories.forEach(c=>{
-      const el = document.createElement('div');
-      el.className = 'cat';
-      el.innerHTML = `<div class="emoji" aria-hidden="true" style="font-size:28px">${c.icon}</div><div class="label">${c.label}</div>`;
-      el.addEventListener('click', ()=> { location.href = 'categories.html'; });
-      catGrid.appendChild(el);
-    });
-  }
-
-  /* Products render */
+  function renderCategories(){ catGrid.innerHTML=''; categories.forEach(c => {
+    const d = el('div','cat');
+    d.innerHTML = `<div class="emoji">${c.icon}</div><div class="label">${escapeHtml(c.label)}</div>`;
+    d.addEventListener('click', ()=> location.href='categories.html');
+    catGrid.appendChild(d);
+  }); }
+  /* -------------------------
+     Products render
+  --------------------------*/
   function renderProducts(list){
-    productsGrid.innerHTML = '';
+    productsGrid.innerHTML='';
     list.forEach(p=>{
-      const art = document.createElement('article');
-      art.className = 'card';
-      art.innerHTML = `
-        <div class="media"><img src="${p.thumb}" alt="${escapeHtml(p.title)}" onerror="this.src='https://via.placeholder.com/360x260?text=Image'"></div>
-        <div class="body">
-          <div class="title">${escapeHtml(p.title)}</div>
-          <div class="meta">${escapeHtml(p.brand)}</div>
-          <div class="price-row">
-            <div class="oldprice">${p.old_price ? p.old_price + ' ' + p.currency : ''}</div>
-            <div class="price">${p.price} ${p.currency}</div>
-          </div>
-        </div>`;
+      const art = el('article','card');
+      art.innerHTML = `<div class="media"><img src="${p.thumb}" alt="${escapeHtml(p.title)}" onerror="this.src='https://via.placeholder.com/360x260?text=Image'"></div>
+        <div class="body"><div class="title">${escapeHtml(p.title)}</div><div class="meta">${escapeHtml(p.brand)}</div>
+        <div class="price-row"><div class="oldprice">${p.old_price ? p.old_price + ' ' + p.currency : ''}</div><div class="price">${p.price} ${p.currency}</div></div></div>`;
       art.addEventListener('click', ()=> openProductModal(p));
       productsGrid.appendChild(art);
     });
   }
 
-  /* Product Modal */
-  const modalBack = document.getElementById('modalBack');
-  const modalClose = document.getElementById('modalClose');
+  /* -------------------------
+     Product modal functions
+  --------------------------*/
   function openProductModal(p){
     modalBack.classList.add('open');
     modalBack.setAttribute('aria-hidden','false');
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow='hidden';
     const m = modalBack.querySelector('.modal');
     m.querySelector('.m-img').src = p.image;
     m.querySelector('.m-title').innerText = p.title;
@@ -581,188 +506,130 @@
     m.querySelector('.m-desc').innerText = p.description || p.short;
     m.querySelector('.m-sku').innerText = p.sku || '';
     m.querySelector('.qty-number').innerText = 1;
-
     const addBtn = m.querySelector('#addToCart');
-    addBtn.onclick = () => {
-      const qty = Number(m.querySelector('.qty-number').innerText) || 1;
-      addToCart(p,qty);
-      closeModal();
-      toast('Added to cart: ' + p.title);
-    };
+    addBtn.onclick = () => { addToCart(p, Number(m.querySelector('.qty-number').innerText) || 1 ); closeModal(); toast('Added to cart'); };
     m.querySelector('#viewPage').href = 'product.html?id=' + encodeURIComponent(p.id);
   }
-  function closeModal(){ modalBack.classList.remove('open'); modalBack.setAttribute('aria-hidden','true'); document.body.style.overflow = ''; }
+  function closeModal(){ modalBack.classList.remove('open'); modalBack.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
   modalClose.addEventListener('click', closeModal);
   modalBack.addEventListener('click', (e)=> { if(e.target === modalBack) closeModal(); });
-
-  /* qty controls (delegation) */
-  document.addEventListener('click', (e)=>{
-    if(e.target.matches('.qty-inc')) {
-      const n = e.target.closest('.modal').querySelector('.qty-number');
-      n.innerText = Math.min(99, Number(n.innerText)+1);
-    }
-    if(e.target.matches('.qty-dec')) {
-      const n = e.target.closest('.modal').querySelector('.qty-number');
-      n.innerText = Math.max(1, Number(n.innerText)-1);
-    }
+  document.addEventListener('click', (e)=> {
+    if(e.target.matches('.qty-inc')) { const n = e.target.closest('.modal').querySelector('.qty-number'); n.innerText = Math.min(99, Number(n.innerText)+1); }
+    if(e.target.matches('.qty-dec')) { const n = e.target.closest('.modal').querySelector('.qty-number'); n.innerText = Math.max(1, Number(n.innerText)-1); }
   });
 
-  /* Add to cart */
+  /* -------------------------
+     Cart (localStorage simple)
+  --------------------------*/
+  const CART_KEY = 'shop_cart_v4';
+  function getCart(){ try{ return JSON.parse(localStorage.getItem(CART_KEY))||[] }catch(e){ return []; } }
+  function saveCart(c){ localStorage.setItem(CART_KEY, JSON.stringify(c)); updateCartCount(); }
   function addToCart(product, qty=1){
-    const cart = getCart();
-    const found = cart.find(i=>i.id===product.id);
+    const cart = getCart(); const found = cart.find(i=>i.id===product.id);
     if(found) found.qty += qty; else cart.push({ id:product.id, title:product.title, price:product.price, currency:product.currency, qty });
     saveCart(cart);
-    updateCart();
   }
+  function updateCartCount(){ const n = getCart().reduce((s,i)=>s+i.qty,0); cartCountEl.innerText = n; }
 
-  /* Simple toast */
-  function toast(msg){
-    const n = document.createElement('div');
-    n.style = 'position:fixed;right:18px;bottom:18px;padding:10px 14px;background:var(--card);border-radius:10px;box-shadow:0 8px 30px rgba(2,6,23,0.2);z-index:99999;font-weight:700';
-    n.innerText = msg;
-    document.body.appendChild(n);
-    setTimeout(()=> n.style.opacity = '0',2600);
-    setTimeout(()=> n.remove(),3200);
+  /* -------------------------
+     Chat (auto replies) with close
+  --------------------------*/
+  function appendChat(text, who='bot'){ const d = el('div','msg ' + (who==='user'?'user':'bot')); d.innerText = text; chatBody.appendChild(d); chatBody.scrollTop = chatBody.scrollHeight; }
+  function aiReply(msg){
+    const q = (msg||'').toLowerCase();
+    if(!q) return "Hi — ask me about products or shipping.";
+    if(q.includes('price')||q.includes('how much')) return "Tell me the product name and I'll fetch the price.";
+    if(q.includes('shipping')) return "Standard delivery 2-4 days. Express available at checkout.";
+    if(q.includes('deal')||q.includes('discount')) return "Check Today's Deals — or ask me for deals on watches.";
+    for(const p of products) if(q.includes(p.title.toLowerCase().split(' ')[0])) return `${p.title} — ${p.price} ${p.currency}`;
+    return "I didn't understand. Try 'price of Nest Audio' or 'shipping'.";
   }
-
-  /* Helper escape */
-  function escapeHtml(s){ return String(s).replace(/[&<>"']/g,function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; }); }
-
-  /* Search */
-  function doSearch(q){
-    q = (q||'').trim().toLowerCase();
-    if(!q) return renderProducts(products);
-    const res = products.filter(p => (p.title + ' ' + p.brand + ' ' + (p.short||'') + ' ' + p.description).toLowerCase().includes(q));
-    renderProducts(res);
-  }
-  searchBtn.addEventListener('click', ()=> doSearch(searchInput.value));
-  searchInput.addEventListener('keydown', (e)=> { if(e.key === 'Enter') doSearch(searchInput.value); });
-
-  /* Sign in (SIMULATED Google - client-side demo)
-     NOTE: Real Google OAuth requires server or Google client-id integration.
-     Here we provide a demo sign-in which stores name & avatar in localStorage.
-  */
-  function openSignInDialog(){
-    const name = prompt('Sign in (demo). Enter your name (or cancel):');
-    if(!name) return;
-    // allow user to paste an avatar URL or use default google-like placeholder
-    let avatar = prompt('Optional: paste avatar image URL (or leave empty to use default):') || 'https://i.ibb.co/4Y3m8Kw/default-avatar.png';
-    const email = prompt('Enter email (optional):') || '';
-    const user = { name, email, avatar };
-    localStorage.setItem(USER_KEY, JSON.stringify(user));
-    applyUser();
-    toast('Signed in as ' + name);
-    closeDrawer();
-  }
-  openSignIn.addEventListener('click', (e)=> { e.preventDefault(); openSignInDialog(); });
-
-  function applyUser(){
-    const raw = localStorage.getItem(USER_KEY);
-    if(!raw) {
-      userAvatar.src = 'https://i.ibb.co/4Y3m8Kw/default-avatar.png';
-      topAvatar.src = 'https://i.ibb.co/4Y3m8Kw/default-avatar.png';
-      userNameEl.innerText = 'Guest';
-      userEmailEl.innerText = 'Not signed in';
-      myAccountLink.href = '#';
-      return;
-    }
-    try {
-      const u = JSON.parse(raw);
-      userAvatar.src = u.avatar || 'https://i.ibb.co/4Y3m8Kw/default-avatar.png';
-      topAvatar.src = u.avatar || 'https://i.ibb.co/4Y3m8Kw/default-avatar.png';
-      userNameEl.innerText = u.name || 'User';
-      userEmailEl.innerText = u.email || 'Signed in';
-      myAccountLink.href = 'account.html';
-    } catch(e) { console.error(e); }
-  }
-
-  /* Language buttons (drawer) */
-  document.querySelectorAll('.lang-select').forEach(btn=>{
-    btn.addEventListener('click', ()=> {
-      const code = btn.dataset.code;
-      localStorage.setItem('shop_lang', code);
-      toast('Language set: ' + btn.innerText);
-    });
-  });
-
-  /* Floating Chat behaviour (Chat button C) - auto replies simulated */
-  let chatOpen = false;
-  floatingChat.addEventListener('click', ()=>{
-    chatOpen = !chatOpen;
-    if(chatOpen){
-      chatPanel.classList.add('open');
-      chatPanel.setAttribute('aria-hidden','false');
-      document.getElementById('chatInput').focus();
-    } else {
-      chatPanel.classList.remove('open');
-      chatPanel.setAttribute('aria-hidden','true');
-    }
-  });
-
-  function appendChatMessage(text, who='bot'){
-    const d = document.createElement('div');
-    d.className = 'msg ' + (who==='user' ? 'user' : 'bot');
-    d.innerText = text;
-    chatBody.appendChild(d);
-    chatBody.scrollTop = chatBody.scrollHeight;
-  }
-
-  // Very simple simulated "AI" auto-reply rules:
-  function aiReply(userMsg){
-    const q = (userMsg||'').toLowerCase();
-    // canned replies
-    if(q.includes('price') || q.includes('how much')) return "Most prices are shown on product cards. Tell me which product (name) and I will fetch price.";
-    if(q.includes('shipping') || q.includes('delivery')) return "We ship nationwide. Standard delivery 2-4 business days. Express available at checkout.";
-    if(q.includes('discount') || q.includes('offer')) return "Check 'Today's Deals' — we update offers frequently. You can also ask me for 'best deals on watches'.";
-    if(q.includes('return') || q.includes('refund')) return "We accept returns within 7 days (unused items). Contact support for an RMA.";
-    if(q.includes('hello') || q.includes('hi')) return "Hi! How can I help you today? You can ask about products, delivery or offers.";
-    // find product by name
-    for(const p of products){
-      if(q.includes(p.title.toLowerCase().split(' ')[0])) return `${p.title} — price: ${p.price} ${p.currency}. Want to add to cart?`;
-    }
-    // fallback
-    return "Sorry, I didn't get that. Try: 'price of Nest Audio', 'shipping', or 'deals on watches'.";
-  }
-
+  floatingChat.addEventListener('click', ()=> { chatPanel.classList.toggle('open'); chatPanel.setAttribute('aria-hidden', !chatPanel.classList.contains('open')); if(chatPanel.classList.contains('open')) chatInput.focus(); });
+  chatClose.addEventListener('click', ()=> { chatPanel.classList.remove('open'); chatPanel.setAttribute('aria-hidden','true'); });
   sendChat.addEventListener('click', ()=> {
-    const txt = chatInput.value.trim();
-    if(!txt) return;
-    appendChatMessage(txt,'user');
-    chatInput.value = '';
-    // simulate typing...
-    appendChatMessage('typing...','bot');
-    // replace typing with reply
-    setTimeout(()=> {
-      const nodes = chatBody.querySelectorAll('.msg');
-      const last = nodes[nodes.length-1];
-      if(last && last.innerText === 'typing...') last.remove();
-      appendChatMessage(aiReply(txt),'bot');
-    }, 800 + Math.random()*800);
+    const txt = chatInput.value.trim(); if(!txt) return; appendChat(txt,'user'); chatInput.value='';
+    appendChat('typing...','bot');
+    setTimeout(()=> { const nodes = chatBody.querySelectorAll('.msg'); if(nodes[nodes.length-1] && nodes[nodes.length-1].innerText==='typing...') nodes[nodes.length-1].remove(); appendChat(aiReply(txt),'bot'); }, 700 + Math.random()*700);
+  });
+  chatInput.addEventListener('keydown', (e)=> { if(e.key==='Enter') sendChat.click(); });
+
+  /* -------------------------
+     Tiny toast
+  --------------------------*/
+  function toast(msg){ const n = el('div'); n.style='position:fixed;right:18px;bottom:18px;padding:10px 14px;background:var(--card);border-radius:10px;box-shadow:0 8px 30px rgba(2,6,23,0.2);z-index:99999;font-weight:700'; n.innerText=msg; document.body.appendChild(n); setTimeout(()=> n.style.opacity='0',2600); setTimeout(()=> n.remove(),3200); }
+
+  /* -------------------------
+     Simple search
+  --------------------------*/
+  const searchInput = document.getElementById('searchInput');
+  const searchBtn = document.getElementById('searchBtn');
+  function doSearch(q){ q=(q||'').trim().toLowerCase(); if(!q) return renderProducts(products); const res = products.filter(p => (p.title + ' ' + p.brand + ' ' + (p.short||'')).toLowerCase().includes(q)); renderProducts(res); }
+  searchBtn.addEventListener('click', ()=> doSearch(searchInput.value));
+  searchInput.addEventListener('keydown', (e)=> { if(e.key==='Enter') doSearch(searchInput.value); });
+
+  /* -------------------------
+     Auth state (Firebase)
+     - we import onAuthStateChanged above; auth imported from firebase.js
+  --------------------------*/
+  onAuthStateChanged(auth, (user) => {
+    if(user){
+      // user logged in
+      const name = user.displayName || user.email.split('@')[0];
+      const email = user.email || '';
+      const avatar = user.photoURL || 'https://i.ibb.co/4Y3m8Kw/default-avatar.png';
+      // set UI
+      topAvatar.src = avatar; drawerAvatar.src = avatar;
+      drawerName.innerText = name; drawerEmail.innerText = email;
+      drawerSignBtn.style.display='none';
+      drawerAccountLink.style.display='block';
+      drawerAccountLink.href = 'dashboard.html';
+      avatarBtn.addEventListener('click', ()=> window.location.href='dashboard.html');
+      // persist small local copy
+      localStorage.setItem('shop_user', JSON.stringify({ uid:user.uid, name, email, avatar }));
+    } else {
+      // logged out
+      topAvatar.src = 'https://i.ibb.co/4Y3m8Kw/default-avatar.png';
+      drawerAvatar.src = 'https://i.ibb.co/4Y3m8Kw/default-avatar.png';
+      drawerName.innerText = 'Guest';
+      drawerEmail.innerText = 'Not signed in';
+      drawerSignBtn.style.display='block';
+      drawerAccountLink.style.display='none';
+      avatarBtn.addEventListener('click', ()=> openDrawer());
+      localStorage.removeItem('shop_user');
+    }
   });
 
-  chatInput.addEventListener('keydown', (e)=> { if(e.key === 'Enter') sendChat.click(); });
+  // drawer sign in action -> go to login page (you will add login.html)
+  drawerSignBtn.addEventListener('click', (e)=> { e.preventDefault(); window.location.href='login.html'; });
 
-  /* init render */
+  /* -------------------------
+     Language buttons
+  --------------------------*/
+  document.querySelectorAll('.lang-select').forEach(btn => {
+    btn.addEventListener('click', ()=> { localStorage.setItem('shop_lang', btn.dataset.code); toast('Language set: ' + btn.innerText); });
+  });
+
+  /* -------------------------
+     Init
+  --------------------------*/
   (function init(){
+    // categories + products
     renderCategories();
     renderProducts(products);
-    applyUser();
-    updateCart();
+    updateCartCount();
+    // ensure drawer closed
+    drawer.classList.remove('open');
+    drawerBack.classList.remove('open');
   })();
 
-  /* Accessibility: keyboard close */
-  document.addEventListener('keydown', (e)=>{
+  // accessibility: escape to close drawer/modal/chat
+  document.addEventListener('keydown', (e)=> {
     if(e.key === 'Escape'){
       if(drawer.classList.contains('open')) closeDrawer();
       if(modalBack.classList.contains('open')) closeModal();
       if(chatPanel.classList.contains('open')) { chatPanel.classList.remove('open'); chatPanel.setAttribute('aria-hidden','true'); }
     }
   });
-
-  /* Ensure drawer closed by default (fixes auto-open issues) */
-  drawer.classList.remove('open');
-  drawerBack.classList.remove('open');
 
   </script>
 </body>
