@@ -1,144 +1,155 @@
-/* -----------------------------------------------------------
-   BASIC HELPERS
------------------------------------------------------------ */
-const $ = (s) => document.querySelector(s);
-const $$ = (s) => document.querySelectorAll(s);
+/* shop.js - main interactions: drawer, lang picker, products load, modal, cart (simple) */
 
-/* -----------------------------------------------------------
-   LOAD PRODUCTS.JSON
------------------------------------------------------------ */
-let allProducts = [];
-let loadedCount = 0;
-const LOAD_SIZE = 8;
+document.addEventListener('DOMContentLoaded', () => {
+  /* ELEMENTS */
+  const drawer = document.querySelector('.drawer');
+  const openDrawerBtns = document.querySelectorAll('.hamburger, .open-drawer');
+  const closeDrawerBtns = document.querySelectorAll('.drawer-close');
+  const langModal = document.querySelector('.lang-modal');
+  const langOpenBtns = document.querySelectorAll('.lang-open, .lang-btn');
+  const langCloseBtns = document.querySelectorAll('.lang-close');
+  const langLabelEls = document.querySelectorAll('.lang-label');
 
-async function loadProducts() {
-  const res = await fetch("products.json");
-  const data = await res.json();
-  allProducts = data.products;
-  renderCategories(data.categories);
-  renderProducts();
-}
+  const modalBack = document.querySelector('.modal-back');
+  const productsGrid = document.querySelector('.products-grid');
 
-loadProducts();
+  const CART_KEY = 'demo_cart';
 
-/* -----------------------------------------------------------
-   RENDER CATEGORY CHIPS + ICON ROW
------------------------------------------------------------ */
-function renderCategories(categories) {
-  const chips = $("#categoryChips");
-  const row = $("#categoriesRow");
+  /* Drawer open/close */
+  function openDrawer(){ drawer.classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeDrawer(){ drawer.classList.remove('open'); document.body.style.overflow=''; }
+  openDrawerBtns.forEach(b => b && b.addEventListener('click', openDrawer));
+  closeDrawerBtns.forEach(b => b && b.addEventListener('click', closeDrawer));
 
-  categories.forEach((cat) => {
-    chips.innerHTML += `<span data-cat="${cat.name}">${cat.name}</span>`;
+  /* Language modal */
+  function openLang(){ langModal && langModal.classList.add('open'); }
+  function closeLang(){ langModal && langModal.classList.remove('open'); }
+  langOpenBtns.forEach(b => b && b.addEventListener('click', openLang));
+  langCloseBtns.forEach(b => b && b.addEventListener('click', closeLang));
+  if(langModal) langModal.addEventListener('click', (e) => { if(e.target === langModal) closeLang(); });
 
-    row.innerHTML += `
-      <div class="category-item" data-cat="${cat.name}">
-        <img src="${cat.icon}" alt="">
-        <div>${cat.name}</div>
-      </div>
-    `;
+  /* Set language label from localStorage */
+  const savedLang = localStorage.getItem('site_lang');
+  if(savedLang){
+    const el = document.querySelector(`.lang-item[data-code="${savedLang}"]`);
+    if(el) langLabelEls.forEach(l => l.innerText = el.innerText.trim());
+  }
+
+  /* Lang select - delegation */
+  document.addEventListener('click', (e) => {
+    const li = e.target.closest('.lang-item');
+    if(!li) return;
+    const code = li.dataset.code;
+    localStorage.setItem('site_lang', code);
+    langLabelEls.forEach(l => l.innerText = li.innerText.trim());
+    closeLang();
   });
 
-  // filter click
-  chips.querySelectorAll("span").forEach((chip) => {
-    chip.addEventListener("click", () => {
-      const c = chip.dataset.cat;
-      renderProducts(c);
+  /* Modal close */
+  modalBack && modalBack.addEventListener('click', (e) => {
+    if(e.target === modalBack || e.target.classList.contains('modal-close')) {
+      modalBack.classList.remove('open'); document.body.style.overflow='';
+    }
+  });
+
+  /* Simple cart helpers */
+  function getCart(){ try{ return JSON.parse(localStorage.getItem(CART_KEY)) || []; }catch(e){ return []; } }
+  function saveCart(arr){ localStorage.setItem(CART_KEY, JSON.stringify(arr)); updateCartCount(); }
+  function updateCartCount(){
+    const count = getCart().length;
+    document.querySelectorAll('.cart-count').forEach(el => el.innerText = count);
+  }
+  updateCartCount();
+
+  /* Load products from products.json */
+  async function loadProducts(){
+    try{
+      const res = await fetch('products.json');
+      const data = await res.json();
+      renderProducts(data);
+    } catch(err){
+      console.error('Failed to load products.json', err);
+      // fallback: empty
+      renderProducts([]);
+    }
+  }
+
+  function renderProducts(list){
+    if(!productsGrid) return;
+    productsGrid.innerHTML = '';
+    list.forEach(p => {
+      const card = document.createElement('article');
+      card.className = 'card';
+      card.tabIndex = 0;
+      card.dataset.id = p.id;
+      card.innerHTML = `
+        <div class="media"><img src="${p.thumb}" alt="${escapeHtml(p.title)}"></div>
+        <div class="body">
+          <div class="title">${escapeHtml(p.title)}</div>
+          <div class="meta">${escapeHtml(p.brand)}</div>
+          <div class="price-row">
+            <div class="oldprice">${p.old_price ? p.old_price + ' ' + p.currency : ''}</div>
+            <div class="price">${p.price} ${p.currency}</div>
+          </div>
+        </div>
+      `;
+      // open modal on click
+      card.addEventListener('click', () => openProductModal(p));
+      productsGrid.appendChild(card);
     });
+  }
+
+  /* Open product modal and populate */
+  function openProductModal(p){
+    if(!modalBack) return;
+    const modal = modalBack.querySelector('.modal');
+    modal.querySelector('.m-img').src = p.image;
+    modal.querySelector('.m-title').innerText = p.title;
+    modal.querySelector('.m-meta').innerText = p.brand + ' · ' + p.category;
+    modal.querySelector('.m-price').innerText = p.price + ' ' + p.currency;
+    modal.querySelector('.m-desc').innerText = p.description || p.short || '';
+    modal.querySelector('.m-oldprice').innerText = p.old_price ? p.old_price + ' ' + p.currency : '';
+    // quantity default
+    modal.querySelector('.qty-number').innerText = 1;
+
+    // Add to cart handler
+    const addBtn = modal.querySelector('.add-to-cart');
+    addBtn.onclick = () => {
+      const qty = Number(modal.querySelector('.qty-number').innerText) || 1;
+      addToCart(p, qty);
+      modalBack.classList.remove('open');
+      document.body.style.overflow='';
+      alert('Added to cart: ' + p.title);
+    };
+
+    modalBack.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+
+  /* quantity controls */
+  document.addEventListener('click', (e) => {
+    if(e.target.matches('.qty-inc')) {
+      const n = e.target.closest('.modal').querySelector('.qty-number');
+      n.innerText = Math.min(99, Number(n.innerText)+1);
+    }
+    if(e.target.matches('.qty-dec')) {
+      const n = e.target.closest('.modal').querySelector('.qty-number');
+      n.innerText = Math.max(1, Number(n.innerText)-1);
+    }
   });
-}
 
-/* -----------------------------------------------------------
-   SHOW PRODUCTS
------------------------------------------------------------ */
-function renderProducts(filter = null) {
-  const grid = $("#productsGrid");
+  /* Add to cart logic */
+  function addToCart(product, qty=1){
+    const cart = getCart();
+    const found = cart.find(i => i.id === product.id);
+    if(found){ found.qty += qty; }
+    else { cart.push({ id: product.id, title: product.title, price: product.price, currency: product.currency, qty }); }
+    saveCart(cart);
+  }
 
-  let items = allProducts;
-  if (filter) items = items.filter((p) => p.category === filter);
+  /* utility escape */
+  function escapeHtml(s){ return String(s).replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; }); }
 
-  grid.innerHTML = "";
-
-  items.slice(0, loadedCount + LOAD_SIZE).forEach((p) => {
-    grid.innerHTML += `
-      <div class="product-card">
-        <img src="${p.image}">
-        <h4>${p.name}</h4>
-        <div class="price">৳${p.price}</div>
-        <button onclick="orderWhatsApp('${p.name}', '${p.price}')">Order</button>
-      </div>
-    `;
-  });
-
-  loadedCount += LOAD_SIZE;
-}
-
-/* Load More Button */
-$("#loadMoreBtn").addEventListener("click", () => renderProducts());
-
-/* -----------------------------------------------------------
-   SORTING
------------------------------------------------------------ */
-$("#sortSelect").addEventListener("change", (e) => {
-  const type = e.target.value;
-
-  if (type === "price-asc")
-    allProducts.sort((a, b) => a.price - b.price);
-
-  if (type === "price-desc")
-    allProducts.sort((a, b) => b.price - a.price);
-
-  if (type === "newest")
-    allProducts.sort((a, b) => b.id - a.id);
-
-  if (type === "featured")
-    allProducts.sort((a, b) => a.id - b.id);
-
-  loadedCount = 0;
-  renderProducts();
-});
-
-/* -----------------------------------------------------------
-   WHATSAPP ORDER
------------------------------------------------------------ */
-function orderWhatsApp(name, price) {
-  window.open(`https://wa.me/8801868461577?text=আমি অর্ডার করতে চাই: ${name} (৳${price})`);
-}
-
-/* -----------------------------------------------------------
-   MOBILE DRAWER
------------------------------------------------------------ */
-$("#menuToggle").addEventListener("click", () => {
-  $("#mobileDrawer").classList.add("open");
-});
-
-$("#closeDrawer").addEventListener("click", () => {
-  $("#mobileDrawer").classList.remove("open");
-});
-
-/* -----------------------------------------------------------
-   THEME TOGGLE
------------------------------------------------------------ */
-$("#themeToggle").addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-  $("#themeToggle").textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
-});
-
-/* -----------------------------------------------------------
-   PWA INSTALL BUTTON
------------------------------------------------------------ */
-let deferredPrompt;
-
-window.addEventListener("beforeinstallprompt", (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  $("#installBtn").style.display = "inline-block";
-});
-
-$("#installBtn").addEventListener("click", async () => {
-  if (!deferredPrompt) return;
-
-  deferredPrompt.prompt();
-  await deferredPrompt.userChoice;
-  deferredPrompt = null;
+  /* init */
+  loadProducts();
 });
