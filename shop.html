@@ -1,116 +1,319 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Shop — Home</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Shop — Modern</title>
+  <meta name="author" content="Generated">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="shop.css">
+
+  <style>
+  /* ============================
+     Global / Reset
+     ============================ */
+  :root{
+    --bg: #f5f7fb;
+    --card: #ffffff;
+    --muted: #6b7280;
+    --accent: #6b2fa3;
+    --accent-2: #ff7a00;
+    --text: #0f1724;
+    --soft-shadow: 0 8px 20px rgba(17,24,39,0.06);
+    --glass: rgba(255,255,255,0.6);
+  }
+  [data-theme="dark"]{
+    --bg: #0b0f14;
+    --card: #0f1720;
+    --muted: #9aa3ad;
+    --accent: #8a63d9;
+    --accent-2: #ff9a4a;
+    --text: #ecf0f6;
+    --soft-shadow: none;
+    --glass: rgba(255,255,255,0.03);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit}
+
+  .container{max-width:1180px;margin:18px auto;padding:0 16px}
+
+  /* ============================
+     Header
+     ============================ */
+  .header{background:var(--card);border-radius:12px;padding:12px;box-shadow:var(--soft-shadow);display:flex;flex-direction:column;gap:8px;position:relative;z-index:50}
+  .hdr-row{display:flex;align-items:center;gap:12px}
+  .logo{display:flex;align-items:center;gap:12px}
+  .logo img{width:140px;height:auto}
+  .search{flex:1;position:relative}
+  .search input{width:100%;padding:12px 44px 12px 14px;border-radius:999px;border:1px solid rgba(15,23,36,0.06);background:linear-gradient(180deg,rgba(255,255,255,0.85),rgba(250,250,253,0.9));font-size:14px;color:var(--text)}
+  .search button{position:absolute;right:6px;top:6px;bottom:6px;width:40px;border-radius:10px;border:none;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
+  .hdr-actions{display:flex;align-items:center;gap:10px}
+  .icon-btn{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid rgba(15,23,36,0.04);padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:600}
+  .hamburger{display:none;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;border:1px solid rgba(15,23,36,0.04);background:var(--card);cursor:pointer;font-size:20px}
+  .cart-count{color:var(--accent);font-weight:800;margin-left:6px}
+
+  /* top nav (desktop) */
+  .topnav{margin-top:8px;background:linear-gradient(90deg,var(--accent),#7b3ed1);color:#fff;padding:8px 12px;border-radius:10px;display:flex;gap:14px;align-items:center;overflow:auto}
+  .topnav a{color:#fff;font-weight:700;white-space:nowrap;padding:6px 8px;border-radius:8px}
+
+  /* ============================
+     Drawer (mobile)
+     ============================ */
+  .drawer-back{position:fixed;inset:0;background:rgba(4,6,8,0.3);opacity:0;pointer-events:none;transition:opacity .22s;z-index:140}
+  .drawer-back.open{opacity:1;pointer-events:auto}
+  .drawer{position:fixed;left:-100%;top:0;height:100vh;width:86%;max-width:420px;background:var(--card);box-shadow:10px 0 40px rgba(2,6,23,0.18);transition:left .28s ease;border-radius:0 14px 14px 0;z-index:150;padding:18px;overflow:auto}
+  .drawer.open{left:0}
+  .drawer .close-wrap{display:flex;justify-content:flex-end}
+  .drawer .close-btn{background:var(--card);border:1px solid rgba(15,23,36,0.04);padding:8px 10px;border-radius:12px;cursor:pointer}
+  .drawer nav{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+  .drawer nav a{display:block;padding:16px;border-radius:12px;background:linear-gradient(180deg,rgba(250,250,253,0.6),rgba(245,246,250,0.8));font-weight:700;color:var(--text)}
+
+  /* Language modal */
+  .lang-modal{position:fixed;inset:0;background:rgba(2,6,23,0.36);display:none;align-items:center;justify-content:center;z-index:200}
+  .lang-modal.open{display:flex}
+  .lang-box{background:var(--card);padding:14px;border-radius:12px;max-width:420px;width:92%;box-shadow:var(--soft-shadow)}
+
+  /* ============================
+     Hero
+     ============================ */
+  .hero{background:var(--card);border-radius:14px;padding:20px;display:flex;gap:18px;align-items:center;box-shadow:var(--soft-shadow)}
+  .hero .left{flex:1}
+  .hero .kicker{color:var(--accent);font-weight:800;margin-bottom:8px;letter-spacing:0.6px}
+  .hero h1{font-size:34px;line-height:1.02;margin-bottom:10px;font-weight:800}
+  .hero p{color:var(--muted);margin-bottom:14px;line-height:1.5}
+  .cta{background:var(--accent-2);color:#fff;padding:12px 20px;border-radius:999px;font-weight:800;box-shadow:0 8px 28px rgba(255,122,0,0.16);display:inline-block}
+  .img-wrap{width:320px;display:flex;align-items:center;justify-content:center}
+  .img-wrap img{width:280px;transform:rotate(-6deg);filter:drop-shadow(0 12px 30px rgba(6,10,20,0.06));border-radius:12px}
+
+  /* ============================
+     Categories grid
+     ============================ */
+  .cat-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:18px}
+  .cat{background:var(--card);padding:14px;border-radius:14px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;box-shadow:var(--soft-shadow);cursor:pointer;transition:transform .18s}
+  .cat:hover{transform:translateY(-6px)}
+  .cat img{width:72px;height:72px;border-radius:12px;object-fit:cover}
+  .cat .label{font-weight:700;margin-top:6px}
+
+  /* ============================
+     Sections & products
+     ============================ */
+  .section{margin-top:20px}
+  .section .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+  .products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .card{background:var(--card);border-radius:14px;overflow:hidden;box-shadow:var(--soft-shadow);transition:transform .18s;cursor:pointer}
+  .card:hover{transform:translateY(-6px)}
+  .card .media{background:linear-gradient(180deg,rgba(250,250,253,0.6),rgba(245,246,250,0.8));display:flex;align-items:center;justify-content:center;padding:18px;height:170px}
+  .card .media img{max-width:100%;max-height:130px;object-fit:contain}
+  .card .body{padding:12px}
+  .card .title{font-weight:700;margin-bottom:6px}
+  .card .meta{color:var(--muted);font-size:13px;margin-bottom:8px}
+  .price-row{display:flex;align-items:center;gap:8px}
+  .oldprice{text-decoration:line-through;color:rgba(15,23,36,0.25)}
+  .price{color:var(--accent-2);font-weight:900}
+
+  /* banner boxes */
+  .banners{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+  .banner{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--soft-shadow)}
+
+  /* brands */
+  .brand-row{display:flex;gap:12px;overflow:auto;padding:8px 0}
+
+  /* footer */
+  .footer{margin-top:20px;padding:18px;background:var(--card);border-radius:12px;box-shadow:var(--soft-shadow);display:flex;gap:14px;flex-wrap:wrap}
+  .footer .col{min-width:160px}
+  .small{color:var(--muted);font-size:14px}
+
+  /* ============================
+     Product Modal (full-screen mobile style)
+     ============================ */
+  .modal-back{position:fixed;inset:0;background:rgba(2,6,23,0.55);display:none;align-items:center;justify-content:center;z-index:220;padding:16px}
+  .modal-back.open{display:flex}
+  .modal{width:100%;max-width:920px;background:var(--card);border-radius:12px;padding:16px;display:flex;gap:12px;box-shadow:0 20px 50px rgba(2,6,23,0.5)}
+  .modal .left{width:48%;display:flex;align-items:center;justify-content:center}
+  .modal .left img{width:100%;max-height:520px;object-fit:contain;border-radius:8px}
+  .modal .right{width:52%;padding:6px 10px;display:flex;flex-direction:column;gap:12px}
+  .m-title{font-size:22px;font-weight:800}
+  .m-meta{color:var(--muted)}
+  .m-price{color:var(--accent-2);font-weight:900;font-size:20px}
+  .qty{display:flex;gap:8px;align-items:center}
+  .qty button{width:36px;height:36px;border-radius:10px;border:1px solid rgba(15,23,36,0.06);background:var(--card);cursor:pointer}
+
+  /* ============================
+     Utilities
+     ============================ */
+  .center{display:flex;align-items:center;justify-content:center}
+  .hidden{display:none}
+  .muted{color:var(--muted)}
+  .chip{padding:6px 10px;background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(250,250,253,0.9));border-radius:999px;border:1px solid rgba(15,23,36,0.04);font-weight:700}
+
+  /* ============================
+     Responsive tweaks (mobile-first)
+     ============================ */
+  @media (max-width:1100px){
+    .cat-grid{grid-template-columns:repeat(4,1fr)}
+    .products-grid{grid-template-columns:repeat(3,1fr)}
+    .hero .img-wrap{width:240px}
+  }
+  @media (max-width:820px){
+    .hero{flex-direction:column;align-items:flex-start}
+    .img-wrap{display:flex;justify-content:center;width:100%}
+    .products-grid{grid-template-columns:repeat(2,1fr)}
+    .modal{flex-direction:column;max-width:680px}
+    .modal .left,.modal .right{width:100%}
+    .hamburger{display:flex}
+    .topnav{display:none}
+    .drawer{width:86%}
+  }
+  @media (max-width:540px){
+    .container{padding:10px}
+    .logo img{width:110px}
+    .hero h1{font-size:26px}
+    .cat-grid{grid-template-columns:repeat(2,1fr)}
+    .products-grid{grid-template-columns:1fr}
+    .card .media{height:200px}
+    .img-wrap img{width:220px}
+    .drawer{width:86%}
+    /* mobile full-screen modal style */
+    .modal{border-radius:14px;padding:14px;flex-direction:column;max-height:92vh;overflow:auto}
+    .modal .left img{max-height:260px}
+    .modal .right{width:100%}
+  }
+
+  /* ============================
+     Dark-mode toggle button
+     ============================ */
+  .theme-toggle{display:inline-flex;align-items:center;gap:8px;padding:8px;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(250,250,253,0.9));border:1px solid rgba(15,23,36,0.04);cursor:pointer}
+
+  </style>
 </head>
-<body>
+<body data-theme="light">
+
+  <!-- DRAWER BACKDROP -->
+  <div id="drawerBack" class="drawer-back" aria-hidden="true"></div>
 
   <!-- DRAWER -->
-  <div class="drawer" aria-hidden="true">
-    <div class="close"><button class="drawer-close icon-btn">Close ✕</button></div>
+  <aside id="drawer" class="drawer" aria-hidden="true">
+    <div class="close-wrap">
+      <button id="drawerClose" class="close-btn" aria-label="Close menu">Close ✕</button>
+    </div>
     <nav>
-      <a href="shop.html">Home</a>
-      <a href="categories.html">Show all categories</a>
-      <a href="orders.html">My Orders</a>
-      <a href="deals.html">Today's Deals</a>
-      <a href="campaigns.html">Campaigns</a>
-      <a href="brands.html">Top Brands</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-      <hr>
-      <a href="signin.html">Sign in</a>
-      <a href="cart.html">Cart <span class="cart-count">0</span></a>
+      <a href="#home" data-link>Home</a>
+      <a href="categories.html" data-link>Show all categories</a>
+      <a href="orders.html" data-link>My Orders</a>
+      <a href="deals.html" data-link>Today's Deals</a>
+      <a href="campaigns.html" data-link>Campaigns</a>
+      <a href="brands.html" data-link>Top Brands</a>
+      <a href="about.html" data-link>About</a>
+      <a href="contact.html" data-link>Contact</a>
+      <a href="signin.html" data-link>Sign in</a>
+      <a href="#" id="openLang" data-link>Language</a>
     </nav>
-  </div>
+  </aside>
 
-  <!-- LANG modal -->
-  <div class="lang-modal" role="dialog" aria-modal="true">
+  <!-- LANGUAGE MODAL -->
+  <div id="langModal" class="lang-modal" role="dialog" aria-hidden="true">
     <div class="lang-box">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
         <strong>Select language</strong>
-        <button class="lang-close icon-btn">Close</button>
+        <button id="langClose" class="icon-btn">Close</button>
       </div>
-      <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:8px;">
-        <div class="lang-item" data-code="en">English</div>
-        <div class="lang-item" data-code="bn">বাংলা (Bangla)</div>
-        <div class="lang-item" data-code="ar">Arabic (العربية)</div>
-        <div class="lang-item" data-code="hi">Hindi (हिन्दी)</div>
-        <div class="lang-item" data-code="fr">Français</div>
-        <div class="lang-item" data-code="es">Español</div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
+        <button class="lang-item chip" data-code="en">English</button>
+        <button class="lang-item chip" data-code="bn">বাংলা (Bangla)</button>
+        <button class="lang-item chip" data-code="ar">العربية</button>
+        <button class="lang-item chip" data-code="hi">हिन्दी</button>
+        <button class="lang-item chip" data-code="fr">Français</button>
+        <button class="lang-item chip" data-code="es">Español</button>
       </div>
     </div>
   </div>
 
   <!-- PRODUCT MODAL -->
-  <div class="modal-back" aria-hidden="true">
+  <div id="modalBack" class="modal-back" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true">
-      <div style="display:flex; justify-content:space-between; align-items:center;">
-        <div style="font-weight:800;" class="m-title">Product</div>
-        <button class="modal-close icon-btn">Close</button>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+        <div style="font-weight:800" class="m-title">Product</div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <div id="shareBtn" class="icon-btn">Share</div>
+          <button id="modalClose" class="icon-btn">Close</button>
+        </div>
       </div>
-      <div style="display:flex; gap:12px; margin-top:12px;">
-        <div class="left"><img class="m-img" src="https://via.placeholder.com/800x600" alt="product"></div>
+
+      <div style="display:flex;gap:12px;margin-top:12px">
+        <div class="left"><img class="m-img" src="https://via.placeholder.com/900x700" alt="product"></div>
         <div class="right">
-          <div class="m-meta">Brand · category</div>
-          <div class="m-title" style="margin-top:6px;">Product Title</div>
-          <div style="display:flex;gap:8px;align-items:center;">
+          <div class="m-meta muted">Brand · Category</div>
+          <div class="m-title">Product Title</div>
+          <div style="display:flex;gap:8px;align-items:center">
             <div class="m-oldprice oldprice"></div>
-            <div class="m-price">1950 SAR</div>
+            <div class="m-price">0</div>
           </div>
-          <p class="m-desc small" style="margin-top:8px;"></p>
-          <div style="display:flex;gap:12px;align-items:center;margin-top:10px;">
+          <p class="m-desc muted" style="margin-top:6px"></p>
+
+          <div style="display:flex;gap:12px;align-items:center;margin-top:10px">
             <div class="qty" aria-hidden="false">
               <button class="qty-dec">-</button>
-              <div class="qty-number" style="min-width:36px;text-align:center;">1</div>
+              <div class="qty-number" style="min-width:36px;text-align:center">1</div>
               <button class="qty-inc">+</button>
             </div>
-            <button class="cta add-to-cart">Add to cart</button>
-            <a class="icon-btn" href="#">View page</a>
+            <button id="addToCart" class="cta add-to-cart">Add to cart</button>
+            <a id="viewPage" class="icon-btn" href="#">View page</a>
           </div>
-          <div style="margin-top:12px;" class="small">SKU: <span class="m-sku"></span></div>
+
+          <div style="margin-top:10px" class="small">SKU: <span class="m-sku muted"></span></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- HEADER -->
+  <!-- PAGE HEADER -->
   <header class="container">
-    <div class="header" role="banner">
-      <div class="logo"><a href="shop.html"><img src="https://via.placeholder.com/160x40?text=LOGO" alt="logo"></a></div>
-      <div class="search">
-        <input type="search" placeholder="Search Products, brands and more..." aria-label="Search">
-        <button aria-label="Search">🔍</button>
-      </div>
-      <div class="header-actions">
-        <button class="lang-btn lang-open"><span class="lang-label">Language</span></button>
-        <a class="icon-btn" href="signin.html">Sign in</a>
-        <a class="icon-btn" href="cart.html">Cart (<span class="cart-count">0</span>)</a>
-        <button class="hamburger open-drawer" aria-label="Open menu">☰</button>
-      </div>
-    </div>
+    <div class="header" id="header">
+      <div class="hdr-row">
+        <div class="logo"><a href="shop.html"><img src="https://via.placeholder.com/160x40?text=LOGO" alt="logo"></a></div>
 
-    <nav class="topnav" aria-label="Primary navigation">
-      <a href="categories.html">Show all categories</a>
-      <a href="orders.html">My Orders</a>
-      <a href="deals.html">Today's Deals</a>
-      <a href="campaigns.html">Campaigns</a>
-      <a href="brands.html">Top Brands</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+        <div class="search" style="flex:1">
+          <input id="searchInput" type="search" placeholder="Search Products, brands and more..." aria-label="Search">
+          <button aria-label="Search" id="searchBtn">🔍</button>
+        </div>
+
+        <div class="hdr-actions">
+          <div id="themeToggle" class="theme-toggle" title="Toggle theme">
+            <svg id="sunIcon" width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="#111827" stroke-width="1.4"/></svg>
+            <span class="muted" id="themeLabel">Light</span>
+          </div>
+
+          <a href="signin.html" class="icon-btn hidden mobile-hide">Sign in</a>
+          <a href="cart.html" class="icon-btn cart-btn"><span>Cart</span> <span class="cart-count">0</span></a>
+
+          <button id="hamburger" class="hamburger" aria-label="Open menu">☰</button>
+        </div>
+      </div>
+
+      <nav class="topnav" aria-label="Primary navigation">
+        <a href="categories.html">Show all categories</a>
+        <a href="orders.html">My Orders</a>
+        <a href="deals.html">Today's Deals</a>
+        <a href="campaigns.html">Campaigns</a>
+        <a href="brands.html">Top Brands</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
   </header>
 
-  <!-- MAIN -->
-  <main class="container">
-    <section class="hero" aria-label="Hero">
+  <!-- MAIN PAGE -->
+  <main class="container" id="main">
+
+    <!-- HERO -->
+    <section class="hero" id="home">
       <div class="left">
-        <div style="color:#6b2fa3;font-weight:800;margin-bottom:6px;">XIAOMI</div>
+        <div class="kicker">XIAOMI</div>
         <h1>Xiaomi Smart Band 8 Active</h1>
         <p>Enjoy water resistance to a depth of 50 meters and an impressive battery life lasting up to 14 days. Embrace style and functionality with the latest fitness band.</p>
-        <a class="cta" href="#">অর্ডার করুন</a>
+        <a class="cta" href="#" id="heroCTABtn">অর্ডার করুন</a>
       </div>
       <div class="img-wrap"><img src="https://via.placeholder.com/420x360?text=Smart+Band" alt="hero"></div>
     </section>
@@ -119,15 +322,11 @@
     <section class="section">
       <div class="head">
         <h2>Categories</h2>
-        <a class="view-all" href="categories.html">View all</a>
+        <a class="chip" href="categories.html">View all</a>
       </div>
-      <div class="cat-grid" aria-label="Categories">
-        <div class="cat" data-cat="mobiles"><img src="https://via.placeholder.com/120?text=📱"><div>Mobiles</div></div>
-        <div class="cat" data-cat="laptops"><img src="https://via.placeholder.com/120?text=💻"><div>Laptops</div></div>
-        <div class="cat" data-cat="kids"><img src="https://via.placeholder.com/120?text=🎮"><div>Kidsgame</div></div>
-        <div class="cat" data-cat="home"><img src="https://via.placeholder.com/120?text=🍳"><div>Home & Kitchen</div></div>
-        <div class="cat" data-cat="power"><img src="https://via.placeholder.com/120?text=🔋"><div>Powerbank</div></div>
-        <div class="cat" data-cat="watches"><img src="https://via.placeholder.com/120?text=⌚"><div>Watches</div></div>
+
+      <div class="cat-grid" id="catGrid" aria-label="Categories">
+        <!-- pulled from JS data or static placeholder -->
       </div>
     </section>
 
@@ -135,21 +334,22 @@
     <section class="section">
       <div class="head">
         <h2>Hot Product</h2>
-        <a class="view-all" href="deals.html">View All</a>
+        <a class="chip" href="deals.html">View All</a>
       </div>
-      <div class="products-grid products-grid" aria-live="polite">
-        <!-- populated by shop.js from products.json -->
+
+      <div class="products-grid" id="productsGrid" aria-live="polite">
+        <!-- products inserted by JS -->
       </div>
     </section>
 
     <!-- BANNERS -->
-    <section class="section" style="margin-top:20px;">
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
-        <div style="background:#fff;padding:18px;border-radius:12px;box-shadow:0 8px 20px rgba(17,24,39,0.04);">
+    <section class="section">
+      <div class="banners">
+        <div class="banner">
           <h3>Popcorn maker for Friday nights</h3>
           <p class="small">Make movie nights special with our popcorn makers.</p>
         </div>
-        <div style="background:#fff;padding:18px;border-radius:12px;box-shadow:0 8px 20px rgba(17,24,39,0.04);">
+        <div class="banner">
           <h3>Your coffee your mood!</h3>
           <p class="small">Offers on selected coffee makers.</p>
         </div>
@@ -160,9 +360,9 @@
     <section class="section">
       <div class="head">
         <h2>Featured Brands</h2>
-        <a class="view-all" href="brands.html">View All</a>
+        <a class="chip" href="brands.html">View All</a>
       </div>
-      <div class="brand-row">
+      <div class="brand-row" id="brandRow">
         <img src="https://via.placeholder.com/110x40?text=Braun" alt="">
         <img src="https://via.placeholder.com/110x40?text=Eufy" alt="">
         <img src="https://via.placeholder.com/110x40?text=Honor" alt="">
@@ -181,6 +381,360 @@
 
   </main>
 
-  <script src="shop.js"></script>
+  <!-- ============================
+       Scripts (Products, Drawer, Modal, Theme)
+       ============================ -->
+  <script>
+  /* ============================
+     Demo Products Data (edit easily)
+     ============================ */
+  const products = [
+    {
+      id: "p001",
+      title: "Xiaomi Smart Band 8 Active",
+      brand: "Xiaomi",
+      price: 1950,
+      currency: "SAR",
+      old_price: 2800,
+      image: "https://via.placeholder.com/900x700?text=Smart+Band+8",
+      thumb: "https://via.placeholder.com/360x260?text=Smart+Band+8",
+      short: "Water resistant to 50 meters. Up to 14 days battery life.",
+      description: "Xiaomi Smart Band 8 Active — long battery life, heart-rate monitoring, sleep tracking and multiple sports modes. Premium silicon strap and lightweight.",
+      category: "watches",
+      sku: "XMB-8A"
+    },
+    {
+      id: "p002",
+      title: "New Google Speaker Nest Audio",
+      brand: "Google",
+      price: 1950,
+      currency: "SAR",
+      old_price: 2800,
+      image: "https://via.placeholder.com/900x700?text=Nest+Audio",
+      thumb: "https://via.placeholder.com/360x260?text=Nest+Audio",
+      short: "Rich sound with strong bass.",
+      description: "Google Nest Audio delivers clear sound, improved bass and voice assistant features. Compact and stylish design fits any home.",
+      category: "home",
+      sku: "GNA-01"
+    },
+    {
+      id: "p003",
+      title: "Robot Vacuum Cleaner",
+      brand: "Xiaomi",
+      price: 1950,
+      currency: "SAR",
+      old_price: 2800,
+      image: "https://via.placeholder.com/900x700?text=Robot+Vacuum",
+      thumb: "https://via.placeholder.com/360x260?text=Robot+Vacuum",
+      short: "Smart navigation and suction power.",
+      description: "Automated floor cleaning robot with multiple cleaning modes, remote control via app and scheduled cleaning.",
+      category: "home",
+      sku: "RBV-300"
+    },
+    {
+      id: "p004",
+      title: "Compact Coffee Machine",
+      brand: "BrewPro",
+      price: 1950,
+      currency: "SAR",
+      old_price: 2800,
+      image: "https://via.placeholder.com/900x700?text=Coffee+Machine",
+      thumb: "https://via.placeholder.com/360x260?text=Coffee+Machine",
+      short: "Brew coffee like a barista.",
+      description: "Compact and stylish coffee maker suitable for espresso, americano and more. Easy to clean and maintain.",
+      category: "kitchen",
+      sku: "BPM-09"
+    },
+    {
+      id: "p005",
+      title: "Wireless Charger Pro",
+      brand: "ChargeX",
+      price: 350,
+      currency: "SAR",
+      old_price: 590,
+      image: "https://via.placeholder.com/900x700?text=Wireless+Charger",
+      thumb: "https://via.placeholder.com/360x260?text=Wireless+Charger",
+      short: "Fast wireless charging.",
+      description: "Fast 20W wireless charger with thermal protection and smart coil alignment.",
+      category: "power",
+      sku: "WCP-20"
+    }
+  ];
+
+  /* ============================
+     DOM refs
+     ============================ */
+  const drawer = document.getElementById('drawer');
+  const drawerBack = document.getElementById('drawerBack');
+  const hamburger = document.getElementById('hamburger');
+  const drawerClose = document.getElementById('drawerClose');
+  const langModal = document.getElementById('langModal');
+  const openLang = document.getElementById('openLang');
+  const langClose = document.getElementById('langClose');
+  const modalBack = document.getElementById('modalBack');
+  const modalClose = document.getElementById('modalClose');
+  const productsGrid = document.getElementById('productsGrid');
+  const catGrid = document.getElementById('catGrid');
+  const cartCountEls = document.querySelectorAll('.cart-count');
+  const themeToggle = document.getElementById('themeToggle');
+  const themeLabel = document.getElementById('themeLabel');
+  const bodyEl = document.body;
+  const searchInput = document.getElementById('searchInput');
+  const searchBtn = document.getElementById('searchBtn');
+
+  /* ============================
+     Utilities - Cart (localStorage)
+     ============================ */
+  const CART_KEY = 'demo_cart_v1';
+  function getCart(){ try{return JSON.parse(localStorage.getItem(CART_KEY))||[];}catch(e){return []} }
+  function saveCart(arr){ localStorage.setItem(CART_KEY, JSON.stringify(arr)); updateCartCount(); }
+  function updateCartCount(){ const n = getCart().reduce((s,i)=>s+i.qty,0); cartCountEls.forEach(el=>el.innerText = n); }
+
+  /* ============================
+     Drawer open/close
+     ============================ */
+  function openDrawer(){
+    drawer.classList.add('open');
+    drawerBack.classList.add('open');
+    drawer.setAttribute('aria-hidden','false');
+    drawerBack.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDrawer(){
+    drawer.classList.remove('open');
+    drawerBack.classList.remove('open');
+    drawer.setAttribute('aria-hidden','true');
+    drawerBack.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+  }
+  hamburger.addEventListener('click', openDrawer);
+  drawerClose.addEventListener('click', closeDrawer);
+  drawerBack.addEventListener('click', closeDrawer);
+
+  /* ============================
+     Language modal
+     ============================ */
+  openLang.addEventListener('click', (e)=>{
+    e.preventDefault();
+    langModal.classList.add('open');
+    langModal.setAttribute('aria-hidden','false');
+  });
+  langClose.addEventListener('click', ()=>{
+    langModal.classList.remove('open');
+    langModal.setAttribute('aria-hidden','true');
+  });
+  langModal.addEventListener('click', (e)=>{ if(e.target === langModal){ langModal.classList.remove('open'); } });
+  document.querySelectorAll('.lang-item').forEach(btn=>{
+    btn.addEventListener('click', () => {
+      const code = btn.dataset.code;
+      localStorage.setItem('site_lang', code);
+      // feedback (simple)
+      alert('Language selected: ' + btn.innerText);
+      langModal.classList.remove('open');
+    });
+  });
+
+  /* ============================
+     Theme toggle (light/dark)
+     ============================ */
+  function setTheme(theme){
+    bodyEl.setAttribute('data-theme', theme);
+    localStorage.setItem('site_theme', theme);
+    themeLabel.innerText = theme === 'dark' ? 'Dark' : 'Light';
+  }
+  // init
+  const savedTheme = localStorage.getItem('site_theme') || 'light';
+  setTheme(savedTheme);
+  themeToggle.addEventListener('click', ()=>{
+    const current = bodyEl.getAttribute('data-theme') || 'light';
+    setTheme(current === 'light' ? 'dark' : 'light');
+  });
+
+  /* ============================
+     Render categories (quick)
+     ============================ */
+  const categories = [
+    {id:'mobiles',label:'Mobiles',icon:'📱'},
+    {id:'laptops',label:'Laptops',icon:'💻'},
+    {id:'kids',label:'Kidsgame',icon:'🎮'},
+    {id:'home',label:'Home & Kitchen',icon:'🍳'},
+    {id:'power',label:'Powerbank',icon:'🔋'},
+    {id:'watches',label:'Watches',icon:'⌚'},
+    {id:'electric',label:'Electric',icon:'🛴'},
+    {id:'more',label:'More',icon:'⋯'}
+  ];
+  function renderCategories(){
+    catGrid.innerHTML = '';
+    categories.forEach(c=>{
+      const div = document.createElement('div');
+      div.className = 'cat';
+      div.innerHTML = `<div style="font-size:28px">${c.icon}</div><div class="label">${c.label}</div>`;
+      div.addEventListener('click', ()=>{ location.href='categories.html'; });
+      catGrid.appendChild(div);
+    });
+  }
+
+  /* ============================
+     Render products
+     ============================ */
+  function renderProducts(list){
+    productsGrid.innerHTML = '';
+    list.forEach(p=>{
+      const art = document.createElement('article');
+      art.className = 'card';
+      art.tabIndex = 0;
+      art.dataset.id = p.id;
+      art.innerHTML = `
+        <div class="media"><img src="${p.thumb}" alt="${escapeHtml(p.title)}"></div>
+        <div class="body">
+          <div class="title">${escapeHtml(p.title)}</div>
+          <div class="meta">${escapeHtml(p.brand)}</div>
+          <div class="price-row">
+            <div class="oldprice">${p.old_price ? p.old_price + ' ' + p.currency : ''}</div>
+            <div class="price">${p.price} ${p.currency}</div>
+          </div>
+        </div>
+      `;
+      art.addEventListener('click', ()=> openProductModal(p));
+      productsGrid.appendChild(art);
+    });
+  }
+
+  /* ============================
+     Product modal
+     ============================ */
+  function openProductModal(p){
+    modalBack.classList.add('open');
+    modalBack.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+    const m = modalBack.querySelector('.modal');
+    m.querySelector('.m-img').src = p.image;
+    m.querySelector('.m-title').innerText = p.title;
+    m.querySelector('.m-meta').innerText = p.brand + ' · ' + p.category;
+    m.querySelector('.m-price').innerText = p.price + ' ' + p.currency;
+    m.querySelector('.m-oldprice').innerText = p.old_price ? p.old_price + ' ' + p.currency : '';
+    m.querySelector('.m-desc').innerText = p.description || p.short;
+    m.querySelector('.m-sku').innerText = p.sku || '';
+    m.querySelector('.qty-number').innerText = 1;
+
+    // set add to cart handler
+    const addBtn = m.querySelector('#addToCart');
+    addBtn.onclick = () => {
+      const qty = Number(m.querySelector('.qty-number').innerText) || 1;
+      addToCart(p, qty);
+      closeModal();
+      // lightweight toast
+      notify('Added to cart: ' + p.title);
+    };
+
+    // share simple handler
+    const shareBtn = m.querySelector('#shareBtn');
+    shareBtn.onclick = () => {
+      if(navigator.share){
+        navigator.share({title:p.title,text:p.short,url:location.href});
+      } else { alert('Share this product: ' + p.title); }
+    };
+
+    // view page - placeholder
+    m.querySelector('#viewPage').href = 'product.html?id=' + encodeURIComponent(p.id);
+  }
+  function closeModal(){
+    modalBack.classList.remove('open');
+    modalBack.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+  }
+  modalClose.addEventListener('click', closeModal);
+  modalBack.addEventListener('click', (e)=>{ if(e.target === modalBack) closeModal(); });
+
+  // qty controls (delegation)
+  document.addEventListener('click', (e)=>{
+    const plus = e.target.closest('.qty-inc');
+    const minus = e.target.closest('.qty-dec');
+    if(plus){
+      const n = plus.closest('.modal').querySelector('.qty-number');
+      n.innerText = Math.min(99, Number(n.innerText) + 1);
+    }
+    if(minus){
+      const n = minus.closest('.modal').querySelector('.qty-number');
+      n.innerText = Math.max(1, Number(n.innerText) - 1);
+    }
+  });
+
+  /* ============================
+     Add to cart
+     ============================ */
+  function addToCart(product, qty=1){
+    const cart = getCart();
+    const found = cart.find(i=>i.id===product.id);
+    if(found){ found.qty += qty; } else { cart.push({id:product.id,title:product.title,price:product.price,currency:product.currency,qty:qty}); }
+    saveCart(cart);
+  }
+
+  /* ============================
+     Mini notifier
+     ============================ */
+  function notify(msg){
+    const n = document.createElement('div');
+    n.style = 'position:fixed;right:18px;bottom:18px;padding:10px 14px;background:var(--card);border-radius:10px;box-shadow:0 8px 30px rgba(2,6,23,0.2);z-index:99999;font-weight:700';
+    n.innerText = msg;
+    document.body.appendChild(n);
+    setTimeout(()=> n.style.opacity = '0',2600);
+    setTimeout(()=> n.remove(),3200);
+  }
+
+  /* ============================
+     Helpers
+     ============================ */
+  function escapeHtml(s){ return String(s).replace(/[&<>"']/g,function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; }); }
+
+  /* ============================
+     Search functionality (basic)
+     ============================ */
+  function doSearch(q){
+    q = (q||'').trim().toLowerCase();
+    if(!q){ renderProducts(products); return; }
+    const res = products.filter(p => (p.title + ' ' + p.brand + ' ' + (p.short||'') + ' ' + p.description).toLowerCase().includes(q));
+    renderProducts(res);
+  }
+  searchBtn.addEventListener('click', ()=> doSearch(searchInput.value));
+  searchInput.addEventListener('keydown', (e)=> { if(e.key === 'Enter') doSearch(searchInput.value); });
+
+  /* ============================
+     Init
+     ============================ */
+  (function init(){
+    renderCategories();
+    renderProducts(products);
+    updateCartCount();
+    // set cart count on cart link
+    document.querySelectorAll('.cart-btn').forEach(el=>{
+      el.addEventListener('click', (e)=>{ /* optional: go to cart page */ });
+    });
+  })();
+
+  /* ============================
+     Accessibility: keyboard ESC to close modals/drawer
+     ============================ */
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape'){
+      if(drawer.classList.contains('open')) closeDrawer();
+      if(modalBack.classList.contains('open')) closeModal();
+      if(langModal.classList.contains('open')) langModal.classList.remove('open');
+    }
+  });
+
+  /* ============================
+     Prevent accidental auto-open
+     ============================ */
+  // ensure drawer is closed by default
+  drawer.classList.remove('open');
+  drawer.setAttribute('aria-hidden','true');
+  drawerBack.classList.remove('open');
+  drawerBack.setAttribute('aria-hidden','true');
+  modalBack.classList.remove('open');
+  modalBack.setAttribute('aria-hidden','true');
+
+  </script>
+
 </body>
 </html>
