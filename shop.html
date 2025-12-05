@@ -3,104 +3,115 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Shop — Modern</title>
+  <title>Shop — Modern (v3)</title>
   <meta name="author" content="Generated">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-
   <style>
   /* ============================
-     Global / Reset
+     THEME: iOS Clean Mode (Light + Dark)
      ============================ */
   :root{
-    --bg: #f5f7fb;
-    --card: #ffffff;
-    --muted: #6b7280;
-    --accent: #6b2fa3;
-    --accent-2: #ff7a00;
-    --text: #0f1724;
-    --soft-shadow: 0 8px 20px rgba(17,24,39,0.06);
-    --glass: rgba(255,255,255,0.6);
+    --bg:#f5f7fb;
+    --card:#ffffff;
+    --muted:#6b7280;
+    --accent:#6b2fa3;
+    --accent-2:#ff7a00;
+    --text:#0f1724;
+    --soft-shadow:0 8px 20px rgba(17,24,39,0.06);
+    --glass:rgba(255,255,255,0.6);
+    --glass-border: rgba(15,23,36,0.04);
   }
   [data-theme="dark"]{
-    --bg: #0b0f14;
-    --card: #0f1720;
-    --muted: #9aa3ad;
-    --accent: #8a63d9;
-    --accent-2: #ff9a4a;
-    --text: #ecf0f6;
-    --soft-shadow: none;
-    --glass: rgba(255,255,255,0.03);
+    --bg:#0b0f14;
+    --card:#0f1720;
+    --muted:#9aa3ad;
+    --accent:#8a63d9;
+    --accent-2:#ff9a4a;
+    --text:#ecf0f6;
+    --soft-shadow:none;
+    --glass:rgba(255,255,255,0.03);
+    --glass-border: rgba(255,255,255,0.06);
   }
 
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%;font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+  html,body{height:100%;font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
   a{color:inherit;text-decoration:none}
-  button{font-family:inherit}
+  button{font-family:inherit;cursor:pointer}
 
   .container{max-width:1180px;margin:18px auto;padding:0 16px}
 
   /* ============================
-     Header
+     HEADER (updated for mobile)
+     - Mobile: Logo + action icons on top row
+     - Search: next line full-width
      ============================ */
-  .header{background:var(--card);border-radius:12px;padding:12px;box-shadow:var(--soft-shadow);display:flex;flex-direction:column;gap:8px;position:relative;z-index:50}
-  .hdr-row{display:flex;align-items:center;gap:12px}
+  .header{background:var(--card);border-radius:12px;padding:10px;box-shadow:var(--soft-shadow);display:flex;flex-direction:column;gap:8px;position:relative;z-index:50}
+  .top-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
   .logo{display:flex;align-items:center;gap:12px}
-  .logo img{width:140px;height:auto}
-  .search{flex:1;position:relative}
-  .search input{width:100%;padding:12px 44px 12px 14px;border-radius:999px;border:1px solid rgba(15,23,36,0.06);background:linear-gradient(180deg,rgba(255,255,255,0.85),rgba(250,250,253,0.9));font-size:14px;color:var(--text)}
-  .search button{position:absolute;right:6px;top:6px;bottom:6px;width:40px;border-radius:10px;border:none;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
-  .hdr-actions{display:flex;align-items:center;gap:10px}
-  .icon-btn{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid rgba(15,23,36,0.04);padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:600}
-  .hamburger{display:none;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;border:1px solid rgba(15,23,36,0.04);background:var(--card);cursor:pointer;font-size:20px}
+  .logo img{width:110px;height:auto}
+  .actions{display:flex;align-items:center;gap:8px}
+  .icon-btn{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--glass-border);padding:8px 12px;border-radius:10px}
+  .icon-btn.small{padding:8px;border-radius:10px}
   .cart-count{color:var(--accent);font-weight:800;margin-left:6px}
+  .hamburger{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;border:1px solid var(--glass-border);background:var(--card);font-size:20px}
+  .user-avatar{width:40px;height:40px;border-radius:999px;object-fit:cover;border:2px solid var(--glass-border)}
 
-  /* top nav (desktop) */
+  /* SEARCH row is separate on mobile (full width) */
+  .search-row{display:flex;gap:8px;align-items:center}
+  .search{flex:1;position:relative}
+  .search input{width:100%;padding:12px 44px 12px 14px;border-radius:999px;border:1px solid var(--glass-border);background:var(--glass);font-size:14px;color:var(--text)}
+  .search button{position:absolute;right:6px;top:6px;bottom:6px;width:40px;border-radius:12px;border:none;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center}
+
+  /* hide sign in on small header (we move sign-in into drawer) */
+  .desktop-hide{display:none}
+
+  /* top nav (desktop only) */
   .topnav{margin-top:8px;background:linear-gradient(90deg,var(--accent),#7b3ed1);color:#fff;padding:8px 12px;border-radius:10px;display:flex;gap:14px;align-items:center;overflow:auto}
   .topnav a{color:#fff;font-weight:700;white-space:nowrap;padding:6px 8px;border-radius:8px}
 
   /* ============================
-     Drawer (mobile)
+     Drawer (mobile) + language + dark toggle inside drawer
      ============================ */
-  .drawer-back{position:fixed;inset:0;background:rgba(4,6,8,0.3);opacity:0;pointer-events:none;transition:opacity .22s;z-index:140}
+  .drawer-back{position:fixed;inset:0;background:rgba(2,6,23,0.3);opacity:0;pointer-events:none;transition:opacity .22s;z-index:140}
   .drawer-back.open{opacity:1;pointer-events:auto}
   .drawer{position:fixed;left:-100%;top:0;height:100vh;width:86%;max-width:420px;background:var(--card);box-shadow:10px 0 40px rgba(2,6,23,0.18);transition:left .28s ease;border-radius:0 14px 14px 0;z-index:150;padding:18px;overflow:auto}
   .drawer.open{left:0}
   .drawer .close-wrap{display:flex;justify-content:flex-end}
-  .drawer .close-btn{background:var(--card);border:1px solid rgba(15,23,36,0.04);padding:8px 10px;border-radius:12px;cursor:pointer}
+  .drawer .close-btn{background:var(--card);border:1px solid var(--glass-border);padding:8px 10px;border-radius:12px;cursor:pointer}
   .drawer nav{display:flex;flex-direction:column;gap:12px;margin-top:12px}
-  .drawer nav a{display:block;padding:16px;border-radius:12px;background:linear-gradient(180deg,rgba(250,250,253,0.6),rgba(245,246,250,0.8));font-weight:700;color:var(--text)}
+  .drawer nav a{display:block;padding:14px;border-radius:12px;background:linear-gradient(180deg,rgba(250,250,253,0.6),rgba(245,246,250,0.8));font-weight:700;color:var(--text)}
+  .drawer .muted{color:var(--muted)}
 
-  /* Language modal */
-  .lang-modal{position:fixed;inset:0;background:rgba(2,6,23,0.36);display:none;align-items:center;justify-content:center;z-index:200}
-  .lang-modal.open{display:flex}
-  .lang-box{background:var(--card);padding:14px;border-radius:12px;max-width:420px;width:92%;box-shadow:var(--soft-shadow)}
+  .drawer .section-title{margin-top:10px;font-weight:800}
+
+  .theme-toggle-row{display:flex;align-items:center;gap:10px;padding:10px 6px;border-radius:10px;border:1px solid var(--glass-border);background:var(--glass);margin-top:8px}
+  .theme-switch{display:inline-flex;align-items:center;gap:8px;padding:8px;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,0.95),rgba(250,250,253,0.9));border:1px solid var(--glass-border)}
 
   /* ============================
-     Hero
+     HERO
      ============================ */
-  .hero{background:var(--card);border-radius:14px;padding:20px;display:flex;gap:18px;align-items:center;box-shadow:var(--soft-shadow)}
+  .hero{background:var(--card);border-radius:14px;padding:18px;display:flex;gap:18px;align-items:center;box-shadow:var(--soft-shadow)}
   .hero .left{flex:1}
-  .hero .kicker{color:var(--accent);font-weight:800;margin-bottom:8px;letter-spacing:0.6px}
-  .hero h1{font-size:34px;line-height:1.02;margin-bottom:10px;font-weight:800}
-  .hero p{color:var(--muted);margin-bottom:14px;line-height:1.5}
-  .cta{background:var(--accent-2);color:#fff;padding:12px 20px;border-radius:999px;font-weight:800;box-shadow:0 8px 28px rgba(255,122,0,0.16);display:inline-block}
-  .img-wrap{width:320px;display:flex;align-items:center;justify-content:center}
-  .img-wrap img{width:280px;transform:rotate(-6deg);filter:drop-shadow(0 12px 30px rgba(6,10,20,0.06));border-radius:12px}
+  .hero .kicker{color:var(--accent);font-weight:800;margin-bottom:6px}
+  .hero h1{font-size:28px;line-height:1.02;margin-bottom:8px;font-weight:800}
+  .hero p{color:var(--muted);margin-bottom:12px;line-height:1.5}
+  .cta{background:var(--accent-2);color:#fff;padding:12px 18px;border-radius:999px;font-weight:800;box-shadow:0 8px 28px rgba(255,122,0,0.12);display:inline-block}
+  .img-wrap{width:260px;display:flex;align-items:center;justify-content:center}
+  .img-wrap img{width:220px;transform:rotate(-6deg);filter:drop-shadow(0 12px 30px rgba(6,10,20,0.06));border-radius:10px}
 
   /* ============================
-     Categories grid
+     Category grid
      ============================ */
-  .cat-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:18px}
-  .cat{background:var(--card);padding:14px;border-radius:14px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;box-shadow:var(--soft-shadow);cursor:pointer;transition:transform .18s}
+  .cat-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:16px}
+  .cat{background:var(--card);padding:12px;border-radius:14px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;box-shadow:var(--soft-shadow);cursor:pointer;transition:transform .18s}
   .cat:hover{transform:translateY(-6px)}
-  .cat img{width:72px;height:72px;border-radius:12px;object-fit:cover}
-  .cat .label{font-weight:700;margin-top:6px}
+  .cat img, .cat .emoji{width:68px;height:68px;border-radius:12px;object-fit:cover;display:inline-flex;align-items:center;justify-content:center}
 
   /* ============================
-     Sections & products
+     Products grid & cards
      ============================ */
-  .section{margin-top:20px}
-  .section .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+  .section{margin-top:18px}
+  .section .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
   .products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
   .card{background:var(--card);border-radius:14px;overflow:hidden;box-shadow:var(--soft-shadow);transition:transform .18s;cursor:pointer}
   .card:hover{transform:translateY(-6px)}
@@ -113,20 +124,30 @@
   .oldprice{text-decoration:line-through;color:rgba(15,23,36,0.25)}
   .price{color:var(--accent-2);font-weight:900}
 
-  /* banner boxes */
-  .banners{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
-  .banner{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--soft-shadow)}
+  /* banners */
+  .banners{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+  .banner{background:var(--card);padding:14px;border-radius:12px;box-shadow:var(--soft-shadow)}
 
   /* brands */
   .brand-row{display:flex;gap:12px;overflow:auto;padding:8px 0}
 
-  /* footer */
-  .footer{margin-top:20px;padding:18px;background:var(--card);border-radius:12px;box-shadow:var(--soft-shadow);display:flex;gap:14px;flex-wrap:wrap}
+  /* ============================
+     STAY CONNECTED (glass box above footer)
+     ============================ */
+  .stay-connected{margin-top:18px}
+  .stay-box{background:var(--glass);border:1px solid var(--glass-border);padding:14px;border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:var(--soft-shadow)}
+  .stay-box h4{font-weight:800}
+  .connect-icons{display:flex;gap:10px;align-items:center}
+  .connect-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--card);border:1px solid var(--glass-border);color:var(--muted;font-weight:700)}
+  .connect-icon i{font-size:18px;color:var(--accent)}
+
+  /* Footer */
+  .footer{margin-top:14px;padding:16px;background:var(--card);border-radius:12px;box-shadow:var(--soft-shadow);display:flex;gap:14px;flex-wrap:wrap}
   .footer .col{min-width:160px}
   .small{color:var(--muted);font-size:14px}
 
   /* ============================
-     Product Modal (full-screen mobile style)
+     Product modal (responsive)
      ============================ */
   .modal-back{position:fixed;inset:0;background:rgba(2,6,23,0.55);display:none;align-items:center;justify-content:center;z-index:220;padding:16px}
   .modal-back.open{display:flex}
@@ -138,55 +159,53 @@
   .m-meta{color:var(--muted)}
   .m-price{color:var(--accent-2);font-weight:900;font-size:20px}
   .qty{display:flex;gap:8px;align-items:center}
-  .qty button{width:36px;height:36px;border-radius:10px;border:1px solid rgba(15,23,36,0.06);background:var(--card);cursor:pointer}
+  .qty button{width:36px;height:36px;border-radius:10px;border:1px solid var(--glass-border);background:var(--card);cursor:pointer}
 
   /* ============================
-     Utilities
+     Floating WhatsApp + Chat (Chat button C - circle glossy)
      ============================ */
-  .center{display:flex;align-items:center;justify-content:center}
-  .hidden{display:none}
-  .muted{color:var(--muted)}
-  .chip{padding:6px 10px;background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(250,250,253,0.9));border-radius:999px;border:1px solid rgba(15,23,36,0.04);font-weight:700}
+  .floating-col{position:fixed;right:18px;bottom:18px;display:flex;flex-direction:column;gap:12px;z-index:9999}
+  .floating-whatsapp, .floating-chat{
+    width:56px;height:56px;border-radius:999px;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(180deg,#25D366,#128C7E);color:#fff;box-shadow:0 12px 30px rgba(18,28,47,0.18);border:4px solid rgba(255,255,255,0.06);
+    cursor:pointer;font-weight:800;font-size:20px;
+  }
+  .floating-chat{background:linear-gradient(180deg,#7b3ed1,#5f2ab8);}
+
+  /* Chat widget panel */
+  .chat-panel{position:fixed;right:18px;bottom:86px;width:320px;max-width:92vw;border-radius:12px;background:var(--card);box-shadow:0 30px 80px rgba(2,6,23,0.3);overflow:hidden;display:none;flex-direction:column;z-index:99999}
+  .chat-panel.open{display:flex}
+  .chat-header{padding:12px;border-bottom:1px solid var(--glass-border);display:flex;align-items:center;gap:10px}
+  .chat-body{padding:10px;max-height:300px;overflow:auto;display:flex;flex-direction:column;gap:8px}
+  .chat-input-row{display:flex;gap:8px;padding:10px;border-top:1px solid var(--glass-border)}
+  .chat-input{flex:1;padding:10px;border-radius:10px;border:1px solid var(--glass-border);background:var(--glass)}
+  .msg{max-width:78%;padding:10px 12px;border-radius:12px}
+  .msg.user{align-self:flex-end;background:linear-gradient(180deg,#eaf2ff,#dbe9ff)}
+  .msg.bot{align-self:flex-start;background:linear-gradient(180deg,#f3f3f6,#ededf8);color:var(--text)}
 
   /* ============================
-     Responsive tweaks (mobile-first)
+     Responsive tweaks
      ============================ */
-  @media (max-width:1100px){
-    .cat-grid{grid-template-columns:repeat(4,1fr)}
-    .products-grid{grid-template-columns:repeat(3,1fr)}
-    .hero .img-wrap{width:240px}
-  }
-  @media (max-width:820px){
-    .hero{flex-direction:column;align-items:flex-start}
-    .img-wrap{display:flex;justify-content:center;width:100%}
-    .products-grid{grid-template-columns:repeat(2,1fr)}
-    .modal{flex-direction:column;max-width:680px}
-    .modal .left,.modal .right{width:100%}
-    .hamburger{display:flex}
-    .topnav{display:none}
-    .drawer{width:86%}
-  }
+  @media (max-width:1100px){ .cat-grid{grid-template-columns:repeat(4,1fr)} .products-grid{grid-template-columns:repeat(3,1fr)} .img-wrap{width:200px} }
+  @media (max-width:820px){ .hero{flex-direction:column;align-items:flex-start} .products-grid{grid-template-columns:repeat(2,1fr)} .modal{flex-direction:column;max-width:680px} .modal .left,.modal .right{width:100%} .hamburger{display:flex} .topnav{display:none} }
   @media (max-width:540px){
     .container{padding:10px}
-    .logo img{width:110px}
-    .hero h1{font-size:26px}
+    .logo img{width:96px}
+    .hero h1{font-size:22px}
     .cat-grid{grid-template-columns:repeat(2,1fr)}
     .products-grid{grid-template-columns:1fr}
     .card .media{height:200px}
     .img-wrap img{width:220px}
     .drawer{width:86%}
-    /* mobile full-screen modal style */
-    .modal{border-radius:14px;padding:14px;flex-direction:column;max-height:92vh;overflow:auto}
-    .modal .left img{max-height:260px}
-    .modal .right{width:100%}
+    .chat-panel{right:12px;bottom:86px;width:90vw}
+    /* Move search below on small screens (search-row is flex-col) */
+    .top-row{flex-direction:row;align-items:center}
+    .search-row{flex-direction:column;gap:8px}
+    .desktop-hide{display:none}
   }
-
-  /* ============================
-     Dark-mode toggle button
-     ============================ */
-  .theme-toggle{display:inline-flex;align-items:center;gap:8px;padding:8px;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(250,250,253,0.9));border:1px solid rgba(15,23,36,0.04);cursor:pointer}
-
   </style>
+  <!-- fontawesome for icons in stay connected -->
+  <script src="https://kit.fontawesome.com/a2f6f2b0a7.js" crossorigin="anonymous"></script>
 </head>
 <body data-theme="light">
 
@@ -198,37 +217,51 @@
     <div class="close-wrap">
       <button id="drawerClose" class="close-btn" aria-label="Close menu">Close ✕</button>
     </div>
+
+    <!-- Account area -->
+    <div style="display:flex;align-items:center;gap:10px">
+      <img id="userAvatar" class="user-avatar" src="https://i.ibb.co/4Y3m8Kw/default-avatar.png" alt="avatar">
+      <div>
+        <div id="userName" style="font-weight:800">Guest</div>
+        <div class="muted" id="userEmail">Not signed in</div>
+      </div>
+    </div>
+
     <nav>
-      <a href="#home" data-link>Home</a>
-      <a href="categories.html" data-link>Show all categories</a>
-      <a href="orders.html" data-link>My Orders</a>
-      <a href="deals.html" data-link>Today's Deals</a>
-      <a href="campaigns.html" data-link>Campaigns</a>
-      <a href="brands.html" data-link>Top Brands</a>
-      <a href="about.html" data-link>About</a>
-      <a href="contact.html" data-link>Contact</a>
-      <a href="signin.html" data-link>Sign in</a>
-      <a href="#" id="openLang" data-link>Language</a>
+      <a href="#home">Home</a>
+      <a href="categories.html">Show all categories</a>
+      <a href="orders.html">My Orders</a>
+      <a href="deals.html">Today's Deals</a>
+      <a href="campaigns.html">Campaigns</a>
+      <a href="brands.html">Top Brands</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <div class="section-title">Account</div>
+      <a href="#" id="openSignIn">Sign in with Google (demo)</a>
+      <a href="#" id="myAccountLink" class="muted">My Account</a>
+
+      <div class="section-title">Preferences</div>
+      <div class="muted" style="font-size:13px">Language</div>
+      <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+        <button class="icon-btn lang-select" data-code="en">English</button>
+        <button class="icon-btn lang-select" data-code="bn">বাংলা</button>
+        <button class="icon-btn lang-select" data-code="ar">العربية</button>
+      </div>
+
+      <div style="margin-top:10px">
+        <div class="theme-toggle-row">
+          <div class="theme-switch">
+            <span id="themeLabel">Light</span>
+          </div>
+          <div class="muted">Theme</div>
+          <button id="toggleThemeDrawer" class="icon-btn" style="margin-left:auto">Toggle</button>
+        </div>
+      </div>
     </nav>
   </aside>
 
-  <!-- LANGUAGE MODAL -->
-  <div id="langModal" class="lang-modal" role="dialog" aria-hidden="true">
-    <div class="lang-box">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-        <strong>Select language</strong>
-        <button id="langClose" class="icon-btn">Close</button>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
-        <button class="lang-item chip" data-code="en">English</button>
-        <button class="lang-item chip" data-code="bn">বাংলা (Bangla)</button>
-        <button class="lang-item chip" data-code="ar">العربية</button>
-        <button class="lang-item chip" data-code="hi">हिन्दी</button>
-        <button class="lang-item chip" data-code="fr">Français</button>
-        <button class="lang-item chip" data-code="es">Español</button>
-      </div>
-    </div>
-  </div>
+  <!-- LANGUAGE MODAL (fallback) -->
+  <div id="langModal" class="drawer-back" style="display:none" aria-hidden="true"></div>
 
   <!-- PRODUCT MODAL -->
   <div id="modalBack" class="modal-back" aria-hidden="true">
@@ -271,27 +304,27 @@
   <!-- PAGE HEADER -->
   <header class="container">
     <div class="header" id="header">
-      <div class="hdr-row">
-        <div class="logo"><a href="shop.html"><img src="https://via.placeholder.com/160x40?text=LOGO" alt="logo"></a></div>
 
-        <div class="search" style="flex:1">
-          <input id="searchInput" type="search" placeholder="Search Products, brands and more..." aria-label="Search">
-          <button aria-label="Search" id="searchBtn">🔍</button>
-        </div>
+      <div class="top-row">
+        <div class="logo"><a href="shop.html"><img src="https://via.placeholder.com/160x40?text=logo" alt="logo"></a></div>
 
-        <div class="hdr-actions">
-          <div id="themeToggle" class="theme-toggle" title="Toggle theme">
-            <svg id="sunIcon" width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="#111827" stroke-width="1.4"/></svg>
-            <span class="muted" id="themeLabel">Light</span>
-          </div>
-
-          <a href="signin.html" class="icon-btn hidden mobile-hide">Sign in</a>
-          <a href="cart.html" class="icon-btn cart-btn"><span>Cart</span> <span class="cart-count">0</span></a>
-
+        <div style="display:flex;align-items:center;gap:8px" class="actions">
+          <!-- On mobile we show only avatar/cart/menu; sign-in is in drawer -->
+          <a id="avatarBtn" class="icon-btn" title="Account"><img id="topAvatar" class="user-avatar" src="https://i.ibb.co/4Y3m8Kw/default-avatar.png" alt="user"></a>
+          <a href="cart.html" class="icon-btn"><span>Cart</span> <span class="cart-count">0</span></a>
           <button id="hamburger" class="hamburger" aria-label="Open menu">☰</button>
         </div>
       </div>
 
+      <!-- Search row (mobile: full width below logo) -->
+      <div class="search-row">
+        <div class="search" style="width:100%">
+          <input id="searchInput" type="search" placeholder="Search Products, brands and more..." aria-label="Search">
+          <button aria-label="Search" id="searchBtn">🔍</button>
+        </div>
+      </div>
+
+      <!-- Desktop nav -->
       <nav class="topnav" aria-label="Primary navigation">
         <a href="categories.html">Show all categories</a>
         <a href="orders.html">My Orders</a>
@@ -304,9 +337,8 @@
     </div>
   </header>
 
-  <!-- MAIN PAGE -->
+  <!-- MAIN -->
   <main class="container" id="main">
-
     <!-- HERO -->
     <section class="hero" id="home">
       <div class="left">
@@ -322,24 +354,18 @@
     <section class="section">
       <div class="head">
         <h2>Categories</h2>
-        <a class="chip" href="categories.html">View all</a>
+        <a class="icon-btn" href="categories.html">View all</a>
       </div>
-
-      <div class="cat-grid" id="catGrid" aria-label="Categories">
-        <!-- pulled from JS data or static placeholder -->
-      </div>
+      <div class="cat-grid" id="catGrid" aria-label="Categories"></div>
     </section>
 
     <!-- HOT PRODUCTS -->
     <section class="section">
       <div class="head">
         <h2>Hot Product</h2>
-        <a class="chip" href="deals.html">View All</a>
+        <a class="icon-btn" href="deals.html">View All</a>
       </div>
-
-      <div class="products-grid" id="productsGrid" aria-live="polite">
-        <!-- products inserted by JS -->
-      </div>
+      <div class="products-grid" id="productsGrid" aria-live="polite"></div>
     </section>
 
     <!-- BANNERS -->
@@ -360,7 +386,7 @@
     <section class="section">
       <div class="head">
         <h2>Featured Brands</h2>
-        <a class="chip" href="brands.html">View All</a>
+        <a class="icon-btn" href="brands.html">View All</a>
       </div>
       <div class="brand-row" id="brandRow">
         <img src="https://via.placeholder.com/110x40?text=Braun" alt="">
@@ -368,6 +394,21 @@
         <img src="https://via.placeholder.com/110x40?text=Honor" alt="">
         <img src="https://via.placeholder.com/110x40?text=Huawei" alt="">
         <img src="https://via.placeholder.com/110x40?text=Oppo" alt="">
+      </div>
+    </section>
+
+    <!-- STAY CONNECTED (Option A: footer above) -->
+    <section class="stay-connected section" aria-label="Stay connected">
+      <div class="stay-box">
+        <h4>STAY CONNECTED</h4>
+        <div class="connect-icons" role="list">
+          <a class="connect-icon" href="https://www.facebook.com/share/1adkemEFLo/" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a class="connect-icon" href="https://www.instagram.com/md_habibur__rahman" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a class="connect-icon" href="https://youtube.com/@h_a_b_i_b-yt?si=KzptsxRXXNw0t635" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a class="connect-icon" href="https://wa.me/8801868461577" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          <a class="connect-icon" href="mailto:mshabib471@gmail.com" aria-label="Email"><i class="fa-regular fa-envelope"></i></a>
+          <a class="connect-icon" href="https://www.tiktok.com/@habibur_._rahman" target="_blank" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
       </div>
     </section>
 
@@ -381,118 +422,75 @@
 
   </main>
 
-  <!-- ============================
-       Scripts (Products, Drawer, Modal, Theme)
-       ============================ -->
+  <!-- Floating Chat + WhatsApp -->
+  <div class="floating-col" aria-hidden="false">
+    <div id="chatPanel" class="chat-panel" role="dialog" aria-hidden="true">
+      <div class="chat-header">
+        <img src="https://i.ibb.co/4Y3m8Kw/default-avatar.png" alt="bot" style="width:44px;height:44px;border-radius:999px">
+        <div style="font-weight:800">Shop Assistant</div>
+      </div>
+      <div class="chat-body" id="chatBody">
+        <!-- messages -->
+        <div class="msg bot">Hi — I am your shopping assistant. Ask me about products, deals or shipping.</div>
+      </div>
+      <div class="chat-input-row">
+        <input id="chatInput" class="chat-input" placeholder="Type a message...">
+        <button id="sendChat" class="icon-btn">Send</button>
+      </div>
+    </div>
+
+    <div id="floatingChat" class="floating-chat" title="Chat with us (AI)" aria-label="Chat">💬</div>
+    <a class="floating-whatsapp" title="WhatsApp" href="https://wa.me/8801868461577" target="_blank" aria-label="WhatsApp">🟢</a>
+  </div>
+
   <script>
   /* ============================
-     Demo Products Data (edit easily)
+     Demo products array — edit here or later move to products.json
      ============================ */
   const products = [
-    {
-      id: "p001",
-      title: "Xiaomi Smart Band 8 Active",
-      brand: "Xiaomi",
-      price: 1950,
-      currency: "SAR",
-      old_price: 2800,
-      image: "https://via.placeholder.com/900x700?text=Smart+Band+8",
-      thumb: "https://via.placeholder.com/360x260?text=Smart+Band+8",
-      short: "Water resistant to 50 meters. Up to 14 days battery life.",
-      description: "Xiaomi Smart Band 8 Active — long battery life, heart-rate monitoring, sleep tracking and multiple sports modes. Premium silicon strap and lightweight.",
-      category: "watches",
-      sku: "XMB-8A"
-    },
-    {
-      id: "p002",
-      title: "New Google Speaker Nest Audio",
-      brand: "Google",
-      price: 1950,
-      currency: "SAR",
-      old_price: 2800,
-      image: "https://via.placeholder.com/900x700?text=Nest+Audio",
-      thumb: "https://via.placeholder.com/360x260?text=Nest+Audio",
-      short: "Rich sound with strong bass.",
-      description: "Google Nest Audio delivers clear sound, improved bass and voice assistant features. Compact and stylish design fits any home.",
-      category: "home",
-      sku: "GNA-01"
-    },
-    {
-      id: "p003",
-      title: "Robot Vacuum Cleaner",
-      brand: "Xiaomi",
-      price: 1950,
-      currency: "SAR",
-      old_price: 2800,
-      image: "https://via.placeholder.com/900x700?text=Robot+Vacuum",
-      thumb: "https://via.placeholder.com/360x260?text=Robot+Vacuum",
-      short: "Smart navigation and suction power.",
-      description: "Automated floor cleaning robot with multiple cleaning modes, remote control via app and scheduled cleaning.",
-      category: "home",
-      sku: "RBV-300"
-    },
-    {
-      id: "p004",
-      title: "Compact Coffee Machine",
-      brand: "BrewPro",
-      price: 1950,
-      currency: "SAR",
-      old_price: 2800,
-      image: "https://via.placeholder.com/900x700?text=Coffee+Machine",
-      thumb: "https://via.placeholder.com/360x260?text=Coffee+Machine",
-      short: "Brew coffee like a barista.",
-      description: "Compact and stylish coffee maker suitable for espresso, americano and more. Easy to clean and maintain.",
-      category: "kitchen",
-      sku: "BPM-09"
-    },
-    {
-      id: "p005",
-      title: "Wireless Charger Pro",
-      brand: "ChargeX",
-      price: 350,
-      currency: "SAR",
-      old_price: 590,
-      image: "https://via.placeholder.com/900x700?text=Wireless+Charger",
-      thumb: "https://via.placeholder.com/360x260?text=Wireless+Charger",
-      short: "Fast wireless charging.",
-      description: "Fast 20W wireless charger with thermal protection and smart coil alignment.",
-      category: "power",
-      sku: "WCP-20"
-    }
+    { id:"p001", title:"Xiaomi Smart Band 8 Active", brand:"Xiaomi", price:1950, currency:"SAR", old_price:2800, image:"https://via.placeholder.com/900x700?text=Smart+Band+8", thumb:"https://via.placeholder.com/360x260?text=Smart+Band+8", short:"Water resistant to 50m. 14 days battery.", description:"Xiaomi Smart Band 8 Active — long battery life, heart-rate monitoring, sleep tracking and multiple sports modes.", category:"watches", sku:"XMB-8A" },
+    { id:"p002", title:"New Google Speaker Nest Audio", brand:"Google", price:1950, currency:"SAR", old_price:2800, image:"https://via.placeholder.com/900x700?text=Nest+Audio", thumb:"https://via.placeholder.com/360x260?text=Nest+Audio", short:"Rich sound with strong bass.", description:"Google Nest Audio delivers clear sound and voice assistant features.", category:"home", sku:"GNA-01" },
+    { id:"p003", title:"Robot Vacuum Cleaner", brand:"Xiaomi", price:1950, currency:"SAR", old_price:2800, image:"https://via.placeholder.com/900x700?text=Robot+Vacuum", thumb:"https://via.placeholder.com/360x260?text=Robot+Vacuum", short:"Smart navigation and suction power.", description:"Automated floor cleaning robot with multiple modes.", category:"home", sku:"RBV-300" },
+    { id:"p004", title:"Compact Coffee Machine", brand:"BrewPro", price:1950, currency:"SAR", old_price:2800, image:"https://via.placeholder.com/900x700?text=Coffee+Machine", thumb:"https://via.placeholder.com/360x260?text=Coffee+Machine", short:"Brew coffee like a barista.", description:"Compact and stylish coffee maker.", category:"kitchen", sku:"BPM-09" },
+    { id:"p005", title:"Wireless Charger Pro", brand:"ChargeX", price:350, currency:"SAR", old_price:590, image:"https://via.placeholder.com/900x700?text=Wireless+Charger", thumb:"https://via.placeholder.com/360x260?text=Wireless+Charger", short:"Fast wireless charging.", description:"Fast 20W wireless charger.", category:"power", sku:"WCP-20" }
   ];
 
-  /* ============================
-     DOM refs
-     ============================ */
+  /* DOM refs */
+  const catGrid = document.getElementById('catGrid');
+  const productsGrid = document.getElementById('productsGrid');
   const drawer = document.getElementById('drawer');
   const drawerBack = document.getElementById('drawerBack');
   const hamburger = document.getElementById('hamburger');
   const drawerClose = document.getElementById('drawerClose');
-  const langModal = document.getElementById('langModal');
-  const openLang = document.getElementById('openLang');
-  const langClose = document.getElementById('langClose');
-  const modalBack = document.getElementById('modalBack');
-  const modalClose = document.getElementById('modalClose');
-  const productsGrid = document.getElementById('productsGrid');
-  const catGrid = document.getElementById('catGrid');
-  const cartCountEls = document.querySelectorAll('.cart-count');
-  const themeToggle = document.getElementById('themeToggle');
+  const openSignIn = document.getElementById('openSignIn');
+  const userAvatar = document.getElementById('userAvatar');
+  const topAvatar = document.getElementById('topAvatar');
+  const userNameEl = document.getElementById('userName');
+  const userEmailEl = document.getElementById('userEmail');
+  const myAccountLink = document.getElementById('myAccountLink');
+  const toggleThemeDrawer = document.getElementById('toggleThemeDrawer');
   const themeLabel = document.getElementById('themeLabel');
-  const bodyEl = document.body;
   const searchInput = document.getElementById('searchInput');
   const searchBtn = document.getElementById('searchBtn');
+  const cartCountEls = document.querySelectorAll('.cart-count');
 
-  /* ============================
-     Utilities - Cart (localStorage)
-     ============================ */
-  const CART_KEY = 'demo_cart_v1';
-  function getCart(){ try{return JSON.parse(localStorage.getItem(CART_KEY))||[];}catch(e){return []} }
-  function saveCart(arr){ localStorage.setItem(CART_KEY, JSON.stringify(arr)); updateCartCount(); }
-  function updateCartCount(){ const n = getCart().reduce((s,i)=>s+i.qty,0); cartCountEls.forEach(el=>el.innerText = n); }
+  /* Chat refs */
+  const floatingChat = document.getElementById('floatingChat');
+  const chatPanel = document.getElementById('chatPanel');
+  const chatBody = document.getElementById('chatBody');
+  const chatInput = document.getElementById('chatInput');
+  const sendChat = document.getElementById('sendChat');
 
-  /* ============================
-     Drawer open/close
-     ============================ */
+  /* constants */
+  const CART_KEY = 'shop_v3_cart';
+  const USER_KEY = 'shop_v3_user';
+
+  /* Cart helpers */
+  function getCart(){ try{ return JSON.parse(localStorage.getItem(CART_KEY)) || []; }catch(e){ return []; } }
+  function saveCart(c){ localStorage.setItem(CART_KEY, JSON.stringify(c)); updateCart(); }
+  function updateCart(){ const n = getCart().reduce((s,i)=>s+i.qty,0); cartCountEls.forEach(el=>el.innerText = n); }
+
+  /* Drawer open/close */
   function openDrawer(){
     drawer.classList.add('open');
     drawerBack.classList.add('open');
@@ -511,48 +509,20 @@
   drawerClose.addEventListener('click', closeDrawer);
   drawerBack.addEventListener('click', closeDrawer);
 
-  /* ============================
-     Language modal
-     ============================ */
-  openLang.addEventListener('click', (e)=>{
-    e.preventDefault();
-    langModal.classList.add('open');
-    langModal.setAttribute('aria-hidden','false');
-  });
-  langClose.addEventListener('click', ()=>{
-    langModal.classList.remove('open');
-    langModal.setAttribute('aria-hidden','true');
-  });
-  langModal.addEventListener('click', (e)=>{ if(e.target === langModal){ langModal.classList.remove('open'); } });
-  document.querySelectorAll('.lang-item').forEach(btn=>{
-    btn.addEventListener('click', () => {
-      const code = btn.dataset.code;
-      localStorage.setItem('site_lang', code);
-      // feedback (simple)
-      alert('Language selected: ' + btn.innerText);
-      langModal.classList.remove('open');
-    });
-  });
-
-  /* ============================
-     Theme toggle (light/dark)
-     ============================ */
-  function setTheme(theme){
-    bodyEl.setAttribute('data-theme', theme);
-    localStorage.setItem('site_theme', theme);
-    themeLabel.innerText = theme === 'dark' ? 'Dark' : 'Light';
+  /* Theme handling (drawer toggle) */
+  function setTheme(t){
+    document.body.setAttribute('data-theme', t);
+    localStorage.setItem('shop_theme', t);
+    themeLabel.innerText = t === 'dark' ? 'Dark' : 'Light';
   }
-  // init
-  const savedTheme = localStorage.getItem('site_theme') || 'light';
-  setTheme(savedTheme);
-  themeToggle.addEventListener('click', ()=>{
-    const current = bodyEl.getAttribute('data-theme') || 'light';
-    setTheme(current === 'light' ? 'dark' : 'light');
+  // init theme
+  setTheme(localStorage.getItem('shop_theme') || 'light');
+  toggleThemeDrawer.addEventListener('click', ()=>{
+    const cur = document.body.getAttribute('data-theme') || 'light';
+    setTheme(cur === 'light' ? 'dark' : 'light');
   });
 
-  /* ============================
-     Render categories (quick)
-     ============================ */
+  /* Simple categories render */
   const categories = [
     {id:'mobiles',label:'Mobiles',icon:'📱'},
     {id:'laptops',label:'Laptops',icon:'💻'},
@@ -566,26 +536,22 @@
   function renderCategories(){
     catGrid.innerHTML = '';
     categories.forEach(c=>{
-      const div = document.createElement('div');
-      div.className = 'cat';
-      div.innerHTML = `<div style="font-size:28px">${c.icon}</div><div class="label">${c.label}</div>`;
-      div.addEventListener('click', ()=>{ location.href='categories.html'; });
-      catGrid.appendChild(div);
+      const el = document.createElement('div');
+      el.className = 'cat';
+      el.innerHTML = `<div class="emoji" aria-hidden="true" style="font-size:28px">${c.icon}</div><div class="label">${c.label}</div>`;
+      el.addEventListener('click', ()=> { location.href = 'categories.html'; });
+      catGrid.appendChild(el);
     });
   }
 
-  /* ============================
-     Render products
-     ============================ */
+  /* Products render */
   function renderProducts(list){
     productsGrid.innerHTML = '';
     list.forEach(p=>{
       const art = document.createElement('article');
       art.className = 'card';
-      art.tabIndex = 0;
-      art.dataset.id = p.id;
       art.innerHTML = `
-        <div class="media"><img src="${p.thumb}" alt="${escapeHtml(p.title)}"></div>
+        <div class="media"><img src="${p.thumb}" alt="${escapeHtml(p.title)}" onerror="this.src='https://via.placeholder.com/360x260?text=Image'"></div>
         <div class="body">
           <div class="title">${escapeHtml(p.title)}</div>
           <div class="meta">${escapeHtml(p.brand)}</div>
@@ -593,16 +559,15 @@
             <div class="oldprice">${p.old_price ? p.old_price + ' ' + p.currency : ''}</div>
             <div class="price">${p.price} ${p.currency}</div>
           </div>
-        </div>
-      `;
+        </div>`;
       art.addEventListener('click', ()=> openProductModal(p));
       productsGrid.appendChild(art);
     });
   }
 
-  /* ============================
-     Product modal
-     ============================ */
+  /* Product Modal */
+  const modalBack = document.getElementById('modalBack');
+  const modalClose = document.getElementById('modalClose');
   function openProductModal(p){
     modalBack.classList.add('open');
     modalBack.setAttribute('aria-hidden','false');
@@ -617,63 +582,42 @@
     m.querySelector('.m-sku').innerText = p.sku || '';
     m.querySelector('.qty-number').innerText = 1;
 
-    // set add to cart handler
     const addBtn = m.querySelector('#addToCart');
     addBtn.onclick = () => {
       const qty = Number(m.querySelector('.qty-number').innerText) || 1;
-      addToCart(p, qty);
+      addToCart(p,qty);
       closeModal();
-      // lightweight toast
-      notify('Added to cart: ' + p.title);
+      toast('Added to cart: ' + p.title);
     };
-
-    // share simple handler
-    const shareBtn = m.querySelector('#shareBtn');
-    shareBtn.onclick = () => {
-      if(navigator.share){
-        navigator.share({title:p.title,text:p.short,url:location.href});
-      } else { alert('Share this product: ' + p.title); }
-    };
-
-    // view page - placeholder
     m.querySelector('#viewPage').href = 'product.html?id=' + encodeURIComponent(p.id);
   }
-  function closeModal(){
-    modalBack.classList.remove('open');
-    modalBack.setAttribute('aria-hidden','true');
-    document.body.style.overflow = '';
-  }
+  function closeModal(){ modalBack.classList.remove('open'); modalBack.setAttribute('aria-hidden','true'); document.body.style.overflow = ''; }
   modalClose.addEventListener('click', closeModal);
-  modalBack.addEventListener('click', (e)=>{ if(e.target === modalBack) closeModal(); });
+  modalBack.addEventListener('click', (e)=> { if(e.target === modalBack) closeModal(); });
 
-  // qty controls (delegation)
+  /* qty controls (delegation) */
   document.addEventListener('click', (e)=>{
-    const plus = e.target.closest('.qty-inc');
-    const minus = e.target.closest('.qty-dec');
-    if(plus){
-      const n = plus.closest('.modal').querySelector('.qty-number');
-      n.innerText = Math.min(99, Number(n.innerText) + 1);
+    if(e.target.matches('.qty-inc')) {
+      const n = e.target.closest('.modal').querySelector('.qty-number');
+      n.innerText = Math.min(99, Number(n.innerText)+1);
     }
-    if(minus){
-      const n = minus.closest('.modal').querySelector('.qty-number');
-      n.innerText = Math.max(1, Number(n.innerText) - 1);
+    if(e.target.matches('.qty-dec')) {
+      const n = e.target.closest('.modal').querySelector('.qty-number');
+      n.innerText = Math.max(1, Number(n.innerText)-1);
     }
   });
 
-  /* ============================
-     Add to cart
-     ============================ */
+  /* Add to cart */
   function addToCart(product, qty=1){
     const cart = getCart();
     const found = cart.find(i=>i.id===product.id);
-    if(found){ found.qty += qty; } else { cart.push({id:product.id,title:product.title,price:product.price,currency:product.currency,qty:qty}); }
+    if(found) found.qty += qty; else cart.push({ id:product.id, title:product.title, price:product.price, currency:product.currency, qty });
     saveCart(cart);
+    updateCart();
   }
 
-  /* ============================
-     Mini notifier
-     ============================ */
-  function notify(msg){
+  /* Simple toast */
+  function toast(msg){
     const n = document.createElement('div');
     n.style = 'position:fixed;right:18px;bottom:18px;padding:10px 14px;background:var(--card);border-radius:10px;box-shadow:0 8px 30px rgba(2,6,23,0.2);z-index:99999;font-weight:700';
     n.innerText = msg;
@@ -682,59 +626,144 @@
     setTimeout(()=> n.remove(),3200);
   }
 
-  /* ============================
-     Helpers
-     ============================ */
+  /* Helper escape */
   function escapeHtml(s){ return String(s).replace(/[&<>"']/g,function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; }); }
 
-  /* ============================
-     Search functionality (basic)
-     ============================ */
+  /* Search */
   function doSearch(q){
     q = (q||'').trim().toLowerCase();
-    if(!q){ renderProducts(products); return; }
+    if(!q) return renderProducts(products);
     const res = products.filter(p => (p.title + ' ' + p.brand + ' ' + (p.short||'') + ' ' + p.description).toLowerCase().includes(q));
     renderProducts(res);
   }
   searchBtn.addEventListener('click', ()=> doSearch(searchInput.value));
   searchInput.addEventListener('keydown', (e)=> { if(e.key === 'Enter') doSearch(searchInput.value); });
 
-  /* ============================
-     Init
-     ============================ */
+  /* Sign in (SIMULATED Google - client-side demo)
+     NOTE: Real Google OAuth requires server or Google client-id integration.
+     Here we provide a demo sign-in which stores name & avatar in localStorage.
+  */
+  function openSignInDialog(){
+    const name = prompt('Sign in (demo). Enter your name (or cancel):');
+    if(!name) return;
+    // allow user to paste an avatar URL or use default google-like placeholder
+    let avatar = prompt('Optional: paste avatar image URL (or leave empty to use default):') || 'https://i.ibb.co/4Y3m8Kw/default-avatar.png';
+    const email = prompt('Enter email (optional):') || '';
+    const user = { name, email, avatar };
+    localStorage.setItem(USER_KEY, JSON.stringify(user));
+    applyUser();
+    toast('Signed in as ' + name);
+    closeDrawer();
+  }
+  openSignIn.addEventListener('click', (e)=> { e.preventDefault(); openSignInDialog(); });
+
+  function applyUser(){
+    const raw = localStorage.getItem(USER_KEY);
+    if(!raw) {
+      userAvatar.src = 'https://i.ibb.co/4Y3m8Kw/default-avatar.png';
+      topAvatar.src = 'https://i.ibb.co/4Y3m8Kw/default-avatar.png';
+      userNameEl.innerText = 'Guest';
+      userEmailEl.innerText = 'Not signed in';
+      myAccountLink.href = '#';
+      return;
+    }
+    try {
+      const u = JSON.parse(raw);
+      userAvatar.src = u.avatar || 'https://i.ibb.co/4Y3m8Kw/default-avatar.png';
+      topAvatar.src = u.avatar || 'https://i.ibb.co/4Y3m8Kw/default-avatar.png';
+      userNameEl.innerText = u.name || 'User';
+      userEmailEl.innerText = u.email || 'Signed in';
+      myAccountLink.href = 'account.html';
+    } catch(e) { console.error(e); }
+  }
+
+  /* Language buttons (drawer) */
+  document.querySelectorAll('.lang-select').forEach(btn=>{
+    btn.addEventListener('click', ()=> {
+      const code = btn.dataset.code;
+      localStorage.setItem('shop_lang', code);
+      toast('Language set: ' + btn.innerText);
+    });
+  });
+
+  /* Floating Chat behaviour (Chat button C) - auto replies simulated */
+  let chatOpen = false;
+  floatingChat.addEventListener('click', ()=>{
+    chatOpen = !chatOpen;
+    if(chatOpen){
+      chatPanel.classList.add('open');
+      chatPanel.setAttribute('aria-hidden','false');
+      document.getElementById('chatInput').focus();
+    } else {
+      chatPanel.classList.remove('open');
+      chatPanel.setAttribute('aria-hidden','true');
+    }
+  });
+
+  function appendChatMessage(text, who='bot'){
+    const d = document.createElement('div');
+    d.className = 'msg ' + (who==='user' ? 'user' : 'bot');
+    d.innerText = text;
+    chatBody.appendChild(d);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+
+  // Very simple simulated "AI" auto-reply rules:
+  function aiReply(userMsg){
+    const q = (userMsg||'').toLowerCase();
+    // canned replies
+    if(q.includes('price') || q.includes('how much')) return "Most prices are shown on product cards. Tell me which product (name) and I will fetch price.";
+    if(q.includes('shipping') || q.includes('delivery')) return "We ship nationwide. Standard delivery 2-4 business days. Express available at checkout.";
+    if(q.includes('discount') || q.includes('offer')) return "Check 'Today's Deals' — we update offers frequently. You can also ask me for 'best deals on watches'.";
+    if(q.includes('return') || q.includes('refund')) return "We accept returns within 7 days (unused items). Contact support for an RMA.";
+    if(q.includes('hello') || q.includes('hi')) return "Hi! How can I help you today? You can ask about products, delivery or offers.";
+    // find product by name
+    for(const p of products){
+      if(q.includes(p.title.toLowerCase().split(' ')[0])) return `${p.title} — price: ${p.price} ${p.currency}. Want to add to cart?`;
+    }
+    // fallback
+    return "Sorry, I didn't get that. Try: 'price of Nest Audio', 'shipping', or 'deals on watches'.";
+  }
+
+  sendChat.addEventListener('click', ()=> {
+    const txt = chatInput.value.trim();
+    if(!txt) return;
+    appendChatMessage(txt,'user');
+    chatInput.value = '';
+    // simulate typing...
+    appendChatMessage('typing...','bot');
+    // replace typing with reply
+    setTimeout(()=> {
+      const nodes = chatBody.querySelectorAll('.msg');
+      const last = nodes[nodes.length-1];
+      if(last && last.innerText === 'typing...') last.remove();
+      appendChatMessage(aiReply(txt),'bot');
+    }, 800 + Math.random()*800);
+  });
+
+  chatInput.addEventListener('keydown', (e)=> { if(e.key === 'Enter') sendChat.click(); });
+
+  /* init render */
   (function init(){
     renderCategories();
     renderProducts(products);
-    updateCartCount();
-    // set cart count on cart link
-    document.querySelectorAll('.cart-btn').forEach(el=>{
-      el.addEventListener('click', (e)=>{ /* optional: go to cart page */ });
-    });
+    applyUser();
+    updateCart();
   })();
 
-  /* ============================
-     Accessibility: keyboard ESC to close modals/drawer
-     ============================ */
+  /* Accessibility: keyboard close */
   document.addEventListener('keydown', (e)=>{
     if(e.key === 'Escape'){
       if(drawer.classList.contains('open')) closeDrawer();
       if(modalBack.classList.contains('open')) closeModal();
-      if(langModal.classList.contains('open')) langModal.classList.remove('open');
+      if(chatPanel.classList.contains('open')) { chatPanel.classList.remove('open'); chatPanel.setAttribute('aria-hidden','true'); }
     }
   });
 
-  /* ============================
-     Prevent accidental auto-open
-     ============================ */
-  // ensure drawer is closed by default
+  /* Ensure drawer closed by default (fixes auto-open issues) */
   drawer.classList.remove('open');
-  drawer.setAttribute('aria-hidden','true');
   drawerBack.classList.remove('open');
-  drawerBack.setAttribute('aria-hidden','true');
-  modalBack.classList.remove('open');
-  modalBack.setAttribute('aria-hidden','true');
 
   </script>
-
 </body>
 </html>
