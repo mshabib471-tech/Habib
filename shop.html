@@ -1,196 +1,278 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="bn">
 <head>
-<meta charset="UTF-8" />
-<title>Habib Mobile Shop — Full Store</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <title>Shop — Habib Business App</title>
 
-<!-- Favicon -->
-<link rel="icon" type="image/png" href="https://i.ibb.co/n88CVpsy/habib.png">
+  <!-- Prevent mobile zoom jump (user requested) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="theme-color" content="#0b1220" />
 
-<!-- Styles -->
-<link rel="stylesheet" href="shop.css" />
+  <!-- favicon -->
+  <link rel="icon" href="https://i.ibb.co/n88CVpsy/habib.png">
+
+  <!-- fonts & icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- main css (Part 2 will provide full style.css) -->
+  <link rel="stylesheet" href="shop.css">
+
+  <!-- small inline styles for immediate layout safety -->
+  <style>
+    :root{--container:1200px}
+    body{font-family:Inter,system-ui,Arial;margin:0;background:linear-gradient(180deg,#f6f7fb,#eef1f6)}
+    .container{max-width:var(--container);margin:0 auto;padding:18px}
+    a{color:inherit;text-decoration:none}
+  </style>
 </head>
-
 <body>
 
-<div class="page-shell">
+  <!-- NAVBAR (sticky) -->
+  <header class="navbar">
+    <div class="navbar-inner container">
+      <a href="index.html" class="brand">
+        <div class="brand-avatar"><img src="https://i.ibb.co/n88CVpsy/habib.png" alt="Habib"></div>
+        <div class="brand-text">
+          <div class="brand-title">Habibur Rahman</div>
+          <div class="brand-sub">Web Developer • Mobile Retail Owner</div>
+        </div>
+      </a>
 
-<!-- HEADER / TOP NAV -->
-<header class="shop-header">
-  <div class="shop-header-inner">
+      <nav class="nav-links desktop-nav" id="desktopNav">
+        <a href="index.html">Home</a>
+        <a href="card.html">Card</a>
+        <a class="active" href="shop.html">Shop</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+      </nav>
 
-    <button id="menu-open" class="menu-btn">☰</button>
-
-    <div class="shop-brand">
-      <img src="https://i.ibb.co/n88CVpsy/habib.png" class="brand-logo">
-      <span>Habib Mobile Shop</span>
+      <div class="nav-controls">
+        <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+        <button id="menuToggle" class="menu-toggle" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
 
-    <button id="themeToggle" class="theme-toggle">🌙</button>
-
-  </div>
-</header>
-
-<!-- DRAWER SIDEBAR -->
-<aside id="drawer" class="drawer">
-  <div class="drawer-head">
-    <h2>Menu</h2>
-    <button id="menu-close">✕</button>
-  </div>
-
-  <div class="drawer-links">
-    <a href="index.html">🏠 Home</a>
-    <a href="shop.html">🛍️ Shop</a>
-    <a href="#smartphones">📱 Smartphones</a>
-    <a href="#accessories">🎧 Accessories</a>
-    <a href="#gadgets">⌚ Gadgets</a>
-    <a href="cart.html">🧺 Cart</a>
-    <a href="wishlist.html">❤️ Wishlist</a>
-    <a href="account.html">👤 My Account</a>
-    <a href="#topup">🎮 Games Topup</a>
-  </div>
-</aside>
-
-<div id="drawer-overlay" class="drawer-overlay"></div>
-
-<!-- CATEGORY TABS -->
-<nav class="category-nav">
-  <button class="cat-btn active" data-cat="all">All</button>
-  <button class="cat-btn" data-cat="smartphone">Smartphones</button>
-  <button class="cat-btn" data-cat="accessory">Accessories</button>
-  <button class="cat-btn" data-cat="gadget">Gadgets</button>
-</nav>
-
-<!-- MAIN SHOP CONTENT -->
-<main class="shop-content">
-
-  <!-- SMARTPHONES -->
-  <section id="smartphones">
-    <h2 class="section-title">📱 Smartphones</h2>
-
-    <div class="product-grid">
-
-      <div class="product-card" data-cat="smartphone">
-        <img src="https://i.ibb.co/Z4M61km/image.png">
-        <h3>Samsung Galaxy A14</h3>
-        <p>50MP • 5000mAh • Warranty</p>
-        <div class="p-row">
-          <span class="price">15,999 ৳</span>
-          <del>17,500 ৳</del>
+    <!-- mobile drawer -->
+    <div id="mobileDrawer" class="mobile-drawer" aria-hidden="true">
+      <div class="drawer-top">
+        <div class="drawer-user">
+          <img src="https://i.ibb.co/n88CVpsy/habib.png" alt="Habib" />
+          <div>
+            <div class="drawer-name">Habibur Rahman</div>
+            <div class="drawer-sub">Mobile Shop Owner</div>
+          </div>
         </div>
-
-        <div class="p-actions">
-          <button class="btn-primary add-cart" data-name="Samsung A14" data-price="15999">🧺 Add</button>
-          <button class="btn-outline wishlist-btn" data-name="Samsung A14">❤️</button>
-        </div>
+        <button id="closeDrawer" class="drawer-close">✕</button>
       </div>
 
-      <div class="product-card" data-cat="smartphone">
-        <img src="https://cdn.iconscout.com/illustration/premium/thumb/mobile-phone-sale-illustration-download-in-svg-png-gif-file-formats--smartphone-shop-electronics-shopping-pack-e-commerce-illustrations-4499986.png">
-        <h3>Redmi Note 12</h3>
-        <p>AMOLED • Fast Charge • 128GB</p>
-        <div class="p-row">
-          <span class="price">21,999 ৳</span>
-          <del>23,500 ৳</del>
-        </div>
-
-        <div class="p-actions">
-          <button class="btn-primary add-cart" data-name="Redmi 12" data-price="21999">🧺 Add</button>
-          <button class="btn-outline wishlist-btn" data-name="Redmi 12">❤️</button>
-        </div>
-      </div>
-
+      <nav class="drawer-links">
+        <a href="index.html">Home</a>
+        <a href="card.html">Card</a>
+        <a href="shop.html">Shop</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html" id="drawerAuthAction">Login / Register</a>
+      </nav>
     </div>
-  </section>
+  </header>
 
+  <main>
 
-  <!-- ACCESSORIES -->
-  <section id="accessories">
-    <h2 class="section-title">🎧 Accessories</h2>
+    <!-- HERO / TOP SLIDER AREA -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-left">
+          <h1 class="hero-title">Shop — Mobile, Accessories & More</h1>
+          <p class="hero-sub">Premium phones, accessories, and local warranty — সবই এক জায়গায়।</p>
 
-    <div class="product-grid small">
+          <!-- category chips -->
+          <div class="category-chips" id="categoryChips">
+            <!-- JS: will render categories here -->
+          </div>
 
-      <div class="product-card small" data-cat="accessory">
-        <img src="https://cdn-icons-png.flaticon.com/512/1047/1047711.png">
-        <h4>Premium Back Cover</h4>
-        <div class="price">250 ৳</div>
+          <!-- quick CTAs -->
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#productsGrid">Open Shop →</a>
+            <a class="btn btn-ghost" href="https://wa.me/8801868461577" target="_blank">WhatsApp Order</a>
+          </div>
+        </div>
 
-        <div class="p-actions small">
-          <button class="btn-primary add-cart" data-name="Back Cover" data-price="250">🧺</button>
-          <button class="btn-outline wishlist-btn" data-name="Back Cover">❤️</button>
+        <div class="hero-right">
+          <!-- slider placeholder (JS will enable slider images or keep static fallback) -->
+          <div class="main-slider" id="mainSlider">
+            <div class="slide">
+              <img src="https://cdni.iconscout.com/illustration/premium/thumb/online-mobile-shopping-illustration-3123927-2606008.png" alt="Slide">
+            </div>
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="product-card small" data-cat="accessory">
-        <img src="https://cdn-icons-png.flaticon.com/512/1047/1047700.png">
-        <h4>Tempered Glass</h4>
-        <div class="price">120 ৳</div>
-
-        <div class="p-actions small">
-          <button class="btn-primary add-cart" data-name="Glass" data-price="120">🧺</button>
-          <button class="btn-outline wishlist-btn" data-name="Glass">❤️</button>
+    <!-- CATEGORIES ROW (icons) -->
+    <section class="categories-section">
+      <div class="container">
+        <div class="categories-row" id="categoriesRow">
+          <!-- JS will populate categories icons -->
         </div>
       </div>
+    </section>
 
+    <!-- HOT PRODUCTS (dynamic from products.json) -->
+    <section class="products-section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Hot Products</h2>
+          <div class="products-controls">
+            <label class="small">Sort:</label>
+            <select id="sortSelect">
+              <option value="featured">Featured</option>
+              <option value="price-asc">Price low → high</option>
+              <option value="price-desc">Price high → low</option>
+              <option value="newest">Newest</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="productsGrid" class="products-grid">
+          <!-- JS renders product cards here from products.json -->
+        </div>
+
+        <!-- load more -->
+        <div class="load-more-wrap">
+          <button id="loadMoreBtn" class="btn btn-outline">Load more</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTIONS (category-by-category) -->
+    <section class="sections-list">
+      <div class="container" id="sectionsContainer">
+        <!-- JS will render category sections (e.g., Smart Watches, Powerbank, etc.) -->
+      </div>
+    </section>
+
+    <!-- STAY CONNECTED (glass card) -->
+    <section class="stay-connected">
+      <div class="container">
+        <div class="glass-card stay-card">
+          <h3>STAY CONNECTED</h3>
+          <div class="social-row" id="staySocials">
+            <!-- icons horizontally aligned -->
+            <a class="social-btn" href="https://www.facebook.com/share/1adkemEFLo/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+            <a class="social-btn" href="https://www.instagram.com/md_habibur__rahman" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a class="social-btn" href="https://youtube.com/@h_a_b_i_b-yt?si=KzptsxRXXNw0t635" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+            <a class="social-btn" href="https://wa.me/8801868461577" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+            <a class="social-btn" href="mailto:mshabib471@gmail.com"><i class="fa-regular fa-envelope"></i></a>
+            <a class="social-btn" href="https://www.tiktok.com/@habibur_._rahman" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PWA / INSTALL CARD -->
+    <section class="install-section">
+      <div class="container">
+        <div class="glass-card install-card">
+          <div>
+            <h3>Habib Business App — Install Now</h3>
+            <p>Add to Home Screen করে এক ক্লিকে আপনার shop + portfolio খুলুন।</p>
+          </div>
+          <div>
+            <button id="installBtn" class="btn btn-primary">Install</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUPPORT & FOOTER -->
+    <section class="support-section">
+      <div class="container">
+        <div class="support-card glass-card">
+          <h3>SUPPORT CENTER</h3>
+          <p>Help line [9AM–12PM] — <a href="https://t.me/H_A_B_I_B_Top_1" target="_blank">@habib_support</a></p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>© <span id="year"></span> Habib Business App — Portfolio & Mobile Shop. All Rights Reserved.</div>
+        <div class="footer-links"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+      </div>
     </div>
-  </section>
+  </footer>
 
+  <!-- Floating WhatsApp -->
+  <a class="floating-wa" href="https://wa.me/8801868461577" target="_blank" aria-label="WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
 
-  <!-- GADGETS -->
-  <section id="gadgets">
-    <h2 class="section-title">⌚ Gadgets</h2>
+  <!-- Bottom Nav -->
+  <nav class="bottom-nav">
+    <a href="index.html" class="bn"><i class="fa-solid fa-house"></i><span>Home</span></a>
+    <a href="shop.html" class="bn active"><i class="fa-solid fa-bag-shopping"></i><span>Shop</span></a>
+    <a href="#contact" class="bn"><i class="fa-regular fa-envelope"></i><span>Contact</span></a>
+    <a href="login.html" class="bn"><i class="fa-regular fa-user"></i><span>Account</span></a>
+  </nav>
 
-    <div class="product-grid small">
+  <!-- dependencies + product loader script (Part 3 will provide shop.js) -->
+  <script>
+    // small helpers so page already somewhat functional until full script arrives
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-      <div class="product-card small" data-cat="gadget">
-        <img src="https://cdn-icons-png.flaticon.com/512/992/992700.png">
-        <h4>TWS Earbuds</h4>
-        <div class="price">899 ৳</div>
+    // Mobile drawer toggles
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    const closeDrawer = document.getElementById('closeDrawer');
 
-        <div class="p-actions small">
-          <button class="btn-primary add-cart" data-name="TWS" data-price="899">🧺</button>
-          <button class="btn-outline wishlist-btn" data-name="TWS">❤️</button>
-        </div>
-      </div>
+    menuToggle?.addEventListener('click', () => {
+      mobileDrawer.classList.add('open');
+      mobileDrawer.setAttribute('aria-hidden', 'false');
+    });
+    closeDrawer?.addEventListener('click', () => {
+      mobileDrawer.classList.remove('open');
+      mobileDrawer.setAttribute('aria-hidden', 'true');
+    });
 
-      <div class="product-card small" data-cat="gadget">
-        <img src="https://cdn-icons-png.flaticon.com/512/992/992754.png">
-        <h4>Smart Watch</h4>
-        <div class="price">1299 ৳</div>
+    // Theme toggle stub (Part 3 will fully implement)
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle?.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      themeToggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+    });
 
-        <div class="p-actions small">
-          <button class="btn-primary add-cart" data-name="Smart Watch" data-price="1299">🧺</button>
-          <button class="btn-outline wishlist-btn" data-name="Smart Watch">❤️</button>
-        </div>
-      </div>
+    // Install prompt handling skeleton — Part3 will wire beforeinstallprompt
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      // enable installBtn
+      const btn = document.getElementById('installBtn');
+      if (btn) btn.style.display = 'inline-block';
+    });
+    document.getElementById('installBtn')?.addEventListener('click', async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const choice = await deferredPrompt.userChoice;
+        deferredPrompt = null;
+      } else {
+        // If PWA prompt not available, fallback to manual install instructions or just do nothing
+        alert('Install not available: make sure this site is served over HTTPS and has manifest/service worker.');
+      }
+    });
 
-    </div>
-  </section>
+    // fix for "no zoom" behavior already set via meta viewport above
+  </script>
 
-  <!-- GAME TOPUP PAGE LINK -->
-  <section id="topup">
-    <h2 class="section-title">🎮 Games Topup</h2>
-    <p class="topup-text">PUBG • Free Fire • Diamond • UC — সব পাওয়া যাবে।</p>
-
-    <a href="https://habib-yt.vercel.app" class="topup-btn" target="_blank">
-      OPEN TOPUP SITE →
-    </a>
-  </section>
-
-</main>
-
-<!-- BOTTOM NAV -->
-<nav class="bottom-nav">
-  <a href="shop.html">🛍️<span>Shop</span></a>
-  <a href="wishlist.html">❤️<span>Wishlist</span></a>
-  <a href="cart.html">🧺<span>Cart</span></a>
-  <a href="account.html">👤<span>Account</span></a>
-  <a href="search.html">🔍<span>Search</span></a>
-</nav>
-
-</div>
-
-<script src="shop.js"></script>
+  <!-- main shop script (Part 3) -->
+  <script src="shop.js" defer></script>
 </body>
 </html>
