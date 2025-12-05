@@ -1,623 +1,186 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Shop — Demo E-Commerce Landing</title>
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-
-  <!-- Font Awesome for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-NY6mVQe..." crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-  <style>
-    /* RESET & BASE */
-    * { box-sizing: border-box; }
-    html,body { margin:0; padding:0; font-family: 'Poppins', sans-serif; background:#f2f4f7; color:#222; }
-    a { color: inherit; text-decoration: none; }
-    img { max-width:100%; display:block; }
-
-    /* LAYOUT CONTAINER */
-    .wrap { max-width:1200px; margin:30px auto; background:#fff; box-shadow:0 10px 30px rgba(0,0,0,0.06); border-radius:6px; overflow:hidden; }
-
-    /* TOP BAR / NAV */
-    .topbar { display:flex; align-items:center; justify-content:space-between; padding:16px 28px; border-bottom:4px solid #6b2fa3; }
-    .logo { display:flex; align-items:center; gap:12px; }
-    .logo img { width:120px; height:auto; }
-    .searchbar { flex:1; margin:0 24px; position:relative; }
-    .searchbar input { width:100%; padding:12px 48px 12px 18px; border-radius:30px; border:1px solid #e6e6e6; outline:none; font-size:14px; }
-    .searchbar button { position:absolute; right:6px; top:6px; bottom:6px; background:#6b2fa3; color:#fff; border:none; padding:0 18px; border-radius:24px; cursor:pointer; }
-    .top-actions { display:flex; gap:12px; align-items:center; }
-    .top-actions a { font-size:14px; color:#555; padding:8px 10px; border-radius:6px; }
-    .cart { background:#fff; border:1px solid #eee; padding:8px 12px; border-radius:6px; display:flex; gap:8px; align-items:center; }
-
-    /* MAIN NAV */
-    .mainnav { background:#6b2fa3; color:#fff; padding:10px 28px; display:flex; gap:18px; align-items:center; }
-    .mainnav .menu { display:flex; gap:12px; align-items:center; }
-    .mainnav a { color:#fff; font-weight:600; font-size:14px; padding:8px 10px; border-radius:6px; }
-    .mainnav .show-cat { background:#5a2289; padding:8px 12px; border-radius:6px; }
-
-    /* HERO (slider imitation) */
-    .hero { padding:34px 40px; display:flex; gap:28px; align-items:center; justify-content:space-between; }
-    .hero .left { flex:1; }
-    .hero h3 { color:#6b2fa3; margin:0 0 8px 0; font-weight:700; }
-    .hero h1 { font-size:30px; margin:0 0 12px; }
-    .hero p { color:#666; margin:0 0 18px; line-height:1.4; }
-    .hero .cta { display:inline-block; background:#ff7a00; color:#fff; padding:12px 20px; border-radius:28px; font-weight:700; }
-    .hero .right { width:360px; text-align:center; }
-    .hero .product-mock { display:inline-block; width:260px; transform:rotate(-12deg); }
-
-    /* CATEGORIES ICON ROW */
-    .categories { padding:12px 40px 28px; display:flex; gap:18px; justify-content:space-between; align-items:center; flex-wrap:wrap; }
-    .cat { width:110px; text-align:center; background:#fff; border-radius:10px; padding:12px; box-shadow:0 6px 18px rgba(0,0,0,0.04); }
-    .cat img { width:54px; height:54px; margin-bottom:8px; }
-    .cat span { display:block; font-size:13px; color:#333; font-weight:600; }
-
-    /* SECTION TITLE */
-    .section { padding:30px 40px; }
-    .section .title-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; }
-    .section h2 { margin:0; font-size:20px; }
-    .view-all { background:#5a2a86; color:#fff; padding:8px 12px; border-radius:8px; font-size:13px; }
-
-    /* PRODUCT GRID */
-    .product-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:18px; }
-    .product { background:#fff; border-radius:10px; padding:12px; border:1px solid #f0f0f0; box-shadow:0 6px 18px rgba(0,0,0,0.03); position:relative; overflow:hidden; }
-    .product .badge { position:absolute; left:12px; top:12px; background:#ff4d7a; color:#fff; padding:4px 8px; font-size:12px; border-radius:6px; font-weight:700; }
-    .product img { width:100%; height:140px; object-fit:contain; margin-bottom:8px; }
-    .product .meta { font-size:12px; color:#7a7a7a; margin-bottom:6px; }
-    .product .name { font-weight:700; margin-bottom:6px; font-size:14px; }
-    .product .price { font-weight:800; color:#e04b3c; }
-    .product .oldprice { text-decoration:line-through; color:#b0b0b0; font-size:12px; margin-right:8px; }
-
-    .card-actions { display:flex; gap:8px; margin-top:10px; align-items:center; }
-    .action-btn { border:1px solid #eee; padding:8px 10px; border-radius:8px; font-size:13px; cursor:pointer; background:#fafafa; }
-    .fav { margin-left:auto; color:#6b2fa3; font-weight:700; }
-
-    /* BANNERS (two-column) */
-    .banners { display:grid; grid-template-columns:1fr 1fr; gap:18px; padding:20px 40px; }
-    .banner { background-size:cover; background-position:center; border-radius:12px; min-height:160px; position:relative; overflow:hidden; color:#fff; }
-    .banner .overlay { position:absolute; inset:0; background:linear-gradient(90deg, rgba(0,0,0,0.35), rgba(0,0,0,0.15)); display:flex; align-items:center; padding:18px; }
-    .banner h3 { margin:0; font-size:22px; }
-    .banner .btn { margin-top:10px; display:inline-block; background:#ff7a00; padding:8px 12px; border-radius:8px; color:#fff; font-weight:700; }
-
-    /* BRANDS CAROUSEL */
-    .brands { display:flex; gap:12px; padding:18px 40px; overflow-x:auto; }
-    .brand { min-width:110px; background:#fff; border-radius:8px; padding:18px; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 18px rgba(0,0,0,0.03); }
-
-    /* NEWSLETTER / FOOTER */
-    .newsletter { background:#f6f6fb; padding:20px 40px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
-    .newsletter input { padding:12px 16px; border-radius:30px; border:1px solid #e7e7e7; width:70%; }
-    .newsletter button { background:#6b2fa3; color:#fff; border:none; padding:12px 18px; border-radius:30px; cursor:pointer; }
-
-    footer { background:#fff; padding:28px 40px; color:#666; display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; }
-    footer .col { width:240px; }
-    footer small { color:#999; }
-
-    /* RESPONSIVE */
-    @media (max-width:1100px) {
-      .product-grid { grid-template-columns:repeat(3,1fr); }
-      .hero .right { display:none; }
-    }
-    @media (max-width:720px) {
-      .wrap { margin:12px; }
-      .topbar { flex-direction:column; gap:12px; align-items:flex-start; }
-      .searchbar { width:100%; margin:0; }
-      .categories { justify-content:flex-start; gap:12px; overflow-x:auto; padding-left:18px; }
-      .product-grid { grid-template-columns:repeat(2,1fr); }
-      .banners { grid-template-columns:1fr; padding:12px; }
-      .brands { padding-left:12px; }
-      footer .col { width:100%; }
-    }
-
-    /* small utility */
-    .muted { color:#7a7a7a; font-size:13px; }
-  </style>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Shop — Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shop.css">
 </head>
 <body>
 
-  <div class="wrap">
+  <!-- DRAWER -->
+  <div class="drawer" aria-hidden="true">
+    <div class="close"><button class="drawer-close icon-btn">Close ✕</button></div>
+    <nav>
+      <a href="shop.html">Home</a>
+      <a href="categories.html">Show all categories</a>
+      <a href="orders.html">My Orders</a>
+      <a href="deals.html">Today's Deals</a>
+      <a href="campaigns.html">Campaigns</a>
+      <a href="brands.html">Top Brands</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <hr>
+      <a href="signin.html">Sign in</a>
+      <a href="cart.html">Cart <span class="cart-count">0</span></a>
+    </nav>
+  </div>
 
-    <!-- TOP HEADER -->
-    <div class="topbar">
-      <div class="logo">
-        <img src="https://via.placeholder.com/160x40?text=LOGO" alt="Logo">
+  <!-- LANG modal -->
+  <div class="lang-modal" role="dialog" aria-modal="true">
+    <div class="lang-box">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <strong>Select language</strong>
+        <button class="lang-close icon-btn">Close</button>
       </div>
-
-      <div class="searchbar" role="search">
-        <input type="search" id="q" placeholder="Search Products, brands and more..." aria-label="Search">
-        <button type="button"><i class="fa fa-search"></i></button>
+      <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:8px;">
+        <div class="lang-item" data-code="en">English</div>
+        <div class="lang-item" data-code="bn">বাংলা (Bangla)</div>
+        <div class="lang-item" data-code="ar">Arabic (العربية)</div>
+        <div class="lang-item" data-code="hi">Hindi (हिन्दी)</div>
+        <div class="lang-item" data-code="fr">Français</div>
+        <div class="lang-item" data-code="es">Español</div>
       </div>
+    </div>
+  </div>
 
-      <div class="top-actions">
-        <a href="#" class="muted"><i class="fa fa-globe"></i> বাংলা</a>
-        <a href="#" class="muted"><i class="fa fa-user"></i> Sign in</a>
-        <div class="cart">
-          <i class="fa fa-shopping-cart"></i>
-          <div style="font-size:13px;">Cart <strong style="margin-left:6px;color:#6b2fa3;">2</strong></div>
+  <!-- PRODUCT MODAL -->
+  <div class="modal-back" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div style="font-weight:800;" class="m-title">Product</div>
+        <button class="modal-close icon-btn">Close</button>
+      </div>
+      <div style="display:flex; gap:12px; margin-top:12px;">
+        <div class="left"><img class="m-img" src="https://via.placeholder.com/800x600" alt="product"></div>
+        <div class="right">
+          <div class="m-meta">Brand · category</div>
+          <div class="m-title" style="margin-top:6px;">Product Title</div>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <div class="m-oldprice oldprice"></div>
+            <div class="m-price">1950 SAR</div>
+          </div>
+          <p class="m-desc small" style="margin-top:8px;"></p>
+          <div style="display:flex;gap:12px;align-items:center;margin-top:10px;">
+            <div class="qty" aria-hidden="false">
+              <button class="qty-dec">-</button>
+              <div class="qty-number" style="min-width:36px;text-align:center;">1</div>
+              <button class="qty-inc">+</button>
+            </div>
+            <button class="cta add-to-cart">Add to cart</button>
+            <a class="icon-btn" href="#">View page</a>
+          </div>
+          <div style="margin-top:12px;" class="small">SKU: <span class="m-sku"></span></div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- NAV -->
-    <div class="mainnav">
-      <div class="menu">
-        <a href="#" class="show-cat"><i class="fa fa-bars"></i> Show all categories</a>
-        <a href="#">My Orders</a>
-        <a href="#">Today's Deals</a>
-        <a href="#">Campaigns</a>
-        <a href="#">Top Brands</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
+  <!-- HEADER -->
+  <header class="container">
+    <div class="header" role="banner">
+      <div class="logo"><a href="shop.html"><img src="https://via.placeholder.com/160x40?text=LOGO" alt="logo"></a></div>
+      <div class="search">
+        <input type="search" placeholder="Search Products, brands and more..." aria-label="Search">
+        <button aria-label="Search">🔍</button>
+      </div>
+      <div class="header-actions">
+        <button class="lang-btn lang-open"><span class="lang-label">Language</span></button>
+        <a class="icon-btn" href="signin.html">Sign in</a>
+        <a class="icon-btn" href="cart.html">Cart (<span class="cart-count">0</span>)</a>
+        <button class="hamburger open-drawer" aria-label="Open menu">☰</button>
       </div>
     </div>
 
-    <!-- HERO -->
-    <section class="hero">
+    <nav class="topnav" aria-label="Primary navigation">
+      <a href="categories.html">Show all categories</a>
+      <a href="orders.html">My Orders</a>
+      <a href="deals.html">Today's Deals</a>
+      <a href="campaigns.html">Campaigns</a>
+      <a href="brands.html">Top Brands</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- MAIN -->
+  <main class="container">
+    <section class="hero" aria-label="Hero">
       <div class="left">
-        <h3>XIAOMI</h3>
+        <div style="color:#6b2fa3;font-weight:800;margin-bottom:6px;">XIAOMI</div>
         <h1>Xiaomi Smart Band 8 Active</h1>
         <p>Enjoy water resistance to a depth of 50 meters and an impressive battery life lasting up to 14 days. Embrace style and functionality with the latest fitness band.</p>
         <a class="cta" href="#">অর্ডার করুন</a>
       </div>
-      <div class="right">
-        <img class="product-mock" src="https://via.placeholder.com/260x260?text=Band" alt="Band">
-      </div>
+      <div class="img-wrap"><img src="https://via.placeholder.com/420x360?text=Smart+Band" alt="hero"></div>
     </section>
 
-    <!-- CATEGORIES ROW -->
-    <section class="categories" aria-label="Categories">
-      <div class="cat">
-        <img src="https://via.placeholder.com/64?text=📱" alt="Mobiles">
-        <span>Mobiles</span>
-      </div>
-      <div class="cat">
-        <img src="https://via.placeholder.com/64?text=💻" alt="Laptops">
-        <span>Laptops</span>
-      </div>
-      <div class="cat">
-        <img src="https://via.placeholder.com/64?text=🎮" alt="Kidsgame">
-        <span>Kidsgame</span>
-      </div>
-      <div class="cat">
-        <img src="https://via.placeholder.com/64?text=🍳" alt="Home & Kitchen">
-        <span>Home & Kitchen</span>
-      </div>
-      <div class="cat">
-        <img src="https://via.placeholder.com/64?text=🔋" alt="Powerbank">
-        <span>Powerbank</span>
-      </div>
-      <div class="cat">
-        <img src="https://via.placeholder.com/64?text=⌚" alt="Watches">
-        <span>Watches</span>
-      </div>
-      <div class="cat">
-        <img src="https://via.placeholder.com/64?text=🛴" alt="Electric">
-        <span>Electric</span>
-      </div>
-    </section>
-
-    <!-- HOT PRODUCT -->
+    <!-- CATEGORIES -->
     <section class="section">
-      <div class="title-row">
-        <h2>Hot Product</h2>
-        <a class="view-all" href="#">View All</a>
+      <div class="head">
+        <h2>Categories</h2>
+        <a class="view-all" href="categories.html">View all</a>
       </div>
+      <div class="cat-grid" aria-label="Categories">
+        <div class="cat" data-cat="mobiles"><img src="https://via.placeholder.com/120?text=📱"><div>Mobiles</div></div>
+        <div class="cat" data-cat="laptops"><img src="https://via.placeholder.com/120?text=💻"><div>Laptops</div></div>
+        <div class="cat" data-cat="kids"><img src="https://via.placeholder.com/120?text=🎮"><div>Kidsgame</div></div>
+        <div class="cat" data-cat="home"><img src="https://via.placeholder.com/120?text=🍳"><div>Home & Kitchen</div></div>
+        <div class="cat" data-cat="power"><img src="https://via.placeholder.com/120?text=🔋"><div>Powerbank</div></div>
+        <div class="cat" data-cat="watches"><img src="https://via.placeholder.com/120?text=⌚"><div>Watches</div></div>
+      </div>
+    </section>
 
-      <div class="product-grid" aria-live="polite">
-        <!-- repeat card 5 times (use sample data) -->
-        <article class="product" aria-label="Product 1">
-          <div class="badge">Trending</div>
-          <img src="https://via.placeholder.com/260x140?text=Phone" alt="Product image">
-          <div class="meta">Xiaomi</div>
-          <div class="name">New Google Speaker Nest Audio</div>
-          <div>
-            <span class="oldprice">2800 SAR</span>
-            <span class="price">1950 SAR</span>
-          </div>
-          <div class="card-actions">
-            <button class="action-btn">Add to cart</button>
-            <button class="action-btn">Compare</button>
-            <div class="fav"><i class="fa-regular fa-heart"></i></div>
-          </div>
-        </article>
-
-        <!-- card 2 -->
-        <article class="product" aria-label="Product 2">
-          <div class="badge">Trending</div>
-          <img src="https://via.placeholder.com/260x140?text=Speaker" alt="Product image">
-          <div class="meta">Xiaomi</div>
-          <div class="name">Wireless Charger Pro</div>
-          <div>
-            <span class="oldprice">2800 SAR</span>
-            <span class="price">1950 SAR</span>
-          </div>
-          <div class="card-actions">
-            <button class="action-btn">Add to cart</button>
-            <button class="action-btn">Compare</button>
-            <div class="fav"><i class="fa-regular fa-heart"></i></div>
-          </div>
-        </article>
-
-        <!-- card 3 -->
-        <article class="product" aria-label="Product 3">
-          <div class="badge">Trending</div>
-          <img src="https://via.placeholder.com/260x140?text=Vacuum" alt="Product image">
-          <div class="meta">Xiaomi</div>
-          <div class="name">Robot Vacuum Cleaner</div>
-          <div>
-            <span class="oldprice">2800 SAR</span>
-            <span class="price">1950 SAR</span>
-          </div>
-          <div class="card-actions">
-            <button class="action-btn">Add to cart</button>
-            <button class="action-btn">Compare</button>
-            <div class="fav"><i class="fa-regular fa-heart"></i></div>
-          </div>
-        </article>
-
-        <!-- card 4 -->
-        <article class="product" aria-label="Product 4">
-          <div class="badge">Trending</div>
-          <img src="https://via.placeholder.com/260x140?text=Phone2" alt="Product image">
-          <div class="meta">Xiaomi</div>
-          <div class="name">Smartphone X Pro</div>
-          <div>
-            <span class="oldprice">2800 SAR</span>
-            <span class="price">1950 SAR</span>
-          </div>
-          <div class="card-actions">
-            <button class="action-btn">Add to cart</button>
-            <button class="action-btn">Compare</button>
-            <div class="fav"><i class="fa-regular fa-heart"></i></div>
-          </div>
-        </article>
-
-        <!-- card 5 -->
-        <article class="product" aria-label="Product 5">
-          <div class="badge">Trending</div>
-          <img src="https://via.placeholder.com/260x140?text=Coffee+Maker" alt="Product image">
-          <div class="meta">Xiaomi</div>
-          <div class="name">Compact Coffee Machine</div>
-          <div>
-            <span class="oldprice">2800 SAR</span>
-            <span class="price">1950 SAR</span>
-          </div>
-          <div class="card-actions">
-            <button class="action-btn">Add to cart</button>
-            <button class="action-btn">Compare</button>
-            <div class="fav"><i class="fa-regular fa-heart"></i></div>
-          </div>
-        </article>
-
+    <!-- HOT PRODUCTS -->
+    <section class="section">
+      <div class="head">
+        <h2>Hot Product</h2>
+        <a class="view-all" href="deals.html">View All</a>
+      </div>
+      <div class="products-grid products-grid" aria-live="polite">
+        <!-- populated by shop.js from products.json -->
       </div>
     </section>
 
     <!-- BANNERS -->
-    <div class="banners">
-      <div class="banner" style="background-image:url('https://via.placeholder.com/600x300?text=Outdoor+Systems');">
-        <div class="overlay">
-          <div>
-            <h3>Tracking Systems</h3>
-            <div class="muted">QZSS and more</div>
-            <a class="btn" href="#">Shop Now</a>
-          </div>
+    <section class="section" style="margin-top:20px;">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+        <div style="background:#fff;padding:18px;border-radius:12px;box-shadow:0 8px 20px rgba(17,24,39,0.04);">
+          <h3>Popcorn maker for Friday nights</h3>
+          <p class="small">Make movie nights special with our popcorn makers.</p>
         </div>
-      </div>
-      <div class="banner" style="background-image:url('https://via.placeholder.com/600x300?text=Health+Management');">
-        <div class="overlay">
-          <div>
-            <h3>Health Management</h3>
-            <div class="muted">Monitor heart rate and more</div>
-            <a class="btn" href="#">Shop Now</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- HOME & KITCHEN -->
-    <section class="section">
-      <div class="title-row">
-        <h2>Home and Kitchen</h2>
-        <a class="view-all" href="#">View All</a>
-      </div>
-
-      <div class="product-grid" aria-label="Home and Kitchen list">
-        <!-- sample small product cards -->
-        <article class="product">
-          <div class="badge">Trending</div>
-          <img src="https://via.placeholder.com/260x140?text=Kettle" alt="">
-          <div class="meta">Xiaomi</div>
-          <div class="name">Smart Electric Kettle</div>
-          <div>
-            <span class="oldprice">2800 SAR</span>
-            <span class="price">1950 SAR</span>
-          </div>
-          <div class="card-actions">
-            <button class="action-btn">Add to cart</button>
-            <div class="fav"><i class="fa-regular fa-heart"></i></div>
-          </div>
-        </article>
-
-        <article class="product">
-          <div class="badge">Trending</div>
-          <img src="https://via.placeholder.com/260x140?text=Cooker" alt="">
-          <div class="meta">Xiaomi</div>
-          <div class="name">Smart Rice Cooker</div>
-          <div>
-            <span class="oldprice">2800 SAR</span>
-            <span class="price">1950 SAR</span>
-          </div>
-          <div class="card-actions">
-            <button class="action-btn">Add to cart</button>
-            <div class="fav"><i class="fa-regular fa-heart"></i></div>
-          </div>
-        </article>
-
-        <article class="product">
-          <div class="badge">Trending</div>
-          <img src="https://via.placeholder.com/260x140?text=Blender" alt="">
-          <div class="meta">Xiaomi</div>
-          <div class="name">Multipurpose Blender</div>
-          <div>
-            <span class="oldprice">2800 SAR</span>
-            <span class="price">1950 SAR</span>
-          </div>
-          <div class="card-actions">
-            <button class="action-btn">Add to cart</button>
-            <div class="fav"><i class="fa-regular fa-heart"></i></div>
-          </div>
-        </article>
-
-        <article class="product">
-          <div class="badge">Trending</div>
-          <img src="https://via.placeholder.com/260x140?text=Air+Fryer" alt="">
-          <div class="meta">Xiaomi</div>
-          <div class="name">Air Fryer</div>
-          <div>
-            <span class="oldprice">2800 SAR</span>
-            <span class="price">1950 SAR</span>
-          </div>
-          <div class="card-actions">
-            <button class="action-btn">Add to cart</button>
-            <div class="fav"><i class="fa-regular fa-heart"></i></div>
-          </div>
-        </article>
-
-        <article class="product">
-          <div class="badge">Trending</div>
-          <img src="https://via.placeholder.com/260x140?text=Milk+Frother" alt="">
-          <div class="meta">Xiaomi</div>
-          <div class="name">Mini Milk Frother</div>
-          <div>
-            <span class="oldprice">2800 SAR</span>
-            <span class="price">1950 SAR</span>
-          </div>
-          <div class="card-actions">
-            <button class="action-btn">Add to cart</button>
-            <div class="fav"><i class="fa-regular fa-heart"></i></div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- PROMO BANNERS (vertical) -->
-    <section style="padding:16px 40px;">
-      <div style="display:grid; gap:12px;">
-        <div style="background:#fff; border-radius:12px; padding:18px; display:flex; gap:18px; align-items:center;">
-          <img src="https://via.placeholder.com/180x90?text=Popcorn" alt="">
-          <div>
-            <h3 style="margin:0 0 6px;">Popcorn maker for Friday nights</h3>
-            <a class="btn" href="#" style="margin-top:6px;">Shop Now</a>
-          </div>
-        </div>
-
-        <div style="background:#fff; border-radius:12px; padding:18px; display:flex; gap:18px; align-items:center;">
-          <img src="https://via.placeholder.com/180x90?text=Coffee" alt="">
-          <div>
-            <h3 style="margin:0 0 6px;">Your coffee your mood!</h3>
-            <a class="btn" href="#" style="margin-top:6px;">Shop Now</a>
-          </div>
+        <div style="background:#fff;padding:18px;border-radius:12px;box-shadow:0 8px 20px rgba(17,24,39,0.04);">
+          <h3>Your coffee your mood!</h3>
+          <p class="small">Offers on selected coffee makers.</p>
         </div>
       </div>
     </section>
 
-    <!-- Smart Watches -->
+    <!-- BRANDS -->
     <section class="section">
-      <div class="title-row">
-        <h2>Smart Watches</h2>
-        <a class="view-all" href="#">View All</a>
-      </div>
-
-      <div class="product-grid" aria-label="Smart watches">
-        <!-- repeat a few -->
-        <article class="product">
-          <div class="badge">Trending</div>
-          <img src="https://via.placeholder.com/260x140?text=Watch1" alt="">
-          <div class="meta">Xiaomi</div>
-          <div class="name">Smart Watch Active</div>
-          <div>
-            <span class="oldprice">2800 SAR</span>
-            <span class="price">1950 SAR</span>
-          </div>
-          <div class="card-actions">
-            <button class="action-btn">Add to cart</button>
-            <div class="fav"><i class="fa-regular fa-heart"></i></div>
-          </div>
-        </article>
-
-        <article class="product">
-          <div class="badge">Trending</div>
-          <img src="https://via.placeholder.com/260x140?text=Watch2" alt="">
-          <div class="meta">Xiaomi</div>
-          <div class="name">Fitness Watch Mini</div>
-          <div>
-            <span class="oldprice">2800 SAR</span>
-            <span class="price">1950 SAR</span>
-          </div>
-          <div class="card-actions">
-            <button class="action-btn">Add to cart</button>
-            <div class="fav"><i class="fa-regular fa-heart"></i></div>
-          </div>
-        </article>
-
-        <article class="product">
-          <div class="badge">Trending</div>
-          <img src="https://via.placeholder.com/260x140?text=Watch3" alt="">
-          <div class="meta">Xiaomi</div>
-          <div class="name">Classic Leather Watch</div>
-          <div>
-            <span class="oldprice">2800 SAR</span>
-            <span class="price">1950 SAR</span>
-          </div>
-          <div class="card-actions">
-            <button class="action-btn">Add to cart</button>
-            <div class="fav"><i class="fa-regular fa-heart"></i></div>
-          </div>
-        </article>
-
-        <article class="product">
-          <div class="badge">Trending</div>
-          <img src="https://via.placeholder.com/260x140?text=Watch4" alt="">
-          <div class="meta">Xiaomi</div>
-          <div class="name">Sleek Smart Watch</div>
-          <div>
-            <span class="oldprice">2800 SAR</span>
-            <span class="price">1950 SAR</span>
-          </div>
-          <div class="card-actions">
-            <button class="action-btn">Add to cart</button>
-            <div class="fav"><i class="fa-regular fa-heart"></i></div>
-          </div>
-        </article>
-
-        <article class="product">
-          <div class="badge">Trending</div>
-          <img src="https://via.placeholder.com/260x140?text=Watch5" alt="">
-          <div class="meta">Xiaomi</div>
-          <div class="name">Mini Health Band</div>
-          <div>
-            <span class="oldprice">2800 SAR</span>
-            <span class="price">1950 SAR</span>
-          </div>
-          <div class="card-actions">
-            <button class="action-btn">Add to cart</button>
-            <div class="fav"><i class="fa-regular fa-heart"></i></div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- Routers and Networks -->
-    <section class="section">
-      <div class="title-row">
-        <h2>Routers and Networks</h2>
-        <a class="view-all" href="#">View All</a>
-      </div>
-
-      <div class="product-grid" aria-label="Routers and Networks">
-        <article class="product"><img src="https://via.placeholder.com/260x140?text=Router1"><div class="meta">Xiaomi</div><div class="name">Home Router</div><div><span class="oldprice">2800 SAR</span> <span class="price">1950 SAR</span></div></article>
-        <article class="product"><img src="https://via.placeholder.com/260x140?text=Router2"><div class="meta">Xiaomi</div><div class="name">Mesh WiFi Node</div><div><span class="oldprice">2800 SAR</span> <span class="price">1950 SAR</span></div></article>
-        <article class="product"><img src="https://via.placeholder.com/260x140?text=Adapter"><div class="meta">Xiaomi</div><div class="name">POE Adapter</div><div><span class="oldprice">2800 SAR</span> <span class="price">1950 SAR</span></div></article>
-        <article class="product"><img src="https://via.placeholder.com/260x140?text=Modem"><div class="meta">Xiaomi</div><div class="name">4G Modem</div><div><span class="oldprice">2800 SAR</span> <span class="price">1950 SAR</span></div></article>
-        <article class="product"><img src="https://via.placeholder.com/260x140?text=Repeater"><div class="meta">Xiaomi</div><div class="name">WiFi Repeater</div><div><span class="oldprice">2800 SAR</span> <span class="price">1950 SAR</span></div></article>
-      </div>
-    </section>
-
-    <!-- BANNERS AGAIN -->
-    <div class="banners" style="padding-top:8px;">
-      <div class="banner" style="background-image:url('https://via.placeholder.com/600x300?text=Promo+1'); min-height:140px;">
-        <div class="overlay"><div><h3>Quality Accessories</h3><a class="btn" href="#">Shop Now</a></div></div>
-      </div>
-      <div class="banner" style="background-image:url('https://via.placeholder.com/600x300?text=Promo+2'); min-height:140px;">
-        <div class="overlay"><div><h3>Best Deals</h3><a class="btn" href="#">Shop Now</a></div></div>
-      </div>
-    </div>
-
-    <!-- FEATURED BRANDS -->
-    <section class="section">
-      <div class="title-row">
+      <div class="head">
         <h2>Featured Brands</h2>
-        <a class="view-all" href="#">View All</a>
+        <a class="view-all" href="brands.html">View All</a>
       </div>
-
-      <div class="brands" aria-label="Brands list">
-        <div class="brand"><img src="https://via.placeholder.com/90x30?text=Braun" alt="Braun"></div>
-        <div class="brand"><img src="https://via.placeholder.com/90x30?text=Eufy" alt="Eufy"></div>
-        <div class="brand"><img src="https://via.placeholder.com/90x30?text=Honor" alt="Honor"></div>
-        <div class="brand"><img src="https://via.placeholder.com/90x30?text=Huawei" alt="Huawei"></div>
-        <div class="brand"><img src="https://via.placeholder.com/90x30?text=Oppo" alt="Oppo"></div>
-        <div class="brand"><img src="https://via.placeholder.com/90x30?text=Infinix" alt="Infinix"></div>
-        <div class="brand"><img src="https://via.placeholder.com/90x30?text=Lenovo" alt="Lenovo"></div>
-        <div class="brand"><img src="https://via.placeholder.com/90x30?text=Amazfit" alt="Amazfit"></div>
+      <div class="brand-row">
+        <img src="https://via.placeholder.com/110x40?text=Braun" alt="">
+        <img src="https://via.placeholder.com/110x40?text=Eufy" alt="">
+        <img src="https://via.placeholder.com/110x40?text=Honor" alt="">
+        <img src="https://via.placeholder.com/110x40?text=Huawei" alt="">
+        <img src="https://via.placeholder.com/110x40?text=Oppo" alt="">
       </div>
     </section>
-
-    <!-- NEWSLETTER -->
-    <div class="newsletter">
-      <div>
-        <strong>Let's keep you posted!</strong>
-        <div class="muted">Subscribe to stay updated on the latest news and tips.</div>
-      </div>
-      <div style="display:flex; gap:8px; width:50%; justify-content:flex-end;">
-        <input type="email" placeholder="Email address" aria-label="Email">
-        <button>Subscribe</button>
-      </div>
-    </div>
 
     <!-- FOOTER -->
-    <footer>
-      <div class="col">
-        <h4>Shop</h4>
-        <p class="muted">About us · Contact · Careers · FAQ</p>
-      </div>
+    <section class="section footer" aria-label="Footer">
+      <div class="col"><strong>Shop</strong><div class="small">About us · Contact · Careers · FAQ</div></div>
+      <div class="col"><strong>Products</strong><div class="small">Phones · Laptops · Home Appliances · Accessories</div></div>
+      <div class="col"><strong>Payment</strong><div class="small">Cash on Delivery · Card · Wallets</div></div>
+      <div class="col"><strong>Support</strong><div class="small">Call our customer service: +(800) 123-456</div></div>
+    </section>
 
-      <div class="col">
-        <h4>Products</h4>
-        <p class="muted">Phones · Laptops · Home Appliances · Accessories</p>
-      </div>
+  </main>
 
-      <div class="col">
-        <h4>Payment</h4>
-        <p class="muted">Cash on Delivery · Card · Wallets</p>
-      </div>
-
-      <div class="col">
-        <h4>Support</h4>
-        <p class="muted">Call our customer service: +(800) 123-456</p>
-      </div>
-
-      <div style="width:100%; margin-top:10px;">
-        <small>© 2025 Demo Shop. All rights reserved.</small>
-      </div>
-    </footer>
-
-  </div>
-
-  <!-- Light JS for simple interactions (no library) -->
-  <script>
-    // Add basic behaviors: favorite toggle, simple keyboard search submit
-    document.addEventListener('click', function(e){
-      if(e.target.closest('.fav')){
-        const heart = e.target.closest('.fav');
-        heart.classList.toggle('liked');
-        // toggle icon
-        const i = heart.querySelector('i');
-        if(i){
-          if(heart.classList.contains('liked')) i.className = 'fa-solid fa-heart';
-          else i.className = 'fa-regular fa-heart';
-        }
-      }
-    });
-
-    // simple enter-to-search
-    document.getElementById('q').addEventListener('keydown', function(e){
-      if(e.key === 'Enter'){
-        const q = this.value.trim();
-        if(q) window.location.href = '/search?q=' + encodeURIComponent(q);
-      }
-    });
-  </script>
-
+  <script src="shop.js"></script>
 </body>
 </html>
