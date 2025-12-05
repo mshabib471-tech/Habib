@@ -1,101 +1,144 @@
-/* ----------------------------------------------------
-   DARK / LIGHT MODE
----------------------------------------------------- */
+/* -----------------------------------------------------------
+   BASIC HELPERS
+----------------------------------------------------------- */
+const $ = (s) => document.querySelector(s);
+const $$ = (s) => document.querySelectorAll(s);
 
-const body = document.body;
-const themeToggle = document.getElementById("themeToggle");
+/* -----------------------------------------------------------
+   LOAD PRODUCTS.JSON
+----------------------------------------------------------- */
+let allProducts = [];
+let loadedCount = 0;
+const LOAD_SIZE = 8;
 
-const savedTheme = localStorage.getItem("shop-theme");
-if(savedTheme === "dark"){
-  body.classList.add("dark");
-  themeToggle.textContent = "🌙";
-} else {
-  themeToggle.textContent = "☀️";
+async function loadProducts() {
+  const res = await fetch("products.json");
+  const data = await res.json();
+  allProducts = data.products;
+  renderCategories(data.categories);
+  renderProducts();
 }
 
-themeToggle.addEventListener("click", ()=>{
-  body.classList.toggle("dark");
+loadProducts();
 
-  if(body.classList.contains("dark")){
-    themeToggle.textContent = "🌙";
-    localStorage.setItem("shop-theme","dark");
-  } else {
-    themeToggle.textContent = "☀️";
-    localStorage.setItem("shop-theme","light");
-  }
-});
+/* -----------------------------------------------------------
+   RENDER CATEGORY CHIPS + ICON ROW
+----------------------------------------------------------- */
+function renderCategories(categories) {
+  const chips = $("#categoryChips");
+  const row = $("#categoriesRow");
 
-/* ----------------------------------------------------
-   DRAWER MENU
----------------------------------------------------- */
+  categories.forEach((cat) => {
+    chips.innerHTML += `<span data-cat="${cat.name}">${cat.name}</span>`;
 
-const drawer = document.getElementById("drawer");
-const overlay = document.getElementById("drawer-overlay");
-const openBtn = document.getElementById("menu-open");
-const closeBtn = document.getElementById("menu-close");
+    row.innerHTML += `
+      <div class="category-item" data-cat="${cat.name}">
+        <img src="${cat.icon}" alt="">
+        <div>${cat.name}</div>
+      </div>
+    `;
+  });
 
-openBtn.onclick = ()=>{
-  drawer.classList.add("open");
-  overlay.style.display="block";
-};
-closeBtn.onclick = closeDrawer;
-overlay.onclick = closeDrawer;
-
-function closeDrawer(){
-  drawer.classList.remove("open");
-  overlay.style.display="none";
-}
-
-/* ----------------------------------------------------
-   CATEGORY FILTER
----------------------------------------------------- */
-
-const catBtns = document.querySelectorAll(".cat-btn");
-const products = document.querySelectorAll(".product-card");
-
-catBtns.forEach(btn=>{
-  btn.addEventListener("click", ()=>{
-    
-    catBtns.forEach(b=>b.classList.remove("active"));
-    btn.classList.add("active");
-
-    const cat = btn.dataset.cat;
-
-    products.forEach(card=>{
-      if(cat === "all" || card.dataset.cat === cat){
-        card.style.display="block";
-      } else {
-        card.style.display="none";
-      }
+  // filter click
+  chips.querySelectorAll("span").forEach((chip) => {
+    chip.addEventListener("click", () => {
+      const c = chip.dataset.cat;
+      renderProducts(c);
     });
-
   });
-});
-
-/* ----------------------------------------------------
-   CART / WISHLIST (LOCALSTORAGE COUNTER ONLY)
----------------------------------------------------- */
-
-let cartCount = localStorage.getItem("cart-count") || 0;
-let wishCount = localStorage.getItem("wish-count") || 0;
-
-function updateCounters(){
-  const cartEl = document.getElementById("cartCount");
-  if(cartEl) cartEl.textContent = cartCount;
 }
-updateCounters();
 
-document.querySelectorAll(".add-cart").forEach(btn=>{
-  btn.addEventListener("click", ()=>{
-    cartCount++;
-    localStorage.setItem("cart-count", cartCount);
-    updateCounters();
+/* -----------------------------------------------------------
+   SHOW PRODUCTS
+----------------------------------------------------------- */
+function renderProducts(filter = null) {
+  const grid = $("#productsGrid");
+
+  let items = allProducts;
+  if (filter) items = items.filter((p) => p.category === filter);
+
+  grid.innerHTML = "";
+
+  items.slice(0, loadedCount + LOAD_SIZE).forEach((p) => {
+    grid.innerHTML += `
+      <div class="product-card">
+        <img src="${p.image}">
+        <h4>${p.name}</h4>
+        <div class="price">৳${p.price}</div>
+        <button onclick="orderWhatsApp('${p.name}', '${p.price}')">Order</button>
+      </div>
+    `;
   });
+
+  loadedCount += LOAD_SIZE;
+}
+
+/* Load More Button */
+$("#loadMoreBtn").addEventListener("click", () => renderProducts());
+
+/* -----------------------------------------------------------
+   SORTING
+----------------------------------------------------------- */
+$("#sortSelect").addEventListener("change", (e) => {
+  const type = e.target.value;
+
+  if (type === "price-asc")
+    allProducts.sort((a, b) => a.price - b.price);
+
+  if (type === "price-desc")
+    allProducts.sort((a, b) => b.price - a.price);
+
+  if (type === "newest")
+    allProducts.sort((a, b) => b.id - a.id);
+
+  if (type === "featured")
+    allProducts.sort((a, b) => a.id - b.id);
+
+  loadedCount = 0;
+  renderProducts();
 });
 
-document.querySelectorAll(".wishlist-btn").forEach(btn=>{
-  btn.addEventListener("click", ()=>{
-    wishCount++;
-    localStorage.setItem("wish-count", wishCount);
-  });
+/* -----------------------------------------------------------
+   WHATSAPP ORDER
+----------------------------------------------------------- */
+function orderWhatsApp(name, price) {
+  window.open(`https://wa.me/8801868461577?text=আমি অর্ডার করতে চাই: ${name} (৳${price})`);
+}
+
+/* -----------------------------------------------------------
+   MOBILE DRAWER
+----------------------------------------------------------- */
+$("#menuToggle").addEventListener("click", () => {
+  $("#mobileDrawer").classList.add("open");
+});
+
+$("#closeDrawer").addEventListener("click", () => {
+  $("#mobileDrawer").classList.remove("open");
+});
+
+/* -----------------------------------------------------------
+   THEME TOGGLE
+----------------------------------------------------------- */
+$("#themeToggle").addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  $("#themeToggle").textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
+});
+
+/* -----------------------------------------------------------
+   PWA INSTALL BUTTON
+----------------------------------------------------------- */
+let deferredPrompt;
+
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  $("#installBtn").style.display = "inline-block";
+});
+
+$("#installBtn").addEventListener("click", async () => {
+  if (!deferredPrompt) return;
+
+  deferredPrompt.prompt();
+  await deferredPrompt.userChoice;
+  deferredPrompt = null;
 });
